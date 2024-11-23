@@ -25,10 +25,13 @@ public class RaycastController : MonoBehaviour
             {
 
                 doorScript = hit.transform.GetComponent<DoorOpen>();
-                if (doorScript != null)
-                {
-                    doorScript.isLocked = false;
+                
+                if (doorScript.Trigger == false)
+                {    
+                    doorScript.Trigger = true;
                 }
+                              
+                
             }
             Debug.Log(hit.transform.name);
         }
