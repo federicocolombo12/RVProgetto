@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RaycastController : MonoBehaviour
 {
-    private DoorOpen doorScript;
-    void Start()
+    private Animator doorAnimator;
+    
+    // Update is called once per frame
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         Raycast();
@@ -19,17 +22,20 @@ public class RaycastController : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         if (Physics.Raycast(ray, out hit))
         {
             if (Input.GetMouseButtonDown(0))
             {
-
-                doorScript = hit.transform.GetComponent<DoorOpen>();
-                
-                if (doorScript.Trigger == false)
-                {    
-                    doorScript.Trigger = true;
+                if (hit.transform.gameObject.CompareTag("Door") )
+                {
+                    
+                    doorAnimator = hit.transform.gameObject.GetComponent<Animator>();
+                    doorAnimator.SetTrigger("TriggerDoor");
                 }
+               
+               
+                
                               
                 
             }
