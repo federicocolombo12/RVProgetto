@@ -20,26 +20,19 @@ public class RaycastController : MonoBehaviour
     }
     void Raycast()
     {
+        OpenDoor();
+
+    }
+    void OpenDoor()
+    {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
+
         if (Physics.Raycast(ray, out hit))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (hit.transform.gameObject.CompareTag("Door") )
-                {
-                    
-                    doorAnimator = hit.transform.gameObject.GetComponent<Animator>();
-                    doorAnimator.SetTrigger("TriggerDoor");
-                }
-               
-               
-                
-                              
-                
-            }
+
             Debug.Log(hit.transform.name);
         }
     }
+    
 }
