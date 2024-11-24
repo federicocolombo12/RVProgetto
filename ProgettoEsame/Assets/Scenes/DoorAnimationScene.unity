@@ -130,9 +130,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 552378335575324515, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4081
+      objectReference: {fileID: 0}
+    - target: {fileID: 552378335575324515, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.3741
+      objectReference: {fileID: 0}
     - target: {fileID: 844285119137183619, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
       propertyPath: m_Name
       value: DayRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758763450060454800, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_TagString
+      value: Grabbable
       objectReference: {fileID: 0}
     - target: {fileID: 2121488190320587867, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -174,10 +186,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2888304256561556701, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888304256561556701, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2888304256561556701, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894154039591941859, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291601595980849232, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_TagString
+      value: Grabbable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291601595980849232, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424634474723082915, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424634474723082915, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6291601595980849232, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9216688302378507454}
   m_SourcePrefab: {fileID: 100100000, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
 --- !u!1001 &3827924485252228562
 PrefabInstance:
@@ -236,6 +283,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6011f5240d0ae4766bd1ebdf4197119d, type: 3}
+--- !u!1 &9216688302378507453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6291601595980849232, guid: a54329c28a9e1430bb6bad5d596c6cff, type: 3}
+  m_PrefabInstance: {fileID: 1010074929852910613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &9216688302378507454
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216688302378507453}
+  serializedVersion: 4
+  m_Mass: 14.44
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
