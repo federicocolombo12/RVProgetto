@@ -21,6 +21,7 @@ public class RaycastController : MonoBehaviour
     void Raycast()
     {
         OpenDoor();
+        GrabObject();
 
     }
     void OpenDoor()
@@ -30,9 +31,33 @@ public class RaycastController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-
-            Debug.Log(hit.transform.name);
+            if (hit.transform.CompareTag("Door"))
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    doorAnimator = hit.transform.GetComponent<Animator>();
+                    doorAnimator.SetTrigger("TriggerDoor");
+                }
+            }
+            
         }
     }
-    
+    void GrabObject()
+    { 
+       RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+           
+            if (hit.transform.CompareTag("Grabbable"))
+            {
+               if (Input.GetMouseButtonDown(0))
+               {
+                   hit.transform.SetParent(transform);
+                   hit.transform.GetComponent<Rigidbody>().isKinematic = true;
+               }
+            }
+        }
+    }
 }
