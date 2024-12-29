@@ -5,19 +5,22 @@ using UnityEngine.UI;
 
 public class Raccolta_Vedi_Oggetto : MonoBehaviour
 {
-    public float interactionDistance = 3f;
+    public float interactionDistance = 2f;
     public float transitionDuration = 1f; // Durata della transizione
     public Vector3 targetPositionOffset = new Vector3(0, 0, 1.0f); // Offset della posizione target rispetto alla camera
-    public Vector3 targetRotationEuler = new Vector3(0, 180, 0); // Rotazione target in gradi (verticale)
     private bool isViewing = false;
     private Transform player;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
+    public LayerMask interactableLayer; // Layer per gli oggetti interagibili
 
     void Start()
     {
+        // Assicurati che l'oggetto non sia statico
+        gameObject.isStatic = false; //per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
+
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
         {
@@ -53,18 +56,24 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     }
 
     void CheckForPlayer()
+{
+    if (player == null || objectRenderer == null)
     {
-        if (player == null || objectRenderer == null)
-        {
-            return;
-        }
+        return;
+    }
 
-        float distance = Vector3.Distance(player.position, transform.position);
-        Debug.Log("Distanza dal giocatore: " + distance);
+    Ray ray = new Ray(player.position, player.forward);
+    RaycastHit hit;
 
-        if (distance <= interactionDistance)
+    // Disegna il raggio nel Scene View per il debug
+    Debug.DrawRay(player.position, player.forward * interactionDistance, Color.red);
+
+    if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) //ricordati di mettere il layer Interaclable agli oggetti su unity
+    {
+        Debug.Log("Raycast ha colpito: " + hit.transform.name);
+        if (hit.transform == this.transform)
         {
-            Debug.Log("Giocatore entro la distanza di interazione.");
+            Debug.Log("Giocatore sta guardando l'oggetto.");
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
@@ -72,6 +81,11 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             }
         }
     }
+    else
+    {
+        Debug.Log("Raycast non ha colpito nulla.");
+    }
+}
 
     IEnumerator EnterView()
     {
@@ -87,12 +101,17 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         }
 
         // Salva la posizione e la rotazione originali dell'oggetto
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
+        originalPosition = this.transform.position;
+        originalRotation = this.transform.rotation;
 
-        // Calcola la posizione e la rotazione target
+        // Calcola la posizione target
         Vector3 targetPosition = player.position + player.TransformDirection(targetPositionOffset); // Posiziona l'oggetto molto vicino alla camera
-        Quaternion targetRotation = Quaternion.LookRotation(player.forward) * Quaternion.Euler(targetRotationEuler);
+
+        // Calcola la rotazione target per far guardare l'oggetto verso la camera
+        Quaternion targetRotation = Quaternion.LookRotation(player.position - this.transform.position);
+
+        // Aggiungi un offset di rotazione se necessario per correggere l'orientamento
+        targetRotation *= Quaternion.Euler(0, 180, 0);
 
         Debug.Log("Posizione target: " + targetPosition);
         Debug.Log("Rotazione target: " + targetRotation);
@@ -104,15 +123,15 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < transitionDuration)
         {
-            transform.position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / transitionDuration);
-            transform.rotation = Quaternion.Lerp(originalRotation, targetRotation, elapsedTime / transitionDuration);
+            this.transform.position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / transitionDuration);
+            this.transform.rotation = Quaternion.Lerp(originalRotation, targetRotation, elapsedTime / transitionDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
-        transform.position = targetPosition;
-        transform.rotation = targetRotation;
+        this.transform.position = targetPosition;
+        this.transform.rotation = targetRotation;
 
         Debug.Log("Oggetto posizionato davanti al giocatore.");
     }
@@ -134,15 +153,15 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < transitionDuration)
         {
-            transform.position = Vector3.Lerp(transform.position, originalPosition, elapsedTime / transitionDuration);
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, elapsedTime / transitionDuration);
+            this.transform.position = Vector3.Lerp(this.transform.position, originalPosition, elapsedTime / transitionDuration);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, originalRotation, elapsedTime / transitionDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione originali
-        transform.position = originalPosition;
-        transform.rotation = originalRotation;
+        this.transform.position = originalPosition;
+        this.transform.rotation = originalRotation;
 
         Debug.Log("Oggetto riposizionato nella posizione originale.");
     }
@@ -152,7 +171,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         float rotationSpeed = 100f;
         float horizontal = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
-        transform.Rotate(Vector3.up, -horizontal, Space.World);
-        transform.Rotate(Vector3.right, vertical, Space.World);
+        this.transform.Rotate(Vector3.up, -horizontal, Space.World);
+        this.transform.Rotate(Vector3.right, vertical, Space.World);
     }
 }
