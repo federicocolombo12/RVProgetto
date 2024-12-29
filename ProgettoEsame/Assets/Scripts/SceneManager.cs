@@ -25,13 +25,14 @@ public class SceneManager : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         
     }
 
     void Start()
     {
-        Scene firstScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName("ScenaIniziale");
+        Scene firstScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName("PrimaScena");
         currentSceneName = firstScene.name;
         
         // Initialize variables if needed

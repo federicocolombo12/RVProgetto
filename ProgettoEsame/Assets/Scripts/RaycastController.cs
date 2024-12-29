@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class RaycastController : MonoBehaviour
 {
     private Animator doorAnimator;
-    
+    public FirstSceneManager firstSceneManager;
     // Update is called once per frame
     private void Start()
     {
@@ -37,6 +37,7 @@ public class RaycastController : MonoBehaviour
                 {
                     doorAnimator = hit.transform.GetComponent<Animator>();
                     doorAnimator.SetTrigger("TriggerDoor");
+                    firstSceneManager.doorOpen = true;
                 }
             }
             
@@ -60,4 +61,6 @@ public class RaycastController : MonoBehaviour
             }
         }
     }
+
+    
 }
