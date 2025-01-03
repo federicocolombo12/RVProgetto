@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+
 public class AgentController : MonoBehaviour
 {
     public Transform target1;
@@ -13,7 +14,6 @@ public class AgentController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
         MoveToTarget(target1);
     }
 
@@ -23,12 +23,9 @@ public class AgentController : MonoBehaviour
         {
             if (!reachedTarget1)
             {
-                StartCoroutine(WaitForPickObjectAnimation());
+                StartCoroutine(WaitAndMoveToTarget2());
             }
-            else if (reachedTarget1 && agent.destination != target2.position)
-            {
-                MoveToTarget(target2);
-            }
+            
         }
     }
 
@@ -37,24 +34,17 @@ public class AgentController : MonoBehaviour
         agent.destination = target.position;
     }
 
-    IEnumerator WaitForPickObjectAnimation()
+    IEnumerator WaitAndMoveToTarget2()
     {
         // Imposta il flag per indicare che il target1 è stato raggiunto
         reachedTarget1 = true;
 
-        // Aspetta che l'animazione "Pick Object" inizi
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Pick Object"))
-        {
-            yield return null;
-        }
-
-        // Aspetta che l'animazione "Pick Object" termini
-        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Pick Object"))
-        {
-            yield return null;
-        }
+        // Aspetta 4 secondi e 567 millisecondi
+        yield return new WaitForSeconds(4f);
+        Debug.Log("Waited for 4.567 seconds");
 
         // Muovi verso il target2
         MoveToTarget(target2);
     }
 }
+
