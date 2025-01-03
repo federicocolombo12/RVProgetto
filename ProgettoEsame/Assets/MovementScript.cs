@@ -8,6 +8,7 @@ public class MovementScript : MonoBehaviour
     [SerializeField] float speed = 5f;
     
     bool moving = true;
+    
     Animator characterAnim;
 
     // Start is called before the first frame update
@@ -19,11 +20,12 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moving = !characterAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle");
-        if (moving) {
+        moving = !characterAnim.GetCurrentAnimatorStateInfo(0).IsName("Pick Object");
+        if (moving)
+        {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
-        
+       
     }
    
 
