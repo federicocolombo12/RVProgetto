@@ -4,7 +4,7 @@ using UnityEngine;
 public class CellGuardNpc : MonoBehaviour
 {
     public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
-    public float walkDuration = 10f; // Durata del camminare in secondi
+    public float walkDuration = 8.5f; // Durata del camminare in secondi
 
     private Animator animator;
 
