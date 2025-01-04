@@ -3,13 +3,10 @@ using UnityEngine;
 
 public class CellGuardNpc : MonoBehaviour
 {
-    public float idleTime = 3f; // Tempo in secondi prima che inizi a camminare
-    public float walkDuration = 5f; // Durata del camminare in secondi
-    public float turnDuration = 1.5f; // Durata della rotazione a sinistra
-    public float turnSpeed = 90f; // Velocità di rotazione in gradi al secondo
+    public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
+    public float walkDuration = 10f; // Durata del camminare in secondi
 
     private Animator animator;
-    private bool isTurning = false;
 
     void Start()
     {
@@ -26,33 +23,32 @@ public class CellGuardNpc : MonoBehaviour
 
     private IEnumerator GuardRoutine()
     {
-        // Stato iniziale: Idle
-        yield return new WaitForSeconds(idleTime);
-
-        // Passa allo stato di camminata
-        animator.SetBool("IsWalking", true);
-        yield return new WaitForSeconds(walkDuration);
-
-        // Passa allo stato di idle e inizia a girare
-        animator.SetBool("IsWalking", false);
-        animator.SetBool("IsTurningLeft", true);
-        isTurning = true;
-
-        // Effettua la rotazione a sinistra
-        float elapsedTime = 0f;
-        while (elapsedTime < turnDuration)
+        while (true)
         {
-            transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            // Stato iniziale: Idle
+            Debug.Log("Inizio Idle");
+            animator.SetBool("IsWalking", false);
+            yield return new WaitForSeconds(idleTime);
+
+            // Passa allo stato di camminata
+            Debug.Log("Inizio Camminata");
+            animator.SetBool("IsWalking", true);
+            yield return new WaitForSeconds(walkDuration);
+
+            // Passa allo stato di idle e inizia a girare
+            Debug.Log("Inizio Rotazione");
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsTurningLeft", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
+            // Ferma la rotazione
+            Debug.Log("Fine Rotazione");
+            animator.SetBool("IsTurningLeft", false);
+
+            // Torna allo stato di idle
+            Debug.Log("Torna a Idle");
+            yield return new WaitForSeconds(idleTime);
         }
-
-        // Ferma la rotazione
-        animator.SetBool("IsTurningLeft", false);
-        isTurning = false;
-
-        // Torna allo stato di idle
-        yield return null;
     }
 
     void Update()
