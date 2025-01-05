@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CellGuardNpc : MonoBehaviour
 {
@@ -8,16 +9,26 @@ public class CellGuardNpc : MonoBehaviour
     public float secondWalkDuration = 2f; // Durata del secondo camminare in secondi
     public float secondIdleTime = 10f; // Tempo in secondi per il secondo idle
     public float rightTurnDuration = 1f; // Durata della rotazione a destra in secondi
-    public float leftTurnWaitTime = 0.5f; // Tempo di attesa dopo la rotazione a sinistra
+    public Transform firstDestination; // Prima destinazione
+    public Transform secondDestination; // Seconda destinazione
 
     private Animator animator;
+    private NavMeshAgent navMeshAgent;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         if (animator == null)
         {
             Debug.LogError("Animator non trovato sul personaggio!");
+            return;
+        }
+
+        if (navMeshAgent == null)
+        {
+            Debug.LogError("NavMeshAgent non trovato sul personaggio!");
             return;
         }
 
@@ -35,10 +46,11 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
 
-            // Passa allo stato di camminata
-            Debug.Log("Inizio Camminata");
+            // Passa allo stato di camminata verso la prima destinazione
+            Debug.Log("Inizio Camminata verso la prima destinazione");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
+            navMeshAgent.SetDestination(firstDestination.position);
             yield return new WaitForSeconds(firstWalkDuration);
 
             // Passa allo stato di idle e inizia a girare a sinistra
@@ -47,10 +59,9 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-            // Ferma la rotazione a sinistra e aspetta
+            // Ferma la rotazione a sinistra
             Debug.Log("Fine Rotazione a Sinistra");
             animator.SetBool("IsTurningLeft", false);
-            yield return new WaitForSeconds(leftTurnWaitTime);
 
             // Stato di idle
             Debug.Log("Inizio Idle");
@@ -67,9 +78,10 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Fine Rotazione a Destra");
             animator.SetBool("IsTurningRight", false);
 
-            // Passa allo stato di camminata
-            Debug.Log("Inizio Seconda Camminata");
+            // Passa allo stato di camminata verso la seconda destinazione
+            Debug.Log("Inizio Seconda Camminata verso la seconda destinazione");
             animator.SetBool("IsWalking", true);
+            navMeshAgent.SetDestination(secondDestination.position);
             yield return new WaitForSeconds(secondWalkDuration);
 
             // Inizia a girare a sinistra
@@ -94,4 +106,6 @@ public class CellGuardNpc : MonoBehaviour
         // Puoi aggiungere eventuali aggiornamenti se necessari
     }
 }
+
+
 
