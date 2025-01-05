@@ -146,8 +146,17 @@ public class CellGuardNpc : MonoBehaviour
     public void SetOggettoNascosto(bool value)
     {
         OggettoNascosto = value;
+        if (OggettoNascosto)
+        {
+            Debug.Log("OggettoNascosto è diventato true, inizio a camminare verso la quarta destinazione");
+            animator.SetBool("SetIdle", false);
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(fourthDestination.position);
+        }
     }
 }
+
 
 
 
