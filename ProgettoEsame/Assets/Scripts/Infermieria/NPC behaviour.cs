@@ -1,50 +1,52 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
 
-public class AgentController : MonoBehaviour
+public class CharacterBehavior : MonoBehaviour
 {
-    public Transform target1;
-    public Transform target2;
-    public Animator animator;
+    public Transform medicinePoint;
+    public Transform exitPoint;
+    public bool HasFinished { get; private set; } = false;
 
     private NavMeshAgent agent;
-    private bool reachedTarget1 = false;
+    private Animator animator;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        MoveToTarget(target1);
+        animator = GetComponent<Animator>();
+
+        // Assicurati che il personaggio sia in idle inizialmente
+        animator.SetBool("isWalking", false);
     }
 
-    void Update()
+    public void StartActions()
     {
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-        {
-            if (!reachedTarget1)
-            {
-                StartCoroutine(WaitAndMoveToTarget2());
-            }
-            
-        }
+        StartCoroutine(PerformActions());
     }
 
-    void MoveToTarget(Transform target)
+    private IEnumerator PerformActions()
     {
-        agent.destination = target.position;
-    }
+        // Cammina verso il punto della medicina
+        animator.SetBool("isWalking", true);
+        agent.SetDestination(medicinePoint.position);
 
-    IEnumerator WaitAndMoveToTarget2()
-    {
-        // Imposta il flag per indicare che il target1 è stato raggiunto
-        reachedTarget1 = true;
+        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.5f);
 
-        // Aspetta 4 secondi e 567 millisecondi
-        yield return new WaitForSeconds(4f);
-        Debug.Log("Waited for 4.567 seconds");
+        // Prendi la medicina
+        animator.SetBool("isWalking", false);
+        animator.SetTrigger("takeMedicine");
+        yield return new WaitForSeconds(2f); // Durata dell'animazione
 
-        // Muovi verso il target2
-        MoveToTarget(target2);
+        // Cammina verso il punto di uscita
+        animator.SetBool("isWalking", true);
+        agent.SetDestination(exitPoint.position);
+
+        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.5f);
+
+        // Termina le azioni
+        animator.SetBool("isWalking", false);
+        HasFinished = true;
+        Destroy(gameObject);
     }
 }
-
