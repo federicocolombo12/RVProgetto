@@ -8,6 +8,7 @@ public class CellGuardNpc : MonoBehaviour
     public float secondIdleTime = 5f; // Tempo in secondi per il secondo idle
     public Transform firstDestination; // Prima destinazione
     public Transform secondDestination; // Seconda destinazione
+    public Transform thirdDestination; // Terza destinazione
     public float walkSpeed = 1f; // Velocità di camminata
     public float stoppingDistance = 0.5f; // Distanza di arresto
     public float rightTurnDuration = 1f; // Durata della rotazione a destra
@@ -91,11 +92,6 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
-            // Torna allo stato di idle
-            Debug.Log("Torna a Idle");
-            animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(idleTime);
-
             // Rotazione a destra
             Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
@@ -103,7 +99,28 @@ public class CellGuardNpc : MonoBehaviour
             yield return new WaitForSeconds(rightTurnDuration);
             animator.SetBool("IsTurningRight", false);
 
-           
+            // Passa allo stato di camminata verso la terza destinazione
+            Debug.Log("Inizio Camminata verso la terza destinazione");
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(thirdDestination.position);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+            // Stato di idle e rotazione a sinistra
+            Debug.Log("Arrivato alla terza destinazione");
+            animator.SetBool("IsWalking", false);
+            navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningLeft", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            animator.SetBool("IsTurningLeft", false);
+            animator.SetBool("SetIdle", true);
+            yield return new WaitForSeconds(secondIdleTime);
+
+
+            // Torna allo stato di idle
+            Debug.Log("Torna a Idle");
+            animator.SetBool("SetIdle", true);
+            yield return new WaitForSeconds(idleTime);
         }
     }
 
@@ -112,6 +129,8 @@ public class CellGuardNpc : MonoBehaviour
         // Puoi aggiungere eventuali aggiornamenti se necessari
     }
 }
+
+
 
 
 
