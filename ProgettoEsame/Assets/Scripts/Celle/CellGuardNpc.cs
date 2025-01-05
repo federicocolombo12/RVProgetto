@@ -10,6 +10,7 @@ public class CellGuardNpc : MonoBehaviour
     public Transform secondDestination; // Seconda destinazione
     public float walkSpeed = 1f; // Velocità di camminata
     public float stoppingDistance = 0.5f; // Distanza di arresto
+    public float rightTurnDuration = 1f; // Durata della rotazione a destra
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
@@ -70,7 +71,7 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsTurningRight", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(rightTurnDuration);
             animator.SetBool("IsTurningRight", false);
 
             // Passa allo stato di camminata verso la seconda destinazione
@@ -94,7 +95,7 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsTurningRight", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(rightTurnDuration);
             animator.SetBool("IsTurningRight", false);
 
             // Torna allo stato di idle
@@ -109,6 +110,8 @@ public class CellGuardNpc : MonoBehaviour
         // Puoi aggiungere eventuali aggiornamenti se necessari
     }
 }
+
+
 
 
 
