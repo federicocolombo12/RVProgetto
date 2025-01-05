@@ -9,6 +9,7 @@ public class CellGuardNpc : MonoBehaviour
     public Transform firstDestination; // Prima destinazione
     public Transform secondDestination; // Seconda destinazione
     public float walkSpeed = 1f; // Velocità di camminata
+    public float stoppingDistance = 0.5f; // Distanza di arresto
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
@@ -31,6 +32,7 @@ public class CellGuardNpc : MonoBehaviour
         }
 
         navMeshAgent.speed = walkSpeed;
+        navMeshAgent.stoppingDistance = stoppingDistance;
 
         // Inizia la routine di comportamento
         StartCoroutine(GuardRoutine());
@@ -52,13 +54,13 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(firstDestination.position);
-            yield return new WaitUntil(() => navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
             // Stato di idle e rotazione a sinistra
-            Debug.Log("Inizio Idle e Rotazione a Sinistra");
+            Debug.Log("Arrivato alla prima destinazione");
             animator.SetBool("IsWalking", false);
-            animator.SetBool("IsTurningLeft", true);
             navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
             animator.SetBool("SetIdle", true);
@@ -76,13 +78,13 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(secondDestination.position);
-            yield return new WaitUntil(() => navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
             // Stato di idle e rotazione a sinistra
-            Debug.Log("Inizio Idle e Rotazione a Sinistra");
+            Debug.Log("Arrivato alla seconda destinazione");
             animator.SetBool("IsWalking", false);
-            animator.SetBool("IsTurningLeft", true);
             navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
             animator.SetBool("SetIdle", true);
@@ -107,6 +109,9 @@ public class CellGuardNpc : MonoBehaviour
         // Puoi aggiungere eventuali aggiornamenti se necessari
     }
 }
+
+
+
 
 
 
