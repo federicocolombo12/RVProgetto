@@ -91,6 +91,11 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
+            // Torna allo stato di idle
+            Debug.Log("Torna a Idle");
+            animator.SetBool("SetIdle", true);
+            yield return new WaitForSeconds(idleTime);
+
             // Rotazione a destra
             Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
@@ -98,10 +103,7 @@ public class CellGuardNpc : MonoBehaviour
             yield return new WaitForSeconds(rightTurnDuration);
             animator.SetBool("IsTurningRight", false);
 
-            // Torna allo stato di idle
-            Debug.Log("Torna a Idle");
-            animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(idleTime);
+           
         }
     }
 
