@@ -19,14 +19,18 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2.0f, interactableLayer))
                 {
                     Debug.Log("Raycast hit: " + hit.transform.name);
-                    if (hit.transform.GetComponent<Rigidbody>())
+                    pickedObject = hit.transform.gameObject;
+
+                    // Disabilita il MeshCollider per evitare problemi di fisica
+                    MeshCollider meshCollider = pickedObject.GetComponent<MeshCollider>();
+                    if (meshCollider != null)
                     {
-                        pickedObject = hit.transform.gameObject;
-                        pickedObject.GetComponent<Rigidbody>().isKinematic = true;
-                        pickedObject.transform.position = holdPosition.position;
-                        pickedObject.transform.parent = holdPosition;
-                        Debug.Log("Picked up: " + pickedObject.name);
+                        meshCollider.enabled = false;
                     }
+
+                    pickedObject.transform.position = holdPosition.position;
+                    pickedObject.transform.parent = holdPosition;
+                    Debug.Log("Picked up: " + pickedObject.name);
                 }
                 else
                 {
@@ -39,8 +43,15 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
             if (pickedObject != null)
             {
                 // Rilascia l'oggetto
-                pickedObject.GetComponent<Rigidbody>().isKinematic = false;
                 pickedObject.transform.parent = null;
+
+                // Riabilita il MeshCollider
+                MeshCollider meshCollider = pickedObject.GetComponent<MeshCollider>();
+                if (meshCollider != null)
+                {
+                    meshCollider.enabled = true;
+                }
+
                 Debug.Log("Dropped: " + pickedObject.name);
                 pickedObject = null;
             }
