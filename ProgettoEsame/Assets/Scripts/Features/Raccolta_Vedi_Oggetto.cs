@@ -7,7 +7,8 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 {
     public float interactionDistance = 2f;
     public float transitionDuration = 1f; // Durata della transizione
-    public Vector3 targetPositionOffset = new Vector3(0, 0, 1.0f); // Offset della posizione target rispetto alla camera
+    // public Vector3 targetPositionOffset = new Vector3(0, 0, 0.01f); // Offset della posizione target rispetto alla camera
+    public bool isFlat = false; // Variabile per indicare se l'oggetto è coricato
     private bool isViewing = false;
     private Transform player;
     private Vector3 originalPosition;
@@ -19,7 +20,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     void Start()
     {
         // Assicurati che l'oggetto non sia statico
-        gameObject.isStatic = false; //per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
+        gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
 
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
@@ -56,36 +57,36 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     }
 
     void CheckForPlayer()
-{
-    if (player == null || objectRenderer == null)
     {
-        return;
-    }
-
-    Ray ray = new Ray(player.position, player.forward);
-    RaycastHit hit;
-
-    // Disegna il raggio nel Scene View per il debug
-    Debug.DrawRay(player.position, player.forward * interactionDistance, Color.red);
-
-    if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) //ricordati di mettere il layer Interaclable agli oggetti su unity
-    {
-        Debug.Log("Raycast ha colpito: " + hit.transform.name);
-        if (hit.transform == this.transform)
+        if (player == null || objectRenderer == null)
         {
-            Debug.Log("Giocatore sta guardando l'oggetto.");
-            if (Input.GetKeyDown(KeyCode.E))
+            return;
+        }
+
+        Ray ray = new Ray(player.position, player.forward);
+        RaycastHit hit;
+
+        // Disegna il raggio nel Scene View per il debug
+        Debug.DrawRay(player.position, player.forward * interactionDistance, Color.red);
+
+        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
+        {
+            Debug.Log("Raycast ha colpito: " + hit.transform.name);
+            if (hit.transform == this.transform)
             {
-                Debug.Log("Tasto E premuto.");
-                StartCoroutine(EnterView());
+                Debug.Log("Giocatore sta guardando l'oggetto.");
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    Debug.Log("Tasto E premuto.");
+                    StartCoroutine(EnterView());
+                }
             }
         }
+        else
+        {
+            Debug.Log("Raycast non ha colpito nulla.");
+        }
     }
-    else
-    {
-        Debug.Log("Raycast non ha colpito nulla.");
-    }
-}
 
     IEnumerator EnterView()
     {
@@ -105,13 +106,22 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         originalRotation = this.transform.rotation;
 
         // Calcola la posizione target
-        Vector3 targetPosition = player.position + player.TransformDirection(targetPositionOffset); // Posiziona l'oggetto molto vicino alla camera
+        Vector3 targetPosition = player.position + player.forward * 0.6f; // Posiziona l'oggetto molto vicino alla camera
 
         // Calcola la rotazione target per far guardare l'oggetto verso la camera
         Quaternion targetRotation = Quaternion.LookRotation(player.position - this.transform.position);
 
-        // Aggiungi un offset di rotazione se necessario per correggere l'orientamento
-        targetRotation *= Quaternion.Euler(0, 180, 0);
+        // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
+        if (isFlat)
+        {
+            // L'oggetto è coricato
+            targetRotation *= Quaternion.Euler(90, 0, 0);
+        }
+        else
+        {
+            // L'oggetto è in piedi
+            targetRotation *= Quaternion.Euler(0, 180, 0);
+        }
 
         Debug.Log("Posizione target: " + targetPosition);
         Debug.Log("Rotazione target: " + targetRotation);
@@ -169,9 +179,16 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     void RotateObject()
     {
         float rotationSpeed = 100f;
-        float horizontal = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
-        float vertical = Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
-        this.transform.Rotate(Vector3.up, -horizontal, Space.World);
-        this.transform.Rotate(Vector3.right, vertical, Space.World);
+        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
+        if (isFlat)
+        {
+            // Ruota l'oggetto coricato sull'asse Z
+            this.transform.Rotate(Vector3.forward, mouseX, Space.Self);
+        }
+        else
+        {
+            // Ruota l'oggetto in piedi sull'asse Y
+            this.transform.Rotate(Vector3.up, mouseX, Space.Self);
+        }
     }
 }
