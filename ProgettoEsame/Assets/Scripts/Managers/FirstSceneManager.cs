@@ -36,8 +36,8 @@ public class FirstSceneManager : MonoBehaviour
         if (doorOpen)
         {
             Debug.Log("Door is now open!");
-            StartCoroutine(SceneManager.instance.LoadNextScene("Corridoio1"));
-            StartCoroutine(SceneManager.instance.UnloadScene(currentScene));
+            StartCoroutine(SceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive));
+            
             Destroy(gameObject);
             
         }

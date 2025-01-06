@@ -36,17 +36,18 @@ public class SceneManager : MonoBehaviour
         currentSceneName = firstScene.name;
         
         // Initialize variables if needed
-        StartCoroutine(LoadNextScene("ScenaIniziale"));
+        StartCoroutine(LoadNextScene(firstScene.name, LoadSceneMode.Single));
     }
 
 
-    public IEnumerator LoadNextScene(string sceneToLoadName)
+    public IEnumerator LoadNextScene(string sceneToLoadName, LoadSceneMode loadSceneMode)
     {
+        currentSceneName = sceneToLoadName;
         Scene sceneToLoad = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneToLoadName);
         if (sceneToLoad.IsValid() && sceneToLoad.isLoaded)
             yield break;
 
-        asyncLoadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoadName, _loadSceneMode);
+        asyncLoadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneToLoadName, loadSceneMode);
         while (!asyncLoadOperation.isDone)
         {
             yield return null;
