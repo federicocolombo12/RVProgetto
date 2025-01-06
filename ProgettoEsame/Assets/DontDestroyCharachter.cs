@@ -13,7 +13,7 @@ public class DontDestroyCharachter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.instance.currentSceneName == "ScenaIniziale" || SceneManager.instance.currentSceneName == "Corridoio1")
+        if (MySceneManager.instance.currentSceneName == "ScenaIniziale" || MySceneManager.instance.currentSceneName == "Corridoio1")
         {
             DontDestroyOnLoad(gameObject);
         }

@@ -16,23 +16,28 @@ public class CorridoioManager : MonoBehaviour
         if (firstObjectFound)
         {
             Debug.Log("First object found!");
-            StartCoroutine(SceneManager.instance.UnloadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene()));
-            StartCoroutine(SceneManager.instance.LoadNextScene("FlashbackInfermieria", LoadSceneMode.Single));
+            
+            MySceneManager.instance.LoadNextScene("FlashbackInfermieria", LoadSceneMode.Single, () =>
+            {
+                Debug.Log("FlashbackInfermieria caricato con successo!");
+            });
             Destroy(gameObject);
             
         }
         if (secondObjectFound)
         {
             Debug.Log("Second object found!");
-            StartCoroutine(SceneManager.instance.LoadNextScene("FlashbackCelle", LoadSceneMode.Single));
-            StartCoroutine(SceneManager.instance.UnloadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene()));
+            MySceneManager.instance.LoadNextScene("FlashbackCelle", LoadSceneMode.Single, () => 
+                {Debug.Log("FlashbackCelle caricato con successo!");});
+            
             Destroy(gameObject);
         } 
         if (doorOpen)
         {
             Debug.Log("Door is now open!");
-            StartCoroutine(SceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Single));
-            StartCoroutine(SceneManager.instance.UnloadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene()));
+            MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Single,
+                () => { Debug.Log("ScenaFinaleElettrosh");
+                });
             Destroy(gameObject);
         }
     }

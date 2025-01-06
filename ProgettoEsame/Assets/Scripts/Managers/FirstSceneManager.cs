@@ -12,7 +12,7 @@ public class FirstSceneManager : MonoBehaviour
     public bool doorOpen = false;
     [SerializeField] Scene currentScene;
     [SerializeField] string currentSceneName;
-
+    public bool startAnimation = false;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -33,7 +33,6 @@ public class FirstSceneManager : MonoBehaviour
         currentScene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         currentSceneName = currentScene.name;
         
-        SceneManager.instance.nextSceneName = "ScenaIniziale";
     }
 
     // Update is called once per frame
@@ -41,18 +40,21 @@ public class FirstSceneManager : MonoBehaviour
     {
         if (torchFound)
         {
-            Debug.Log("Torch found!");
+            
             doorOpenable = true;
         }
         if (doorOpenable)
         {
-            Debug.Log("Door is now openable!");
+            
             
         }
         if (doorOpen)
         {
-            Debug.Log("Door is now open!");
-            StartCoroutine(SceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive));
+
+            MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive, () =>
+            {
+                startAnimation=true;
+            });
             
             Destroy(gameObject);
             
