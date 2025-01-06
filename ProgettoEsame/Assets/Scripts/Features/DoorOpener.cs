@@ -1,66 +1,27 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class RaycastController : MonoBehaviour
+public class DoorOpener : MonoBehaviour
 {
-    private Animator doorAnimator;
-    public FirstSceneManager firstSceneManager;
-    // Update is called once per frame
-    private void Start()
-    {
-        
-    }
+    public Animator doorAnimator;
+    
+    
 
+    // Update is called once per frame
     void Update()
     {
-        Raycast();
-    }
-    void Raycast()
-    {
-        OpenDoor();
-        GrabObject();
-
-    }
-    void OpenDoor()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
+        if (FirstSceneManager.instance.doorOpenable)
         {
-            if (hit.transform.CompareTag("Door"))
+            Debug.Log("Door is now openable!");
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    doorAnimator = hit.transform.GetComponent<Animator>();
-                    doorAnimator.SetTrigger("TriggerDoor");
-                    firstSceneManager.doorOpen = true;
-                }
-            }
-            
-        }
-    }
-    void GrabObject()
-    { 
-       RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
-        {
-           
-            if (hit.transform.CompareTag("Grabbable"))
-            {
-               if (Input.GetMouseButtonDown(0))
-               {
-                   hit.transform.SetParent(transform);
-                   hit.transform.GetComponent<Rigidbody>().isKinematic = true;
-               }
+                FirstSceneManager.instance.doorOpen = true;
+                // Wait until Scene is loaded
+                
+                doorAnimator.SetBool("DoorOpen", true);
+                
             }
         }
     }
-
-    
 }
