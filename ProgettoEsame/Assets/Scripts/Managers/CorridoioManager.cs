@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,28 @@ public class CorridoioManager : MonoBehaviour
 {
     public bool firstObjectFound = false;
     public bool secondObjectFound = false;
-    public bool doorOpen = false;   
-    
+    public bool doorOpen = false;
+    public GameObject firstPersonController;
+    public DoorOpener doorOpener;
+    public TriggerFlashbackObject triggerFlashbackObject;
+    public static CorridoioManager instance { get; private set; }
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        doorOpener.enabled = false;
+        triggerFlashbackObject.enabled = true;
+        
+    }
 
     // Update is called once per frame
     void Update()

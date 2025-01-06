@@ -26,11 +26,7 @@ public class MySceneManager : MonoBehaviour
 
     void Start()
     {
-        LoadNextScene("PrimaScena", LoadSceneMode.Single, () =>
-        {
-            Debug.Log("PrimaScena caricata con successo!");
-            currentSceneName = "PrimaScena";
-        });
+        
     }
 
     public void LoadNextScene(string sceneToLoadName, LoadSceneMode loadSceneMode, Action onSceneLoaded)

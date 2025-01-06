@@ -3,42 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOpener : MonoBehaviour
+public class TriggerFlashbackObject : MonoBehaviour
 {
-    public Animator doorAnimator;
     private Transform player;
     public Camera mainCamera;
     
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField]   private LayerMask interactableLayer;
+    // Start is called before the first frame update
     private void Start()
     {
         
         player = mainCamera.transform;
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (FirstSceneManager.instance.doorOpenable)
-        {
-            Debug.Log("Door is now openable!");
-            DoorActivate();
-            
-        }
+        ObjectFound();
     }
-    private IEnumerator WaitForAnimationStart()
-    {
-        // Wait until startAnimation becomes true
-        yield return new WaitUntil(() => FirstSceneManager.instance.startAnimation);
-
-        // Execute the code after startAnimation becomes true
-        // Place your code here
-        doorAnimator.SetBool("DoorOpen", true);
-    }
-
-    private void DoorActivate()
+    void ObjectFound()
     {
         Ray ray = new Ray(player.position, player.forward);
         RaycastHit hit;
@@ -55,12 +38,14 @@ public class DoorOpener : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
-                FirstSceneManager.instance.doorOpen = true;
-                // Wait until Scene is loaded
-                StartCoroutine(WaitForAnimationStart());
-
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("FirstObject"))                {
+                    CorridoioManager.instance.firstObjectFound = true;
+                }
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("SecondObject"))
+                {
+                    CorridoioManager.instance.secondObjectFound = true;
+                }
             }
-                
         }
     }
 }
