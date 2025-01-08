@@ -16,6 +16,7 @@ public class CellGuardNpc : MonoBehaviour
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
+    public bool OggettoNascosto = false; // Variabile pubblica per controllare lo stato di OggettoNascosto
 
     void Start()
     {
@@ -115,23 +116,21 @@ public class CellGuardNpc : MonoBehaviour
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
             animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(secondIdleTime);
 
-
-            // Torna allo stato di idle
-            Debug.Log("Torna a Idle");
-            animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(idleTime);
+            // Attende fino a quando OggettoNascosto non diventa true
+            Debug.Log("In attesa di OggettoNascosto");
+            yield return new WaitUntil(() => OggettoNascosto);
 
             // Passa allo stato di camminata verso la quarta destinazione
             Debug.Log("Inizio Camminata verso la quarta destinazione");
+            animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(fourthDestination.position);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
             // Torna allo stato di idle
-            Debug.Log("Torna a Idle");
+            Debug.Log("Arrivato alla quarta destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
             animator.SetBool("SetIdle", true);
@@ -143,7 +142,27 @@ public class CellGuardNpc : MonoBehaviour
     {
         // Puoi aggiungere eventuali aggiornamenti se necessari
     }
+
+    public void SetOggettoNascosto(bool value)
+    {
+        OggettoNascosto = value;
+        if (OggettoNascosto)
+        {
+            Debug.Log("OggettoNascosto è diventato true, inizio a camminare verso la quarta destinazione");
+            animator.SetBool("SetIdle", false);
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(fourthDestination.position);
+        }
+    }
 }
+
+
+
+
+
+
+
 
 
 
