@@ -440,6 +440,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: cba00f75539bc564fabb9136fccfac6c, type: 3}
   m_PrefabInstance: {fileID: 3943897306301853410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1922351001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3863622652381722653, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_Name
+      value: PrimaScenaLighting
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8645716
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9996879
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.024983106
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 2.863
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487561720678504860, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 98ff0d7178c7d4585878177328ec66f3, type: 3}
 --- !u!4 &1965638789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 888ce82c0af2ab0499d39c93fb0f4ce4, type: 3}
@@ -1036,7 +1093,7 @@ Transform:
   m_GameObject: {fileID: 6010746712502247949}
   serializedVersion: 2
   m_LocalRotation: {x: 9.431529e-10, y: 0.9996879, z: 0.000000037737177, w: 0.024984628}
-  m_LocalPosition: {x: 0.09, y: -0.285, z: -0.13}
+  m_LocalPosition: {x: 0.084, y: -0.226, z: -0.007}
   m_LocalScale: {x: 0.8206924, y: 0.8206932, z: 0.8206923}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1557,7 +1614,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.47477746
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3491,7 +3548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 0.47477746
+  m_Intensity: 0
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -5479,7 +5536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 60.412655
+  m_Intensity: 298.39246
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -5658,7 +5715,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 4.807486
+  m_Intensity: 23.745317
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6561,3 +6618,4 @@ SceneRoots:
   - {fileID: 230958928}
   - {fileID: 9125686593271427093}
   - {fileID: 1888371528}
+  - {fileID: 1922351001}
