@@ -26,7 +26,7 @@ public class CorridoioManager : MonoBehaviour
 
     private void Start()
     {
-        firstPersonController = GameObject.Find("FPS");
+        firstPersonController = GameObject.FindGameObjectWithTag("Player");
         doorOpener = firstPersonController.GetComponent<DoorOpener>();
         triggerFlashbackObject = firstPersonController.GetComponent<TriggerFlashbackObject>();
         doorOpener.enabled = false;
@@ -46,6 +46,7 @@ public class CorridoioManager : MonoBehaviour
                 Debug.Log("FlashbackInfermieria caricato con successo!");
             });
             Destroy(gameObject);
+            Destroy(firstPersonController);
             
         }
         if (secondObjectFound)
