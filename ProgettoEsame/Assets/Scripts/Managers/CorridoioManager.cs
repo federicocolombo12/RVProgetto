@@ -26,7 +26,7 @@ public class CorridoioManager : MonoBehaviour
 
     private void Start()
     {
-        firstPersonController = GameObject.Find("FirstPersonController");
+        firstPersonController = GameObject.Find("FPS");
         doorOpener = firstPersonController.GetComponent<DoorOpener>();
         triggerFlashbackObject = firstPersonController.GetComponent<TriggerFlashbackObject>();
         doorOpener.enabled = false;
