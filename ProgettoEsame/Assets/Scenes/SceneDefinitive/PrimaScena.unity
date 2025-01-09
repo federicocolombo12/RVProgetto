@@ -410,16 +410,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6608466737390796413, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-      propertyPath: fov
-      value: 50
+      propertyPath: enableZoom
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7187639825420253529, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 2138867107}
-    - target: {fileID: 7187639825420253529, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-      propertyPath: interactableLayer.m_Bits
-      value: 128
+    - target: {fileID: 6608466737390796413, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
+      propertyPath: crosshairColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608466737390796413, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
+      propertyPath: crosshairColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608466737390796413, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
+      propertyPath: crosshairColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -465,11 +469,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: cba00f75539bc564fabb9136fccfac6c, type: 3}
   m_PrefabInstance: {fileID: 8807319516579621443}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &2138867107 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6608466738782180579, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-  m_PrefabInstance: {fileID: 1888371528}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &1317808181169426
 MeshRenderer:
