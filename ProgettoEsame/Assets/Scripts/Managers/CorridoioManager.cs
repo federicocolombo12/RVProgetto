@@ -31,6 +31,7 @@ public class CorridoioManager : MonoBehaviour
         triggerFlashbackObject = firstPersonController.GetComponent<TriggerFlashbackObject>();
         doorOpener.enabled = false;
         triggerFlashbackObject.enabled = true;
+        firstPersonController.GetComponent<FirstPersonController>().fov = 85;
         
     }
 
