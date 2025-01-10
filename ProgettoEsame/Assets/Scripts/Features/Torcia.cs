@@ -6,8 +6,8 @@ public class Torcia : MonoBehaviour
 {
     public GameObject flashlight;
 
-    private bool on;
-    private bool off;
+    [SerializeField] private bool on;
+    [SerializeField] private bool off;
 
 
 
@@ -16,7 +16,7 @@ public class Torcia : MonoBehaviour
     {
         on = true;
         off = false;
-        flashlight.SetActive(true);
+        flashlight.SetActive(false);
     }
 
 
