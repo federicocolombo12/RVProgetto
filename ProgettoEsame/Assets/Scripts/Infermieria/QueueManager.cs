@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class QueueManager : MonoBehaviour
 {
     public List<GameObject> characters; // Lista dei personaggi in fila
@@ -10,15 +11,24 @@ public class QueueManager : MonoBehaviour
     public Transform exitPoint;         // Punto di uscita
     public float delayBetweenTurns = 3f; // Tempo tra un turno e l'altro
     private int currentIndex = 0;       // Indice del personaggio attuale
-    public bool lineFinished = false;   // Indica se la fila � finita
+    public bool lineFinished = false;   // Indica se la fila è finita
+    private bool coroutineRunning = false; // Indica se la coroutine è in esecuzione
+
     void Start()
     {
-        StartCoroutine(ProcessQueue());
-        
+    }
+
+    void Update()
+    {
+        if (InfermieriaManager.instance.isInRow && !coroutineRunning)
+        {
+            StartCoroutine(ProcessQueue());
+        }
     }
 
     private IEnumerator ProcessQueue()
     {
+        coroutineRunning = true;
         while (currentIndex < characters.Count)
         {
             GameObject currentCharacter = characters[currentIndex];
@@ -37,6 +47,6 @@ public class QueueManager : MonoBehaviour
             yield return new WaitForSeconds(delayBetweenTurns);
         }
         lineFinished = true;
-
+        coroutineRunning = false;
     }
 }

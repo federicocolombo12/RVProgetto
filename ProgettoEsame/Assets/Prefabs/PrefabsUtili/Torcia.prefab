@@ -45,9 +45,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 41.489338
-  m_Range: 55
-  m_SpotAngle: 52.3
+  m_Intensity: 1019.21954
+  m_Range: 16
+  m_SpotAngle: 50
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -59,24 +59,24 @@ Light:
     m_NormalBias: 0.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
-      e00: 4
+      e00: 2.2619553
       e01: 0
       e02: 0
       e03: 0
       e10: 0
-      e11: 4
+      e11: 2.2619553
       e12: 0
       e13: 0
       e20: 0
       e21: 0
-      e22: 0.03642987
-      e23: -1.0036429
+      e22: 1.0125
+      e23: -0.20125
       e30: 0
       e31: 0
-      e32: 0
-      e33: 1
+      e32: 1
+      e33: 0
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: f02e60fb16499ec499b07546b8f9acad, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -88,12 +88,12 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 11311
+  m_ColorTemperature: 8750
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 55}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 16}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 1.05
+  m_ShadowRadius: 0.025
   m_ShadowAngle: 0
 --- !u!114 &5382683222128901587
 MonoBehaviour:
@@ -107,14 +107,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 41.489338
+  m_Intensity: 600
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
-  m_InnerSpotPercent: 5.6
+  m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 16
-  m_LightUnit: 2
+  m_VolumetricDimmer: 0.05
+  m_LightUnit: 0
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
   m_AffectDiffuse: 1
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_ShapeWidth: 0.5
   m_ShapeHeight: 0.5
   m_AspectRatio: 1
-  m_ShapeRadius: 1.05
+  m_ShapeRadius: 0.025
   m_SoftnessScale: 1
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 1
