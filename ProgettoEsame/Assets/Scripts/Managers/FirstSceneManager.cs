@@ -13,6 +13,7 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] Scene currentScene;
     [SerializeField] string currentSceneName;
     public bool startAnimation = false;
+    [SerializeField] private Torcia torciaScript;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -40,13 +41,15 @@ public class FirstSceneManager : MonoBehaviour
     {
         if (torchFound)
         {
-            
+
             doorOpenable = true;
+            
+
         }
         if (doorOpenable)
         {
-            
-            
+            torciaScript.enabled = true;
+
         }
         if (doorOpen)
         {
