@@ -16,6 +16,7 @@ public class PickUpTorcia : MonoBehaviour
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
+    [SerializeField] private CassettoOpener cassettoScript;
 
     void Start()
     {
@@ -91,6 +92,7 @@ public class PickUpTorcia : MonoBehaviour
     IEnumerator EnterView()
     {
         if (isViewing) yield break;
+        cassettoScript.enabled =false;
 
         isViewing = true;
         Debug.Log("Entrato in modalità visualizzazione.");
@@ -149,6 +151,7 @@ public class PickUpTorcia : MonoBehaviour
     IEnumerator ExitView()
     {
         if (!isViewing) yield break;
+        cassettoScript.enabled = true;
 
         isViewing = false;
         Debug.Log("Uscito dalla modalità visualizzazione.");
