@@ -370,42 +370,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &457445997 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2735263273658167763, guid: 1f7412537a800454295987053027e1df, type: 3}
-  m_PrefabInstance: {fileID: 1891030439}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &457446002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457445997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.11666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: b2b841696eeec97479c69665a957490a, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1 &706815110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,26 +1322,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1010801041273573925, guid: 1f7412537a800454295987053027e1df, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.14073865
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010801041273573925, guid: 1f7412537a800454295987053027e1df, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.000000005312727
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010801041273573925, guid: 1f7412537a800454295987053027e1df, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.99004686
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010801041273573925, guid: 1f7412537a800454295987053027e1df, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.000000037373216
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010801041273573925, guid: 1f7412537a800454295987053027e1df, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -163.819
-      objectReference: {fileID: 0}
     - target: {fileID: 4793606811862242144, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Name
       value: Corridoio_Cella
@@ -1423,17 +1367,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8924233778924885742, guid: 1f7412537a800454295987053027e1df, type: 3}
-    - {fileID: 2181054945151643417, guid: 1f7412537a800454295987053027e1df, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2545970623112237742, guid: 1f7412537a800454295987053027e1df, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2102592178}
-    - targetCorrespondingSourceObject: {fileID: 2735263273658167763, guid: 1f7412537a800454295987053027e1df, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 457446002}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f7412537a800454295987053027e1df, type: 3}
 --- !u!1 &2094699285
 GameObject:
@@ -1466,42 +1402,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2102592173 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2545970623112237742, guid: 1f7412537a800454295987053027e1df, type: 3}
-  m_PrefabInstance: {fileID: 1891030439}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2102592178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102592173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.11666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 5f35a1ba7fdf240419e5f10fe78a5900, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1001 &98271650168065697
 PrefabInstance:
   m_ObjectHideFlags: 0
