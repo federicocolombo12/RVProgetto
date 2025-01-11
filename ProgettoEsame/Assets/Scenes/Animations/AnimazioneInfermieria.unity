@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f20957e38e89c449f9409b4e8c3e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 965293220}
 --- !u!64 &1077211462
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -454,6 +454,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4692136125495852696}
     m_Modifications:
     - target: {fileID: 4005388111497564762, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: nurse
+      value: 
+      objectReference: {fileID: 228574203}
+    - target: {fileID: 4005388111497564762, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -499,6 +503,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7635504380835043336, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7635504380835043342, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: enableJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7635504380835043342, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: enableCrouch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7635504380835043342, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: enableSprint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7635504380835043342, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: enableHeadBob
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
