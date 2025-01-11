@@ -34,6 +34,7 @@ public class PlayerLock : MonoBehaviour
         else if (!locked && reachedPoint)
         {
             player.playerCanMove = false;
+            player.walkSpeed = 0;
             player.cameraCanMove = true;
             nurse.TriggerNurseTalk();
 
