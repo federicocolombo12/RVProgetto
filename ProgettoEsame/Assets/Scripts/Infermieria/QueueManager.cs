@@ -6,17 +6,25 @@ using UnityEngine;
 
 public class QueueManager : MonoBehaviour
 {
+    public static QueueManager instance { get; private set; }
     public List<GameObject> characters; // Lista dei personaggi in fila
     public Transform medicinePoint;     // Punto della medicina
     public Transform exitPoint;         // Punto di uscita
     public float delayBetweenTurns = 3f; // Tempo tra un turno e l'altro
     private int currentIndex = 0;       // Indice del personaggio attuale
     public bool lineFinished = false;   // Indica se la fila è finita
-    private bool coroutineRunning = false; // Indica se la coroutine è in esecuzione
-
-    void Start()
+    private bool coroutineRunning = false;
+    [SerializeField] private PlayerLock playerLock;// Indica se la coroutine è in esecuzione
+    private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        instance = this;
     }
+   
 
     void Update()
     {
@@ -28,6 +36,7 @@ public class QueueManager : MonoBehaviour
 
     private IEnumerator ProcessQueue()
     {
+        playerLock.enabled = true;
         coroutineRunning = true;
         while (currentIndex < characters.Count)
         {

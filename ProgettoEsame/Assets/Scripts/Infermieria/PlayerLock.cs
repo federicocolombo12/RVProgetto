@@ -5,20 +5,20 @@ using UnityEngine;
 public class PlayerLock : MonoBehaviour
 {
     public GameObject queueManager;
-    QueueManager queueManagerScript;
+    
     [SerializeField] private bool locked;
     FirstPersonController player;
     void Start()
     {
-        queueManagerScript = queueManager.GetComponent<QueueManager>();
-        locked = !queueManagerScript.lineFinished;
+        
+        locked = !QueueManager.instance.lineFinished;
         player = GetComponent<FirstPersonController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        locked = !queueManagerScript.lineFinished;
+        locked = !QueueManager.instance.lineFinished;
         if (locked)
         {
             player.playerCanMove = false;
