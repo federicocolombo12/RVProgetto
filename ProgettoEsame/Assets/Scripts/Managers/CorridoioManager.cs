@@ -12,6 +12,7 @@ public class CorridoioManager : MonoBehaviour
     public GameObject firstPersonController;
     public DoorOpener doorOpener;
     public TriggerFlashbackObject triggerFlashbackObject;
+    [SerializeField] private float walkSpeed;
     public static CorridoioManager instance { get; private set; }
     private void Awake()
     {
@@ -32,6 +33,8 @@ public class CorridoioManager : MonoBehaviour
         doorOpener.enabled = false;
         triggerFlashbackObject.enabled = true;
         firstPersonController.GetComponent<FirstPersonController>().fov = 85;
+        firstPersonController.GetComponent<FirstPersonController>().walkSpeed= walkSpeed;
+       
         
     }
 
