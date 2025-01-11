@@ -7,7 +7,10 @@ public class PlayerLock : MonoBehaviour
     public GameObject queueManager;
     
     [SerializeField] private bool locked;
+    public bool reachedPoint;
     FirstPersonController player;
+    [SerializeField] InfermieraScript nurse;
+
     void Start()
     {
         
@@ -23,10 +26,17 @@ public class PlayerLock : MonoBehaviour
         {
             player.playerCanMove = false;
         }
-        else
+        else if (!locked && !reachedPoint)
         {
             player.playerCanMove = true;
             player.cameraCanMove = false;
+        }
+        else if (!locked && reachedPoint)
+        {
+            player.playerCanMove = false;
+            player.cameraCanMove = true;
+            nurse.TriggerNurseTalk();
+
         }
     }
 }
