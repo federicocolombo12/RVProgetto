@@ -10,6 +10,7 @@ public class CharacterBehavior : MonoBehaviour
 
     private NavMeshAgent agent;
     private Animator animator;
+    [SerializeField] InfermieraScript nurse;
 
     void Start()
     {
@@ -35,8 +36,23 @@ public class CharacterBehavior : MonoBehaviour
 
         // Prendi la medicina
         animator.SetBool("isWalking", false);
+        if (nurse != null)
+        {
+            Debug.Log("Notifying nurse");
+            nurse.TriggerNurseAnimation();
+        }
+        else
+        {
+            Debug.LogWarning("Nurse reference is missing");
+        }
+        yield return new WaitForSeconds(1.5f); // Tempo per l'animazione dell'infermiera
         animator.SetTrigger("takeMedicine");
-        yield return new WaitForSeconds(2f); // Durata dell'animazione
+
+        // Notifica l'infermiera
+        
+        
+
+        yield return new WaitForSeconds(4.567f); // Durata dell'animazione
 
         // Cammina verso il punto di uscita
         animator.SetBool("isWalking", true);

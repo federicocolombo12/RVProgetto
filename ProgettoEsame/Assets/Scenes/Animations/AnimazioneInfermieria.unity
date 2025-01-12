@@ -122,7 +122,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &113051409
+--- !u!1 &680479535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2747951991895309166, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+  m_PrefabInstance: {fileID: 8081360506548549011}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &680479539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680479535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e6ba751b80a88145b1e8405fafeba18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 2
+  transitionDuration: 1
+  isFlat: 0
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+--- !u!64 &680479540
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680479535}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4484233805284905321, guid: 1d272ca83c6774590a666a278a5de0a7, type: 3}
+--- !u!1001 &8081360506548549011
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -130,57 +175,67 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 2747951991895309166, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4803003560685501230, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+      propertyPath: m_Name
+      value: Prefab Scena Infermieria
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.901306
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.8498799
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.2678932
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4692136125450959241, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+    - target: {fileID: 5146519052242903132, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6718964207854349292, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
-      propertyPath: m_Name
-      value: Prefab Scena Infermieria
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2747951991895309166, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 680479539}
+    - targetCorrespondingSourceObject: {fileID: 2747951991895309166, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 680479540}
   m_SourcePrefab: {fileID: 100100000, guid: 3ec8ff2d742daef428c07d7e5dba5a24, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 113051409}
+  - {fileID: 8081360506548549011}
