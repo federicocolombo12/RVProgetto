@@ -33,7 +33,7 @@ public class KnifePlacement : MonoBehaviour
 
         // Salva la posizione e la rotazione finale per il punto di posa
         originalDropPosition = dropPoint.position;
-        originalDropRotation = Quaternion.Euler(0, 0, 90); // Rotazione orizzontale del coltello
+        originalDropRotation = Quaternion.Euler(90, 0, 90); // Rotazione orizzontale del coltello
     }
 
     private void Update()
