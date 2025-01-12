@@ -18,6 +18,8 @@ public class CellGuardNpc : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public bool OggettoNascosto = false; // Variabile pubblica per controllare lo stato di OggettoNascosto
 
+    private bool isRedirecting = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -40,6 +42,22 @@ public class CellGuardNpc : MonoBehaviour
 
         // Inizia la routine di comportamento
         StartCoroutine(GuardRoutine());
+
+        // Trova l'oggetto KnifePlacement e registra l'evento OnKnifePlaced
+        KnifePlacement knifePlacement = FindObjectOfType<KnifePlacement>();
+        if (knifePlacement != null)
+        {
+            knifePlacement.OnKnifePlaced += HandleKnifePlaced;
+        }
+        else
+        {
+            Debug.LogError("KnifePlacement non trovato nella scena!");
+        }
+    }
+
+    private void HandleKnifePlaced()
+    {
+        SetOggettoNascosto(true);
     }
 
     private IEnumerator GuardRoutine()
@@ -138,38 +156,63 @@ public class CellGuardNpc : MonoBehaviour
         }
     }
 
-    void Update()
+    private IEnumerator HandleEnterRoomTransition()
     {
-        // Puoi aggiungere eventuali aggiornamenti se necessari
+        if (isRedirecting) yield break;
+
+        isRedirecting = true;
+
+        Debug.Log("OggettoNascosto è true: Attivazione di EnterRoom");
+        StopAllCoroutines(); // Interrompe tutte le routine in corso
+
+        // Attiva il trigger EnterRoom
+        animator.SetTrigger("EnterRoom");
+
+        // Passa allo stato di camminata verso la terza destinazione
+        Debug.Log("Inizio Camminata verso la terza destinazione");
+        animator.SetBool("IsWalking", true);
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(thirdDestination.position);
+        yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+        // Stato di idle e rotazione a sinistra
+        Debug.Log("Arrivato alla terza destinazione");
+        animator.SetBool("IsWalking", false);
+        navMeshAgent.isStopped = true;
+        animator.SetBool("IsTurningLeft", true);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        animator.SetBool("IsTurningLeft", false);
+        animator.SetBool("SetIdle", true);
+
+        // Aggiungi un breve ritardo per evitare loop infiniti
+        yield return new WaitForSeconds(1f);
+
+        // Passa allo stato di camminata verso la quarta destinazione
+        Debug.Log("Inizio Camminata verso la quarta destinazione");
+        animator.SetBool("SetIdle", false);
+        animator.SetBool("IsWalking", true);
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(fourthDestination.position);
+        yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+        // Torna allo stato di idle
+        Debug.Log("Arrivato alla quarta destinazione");
+        animator.SetBool("IsWalking", false);
+        navMeshAgent.isStopped = true;
+        animator.SetBool("SetIdle", true);
+        yield return new WaitForSeconds(idleTime);
+
+        isRedirecting = false; // Reset the redirecting flag
     }
 
     public void SetOggettoNascosto(bool value)
     {
         OggettoNascosto = value;
+
         if (OggettoNascosto)
         {
-            Debug.Log("OggettoNascosto è diventato true, inizio a camminare verso la quarta destinazione");
-            animator.SetBool("SetIdle", false);
-            animator.SetBool("IsWalking", true);
-            navMeshAgent.isStopped = false;
-            navMeshAgent.SetDestination(fourthDestination.position);
+            Debug.Log("OggettoNascosto è diventato true, avvio transizione verso EnterRoom");
+            StartCoroutine(HandleEnterRoomTransition());
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

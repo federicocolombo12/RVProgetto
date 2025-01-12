@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class KnifePlacement : MonoBehaviour
     private Vector3 originalDropPosition; // Posizione finale dove posare il coltello
     private Quaternion originalDropRotation; // Rotazione orizzontale finale del coltello
 
+    // Evento che segnala la posa del coltello
+    public event Action OnKnifePlaced;
+
     private void Start()
     {
         // Recupera i componenti
@@ -21,7 +25,6 @@ public class KnifePlacement : MonoBehaviour
 
         if (knifeRigidbody != null)
         {
-            // Disabilita la fisica mentre il coltello è in mano
             knifeRigidbody.isKinematic = true;
             knifeRigidbody.useGravity = false;
         }
@@ -92,5 +95,8 @@ public class KnifePlacement : MonoBehaviour
             knifeRigidbody.isKinematic = false;
             knifeRigidbody.useGravity = true;
         }
+
+        // Notifica agli altri script che il coltello è stato posato
+        OnKnifePlaced?.Invoke();
     }
 }
