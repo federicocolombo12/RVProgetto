@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,6 +18,9 @@ public class CellGuardNpc : MonoBehaviour
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     public bool OggettoNascosto = false; // Variabile pubblica per controllare lo stato di OggettoNascosto
+
+    // Evento che segnala la fine dell'animazione
+    public event Action OnAnimationEnd;
 
     void Start()
     {
@@ -150,11 +154,11 @@ public class CellGuardNpc : MonoBehaviour
             navMeshAgent.isStopped = true;
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
+
+            // Segnala la fine dell'animazione
+            OnAnimationEnd?.Invoke();
         }
     }
-
-
-
 
     void Update()
     {
