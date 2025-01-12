@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class CellGuardNpc : MonoBehaviour
 {
     public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
-    public float secondIdleTime = 5f; // Tempo in secondi per il secondo idle
+    public float secondIdleTime = 13f; // Tempo in secondi per il secondo idle
     public Transform firstDestination; // Prima destinazione
     public Transform secondDestination; // Seconda destinazione
     public Transform thirdDestination; // Terza destinazione
