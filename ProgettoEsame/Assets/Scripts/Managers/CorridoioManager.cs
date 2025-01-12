@@ -64,6 +64,7 @@ public class CorridoioManager : MonoBehaviour
                 {Debug.Log("FlashbackCelle caricato con successo!");});
             
             Destroy(gameObject);
+            Destroy(firstPersonController);
         } 
         if (doorOpen)
         {
