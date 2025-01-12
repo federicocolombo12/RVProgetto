@@ -40,6 +40,22 @@ public class CellGuardNpc : MonoBehaviour
 
         // Inizia la routine di comportamento
         StartCoroutine(GuardRoutine());
+
+        // Trova l'oggetto KnifePlacement e registra l'evento OnKnifePlaced
+        KnifePlacement knifePlacement = FindObjectOfType<KnifePlacement>();
+        if (knifePlacement != null)
+        {
+            knifePlacement.OnKnifePlaced += HandleKnifePlaced;
+        }
+        else
+        {
+            Debug.LogError("KnifePlacement non trovato nella scena!");
+        }
+    }
+
+    private void HandleKnifePlaced()
+    {
+        SetOggettoNascosto(true);
     }
 
     private IEnumerator GuardRoutine()
@@ -92,7 +108,10 @@ public class CellGuardNpc : MonoBehaviour
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
             animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(secondIdleTime);
+
+            // Attesa fino a quando OggettoNascosto non diventa true
+            Debug.Log("In attesa di OggettoNascosto");
+            yield return new WaitUntil(() => OggettoNascosto);
 
             // Rotazione a destra
             Debug.Log("Inizio Rotazione a Destra");
@@ -117,10 +136,6 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsTurningLeft", false);
             animator.SetBool("SetIdle", true);
 
-            // Attende fino a quando OggettoNascosto non diventa true
-            Debug.Log("In attesa di OggettoNascosto");
-            yield return new WaitUntil(() => OggettoNascosto);
-
             // Passa allo stato di camminata verso la quarta destinazione
             Debug.Log("Inizio Camminata verso la quarta destinazione");
             animator.SetBool("SetIdle", false);
@@ -137,6 +152,9 @@ public class CellGuardNpc : MonoBehaviour
             yield return new WaitForSeconds(idleTime);
         }
     }
+
+
+
 
     void Update()
     {
@@ -156,20 +174,3 @@ public class CellGuardNpc : MonoBehaviour
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
