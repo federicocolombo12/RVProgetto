@@ -1,22 +1,31 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class StanzaFinaleManager : MonoBehaviour
 {
     public static StanzaFinaleManager instance { get; private set; }
 
-    public bool Video = false;
-    public GameObject videoObject;
+    [Header("Oggetti Interagibili")]
+    public GameObject oggetto1;
+    public GameObject oggetto2;
+    public GameObject oggetto3;
+    public GameObject oggetto4;
+    public GameObject quintoOggetto; // Il quinto oggetto che avvia il video
+
+    [Header("Stato Interazione")]
     public bool Oggetto1 = false;
     public bool Oggetto2 = false;
     public bool Oggetto3 = false;
     public bool Oggetto4 = false;
+    public bool ultimoOggetto = false; // Stato del quinto oggetto
 
-    [SerializeField] Scene currentScene;
-    [SerializeField] string currentSceneName;
+    [Header("Oggetto Finale")]
+    public GameObject videoObject; // Oggetto che contiene il VideoPlayer
+
+    public GameObject canvasObject; // Aggiungi il riferimento al Canvas
+
 
     private void Awake()
     {
@@ -32,40 +41,86 @@ public class StanzaFinaleManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-        currentSceneName = currentScene.name;
-
-        // Assicurati che l'oggetto video sia disabilitato all'inizio
-        if (videoObject != null)
+        if (videoObject != null && canvasObject != null)
         {
-            videoObject.SetActive(false);
+            videoObject.SetActive(false); // Disattiva il video all'inizio
+            canvasObject.SetActive(false); // Disattiva anche il Canvas all'inizio
         }
         else
         {
-            Debug.LogError("Oggetto video non assegnato.");
+            Debug.LogError("Oggetto video o Canvas non assegnato nel StanzaFinaleManager.");
         }
     }
 
-    void Update()
+    private void Update()
     {
-        Debug.Log($"Oggetto1: {Oggetto1}, Oggetto2: {Oggetto2}, Oggetto3: {Oggetto3}, Oggetto4: {Oggetto4}");
+        Debug.Log($"Oggetto1: {Oggetto1}, Oggetto2: {Oggetto2}, Oggetto3: {Oggetto3}, Oggetto4: {Oggetto4}, UltimoOggetto: {ultimoOggetto}");
 
-        if (Oggetto1 && Oggetto2 && Oggetto3 && Oggetto4)
+        // Verifica se tutti gli oggetti sono stati interagiti e se non è stato ancora avviato il video
+        if (Oggetto1 && Oggetto2 && Oggetto3 && Oggetto4 && !ultimoOggetto)
         {
-            Video = true;
-            Debug.Log("Tutti gli oggetti sono stati interagiti. Video impostato su true.");
+            Debug.Log("Tutti gli oggetti sono stati interagiti. Puoi ora interagire con il quinto oggetto.");
         }
+    }
 
-        if (Video)
+    // Metodo per avviare il video
+    private void AvviaVideo()
+    {
+        if (canvasObject != null && videoObject != null && !canvasObject.activeSelf)
         {
-            if (videoObject != null && !videoObject.activeSelf)
+            canvasObject.SetActive(true); // Attiva il Canvas che contiene il video
+            videoObject.SetActive(true);  // Attiva il GameObject del VideoPlayer (lo rende visibile)
+
+            Debug.Log("Video avviato.");
+
+            VideoPlayer videoPlayer = videoObject.GetComponent<VideoPlayer>();
+            if (videoPlayer != null)
             {
-                videoObject.SetActive(true);
-                Debug.Log("Video avviato.");
+                // Avvia il video
+                videoPlayer.Play();
+                Debug.Log("VideoPlayer avviato.");
             }
+            else
+            {
+                Debug.LogError("Nessun componente VideoPlayer trovato sull'oggetto video.");
+            }
+        }
+    }
+
+    // Metodo per controllare se un oggetto è stato interagito
+    public void CheckInteraction(GameObject interactedObject)
+    {
+        if (interactedObject == oggetto1)
+        {
+            Oggetto1 = true;
+            Debug.Log("Interagito con Oggetto1.");
+        }
+        else if (interactedObject == oggetto2)
+        {
+            Oggetto2 = true;
+            Debug.Log("Interagito con Oggetto2.");
+        }
+        else if (interactedObject == oggetto3)
+        {
+            Oggetto3 = true;
+            Debug.Log("Interagito con Oggetto3.");
+        }
+        else if (interactedObject == oggetto4)
+        {
+            Oggetto4 = true;
+            Debug.Log("Interagito con Oggetto4.");
+        }
+        else if (interactedObject == quintoOggetto && Oggetto1 && Oggetto2 && Oggetto3 && Oggetto4 && !ultimoOggetto)
+        {
+            ultimoOggetto = true;
+            Debug.Log("Interagito con l'ultimo oggetto. Video verrà avviato.");
+            AvviaVideo();
+        }
+        else
+        {
+            Debug.LogWarning("Oggetto non riconosciuto o interazione non consentita: " + interactedObject.name);
         }
     }
 }
