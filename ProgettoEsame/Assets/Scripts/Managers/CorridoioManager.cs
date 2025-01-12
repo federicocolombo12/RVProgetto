@@ -61,7 +61,7 @@ public class CorridoioManager : MonoBehaviour
         if (doorOpen)
         {
             Debug.Log("Door is now open!");
-            MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Single,
+            MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
                 () => { Debug.Log("ScenaFinaleElettrosh");
                 });
             Destroy(gameObject);
