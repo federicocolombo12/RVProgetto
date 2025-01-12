@@ -27,13 +27,7 @@ public class CorridoioManager : MonoBehaviour
 
     private void Start()
     {
-        firstPersonController = GameObject.FindGameObjectWithTag("Player");
-        doorOpener = firstPersonController.GetComponent<DoorOpener>();
-        triggerFlashbackObject = firstPersonController.GetComponent<TriggerFlashbackObject>();
-        doorOpener.enabled = false;
-        triggerFlashbackObject.enabled = true;
-        firstPersonController.GetComponent<FirstPersonController>().fov = 85;
-        firstPersonController.GetComponent<FirstPersonController>().walkSpeed= walkSpeed;
+        
        
         
     }
@@ -41,6 +35,16 @@ public class CorridoioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (firstPersonController == null)
+        {
+            firstPersonController = GameObject.FindGameObjectWithTag("Player");
+            doorOpener = firstPersonController.GetComponent<DoorOpener>();
+            triggerFlashbackObject = firstPersonController.GetComponent<TriggerFlashbackObject>();
+            doorOpener.enabled = false;
+            triggerFlashbackObject.enabled = true;
+            firstPersonController.GetComponent<FirstPersonController>().fov = 85;
+            firstPersonController.GetComponent<FirstPersonController>().walkSpeed = walkSpeed;
+        }
         if (firstObjectFound)
         {
             Debug.Log("First object found!");
