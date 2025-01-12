@@ -22,7 +22,7 @@ public class InfermieriaManager : MonoBehaviour
             return;
         }
         instance = this;
-        
+     
     }
 
     void Start()
@@ -37,10 +37,12 @@ public class InfermieriaManager : MonoBehaviour
         {
             MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
             {
+                
                 Instantiate(firstPersonController, playerSpawnPoint.position, playerSpawnPoint.rotation);
                 Destroy(gameObject);
             });
             
         }
     }
+    
 }
