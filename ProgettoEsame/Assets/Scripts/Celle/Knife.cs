@@ -44,8 +44,33 @@ public class KnifePlacement : MonoBehaviour
         // Se il coltello è in mano, controlla se il giocatore vuole posarlo
         if (isHoldingKnife && Input.GetKeyDown(KeyCode.F))
         {
-            StartCoroutine(PlaceKnife());
+            // Controlla se il giocatore sta guardando il punto di posa
+            if (IsLookingAtDropPoint())
+            {
+                StartCoroutine(PlaceKnife());
+            }
+            else
+            {
+                Debug.Log("Il giocatore non sta guardando il punto di posa.");
+            }
         }
+    }
+
+    private bool IsLookingAtDropPoint()
+    {
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log($"Raycast hit: {hit.transform.name}");
+            if (hit.transform == dropPoint)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private IEnumerator PlaceKnife()
