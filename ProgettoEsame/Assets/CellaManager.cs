@@ -22,6 +22,7 @@ public class CellaManager : MonoBehaviour
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject); // Mantieni questo oggetto tra le scene
     }
 
     void Start()
