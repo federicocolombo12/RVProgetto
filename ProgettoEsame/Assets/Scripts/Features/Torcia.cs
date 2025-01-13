@@ -22,7 +22,7 @@ public class Torcia : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Metodo Update chiamato");
+        
 
         if (Input.GetButtonDown("F"))
         {

@@ -12,6 +12,7 @@ public class CorridoioManager : MonoBehaviour
     public GameObject firstPersonController;
     public DoorOpener doorOpener;
     public TriggerFlashbackObject triggerFlashbackObject;
+    public bool startAnimationPorta = false;
     [SerializeField] private float walkSpeed;
     public static CorridoioManager instance { get; private set; }
     private void Awake()
@@ -70,7 +71,8 @@ public class CorridoioManager : MonoBehaviour
         {
             Debug.Log("Door is now open!");
             MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
-                () => { Debug.Log("ScenaFinaleElettrosh");
+                () => {
+                    startAnimationPorta = true;
                 });
             Destroy(gameObject);
         }

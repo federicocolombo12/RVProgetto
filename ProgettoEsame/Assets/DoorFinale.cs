@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOpener : MonoBehaviour
+public class DoorFinale : MonoBehaviour
 {
     public Animator doorAnimator;
     private Transform player;
@@ -13,29 +13,31 @@ public class DoorOpener : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;
     private void Start()
     {
-
+        doorAnimator = GameObject.Find("DoppiaPortaPivot").GetComponent<Animator>();
+        mainCamera = Camera.main;
         player = mainCamera.transform;
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FirstSceneManager.instance.doorOpenable)
-        {
+        
+        
             Debug.Log("Door is now openable!");
             DoorActivate();
 
-        }
+        
     }
     private IEnumerator WaitForAnimationStart()
     {
         // Wait until startAnimation becomes true
-        yield return new WaitUntil(() => FirstSceneManager.instance.startAnimation);
+        yield return new WaitUntil(() => CorridoioManager.instance.startAnimationPorta);
 
         // Execute the code after startAnimation becomes true
         // Place your code here
-        doorAnimator.SetBool("DoorOpen", true);
+        doorAnimator.SetBool("DoubleDoorOpen", true);
     }
 
     private void DoorActivate()
@@ -55,7 +57,7 @@ public class DoorOpener : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
-                FirstSceneManager.instance.doorOpen = true;
+                CorridoioManager.instance.doorOpen = true;
                 // Wait until Scene is loaded
                 StartCoroutine(WaitForAnimationStart());
 

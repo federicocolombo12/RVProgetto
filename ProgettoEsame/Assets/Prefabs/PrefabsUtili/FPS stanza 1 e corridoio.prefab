@@ -198,6 +198,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2051714111210200863}
+    - targetCorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4528010457514705640}
     - targetCorrespondingSourceObject: {fileID: 4459864851310106424, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4297471949640889776}
@@ -265,12 +268,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
   mainCamera: {fileID: 6608466738782180579}
-  doppiaPortaController: {fileID: 0}
   interactionDistance: 2
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  doubleDoorLayer:
+--- !u!114 &4528010457514705640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608466737390796407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58723cd65d5b714408f501245f4a44b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorAnimator: {fileID: 0}
+  mainCamera: {fileID: 0}
+  interactionDistance: 2
+  interactableLayer:
     serializedVersion: 2
     m_Bits: 65536
 --- !u!1 &6608466738782180577 stripped
