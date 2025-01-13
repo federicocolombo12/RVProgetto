@@ -8,7 +8,8 @@ public class DoorOpener : MonoBehaviour
     public Animator doorAnimator;
     private Transform player;
     public Camera mainCamera;
-    
+    public DoppiaPortaController doppiaPortaController;
+
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField]   private LayerMask interactableLayer;
     private void Start()
@@ -58,6 +59,8 @@ public class DoorOpener : MonoBehaviour
                 FirstSceneManager.instance.doorOpen = true;
                 // Wait until Scene is loaded
                 StartCoroutine(WaitForAnimationStart());
+
+                doppiaPortaController.ToggleDoor();
 
             }
                 

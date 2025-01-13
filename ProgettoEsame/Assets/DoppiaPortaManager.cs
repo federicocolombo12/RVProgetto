@@ -9,7 +9,7 @@ public class DoppiaPortaController : MonoBehaviour
     private bool isOpen = false;
     private bool isAnimating = false;
 
-    private Vector3 sinistraAperta = new Vector3(0, -120, 0);
+    private Vector3 sinistraAperta = new Vector3(0, 50, 0);
     private Vector3 sinistraChiusa = Vector3.zero;
 
     private Vector3 destraAperta = new Vector3(0, 120, 0);
