@@ -11,12 +11,13 @@ public class DoorOpener : MonoBehaviour
     public DoppiaPortaController doppiaPortaController;
 
     [SerializeField] private float interactionDistance = 2f;
-    [SerializeField]   private LayerMask interactableLayer;
+    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private LayerMask doubleDoorLayer; // Nuovo LayerMask per la nuova porta doppia
+    private bool doubleDoorOpen = false; // Nuovo bool per gestire lo stato della nuova porta doppia
+
     private void Start()
     {
-        
         player = mainCamera.transform;
-        
     }
 
     // Update is called once per frame
@@ -26,9 +27,9 @@ public class DoorOpener : MonoBehaviour
         {
             Debug.Log("Door is now openable!");
             DoorActivate();
-            
         }
     }
+
     private IEnumerator WaitForAnimationStart()
     {
         // Wait until startAnimation becomes true
@@ -50,8 +51,6 @@ public class DoorOpener : MonoBehaviour
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
             Debug.Log("Raycast ha colpito: " + hit.transform.name);
-                
-                
             Debug.Log("Giocatore sta guardando l'oggetto.");
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -60,10 +59,26 @@ public class DoorOpener : MonoBehaviour
                 // Wait until Scene is loaded
                 StartCoroutine(WaitForAnimationStart());
 
-                doppiaPortaController.ToggleDoor();
-
+                // Assicurati che la porta doppia non si apra
+                if (!doubleDoorOpen)
+                {
+                    doppiaPortaController.ToggleDoor();
+                }
             }
-                
+        }
+        else if (Physics.Raycast(ray, out hit, interactionDistance, doubleDoorLayer)) // Gestione del nuovo layer
+        {
+            Debug.Log("Raycast ha colpito la nuova porta doppia: " + hit.transform.name);
+            Debug.Log("Giocatore sta guardando la nuova porta doppia.");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("Tasto E premuto per la nuova porta doppia.");
+                doubleDoorOpen = true;
+                // Gestisci l'apertura della nuova porta doppia qui
+                // Puoi aggiungere il codice per aprire la nuova porta doppia
+                doppiaPortaController.ToggleDoor();
+            }
         }
     }
+
 }
