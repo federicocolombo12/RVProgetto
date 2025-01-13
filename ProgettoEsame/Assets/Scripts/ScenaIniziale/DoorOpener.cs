@@ -8,7 +8,8 @@ public class DoorOpener : MonoBehaviour
     public Animator doorAnimator;
     private Transform player;
     public Camera mainCamera;
-    public DoppiaPortaController doppiaPortaController;
+    public Animator doppiaPortaAnimatorSinistra;
+    public Animator doppiaPortaAnimatorDestra;
 
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer;
@@ -30,16 +31,6 @@ public class DoorOpener : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForAnimationStart()
-    {
-        // Wait until startAnimation becomes true
-        yield return new WaitUntil(() => FirstSceneManager.instance.startAnimation);
-
-        // Execute the code after startAnimation becomes true
-        // Place your code here
-        doorAnimator.SetBool("DoorOpen", true);
-    }
-
     private void DoorActivate()
     {
         Ray ray = new Ray(player.position, player.forward);
@@ -56,14 +47,8 @@ public class DoorOpener : MonoBehaviour
             {
                 Debug.Log("Tasto E premuto.");
                 FirstSceneManager.instance.doorOpen = true;
-                // Wait until Scene is loaded
-                StartCoroutine(WaitForAnimationStart());
-
-                // Assicurati che la porta doppia non si apra
-                if (!doubleDoorOpen)
-                {
-                    doppiaPortaController.ToggleDoor();
-                }
+                // Imposta il parametro dell'animator per aprire la porta
+                doorAnimator.SetBool("DoorOpen", true);
             }
         }
         else if (Physics.Raycast(ray, out hit, interactionDistance, doubleDoorLayer)) // Gestione del nuovo layer
@@ -74,11 +59,12 @@ public class DoorOpener : MonoBehaviour
             {
                 Debug.Log("Tasto E premuto per la nuova porta doppia.");
                 doubleDoorOpen = true;
-                // Gestisci l'apertura della nuova porta doppia qui
-                // Puoi aggiungere il codice per aprire la nuova porta doppia
-                doppiaPortaController.ToggleDoor();
+                CorridoioManager.instance.doorOpen = true; // Aggiungi questa riga
+                // Imposta i parametri degli animator per aprire le porte doppie
+                doppiaPortaAnimatorSinistra.SetBool("DoorOpen", true);
+                doppiaPortaAnimatorDestra.SetBool("DoorOpen", true);
             }
         }
     }
-
 }
+
