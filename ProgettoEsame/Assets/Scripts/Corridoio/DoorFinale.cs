@@ -50,10 +50,10 @@ public class DoorFinale : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
-            Debug.Log("Raycast ha colpito: " + hit.transform.name);
+            
 
 
-            Debug.Log("Giocatore sta guardando l'oggetto.");
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
