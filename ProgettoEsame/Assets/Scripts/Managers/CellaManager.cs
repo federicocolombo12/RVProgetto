@@ -10,7 +10,7 @@ public class CellaManager : MonoBehaviour
     public GameObject firstPersonController;
     public GameObject firstPersonControllerCorridoio1;
     public bool oggettoNascosto = false;
-    public bool coltelloPosato = false;
+    public bool coltelloPreso = false;
     public GameObject playerKnife; // Coltello del First Person Controller
 
     private CellGuardNpc cellGuardNpc;
@@ -73,10 +73,8 @@ public class CellaManager : MonoBehaviour
 
     void Update()
     {
-        if (coltelloPosato)
+        if (coltelloPreso)
         {
-            oggettoNascosto = true;
-            cellGuardNpc.SetOggettoNascosto(true);
             ShowPlayerKnife();
         }
     }

@@ -91,7 +91,8 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
             animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(idleTime);
+
+            break;
         }
     }
 
@@ -108,7 +109,7 @@ public class Paziente0Script : MonoBehaviour
             interactions = true;
             isWaitingForPlayer = false;
             HideKnife();
-            CellaManager.instance.coltelloPosato = true;
+            CellaManager.instance.coltelloPreso = true;
         }
     }
 
