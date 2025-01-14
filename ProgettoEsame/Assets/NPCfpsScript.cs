@@ -7,6 +7,16 @@ public class NPCfpsScript : MonoBehaviour
     public Camera mainCamera;     // Riferimento alla telecamera del giocatore
     [SerializeField] private float interactionDistance = 2f; // Distanza massima di interazione
     [SerializeField] private LayerMask npcLayer;    // Layer degli NPC
+    public GameObject playerKnife; // Coltello del First Person Controller
+
+    private void Start()
+    {
+        // Assicurati che il coltello del giocatore sia disattivato all'inizio
+        if (playerKnife != null)
+        {
+            playerKnife.SetActive(false);
+        }
+    }
 
     private void Update()
     {
@@ -37,11 +47,20 @@ public class NPCfpsScript : MonoBehaviour
             {
                 // Attiva l'interazione nel Paziente0Script
                 paziente0Script.Interact();
+                ShowPlayerKnife();
             }
         }
         else
         {
             Debug.Log("Raycast non ha colpito nulla.");
+        }
+    }
+
+    private void ShowPlayerKnife()
+    {
+        if (playerKnife != null)
+        {
+            playerKnife.SetActive(true);
         }
     }
 }

@@ -10,6 +10,7 @@ public class Paziente0Script : MonoBehaviour
     public float runSpeed = 3f; // Velocità di corsa
     public float stoppingDistance = 0.5f; // Distanza di arresto
     public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
+    public GameObject knife; // Coltello dell'NPC
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
@@ -106,6 +107,16 @@ public class Paziente0Script : MonoBehaviour
             Debug.Log("Giocatore ha interagito con il Paziente 0");
             interactions = true;
             isWaitingForPlayer = false;
+            HideKnife();
+            CellaManager.instance.coltelloPosato = true;
+        }
+    }
+
+    private void HideKnife()
+    {
+        if (knife != null)
+        {
+            knife.SetActive(false);
         }
     }
 }

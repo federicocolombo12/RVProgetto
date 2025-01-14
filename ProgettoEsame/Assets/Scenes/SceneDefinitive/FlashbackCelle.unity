@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &68193864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+  m_PrefabInstance: {fileID: 1218413510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &169122120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9097135758079227084, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
@@ -165,6 +170,7 @@ MonoBehaviour:
   firstPersonControllerCorridoio1: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
   oggettoNascosto: 0
   coltelloPosato: 0
+  playerKnife: {fileID: 1583663089}
 --- !u!4 &347489267
 Transform:
   m_ObjectHideFlags: 0
@@ -278,6 +284,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -88.743
       objectReference: {fileID: 0}
+    - target: {fileID: 3759026851127001810, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 6909964156162497827, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.561
@@ -322,8 +332,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab Scena Celle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 6796934164120203024, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    - {fileID: 8854933129303554407, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    - {fileID: 6053025269781358833, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    - {fileID: 8563225258731642162, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 9089367971522463959, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
@@ -340,6 +355,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      propertyPath: m_Name
+      value: KnifeNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763541276004337029, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      propertyPath: knife
+      value: 
+      objectReference: {fileID: 68193864}
     - target: {fileID: 2763541276004337029, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
       propertyPath: zeroDestination
       value: 
@@ -408,6 +435,11 @@ PrefabInstance:
 --- !u!4 &1390953362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3512288251895774953, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+  m_PrefabInstance: {fileID: 1091525825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1583663089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3759026851127001810, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
   m_PrefabInstance: {fileID: 1091525825}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
