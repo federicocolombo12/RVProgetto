@@ -8,7 +8,7 @@ public class PickUpTorcia : MonoBehaviour
     public float interactionDistance = 2f;
     public float transitionDuration = 1f; // Durata della transizione
     // public Vector3 targetPositionOffset = new Vector3(0, 0, 0.01f); // Offset della posizione target rispetto alla camera
-    public bool isFlat = false; // Variabile per indicare se l'oggetto è coricato
+    public bool isFlat = false; // Variabile per indicare se l'oggetto ï¿½ coricato
     private bool isViewing = false;
     private Transform player;
     private Vector3 originalPosition;
@@ -21,7 +21,7 @@ public class PickUpTorcia : MonoBehaviour
     void Start()
     {
         // Assicurati che l'oggetto non sia statico
-        gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
+        gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si puï¿½ eliminare
 
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
@@ -95,7 +95,7 @@ public class PickUpTorcia : MonoBehaviour
         cassettoScript.enabled =false;
 
         isViewing = true;
-        Debug.Log("Entrato in modalità visualizzazione.");
+        Debug.Log("Entrato in modalitï¿½ visualizzazione.");
 
         // Disabilita il movimento del giocatore
         if (playerController != null)
@@ -106,6 +106,7 @@ public class PickUpTorcia : MonoBehaviour
         // Salva la posizione e la rotazione originali dell'oggetto
         originalPosition = this.transform.position;
         originalRotation = this.transform.rotation;
+        gameObject.GetComponent<Collider>().enabled = false;
 
         // Calcola la posizione target
         Vector3 targetPosition = player.position + player.forward * 0.6f; // Posiziona l'oggetto molto vicino alla camera
@@ -116,12 +117,12 @@ public class PickUpTorcia : MonoBehaviour
         // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
         if (isFlat)
         {
-            // L'oggetto è coricato
+            // L'oggetto ï¿½ coricato
             targetRotation *= Quaternion.Euler(90, 0, 0);
         }
         else
         {
-            // L'oggetto è in piedi
+            // L'oggetto ï¿½ in piedi
             targetRotation *= Quaternion.Euler(0, 180, 0);
         }
 
@@ -152,9 +153,10 @@ public class PickUpTorcia : MonoBehaviour
     {
         if (!isViewing) yield break;
         cassettoScript.enabled = true;
+        gameObject.GetComponent<Collider>().enabled = true;
 
         isViewing = false;
-        Debug.Log("Uscito dalla modalità visualizzazione.");
+        Debug.Log("Uscito dalla modalitï¿½ visualizzazione.");
 
         // Riabilita il movimento del giocatore
         if (playerController != null)
