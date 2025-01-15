@@ -11,7 +11,8 @@ public class MySceneManager : MonoBehaviour
     public string currentSceneName; // Nome della scena attuale
     public string nextSceneName; // Nome della prossima scena
     public bool isInFlashback; // Indica se siamo in un flashback
-    public FlashbackType currentFlashback; // Tipo di flashback attuale
+    public FlashbackType currentFlashback;
+    // Tipo di flashback attuale
 
     private void Awake()
     {
