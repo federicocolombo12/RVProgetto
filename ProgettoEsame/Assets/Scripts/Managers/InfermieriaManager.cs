@@ -14,6 +14,7 @@ public class InfermieriaManager : MonoBehaviour
     public bool pastigliaTrovata = false;
     public bool isInRow = false;
     public bool medicinaPresa = false;
+    [SerializeField] TransitionScript transitionManager;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -35,14 +36,23 @@ public class InfermieriaManager : MonoBehaviour
     {
         if (medicinaPresa)
         {
-            MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
-            {
-                
-                Instantiate(firstPersonController, playerSpawnPoint.position, playerSpawnPoint.rotation);
-                Destroy(gameObject);
-            });
-            
+            LoadScene();
+
         }
+    }
+
+    IEnumerator LoadScene()
+    {
+        TransitionScript.instance.FadeOut();
+        yield return new WaitForSeconds(2f);
+        
+        
+        MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
+        {
+            
+            Instantiate(firstPersonController, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            Destroy(gameObject);
+        });
     }
     
 }

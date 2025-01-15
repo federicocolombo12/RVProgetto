@@ -62,7 +62,7 @@ public class FirstSceneManager : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        transitionScript.FadeOut();
+        TransitionScript.instance.FadeOut();
         yield return new WaitForSeconds(2f);    
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive, () =>
         {
