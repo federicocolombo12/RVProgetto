@@ -156,17 +156,37 @@ public class PickUpTorcia : MonoBehaviour
         gameObject.GetComponent<Collider>().enabled = true;
 
         isViewing = false;
-        Debug.Log("Uscito dalla modalit� visualizzazione.");
+        Debug.Log("Uscito dalla modalità visualizzazione.");
 
-        // Riabilita il movimento del giocatore
+        // Calculate the target position to be in the bottom right of the view
+        Vector3 targetPosition = player.position + player.forward * 0.6f + player.right * 0.5f - player.up * 0.5f;
+
+        // Calculate the target rotation to face the camera
+        Quaternion targetRotation = Quaternion.LookRotation(player.forward);
+
+
+
+        // Re-enable player movement
         if (playerController != null)
         {
             playerController.enabled = true;
         }
 
+        float elapsedTime = 0f;
+        while (elapsedTime < transitionDuration)
+        {
+            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, elapsedTime / transitionDuration);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, elapsedTime / transitionDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the object is exactly at the target position and rotation
+        this.transform.position = targetPosition;
+        this.transform.rotation = targetRotation;
+
         Destroy(this.gameObject);
         FirstSceneManager.instance.doorOpenable = true;
-
     }
 
     void RotateObject()
