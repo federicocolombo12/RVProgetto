@@ -10,7 +10,8 @@ public class CellaManager : MonoBehaviour
     public GameObject firstPersonController;
     public GameObject firstPersonControllerCorridoio1;
     public bool oggettoNascosto = false;
-    public bool coltelloPosato = false;
+    public bool coltelloPreso = false;
+    public GameObject playerKnife; // Coltello del First Person Controller
 
     private CellGuardNpc cellGuardNpc;
 
@@ -38,6 +39,12 @@ public class CellaManager : MonoBehaviour
 
         // Registra l'evento di fine animazione
         cellGuardNpc.OnAnimationEnd += HandleAnimationEnd;
+
+        // Nascondi il coltello del giocatore all'inizio del gioco
+        if (playerKnife != null)
+        {
+            playerKnife.SetActive(false);
+        }
     }
 
     private void HandleAnimationEnd()
@@ -66,11 +73,17 @@ public class CellaManager : MonoBehaviour
 
     void Update()
     {
-        if (coltelloPosato)
+        if (coltelloPreso)
         {
-            oggettoNascosto = true;
-            cellGuardNpc.SetOggettoNascosto(true);
+            ShowPlayerKnife();
+        }
+    }
+
+    private void ShowPlayerKnife()
+    {
+        if (playerKnife != null)
+        {
+            playerKnife.SetActive(true);
         }
     }
 }
-
