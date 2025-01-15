@@ -83,10 +83,7 @@ public class PickUpTorcia : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log("Raycast non ha colpito nulla.");
-        }
+        
     }
 
     IEnumerator EnterView()

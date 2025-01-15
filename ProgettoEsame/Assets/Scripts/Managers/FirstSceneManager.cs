@@ -67,7 +67,7 @@ public class FirstSceneManager : MonoBehaviour
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive, () =>
         {
             startAnimation=true;
-            transitionScript.FadeIn();
+            TransitionScript.instance.FadeIn();
         });
             
         Destroy(gameObject);
