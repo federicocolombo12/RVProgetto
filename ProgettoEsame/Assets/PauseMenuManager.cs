@@ -5,26 +5,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenuManager : MonoBehaviour
 {
     public Canvas pauseCanvas; // Riferimento al Canvas del menu di pausa
-    public RawImage backgroundImage; // UI RawImage per mostrare lo screenshot
-    public string firstPersonCameraName = "PlayerCamera"; // Nome della camera del First Person Controller
-    public string pauseMenuCameraName = "PauseMenuCamera"; // Nome della camera del menu di pausa
-    public Button resumeButton; // Bottone Resume
-    public Button optionsButton; // Bottone Options
-    public Button mainMenuButton; // Bottone Main Menu
-
-    private Camera firstPersonCamera;
-    private Camera pauseMenuCamera;
-    private Texture2D screenshotTexture;
+    public MonoBehaviour firstPersonController; // Riferimento al componente che gestisce il movimento della camera
 
     void Start()
     {
-        // Trova le camere per nome
-        firstPersonCamera = GameObject.Find(firstPersonCameraName).GetComponent<Camera>();
-        pauseMenuCamera = GameObject.Find(pauseMenuCameraName).GetComponent<Camera>();
-
-        // Nascondi il menu di pausa e disabilita la camera del menu di pausa all'avvio
+        // Nascondi il menu di pausa all'avvio
         pauseCanvas.enabled = false;
-        pauseMenuCamera.enabled = false;
     }
 
     void Update()
@@ -40,22 +26,20 @@ public class PauseMenuManager : MonoBehaviour
 
     public void PauseGame()
     {
-        // Cattura uno screenshot del gioco
-        screenshotTexture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-        screenshotTexture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
-        screenshotTexture.Apply();
-
-        // Mostra lo screenshot come sfondo
-        backgroundImage.texture = screenshotTexture;
-        backgroundImage.enabled = true;
-
         // Mostra il menu di pausa
+        Debug.Log("Menu attivato");
         pauseCanvas.enabled = true;
         Time.timeScale = 0f; // Ferma il tempo
 
-        // Disabilita la camera del First Person Controller e abilita quella del menu di pausa
-        firstPersonCamera.enabled = false;
-        pauseMenuCamera.enabled = true;
+        // Sblocca il cursore e rendilo visibile
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Disabilita il movimento della camera del First Person Controller
+        if (firstPersonController != null)
+        {
+            firstPersonController.enabled = false;
+        }
     }
 
     public void ResumeGame()
@@ -64,13 +48,15 @@ public class PauseMenuManager : MonoBehaviour
         pauseCanvas.enabled = false;
         Time.timeScale = 1f; // Riprendi il tempo
 
-        // Rimuovi lo screenshot
-        backgroundImage.texture = null;
-        backgroundImage.enabled = false;
+        // Blocca il cursore e nascondilo
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
-        // Abilita la camera del First Person Controller e disabilita quella del menu di pausa
-        firstPersonCamera.enabled = true;
-        pauseMenuCamera.enabled = false;
+        // Riabilita il movimento della camera del First Person Controller
+        if (firstPersonController != null)
+        {
+            firstPersonController.enabled = true;
+        }
     }
 
     public void OpenOptions()
@@ -85,3 +71,4 @@ public class PauseMenuManager : MonoBehaviour
         SceneManager.LoadScene("TitleScreen");
     }
 }
+
