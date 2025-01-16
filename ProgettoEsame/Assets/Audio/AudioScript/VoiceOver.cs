@@ -2,25 +2,40 @@ using UnityEngine;
 
 public class VoiceOverObject : MonoBehaviour
 {
-    public AudioSource audioSource;           // L'AudioSource per riprodurre il voice over
-    public AudioClip voiceOverClip;           // Clip audio del voice over quando si prende l'oggetto
-    public string objectDescription;          // Descrizione opzionale dell'oggetto
-    public float interactionDistance = 3f;    // Distanza massima per interagire con l'oggetto
+    public AudioSource voiceOverAudioSource;       // L'AudioSource per riprodurre il voice over
+    public AudioSource ambientMusicSource;         // L'AudioSource per la musica d'ambiente
+    public AudioSource objectMusicSource;          // L'AudioSource per la musica di sottofondo dell'oggetto
+    public AudioClip voiceOverClip;                // Clip audio del voice over quando si interagisce con l'oggetto
+    public string objectDescription;               // Descrizione opzionale dell'oggetto
+    public float interactionDistance = 3f;         // Distanza massima per interagire con l'oggetto
 
-    private Transform player;                 // Riferimento al giocatore
-    private bool isInteracting = false;       // Stato di interazione con l'oggetto
-    private bool canInteract = false;         // Verifica se il giocatore può interagire con l'oggetto (es. vicino a un libro)
+    private Transform player;                      // Riferimento al giocatore
+    private bool isInteracting = false;            // Stato di interazione con l'oggetto
+    private bool canInteract = false;              // Verifica se il giocatore può interagire con l'oggetto
 
     void Start()
     {
-        player = Camera.main.transform;       // Supponiamo che la fotocamera sia controllata dal giocatore
-        if (audioSource == null)
+        player = Camera.main.transform;            // Supponiamo che la fotocamera sia controllata dal giocatore
+        if (voiceOverAudioSource == null)
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
+            voiceOverAudioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        // Assicurati che l'AudioSource non riproduca il voice over all'avvio
-        audioSource.playOnAwake = false;
+        // Configurazione iniziale dell'AudioSource per il voice over
+        voiceOverAudioSource.playOnAwake = false;
+
+        // Configurazione iniziale delle musiche
+        if (ambientMusicSource != null)
+        {
+            ambientMusicSource.loop = true;
+            ambientMusicSource.Play();             // Avvia la musica d'ambiente
+        }
+
+        if (objectMusicSource != null)
+        {
+            objectMusicSource.loop = true;
+            objectMusicSource.playOnAwake = false; // La musica dell'oggetto non parte finché non interagiamo
+        }
     }
 
     void Update()
@@ -44,23 +59,50 @@ public class VoiceOverObject : MonoBehaviour
 
     void StartInteraction()
     {
-        if (voiceOverClip != null && audioSource != null)
+        isInteracting = true;
+
+        // Ferma la musica d'ambiente
+        if (ambientMusicSource != null && ambientMusicSource.isPlaying)
         {
-            isInteracting = true;
-            audioSource.clip = voiceOverClip;
-            audioSource.Play();  // Riproduce il voice over
-            Debug.Log("Inizio analisi oggetto: " + objectDescription);
+            ambientMusicSource.Stop();
         }
+
+        // Avvia la musica dell'oggetto
+        if (objectMusicSource != null)
+        {
+            objectMusicSource.Play();
+        }
+
+        // Riproduce il voice over se disponibile
+        if (voiceOverClip != null && voiceOverAudioSource != null)
+        {
+            voiceOverAudioSource.clip = voiceOverClip;
+            voiceOverAudioSource.Play();
+        }
+
+        Debug.Log("Inizio analisi oggetto: " + objectDescription);
     }
 
     void StopInteraction()
     {
         isInteracting = false;
 
-        // Ferma la riproduzione del voice over
-        if (audioSource.isPlaying)
+        // Ferma la musica dell'oggetto
+        if (objectMusicSource != null && objectMusicSource.isPlaying)
         {
-            audioSource.Stop();
+            objectMusicSource.Stop();
+        }
+
+        // Riprendi la musica d'ambiente
+        if (ambientMusicSource != null)
+        {
+            ambientMusicSource.Play();
+        }
+
+        // Ferma il voice over
+        if (voiceOverAudioSource.isPlaying)
+        {
+            voiceOverAudioSource.Stop();
         }
 
         Debug.Log("Fine analisi oggetto.");
