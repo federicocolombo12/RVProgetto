@@ -16,6 +16,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
+    private Collider objectCollider;
 
     void Start()
     {
@@ -38,6 +39,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         {
             Debug.LogError("Renderer non trovato sull'oggetto. Assicurati che l'oggetto abbia un componente Renderer.");
         }
+
+        objectCollider = GetComponent<Collider>();
+        if (objectCollider == null)
+        {
+            Debug.LogError("Collider non trovato sull'oggetto. Assicurati che l'oggetto abbia un componente Collider.");
+        }
     }
 
     void Update()
@@ -45,7 +52,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isViewing)
         {
             RotateObject();
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 StartCoroutine(ExitView());
             }
@@ -99,6 +106,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (playerController != null)
         {
             playerController.enabled = false;
+        }
+
+        // Disattiva il collider dell'oggetto
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = false;
         }
 
         // Salva la posizione e la rotazione originali dell'oggetto
@@ -172,6 +185,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione originali
         this.transform.position = originalPosition;
         this.transform.rotation = originalRotation;
+
+        // Riattiva il collider dell'oggetto
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = true;
+        }
 
         Debug.Log("Oggetto riposizionato nella posizione originale.");
     }
