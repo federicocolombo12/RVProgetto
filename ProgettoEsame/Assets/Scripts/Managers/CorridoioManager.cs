@@ -15,6 +15,7 @@ public class CorridoioManager : MonoBehaviour
     public bool startAnimationPorta = false;
     [SerializeField] private float walkSpeed;
     public static CorridoioManager instance { get; private set; }
+    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -26,12 +27,7 @@ public class CorridoioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        
-       
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -48,33 +44,55 @@ public class CorridoioManager : MonoBehaviour
         }
         if (firstObjectFound)
         {
-            Debug.Log("First object found!");
-            
-            MySceneManager.instance.LoadNextScene("FlashbackInfermieria", LoadSceneMode.Single, () =>
-            {
-                Debug.Log("FlashbackInfermieria caricato con successo!");
-            });
-            Destroy(gameObject);
-            Destroy(firstPersonController);
-            
+
+            StartCoroutine(LoadInfermieria());
         }
         if (secondObjectFound)
         {
-            Debug.Log("Second object found!");
-            MySceneManager.instance.LoadNextScene("FlashbackCelle", LoadSceneMode.Single, () => 
-                {Debug.Log("FlashbackCelle caricato con successo!");});
-            
-            Destroy(gameObject);
-            Destroy(firstPersonController);
+            StartCoroutine(LoadCelle());
         } 
         if (doorOpen)
         {
-            Debug.Log("Door is now open!");
-            MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
-                () => {
-                    startAnimationPorta = true;
-                });
-            Destroy(gameObject);
+            StartCoroutine(LoadFinale());
         }
+    }
+
+    IEnumerator LoadInfermieria()
+    {
+        Debug.Log("First object found!");
+        TransitionScript.instance.FadeOut();
+        yield return new WaitForSeconds(2f);
+            
+        MySceneManager.instance.LoadNextScene("FlashbackInfermieria", LoadSceneMode.Single, () =>
+        {
+            Debug.Log("FlashbackInfermieria caricato con successo!");
+        });
+        Destroy(gameObject);
+        Destroy(firstPersonController);
+    }
+    IEnumerator LoadCelle()
+    {
+        TransitionScript.instance.FadeOut();
+        yield return new WaitForSeconds(2f);
+            
+        Debug.Log("Second object found!");
+        MySceneManager.instance.LoadNextScene("FlashbackCelle", LoadSceneMode.Single, () => 
+            {Debug.Log("FlashbackCelle caricato con successo!");});
+            
+        Destroy(gameObject);
+        Destroy(firstPersonController);
+    }
+    IEnumerator LoadFinale()
+    {
+        
+        TransitionScript.instance.FadeOut();
+        yield return new WaitForSeconds(2f);
+            
+        Debug.Log("Door is now open!");
+        MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
+            () => {
+                startAnimationPorta = true;
+            });
+        Destroy(gameObject);
     }
 }

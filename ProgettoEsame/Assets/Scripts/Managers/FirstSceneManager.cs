@@ -14,6 +14,7 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] string currentSceneName;
     public bool startAnimation = false;
     [SerializeField] private Torcia torciaScript;
+    public TransitionScript transitionScript;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -54,14 +55,22 @@ public class FirstSceneManager : MonoBehaviour
         if (doorOpen)
         {
 
-            MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive, () =>
-            {
-                startAnimation=true;
-            });
-            
-            Destroy(gameObject);
-            
+            StartCoroutine(LoadScene());
+
         }
+    }
+
+    IEnumerator LoadScene()
+    {
+        TransitionScript.instance.FadeOut();
+        yield return new WaitForSeconds(2f);    
+        MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive, () =>
+        {
+            startAnimation=true;
+            TransitionScript.instance.FadeIn();
+        });
+            
+        Destroy(gameObject);
     }
     
 }

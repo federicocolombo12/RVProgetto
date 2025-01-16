@@ -35,6 +35,7 @@ public class DoorOpener : MonoBehaviour
 
         // Execute the code after startAnimation becomes true
         // Place your code here
+        
         doorAnimator.SetBool("DoorOpen", true);
     }
 
