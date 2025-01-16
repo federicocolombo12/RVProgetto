@@ -29,10 +29,11 @@ public class PlayerLock : MonoBehaviour
         else if (!locked && !reachedPoint)
         {
             player.playerCanMove = true;
-            player.cameraCanMove = false;
+            player.cameraCanMove = true;
         }
         else if (!locked && reachedPoint)
         {
+           
             player.playerCanMove = false;
             player.walkSpeed = 0;
             player.cameraCanMove = true;
