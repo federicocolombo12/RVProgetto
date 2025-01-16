@@ -1693,6 +1693,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: d81be98243f84224f8812a60d1717e1f, type: 3}
     - target: {fileID: 8346413756715460678, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      propertyPath: ambientMusicSource
+      value: 
+      objectReference: {fileID: 251885138}
+    - target: {fileID: 8346413756715460678, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: backgroundMusicClip
       value: 
       objectReference: {fileID: 8300000, guid: 649fa6534dbcf994caa0da8892d2d671, type: 3}
@@ -1708,6 +1712,10 @@ PrefabInstance:
       propertyPath: voiceOverClip
       value: 
       objectReference: {fileID: 8300000, guid: 7bd8411bf1f50074d92c9922f7d9a69a, type: 3}
+    - target: {fileID: 8353407887940931781, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      propertyPath: ambientMusicSource
+      value: 
+      objectReference: {fileID: 251885138}
     - target: {fileID: 8353407887940931781, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: backgroundMusicClip
       value: 
@@ -2137,8 +2145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepAudioSource: {fileID: 2038181161}
-  footstepClip: {fileID: 8300000, guid: 9315e1bff2318774392d846030fe9408, type: 3}
-  stepInterval: 0.5
+  footstepClip: {fileID: 8300000, guid: 5dc61619c91ae314e841dd0bebf7ef0f, type: 3}
+  stepInterval: 0.4
   movementThreshold: 0.1
 --- !u!64 &8390640284049673728
 MeshCollider:
