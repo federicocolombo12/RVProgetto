@@ -90,6 +90,7 @@ public class Paziente0Script : MonoBehaviour
             Debug.Log("Arrivato alla destinazione zero");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningRight", true); // Aggiunto IsTurningRight
             animator.SetBool("SetIdle", true);
 
             break;
