@@ -5,19 +5,20 @@ using UnityEngine.SceneManagement;
 public class PauseMenuManager : MonoBehaviour
 {
     public Canvas pauseCanvas; // Riferimento al Canvas del menu di pausa
-    public MonoBehaviour firstPersonController; // Riferimento al componente che gestisce il movimento della camera
-    public PauseMenuManager instance { get; private set; }
+    private MonoBehaviour firstPersonController; // Riferimento al componente che gestisce il movimento della camera
+    public static PauseMenuManager instance { get; private set; }
 
     private void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
         instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this.gameObject);
     }
+
     void Start()
     {
         // Nascondi il menu di pausa all'avvio
@@ -26,6 +27,12 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "TitleScreen")
+        {
+            pauseCanvas.enabled = false;
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape)) // Tasto per mettere in pausa
         {
             if (pauseCanvas.enabled)
@@ -37,6 +44,9 @@ public class PauseMenuManager : MonoBehaviour
 
     public void PauseGame()
     {
+        // Trova il First Person Controller nella scena corrente
+        firstPersonController = FindObjectOfType<FirstPersonController>(); // Sostituisci MonoBehaviour con il tipo specifico del tuo First Person Controller
+
         // Mostra il menu di pausa
         Debug.Log("Menu attivato");
         pauseCanvas.enabled = true;
@@ -82,4 +92,3 @@ public class PauseMenuManager : MonoBehaviour
         SceneManager.LoadScene("TitleScreen");
     }
 }
-
