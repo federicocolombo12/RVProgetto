@@ -14,6 +14,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
+    private Collider objectCollider;
 
     // Variabili per il voice over e la musica di sottofondo
     public AudioSource audioSource;  // AudioSource per voice over
@@ -53,6 +54,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         {
             originalAmbientVolume = ambientMusicSource.volume; // Salva il volume originale
         }
+
+        objectCollider = GetComponent<Collider>();
+        if (objectCollider == null)
+        {
+            Debug.LogError("Collider non trovato sull'oggetto. Assicurati che l'oggetto abbia un componente Collider.");
+        }
     }
 
     void Update()
@@ -60,7 +67,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isViewing)
         {
             RotateObject();
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetMouseButtonDown(1))
             {
                 StartCoroutine(ExitView());
             }
@@ -109,6 +116,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (playerController != null)
         {
             playerController.enabled = false;
+        }
+
+        // Disabilita il collider dell'oggetto
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = false;
         }
 
         // Salva la posizione e la rotazione originali dell'oggetto
@@ -208,6 +221,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 
         this.transform.position = originalPosition;
         this.transform.rotation = originalRotation;
+
+        // Riabilita il collider dell'oggetto
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = true;
+        }
 
         Debug.Log("Oggetto riposizionato nella posizione originale.");
     }
