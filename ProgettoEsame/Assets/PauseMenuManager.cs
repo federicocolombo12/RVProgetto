@@ -6,7 +6,18 @@ public class PauseMenuManager : MonoBehaviour
 {
     public Canvas pauseCanvas; // Riferimento al Canvas del menu di pausa
     public MonoBehaviour firstPersonController; // Riferimento al componente che gestisce il movimento della camera
+    public PauseMenuManager instance { get; private set; }
 
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(this);
+    }
     void Start()
     {
         // Nascondi il menu di pausa all'avvio
