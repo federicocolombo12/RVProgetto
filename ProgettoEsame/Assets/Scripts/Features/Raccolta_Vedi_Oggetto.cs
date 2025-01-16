@@ -45,7 +45,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isViewing)
         {
             RotateObject();
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 StartCoroutine(ExitView());
             }
