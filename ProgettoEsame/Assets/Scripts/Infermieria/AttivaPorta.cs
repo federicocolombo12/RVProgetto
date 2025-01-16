@@ -188,6 +188,7 @@ public class AttivaPorta : MonoBehaviour
     private float animationSpeed = 5.0f; // Velocità di animazione per raccogliere e posare l'oggetto
     private float maxPickupDistance = 3.0f; // Distanza massima per raccogliere l'oggetto
     private float maxDropDistance = 3.0f; // Distanza massima per posare l'oggetto
+    [SerializeField] private FirstPersonController FirstPersonController;
 
     void Update()
     {
@@ -261,6 +262,7 @@ public class AttivaPorta : MonoBehaviour
         // Anima l'oggetto verso la posizione di raccolta
         while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
         {
+            FirstPersonController.cameraCanMove = false;
             obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, animationSpeed * Time.deltaTime);
             yield return null;
         }
@@ -269,7 +271,9 @@ public class AttivaPorta : MonoBehaviour
         obj.transform.position = targetPosition;
         obj.transform.parent = holdPosition;
         InfermieriaManager.instance.pastigliaTrovata = true;
+
         this.enabled= false;
+        FirstPersonController.cameraCanMove = true;
     }
 
     private IEnumerator DropObject(GameObject obj, Vector3 targetPosition)
