@@ -56,13 +56,14 @@ public class CharacterBehavior : MonoBehaviour
 
         // Cammina verso il punto di uscita
         animator.SetBool("isWalking", true);
+        HasFinished = true;
         agent.SetDestination(exitPoint.position);
 
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.5f);
 
         // Termina le azioni
         animator.SetBool("isWalking", false);
-        HasFinished = true;
+        
         Destroy(gameObject);
     }
 }
