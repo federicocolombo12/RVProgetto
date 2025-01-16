@@ -23,7 +23,7 @@ public class DoorOpenerStandard : MonoBehaviour
     {
         if (InfermieriaManager.instance.pastigliaTrovata)
         {
-            Debug.Log("Door is now openable!");
+            
             DoorActivate();
 
         }
@@ -52,13 +52,13 @@ public class DoorOpenerStandard : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
-            Debug.Log("Raycast ha colpito: " + hit.transform.name);
+            
 
 
-            Debug.Log("Giocatore sta guardando l'oggetto.");
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Tasto E premuto.");
+                
                 
                 // Wait until Scene is loaded
                 StartCoroutine(WaitForAnimationStart());

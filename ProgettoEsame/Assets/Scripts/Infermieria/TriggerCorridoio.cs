@@ -7,6 +7,7 @@ public class TriggerCorridoio : MonoBehaviour
 {
     private Transform player;
     public Camera mainCamera;
+    [SerializeField] private AttivaPorta script;
     
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField]   private LayerMask interactableLayer;
@@ -35,10 +36,7 @@ public class TriggerCorridoio : MonoBehaviour
                 
                 
             Debug.Log("Giocatore sta guardando l'oggetto.");
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                InfermieriaManager.instance.medicinaPresa = true;
-            }
+            script.enabled = true;
         }
     }
 }

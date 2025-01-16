@@ -32,7 +32,7 @@ public class CharacterBehavior : MonoBehaviour
         animator.SetBool("isWalking", true);
         agent.SetDestination(medicinePoint.position);
 
-        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.5f);
+        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.1f);
 
         // Prendi la medicina
         animator.SetBool("isWalking", false);
@@ -45,7 +45,7 @@ public class CharacterBehavior : MonoBehaviour
         {
             Debug.LogWarning("Nurse reference is missing");
         }
-        yield return new WaitForSeconds(1.5f); // Tempo per l'animazione dell'infermiera
+        yield return new WaitForSeconds(3f); // Tempo per l'animazione dell'infermiera
         animator.SetTrigger("takeMedicine");
 
         // Notifica l'infermiera
