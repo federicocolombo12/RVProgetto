@@ -60,6 +60,11 @@ public class CellGuardNpc : MonoBehaviour
 
     private IEnumerator GuardRoutine()
     {
+        // Attesa fino a quando il coltello non è stato preso
+        Debug.Log("In attesa che il coltello venga preso");
+        yield return new WaitUntil(() => KnifePickUpandPlace.coltelloPreso);
+        Debug.Log("Coltello preso, inizio la routine del guardiano");
+
         while (true)
         {
             // Stato iniziale: Idle
@@ -158,7 +163,11 @@ public class CellGuardNpc : MonoBehaviour
 
     void Update()
     {
-        // Puoi aggiungere eventuali aggiornamenti se necessari
+        // Controlla se il coltello è stato nascosto
+        if (KnifePickUpandPlace.coltelloNascosto)
+        {
+            SetOggettoNascosto(true);
+        }
     }
 
     public void SetOggettoNascosto(bool value)
@@ -174,3 +183,4 @@ public class CellGuardNpc : MonoBehaviour
         }
     }
 }
+

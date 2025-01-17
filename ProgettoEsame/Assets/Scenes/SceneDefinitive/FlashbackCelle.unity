@@ -127,6 +127,43 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
   m_PrefabInstance: {fileID: 1218413510}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &68193865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68193864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2d75b494e455545b5fb5f4db061e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdPosition: {fileID: 411795893}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 131072
+--- !u!65 &68193871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68193864}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.14493619, y: 0.2709967, z: 0.1495855}
+  m_Center: {x: -0.0004741276, y: 0.12729347, z: 0.02133489}
 --- !u!4 &283454342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2090270417426387778, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
@@ -165,7 +202,6 @@ MonoBehaviour:
   firstPersonControllerCorridoio1: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
   oggettoNascosto: 0
   coltelloPreso: 0
-  playerKnife: {fileID: 1583663089}
 --- !u!4 &347489267
 Transform:
   m_ObjectHideFlags: 0
@@ -181,6 +217,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &411795892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411795893}
+  m_Layer: 19
+  m_Name: KnifeRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &411795893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411795892}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.056765486, y: -0.69706416, z: -0.14882827, w: 0.69909185}
+  m_LocalPosition: {x: 0.58, y: -0.24735063, z: 0.594906}
+  m_LocalScale: {x: 1.315735, y: 1.2059766, z: 1.3254738}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963998978}
+  m_LocalEulerAnglesHint: {x: -7.361, y: -88.743, z: -16.835}
 --- !u!1001 &746797875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -359,6 +426,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4769069854097378239, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: idleTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6909964156162497827, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.561
@@ -415,7 +486,11 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 9089367971522463959, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     - {fileID: 6604404123588892893, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-    m_AddedGameObjects: []
+    - {fileID: 3759026851127001810, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1154378919911919064, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 411795893}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
 --- !u!1 &1091525826 stripped
@@ -447,6 +522,10 @@ PrefabInstance:
       propertyPath: knife
       value: 
       objectReference: {fileID: 68193864}
+    - target: {fileID: 2763541276004337029, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 2143166939}
     - target: {fileID: 2763541276004337029, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
       propertyPath: zeroDestination
       value: 
@@ -504,22 +583,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6402274065071704957, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402274065071704957, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
       propertyPath: handTransform
       value: 
       objectReference: {fileID: 963998978}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 68193865}
+    - targetCorrespondingSourceObject: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 68193871}
   m_SourcePrefab: {fileID: 100100000, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
 --- !u!4 &1390953362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3512288251895774953, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
   m_PrefabInstance: {fileID: 1091525825}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1583663089 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3759026851127001810, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+--- !u!20 &2143166939 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1154378919911919071, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
   m_PrefabInstance: {fileID: 1091525825}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

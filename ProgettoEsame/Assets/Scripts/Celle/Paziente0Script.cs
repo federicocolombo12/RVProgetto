@@ -11,6 +11,8 @@ public class Paziente0Script : MonoBehaviour
     public float stoppingDistance = 0.5f; // Distanza di arresto
     public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
     public GameObject knife; // Coltello dell'NPC
+    public Camera playerCamera; // Camera del giocatore
+    public float interactionDistance = 2f; // Distanza massima per l'interazione
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
@@ -73,13 +75,21 @@ public class Paziente0Script : MonoBehaviour
             // Imposta interactions a true per 1 secondo
             Debug.Log("Interazioni attive per 1 secondo");
             animator.SetBool("SetIdle", false);
-            animator.SetBool("Interactions", true);
+            animator.SetBool("IsYelling", true);
+            yield return new WaitForSeconds(5f);
+            animator.SetBool("IsYelling", false);
+            animator.SetBool("TakeThis", true);
+
+            // Attesa fino a quando il giocatore non prende il coltello
+            yield return new WaitUntil(() => KnifePickUpandPlace.coltelloPreso);
+
+            animator.SetBool("TakeThis", false);
+            animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(1f);
-            interactions = false;
 
             // Passa allo stato di camminata verso la destinazione zero
             Debug.Log("Inizio Camminata verso la destinazione zero");
-            animator.SetBool("Interactions", false);
+            animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
             navMeshAgent.speed = walkSpeed;
             navMeshAgent.isStopped = false;
@@ -99,7 +109,22 @@ public class Paziente0Script : MonoBehaviour
 
     void Update()
     {
-        // Puoi aggiungere eventuali aggiornamenti se necessari
+        if (isWaitingForPlayer && Input.GetKeyDown(KeyCode.E))
+        {
+            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, interactionDistance))
+            {
+                if (hit.transform == transform)
+                {
+                    Debug.Log("Giocatore ha interagito con il Paziente 0");
+                    interactions = true;
+                    isWaitingForPlayer = false;
+                    CellaManager.instance.coltelloPreso = true;
+                }
+            }
+        }
     }
 
     public void Interact()
@@ -109,16 +134,7 @@ public class Paziente0Script : MonoBehaviour
             Debug.Log("Giocatore ha interagito con il Paziente 0");
             interactions = true;
             isWaitingForPlayer = false;
-            HideKnife();
             CellaManager.instance.coltelloPreso = true;
-        }
-    }
-
-    private void HideKnife()
-    {
-        if (knife != null)
-        {
-            knife.SetActive(false);
         }
     }
 }
