@@ -122,6 +122,116 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &4298592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.902073
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.031935215
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.2851257
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_Name
+      value: InfermieraCheBlocca
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bc1985a142adc4f4584e220c659e97fa, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4298595}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4298594}
+  m_SourcePrefab: {fileID: 100100000, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+--- !u!1 &4298593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
+  m_PrefabInstance: {fileID: 4298592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &4298594
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298593}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4298595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e0addfae3ccb94da8dd8da7be9e305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  firstDestination: {fileID: 0}
+  doorOpenerStandard: {fileID: 0}
+  interactWithNurse1: {fileID: 0}
 --- !u!4 &42710831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3512009561972195544, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
@@ -628,6 +738,23 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8192
+--- !u!114 &2015589559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015589550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e1888317dba3d4eac90fdc3694f71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infermieraBlocking: {fileID: 4298595}
+  interactionDistance: 2
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &2025684189 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4966110171970441380, guid: a9a82faaabfde49cc8d75e81f4d696c3, type: 3}
@@ -1780,6 +1907,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5146519054119525283}
     m_Modifications:
     - target: {fileID: 3043572257708283167, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043572257708283167, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: doorAnimator
       value: 
       objectReference: {fileID: 6456819401014931339}
@@ -1878,6 +2009,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7635504380835043332, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2015589558}
+    - targetCorrespondingSourceObject: {fileID: 7635504380835043332, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2015589559}
   m_SourcePrefab: {fileID: 100100000, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
 --- !u!95 &6456819401014931339
 Animator:
@@ -2422,3 +2556,4 @@ SceneRoots:
   - {fileID: 89848917}
   - {fileID: 1870976755}
   - {fileID: 1914676781}
+  - {fileID: 4298592}
