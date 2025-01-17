@@ -15,6 +15,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
+<<<<<<< Updated upstream
 
     // Nuove variabili per il voice over e la musica di sottofondo
     public AudioSource audioSource;  // AudioSource per voice over
@@ -23,12 +24,23 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 
     public AudioSource backgroundMusicSource;  // AudioSource per la musica di sottofondo
     public AudioClip backgroundMusicClip;      // Clip audio della musica di sottofondo
+=======
+    private Collider objectCollider;
+    public bool playAudio;
+    
+>>>>>>> Stashed changes
 
     void Start()
     {
         // Assicurati che l'oggetto non sia statico
+<<<<<<< Updated upstream
         gameObject.isStatic = false; // per ora fai così, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
 
+=======
+        gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
+        playAudio = false;
+        
+>>>>>>> Stashed changes
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
         {
