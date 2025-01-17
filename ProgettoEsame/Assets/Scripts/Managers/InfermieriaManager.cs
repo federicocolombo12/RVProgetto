@@ -36,7 +36,7 @@ public class InfermieriaManager : MonoBehaviour
     {
         if (medicinaPresa)
         {
-            LoadScene();
+            StartCoroutine(LoadScene());
 
         }
     }
@@ -44,7 +44,7 @@ public class InfermieriaManager : MonoBehaviour
     IEnumerator LoadScene()
     {
         TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         
         
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>

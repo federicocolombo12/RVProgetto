@@ -7,6 +7,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 {
     public float interactionDistance = 2f;
     public float transitionDuration = 1f; // Durata della transizione
+    // public Vector3 targetPositionOffset = new Vector3(0, 0, 0.01f); // Offset della posizione target rispetto alla camera
     public bool isFlat = false; // Variabile per indicare se l'oggetto è coricato
     private bool isViewing = false;
     private Transform player;
@@ -15,32 +16,13 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
-<<<<<<< Updated upstream
-
-    // Nuove variabili per il voice over e la musica di sottofondo
-    public AudioSource audioSource;  // AudioSource per voice over
-    public AudioClip voiceOverClip;  // Clip audio del voice over
-    private bool isVoiceOverPlaying = false;
-
-    public AudioSource backgroundMusicSource;  // AudioSource per la musica di sottofondo
-    public AudioClip backgroundMusicClip;      // Clip audio della musica di sottofondo
-=======
     private Collider objectCollider;
-    public bool playAudio;
-    
->>>>>>> Stashed changes
 
     void Start()
     {
         // Assicurati che l'oggetto non sia statico
-<<<<<<< Updated upstream
-        gameObject.isStatic = false; // per ora fai così, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
-
-=======
         gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
-        playAudio = false;
-        
->>>>>>> Stashed changes
+
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
         {
@@ -57,6 +39,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         {
             Debug.LogError("Renderer non trovato sull'oggetto. Assicurati che l'oggetto abbia un componente Renderer.");
         }
+
+        objectCollider = GetComponent<Collider>();
+        if (objectCollider == null)
+        {
+            Debug.LogError("Collider non trovato sull'oggetto. Assicurati che l'oggetto abbia un componente Collider.");
+        }
     }
 
     void Update()
@@ -64,7 +52,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isViewing)
         {
             RotateObject();
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 StartCoroutine(ExitView());
             }
@@ -88,7 +76,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Disegna il raggio nel Scene View per il debug
         Debug.DrawRay(player.position, player.forward * interactionDistance, Color.red);
 
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interactable agli oggetti su Unity
+        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
             Debug.Log("Raycast ha colpito: " + hit.transform.name);
             if (hit.transform == this.transform)
@@ -100,6 +88,10 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
                     StartCoroutine(EnterView());
                 }
             }
+        }
+        else
+        {
+            Debug.Log("Raycast non ha colpito nulla.");
         }
     }
 
@@ -116,6 +108,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             playerController.enabled = false;
         }
 
+        // Disattiva il collider dell'oggetto
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = false;
+        }
+
         // Salva la posizione e la rotazione originali dell'oggetto
         originalPosition = this.transform.position;
         originalRotation = this.transform.rotation;
@@ -129,10 +127,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
         if (isFlat)
         {
+            // L'oggetto è coricato
             targetRotation *= Quaternion.Euler(90, 0, 0);
         }
         else
         {
+            // L'oggetto è in piedi
             targetRotation *= Quaternion.Euler(0, 180, 0);
         }
 
@@ -152,23 +152,9 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             yield return null;
         }
 
+        // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
         this.transform.position = targetPosition;
         this.transform.rotation = targetRotation;
-
-        // Avvia il voice over
-        if (voiceOverClip != null)
-        {
-            isVoiceOverPlaying = true;
-            audioSource.clip = voiceOverClip;
-            audioSource.Play();
-        }
-
-        // Avvia la musica di sottofondo (se non è già in riproduzione)
-        if (backgroundMusicClip != null && !backgroundMusicSource.isPlaying)
-        {
-            backgroundMusicSource.clip = backgroundMusicClip;
-            backgroundMusicSource.Play();
-        }
 
         Debug.Log("Oggetto posizionato davanti al giocatore.");
     }
@@ -179,19 +165,6 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 
         isViewing = false;
         Debug.Log("Uscito dalla modalità visualizzazione.");
-
-        // Ferma il voice over
-        if (isVoiceOverPlaying && audioSource.isPlaying)
-        {
-            audioSource.Stop();
-            isVoiceOverPlaying = false;
-        }
-
-        // Ferma la musica di sottofondo
-        if (backgroundMusicSource.isPlaying)
-        {
-            backgroundMusicSource.Stop();
-        }
 
         // Riabilita il movimento del giocatore
         if (playerController != null)
@@ -209,8 +182,15 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             yield return null;
         }
 
+        // Assicurati che l'oggetto sia esattamente nella posizione e rotazione originali
         this.transform.position = originalPosition;
         this.transform.rotation = originalRotation;
+
+        // Riattiva il collider dell'oggetto
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = true;
+        }
 
         Debug.Log("Oggetto riposizionato nella posizione originale.");
     }
