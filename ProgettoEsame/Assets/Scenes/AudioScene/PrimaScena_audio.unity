@@ -623,7 +623,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 649fa6534dbcf994caa0da8892d2d671, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.053
   m_Pitch: 1
@@ -873,6 +873,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 567923276}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1791282765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2989267077303417961, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+  m_PrefabInstance: {fileID: 4112675096904402364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1791282767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791282765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605d540cc35c487439d903cb41685458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceOverAudioSource: {fileID: 1425826785}
+  ambientMusicSource: {fileID: 251885138}
+  objectMusicSource: {fileID: 1290314143}
+  voiceOverClip: {fileID: 8300000, guid: d81be98243f84224f8812a60d1717e1f, type: 3}
+  ambientMusicClip: {fileID: 8300000, guid: f134aaf892e3258408f62e48a04f8a12, type: 3}
+  objectMusicClip: {fileID: 8300000, guid: 649fa6534dbcf994caa0da8892d2d671, type: 3}
+  objectDescription: 
+  interactionDistance: 3
+  fadeDuration: 1
 --- !u!1 &1907572800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1778,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5543380334455986075, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4112675096904402379}
+    - targetCorrespondingSourceObject: {fileID: 2989267077303417961, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1791282767}
     - targetCorrespondingSourceObject: {fileID: 5498631503312187170, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8390640284049673728}
