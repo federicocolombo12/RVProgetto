@@ -51,10 +51,6 @@ public class CellGuardNpc : MonoBehaviour
         {
             knifePlacement.OnKnifePlaced += HandleKnifePlaced;
         }
-        else
-        {
-            Debug.LogError("KnifePlacement non trovato nella scena!");
-        }
     }
 
     private void HandleKnifePlaced()

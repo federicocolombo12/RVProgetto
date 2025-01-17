@@ -127,11 +127,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
   m_PrefabInstance: {fileID: 1218413510}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &169122120 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9097135758079227084, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-  m_PrefabInstance: {fileID: 1091525825}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &283454342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2090270417426387778, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
@@ -354,7 +349,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3759026851127001810, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_Layer
-      value: 17
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3759026851127001810, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3759026851127001810, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6909964156162497827, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_LocalPosition.x
@@ -400,6 +403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab Scena Celle
       objectReference: {fileID: 0}
+    - target: {fileID: 7291903528472060741, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: dropPoint
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6796934164120203024, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     - {fileID: 8854933129303554407, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
@@ -407,6 +414,7 @@ PrefabInstance:
     - {fileID: 8563225258731642162, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     m_RemovedGameObjects:
     - {fileID: 9089367971522463959, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    - {fileID: 6604404123588892893, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
@@ -430,6 +438,10 @@ PrefabInstance:
     - target: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
       propertyPath: m_Layer
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493574591860929589, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2763541276004337029, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
       propertyPath: knife
@@ -490,7 +502,7 @@ PrefabInstance:
     - target: {fileID: 6402274065071704957, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
       propertyPath: dropPoint
       value: 
-      objectReference: {fileID: 169122120}
+      objectReference: {fileID: 0}
     - target: {fileID: 6402274065071704957, guid: 5fdcb45af712af84395db33420bef5b2, type: 3}
       propertyPath: handTransform
       value: 
