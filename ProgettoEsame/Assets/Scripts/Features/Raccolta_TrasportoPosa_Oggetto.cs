@@ -13,6 +13,7 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private bool isViewing = false;
+    private bool isHolding = false;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public bool isFlatObject = false; // Flag per determinare se l'oggetto è piatto
 
@@ -60,21 +61,8 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
                         rb.isKinematic = true;
                     }
 
-                    // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
-                    Quaternion targetRotation = holdPosition.rotation;
-                    if (isFlatObject)
-                    {
-                        // L'oggetto è coricato
-                        targetRotation *= Quaternion.Euler(90, 0, 0);
-                    }
-                    else
-                    {
-                        // L'oggetto è in piedi
-                        targetRotation *= Quaternion.Euler(0, 180, 0);
-                    }
-
-                    // Inizia la coroutine per animare l'oggetto verso la posizione di raccolta
-                    StartCoroutine(PickupObject(pickedObject, holdPosition.position, targetRotation));
+                    // Inizia la visualizzazione dell'oggetto
+                    StartCoroutine(EnterView());
 
                     Debug.Log("Picked up: " + pickedObject.name);
                 }
@@ -83,54 +71,39 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
                     Debug.Log("Raycast did not hit any object");
                 }
             }
-            else
+            else if (isViewing)
             {
-                if (isViewing)
+                // Esci dalla visualizzazione e metti l'oggetto in mano
+                StartCoroutine(ExitView());
+                isHolding = true;
+            }
+            else if (isHolding)
+            {
+                // Trova la posizione in cui stai guardando
+                RaycastHit hit;
+                Vector3 dropPosition = pickedObject.transform.position;
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
                 {
-                    // Esci dalla visualizzazione e riprendi il trasporto
-                    StartCoroutine(ExitView());
+                    dropPosition = hit.point;
+                }
+
+                // Verifica se la distanza di rilascio è entro il limite
+                if (Vector3.Distance(transform.position, dropPosition) <= maxDropDistance)
+                {
+                    // Rilascia l'oggetto
+                    pickedObject.transform.parent = null;
+
+                    // Inizia la coroutine per animare l'oggetto verso la posizione di rilascio
+                    StartCoroutine(DropObject(pickedObject, dropPosition, originalRotation));
+
+                    Debug.Log("Dropped: " + pickedObject.name);
+                    pickedObject = null;
+                    isHolding = false;
                 }
                 else
                 {
-                    // Trova la posizione in cui stai guardando
-                    RaycastHit hit;
-                    Vector3 dropPosition = pickedObject.transform.position;
-                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
-                    {
-                        dropPosition = hit.point;
-                    }
-
-                    // Verifica se la distanza di rilascio è entro il limite
-                    if (Vector3.Distance(transform.position, dropPosition) <= maxDropDistance)
-                    {
-                        // Rilascia l'oggetto
-                        pickedObject.transform.parent = null;
-
-                        // Inizia la coroutine per animare l'oggetto verso la posizione di rilascio
-                        StartCoroutine(DropObject(pickedObject, dropPosition, originalRotation));
-
-                        Debug.Log("Dropped: " + pickedObject.name);
-                        pickedObject = null;
-                    }
-                    else
-                    {
-                        Debug.Log("Drop position is too far away");
-                    }
+                    Debug.Log("Drop position is too far away");
                 }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.E) && pickedObject != null)
-        {
-            if (!isViewing)
-            {
-                // Inizia la visualizzazione dell'oggetto
-                StartCoroutine(EnterView());
-            }
-            else
-            {
-                // Termina la visualizzazione e riprendi il trasporto
-                StartCoroutine(ExitView());
             }
         }
 
@@ -258,21 +231,22 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
         {
             if (pickedObject != null)
             {
-                pickedObject.transform.position = Vector3.Lerp(pickedObject.transform.position, originalPosition, elapsedTime / 1f);
-                pickedObject.transform.rotation = Quaternion.Lerp(pickedObject.transform.rotation, originalRotation, elapsedTime / 1f);
+                pickedObject.transform.position = Vector3.Lerp(pickedObject.transform.position, holdPosition.position, elapsedTime / 1f);
+                pickedObject.transform.rotation = Quaternion.Lerp(pickedObject.transform.rotation, holdPosition.rotation, elapsedTime / 1f);
             }
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // Assicurati che l'oggetto sia esattamente nella posizione e rotazione originali
+        // Assicurati che l'oggetto sia esattamente nella posizione e rotazione finali
         if (pickedObject != null)
         {
-            pickedObject.transform.position = originalPosition;
-            pickedObject.transform.rotation = originalRotation;
+            pickedObject.transform.position = holdPosition.position;
+            pickedObject.transform.rotation = holdPosition.rotation;
+            pickedObject.transform.parent = holdPosition;
         }
 
-        Debug.Log("Oggetto riposizionato nella posizione originale.");
+        Debug.Log("Oggetto posizionato in mano.");
     }
 
     private void RotateObjectWithMouse()
