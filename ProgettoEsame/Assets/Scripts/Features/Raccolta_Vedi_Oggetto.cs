@@ -17,11 +17,13 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     private Collider objectCollider;
+    public bool playAudio;
 
     void Start()
     {
         // Assicurati che l'oggetto non sia statico
         gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
+        playAudio = false;
 
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
@@ -54,12 +56,14 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             RotateObject();
             if (Input.GetKeyDown(KeyCode.E))
             {
+                playAudio = false;
                 StartCoroutine(ExitView());
             }
         }
         else
         {
             CheckForPlayer();
+            
         }
     }
 
@@ -85,6 +89,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     Debug.Log("Tasto E premuto.");
+                    playAudio = true;
                     StartCoroutine(EnterView());
                 }
             }
@@ -100,6 +105,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isViewing) yield break;
 
         isViewing = true;
+        
         Debug.Log("Entrato in modalità visualizzazione.");
 
         // Disabilita il movimento del giocatore
@@ -155,7 +161,8 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
         this.transform.position = targetPosition;
         this.transform.rotation = targetRotation;
-
+        
+        
         Debug.Log("Oggetto posizionato davanti al giocatore.");
     }
 
