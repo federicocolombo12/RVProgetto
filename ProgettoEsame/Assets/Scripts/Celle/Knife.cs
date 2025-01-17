@@ -5,14 +5,11 @@ using UnityEngine;
 public class KnifePlacement : MonoBehaviour
 {
     public Transform handTransform;       // Posizione della mano (dove il coltello è tenuto)
-    public Transform dropPoint;          // Posizione in cui il coltello verrà posato
     public float transitionDuration = 1f; // Durata della transizione verso il punto di posa
     public bool isHoldingKnife = true;   // Stato: il coltello è nella mano?
 
     private Rigidbody knifeRigidbody;    // Riferimento al Rigidbody del coltello
     private Collider knifeCollider;      // Riferimento al Collider del coltello
-    private Vector3 originalDropPosition; // Posizione finale dove posare il coltello
-    private Quaternion originalDropRotation; // Rotazione orizzontale finale del coltello
 
     // Evento che segnala la posa del coltello
     public event Action OnKnifePlaced;
@@ -33,44 +30,15 @@ public class KnifePlacement : MonoBehaviour
         {
             Debug.LogError("Collider non trovato sul coltello.");
         }
-
-        // Salva la posizione e la rotazione finale per il punto di posa
-        originalDropPosition = dropPoint.position;
-        originalDropRotation = Quaternion.Euler(90, 0, 90); // Rotazione orizzontale del coltello
     }
 
     private void Update()
     {
-        // Se il coltello è in mano, controlla se il giocatore vuole posarlo
-        if (isHoldingKnife && Input.GetKeyDown(KeyCode.F))
+        // Se il coltello è in mano e appartiene al layer "PlayerKnife", controlla se il giocatore vuole posarlo
+        if (isHoldingKnife && gameObject.layer == LayerMask.NameToLayer("PlayerKnife") && Input.GetKeyDown(KeyCode.F))
         {
-            // Controlla se il giocatore sta guardando il punto di posa
-            if (IsLookingAtDropPoint())
-            {
-                StartCoroutine(PlaceKnife());
-            }
-            else
-            {
-                Debug.Log("Il giocatore non sta guardando il punto di posa.");
-            }
+            StartCoroutine(PlaceKnife());
         }
-    }
-
-    private bool IsLookingAtDropPoint()
-    {
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            Debug.Log($"Raycast hit: {hit.transform.name}");
-            if (hit.transform == dropPoint)
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private IEnumerator PlaceKnife()
@@ -88,6 +56,19 @@ public class KnifePlacement : MonoBehaviour
             knifeCollider.enabled = false;
         }
 
+        // Esegui un raycast dalla posizione della camera verso la direzione in cui sta guardando
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        Vector3 targetPosition = transform.position;
+        Quaternion targetRotation = transform.rotation;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            targetPosition = hit.point;
+            targetRotation = Quaternion.LookRotation(hit.normal);
+        }
+
         // Calcola il tempo trascorso per l'animazione
         float elapsedTime = 0f;
         Vector3 startPosition = transform.position;
@@ -95,17 +76,17 @@ public class KnifePlacement : MonoBehaviour
 
         while (elapsedTime < transitionDuration)
         {
-            // Interpola la posizione e la rotazione verso il punto di posa
-            transform.position = Vector3.Lerp(startPosition, originalDropPosition, elapsedTime / transitionDuration);
-            transform.rotation = Quaternion.Lerp(startRotation, originalDropRotation, elapsedTime / transitionDuration);
+            // Interpola la posizione e la rotazione verso la posizione corrente
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / transitionDuration);
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / transitionDuration);
             elapsedTime += Time.deltaTime;
 
             yield return null;
         }
 
         // Assicurati che il coltello sia esattamente nella posizione e rotazione finale
-        transform.position = originalDropPosition;
-        transform.rotation = originalDropRotation;
+        transform.position = targetPosition;
+        transform.rotation = targetRotation;
 
         Debug.Log("Posa del coltello completata.");
 
@@ -121,7 +102,9 @@ public class KnifePlacement : MonoBehaviour
             knifeRigidbody.useGravity = true;
         }
 
-        // Notifica agli altri script che il coltello è stato posato
-        OnKnifePlaced?.Invoke();
+        if (!isHoldingKnife)
+        {
+            OnKnifePlaced?.Invoke();
+        }
     }
 }
