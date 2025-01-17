@@ -118,15 +118,9 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("In attesa di OggettoNascosto");
             yield return new WaitUntil(() => OggettoNascosto);
 
-            // Rotazione a destra
-            Debug.Log("Inizio Rotazione a Destra");
-            animator.SetBool("SetIdle", false);
-            animator.SetBool("IsTurningRight", true);
-            yield return new WaitForSeconds(rightTurnDuration);
-            animator.SetBool("IsTurningRight", false);
-
             // Passa allo stato di camminata verso la terza destinazione
             Debug.Log("Inizio Camminata verso la terza destinazione");
+            animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(thirdDestination.position);
@@ -175,12 +169,9 @@ public class CellGuardNpc : MonoBehaviour
         OggettoNascosto = value;
         if (OggettoNascosto)
         {
-            Debug.Log("OggettoNascosto è diventato true, inizio a camminare verso la quarta destinazione");
-            animator.SetBool("SetIdle", false);
-            animator.SetBool("IsWalking", true);
-            navMeshAgent.isStopped = false;
-            navMeshAgent.SetDestination(fourthDestination.position);
+            Debug.Log("OggettoNascosto è diventato true");
         }
     }
 }
+
 
