@@ -45,18 +45,10 @@ public class CellGuardNpc : MonoBehaviour
         // Inizia la routine di comportamento
         StartCoroutine(GuardRoutine());
 
-        // Trova l'oggetto KnifePlacement e registra l'evento OnKnifePlaced
-        KnifePlacement knifePlacement = FindObjectOfType<KnifePlacement>();
-        if (knifePlacement != null)
-        {
-            knifePlacement.OnKnifePlaced += HandleKnifePlaced;
-        }
+      
     }
 
-    private void HandleKnifePlaced()
-    {
-        SetOggettoNascosto(true);
-    }
+  
 
     private IEnumerator GuardRoutine()
     {
@@ -116,11 +108,17 @@ public class CellGuardNpc : MonoBehaviour
 
             // Attesa fino a quando OggettoNascosto non diventa true
             Debug.Log("In attesa di OggettoNascosto");
-            yield return new WaitUntil(() => OggettoNascosto);
+            yield return new WaitUntil(() => KnifePickUpandPlace.coltelloNascosto);
+
+            // Rotazione a destra
+            Debug.Log("Inizio Rotazione a Destra");
+            animator.SetBool("SetIdle", false);
+            animator.SetBool("IsTurningRight", true);
+            yield return new WaitForSeconds(rightTurnDuration);
+            animator.SetBool("IsTurningRight", false);
 
             // Passa allo stato di camminata verso la terza destinazione
             Debug.Log("Inizio Camminata verso la terza destinazione");
-            animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(thirdDestination.position);
@@ -155,23 +153,7 @@ public class CellGuardNpc : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // Controlla se il coltello è stato nascosto
-        if (KnifePickUpandPlace.coltelloNascosto)
-        {
-            SetOggettoNascosto(true);
-        }
-    }
 
-    public void SetOggettoNascosto(bool value)
-    {
-        OggettoNascosto = value;
-        if (OggettoNascosto)
-        {
-            Debug.Log("OggettoNascosto è diventato true");
-        }
-    }
+    
 }
-
 
