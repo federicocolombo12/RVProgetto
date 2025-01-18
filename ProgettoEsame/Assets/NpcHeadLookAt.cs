@@ -6,7 +6,7 @@ public class NpcHeadLookAt : MonoBehaviour
 {
     [SerializeField] private Rig rig;
     [SerializeField] private Transform target;
-    [SerializeField] private bool isLooking;
+    public bool isLooking;
     void Start()
     {
         

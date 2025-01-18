@@ -27,6 +27,7 @@ public class NpcScript : MonoBehaviour
     }
     public void StopInteract()
     {
+        
         stopInteract = true;
         npcHeadLookAt.LookAtPosition(otherNpc.position);
     }
