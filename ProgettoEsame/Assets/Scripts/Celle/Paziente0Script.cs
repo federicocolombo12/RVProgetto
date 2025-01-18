@@ -53,13 +53,25 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
 
-            // Passa allo stato di corsa verso la terza destinazione
-            Debug.Log("Inizio Corsa verso la terza destinazione");
+            // Passa allo stato di corsa verso una destinazione intermedia
+            Debug.Log("Inizio Corsa verso destinazione intermedia");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsRunning", true);
             navMeshAgent.speed = runSpeed;
             navMeshAgent.isStopped = false;
+
+            // Calcolo del punto intermedio
+            Vector3 intermediatePoint = Vector3.Lerp(transform.position, thirdDestination.position, 0.5f);
+            navMeshAgent.SetDestination(intermediatePoint);
+
+            // Aspetta che l'NPC raggiunga il punto intermedio
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+            // Passa direttamente alla terza destinazione
+            Debug.Log("Raggiunto punto intermedio, inizio corsa verso la terza destinazione");
             navMeshAgent.SetDestination(thirdDestination.position);
+
+            // Aspetta che l'NPC raggiunga la terza destinazione
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
             // Stato di idle
@@ -72,7 +84,7 @@ public class Paziente0Script : MonoBehaviour
             // Attesa fino a quando il giocatore non preme il tasto E
             yield return new WaitUntil(() => interactions);
 
-            // Imposta interactions a true per 1 secondo
+            // Interazioni e comportamento successivo
             Debug.Log("Interazioni attive per 1 secondo");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsYelling", true);
@@ -122,6 +134,7 @@ public class Paziente0Script : MonoBehaviour
                     interactions = true;
                     isWaitingForPlayer = false;
                     CellaManager.instance.coltelloPreso = true;
+                    LookAtPlayer(); // Aggiungi questa riga per far guardare il paziente verso il giocatore
                 }
             }
         }
@@ -135,6 +148,16 @@ public class Paziente0Script : MonoBehaviour
             interactions = true;
             isWaitingForPlayer = false;
             CellaManager.instance.coltelloPreso = true;
+            LookAtPlayer(); // Aggiungi questa riga per far guardare il paziente verso il giocatore
         }
     }
+
+    private void LookAtPlayer()
+    {
+        Vector3 direction = (playerCamera.transform.position - transform.position).normalized;
+        direction.y = 0; // Mantieni la rotazione solo sull'asse Y
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = lookRotation;
+    }
+
 }
