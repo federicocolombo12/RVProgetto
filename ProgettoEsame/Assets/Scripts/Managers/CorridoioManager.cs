@@ -92,6 +92,7 @@ public class CorridoioManager : MonoBehaviour
         MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
             () => {
                 startAnimationPorta = true;
+                TransitionScript.instance.FadeIn();
             });
         Destroy(gameObject);
     }

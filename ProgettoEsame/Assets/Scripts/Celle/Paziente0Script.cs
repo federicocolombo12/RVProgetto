@@ -6,7 +6,7 @@ public class Paziente0Script : MonoBehaviour
 {
     public Transform thirdDestination; // Terza destinazione
     public Transform zeroDestination; // Destinazione zero
-    public float walkSpeed = 1f; // Velocità di camminata
+    [SerializeField] float walkSpeed = 1f; // Velocità di camminata
     public float runSpeed = 3f; // Velocità di corsa
     public float stoppingDistance = 0.5f; // Distanza di arresto
     public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
