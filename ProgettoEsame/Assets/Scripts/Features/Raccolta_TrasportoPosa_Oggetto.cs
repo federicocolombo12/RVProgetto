@@ -47,6 +47,9 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
                     originalPosition = pickedObject.transform.position;
                     originalRotation = pickedObject.transform.rotation;
 
+                    // Determina se l'oggetto è piatto
+                    isFlatObject = IsFlatObject(pickedObject);
+
                     // Disabilita il MeshCollider per evitare problemi di fisica
                     MeshCollider meshCollider = pickedObject.GetComponent<MeshCollider>();
                     if (meshCollider != null)
@@ -111,6 +114,13 @@ public class Raccolta_TrasportoPosa_Oggetto : MonoBehaviour
         {
             RotateObjectWithMouse();
         }
+    }
+
+    private bool IsFlatObject(GameObject obj)
+    {
+        // Determina se l'oggetto è piatto in base alle sue dimensioni
+        Vector3 size = obj.GetComponent<Renderer>().bounds.size;
+        return size.y < size.x && size.y < size.z;
     }
 
     private IEnumerator PickupObject(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)

@@ -19,6 +19,7 @@ public class UIOggetti : MonoBehaviour
     public float rayDistance = 2f; // Distanza massima del raggio
     public float proximityDistance = 3f; // Distanza di prossimità
     private bool inVisualizzazione = false; // Stato della modalità di visualizzazione
+    private Transform oggettoInVisualizzazione; // Riferimento all'oggetto attualmente in visualizzazione
 
     // Start is called before the first frame update
     void Start()
@@ -73,22 +74,18 @@ public class UIOggetti : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update chiamato.");
-
         if (inVisualizzazione)
         {
-            Debug.Log("Modalità visualizzazione attiva.");
             uscitaTesto.text = "E"; // Testo per uscire
             uscitaTesto.gameObject.SetActive(true); // Mostra il testo di uscita
             uscitaSfondo.gameObject.SetActive(true); // Mostra l'immagine di sfondo per l'uscita
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Tasto E premuto in modalità visualizzazione.");
                 inVisualizzazione = false;
                 uscitaTesto.gameObject.SetActive(false); // Nascondi il testo di uscita
                 uscitaSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo per l'uscita
-                Debug.Log("Uscito dalla modalità visualizzazione.");
+                oggettoInVisualizzazione = null; // Resetta l'oggetto in visualizzazione
             }
             return;
         }
@@ -97,11 +94,8 @@ public class UIOggetti : MonoBehaviour
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit hit;
 
-        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayDistance, Color.red);
-
         if (Physics.Raycast(ray, out hit, rayDistance, interactableLayer))
         {
-            Debug.Log("Raycast ha colpito: " + hit.transform.name);
             immagineProssimita.gameObject.SetActive(false); // Nascondi l'immagine di prossimità
 
             if (hit.transform.CompareTag("OggettoInteragibile1"))
@@ -115,37 +109,10 @@ public class UIOggetti : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log("Tasto E premuto per OggettoInteragibile1.");
                     inVisualizzazione = true;
+                    oggettoInVisualizzazione = oggettoInteragibile; // Imposta l'oggetto in visualizzazione
                     interazioneTesto.gameObject.SetActive(false); // Nascondi il testo di interazione
                     interazioneSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo di interazione
-                    Debug.Log("Entrato in modalità visualizzazione per OggettoInteragibile1.");
-                }
-                else
-                {
-                    Debug.Log("Tasto E non premuto per OggettoInteragibile1.");
-                }
-            }
-            else if (hit.transform.CompareTag("OggettoInteragibile2"))
-            {
-                oggettoInteragibile = hit.transform;
-
-                // Mostra il testo e l'immagine di sfondo per il secondo tipo di oggetto
-                interazioneTesto.text = testoInterazioneOggetto2; // Mostra il testo per il secondo tipo di oggetto
-                interazioneTesto.gameObject.SetActive(true); // Mostra il testo
-                interazioneSfondo.gameObject.SetActive(true); // Mostra l'immagine di sfondo
-
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    Debug.Log("Tasto F premuto per OggettoInteragibile2.");
-                    inVisualizzazione = true;
-                    interazioneTesto.gameObject.SetActive(false); // Nascondi il testo di interazione
-                    interazioneSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo di interazione
-                    Debug.Log("Entrato in modalità visualizzazione per OggettoInteragibile2.");
-                }
-                else
-                {
-                    Debug.Log("Tasto F non premuto per OggettoInteragibile2.");
                 }
             }
             else
@@ -154,7 +121,6 @@ public class UIOggetti : MonoBehaviour
                 interazioneSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo
                 uscitaTesto.gameObject.SetActive(false); // Nascondi il testo di uscita
                 uscitaSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo per l'uscita
-                Debug.Log("Il giocatore non sta guardando un oggetto interagibile.");
             }
         }
         else
@@ -184,12 +150,10 @@ public class UIOggetti : MonoBehaviour
                 Vector3 screenPosition = playerCamera.WorldToScreenPoint(nearestObject.position);
                 immagineProssimita.transform.position = screenPosition;
                 immagineProssimita.gameObject.SetActive(true); // Mostra l'immagine di prossimità
-                Debug.Log("Il giocatore è vicino a un oggetto interagibile.");
             }
             else
             {
                 immagineProssimita.gameObject.SetActive(false); // Nascondi l'immagine di prossimità
-                Debug.Log("Il giocatore non è vicino a nessun oggetto interagibile.");
             }
         }
     }
