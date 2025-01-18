@@ -6,6 +6,7 @@ using UnityEngine;
 public class DoorOpener : MonoBehaviour
 {
     public Animator doorAnimator;
+    [SerializeField] private GameObject doorPrefab;
     private Transform player;
     public Camera mainCamera;
 
@@ -24,6 +25,7 @@ public class DoorOpener : MonoBehaviour
         if (FirstSceneManager.instance.doorOpenable)
         {
             Debug.Log("Door is now openable!");
+            doorPrefab.tag = "OggettoInteragibile1";
             DoorActivate();
 
         }

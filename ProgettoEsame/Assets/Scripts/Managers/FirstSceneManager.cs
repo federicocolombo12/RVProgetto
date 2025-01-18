@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class FirstSceneManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class FirstSceneManager : MonoBehaviour
     public bool startAnimation = false;
     [SerializeField] private Torcia torciaScript;
     public TransitionScript transitionScript;
+    [SerializeField] Volume firstSceneVolume;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -68,6 +70,8 @@ public class FirstSceneManager : MonoBehaviour
         {
             startAnimation=true;
             TransitionScript.instance.FadeIn();
+            firstSceneVolume.enabled = false;
+
         });
             
         Destroy(gameObject);
