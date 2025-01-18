@@ -105,7 +105,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isViewing) yield break;
 
         isViewing = true;
-        
+
         Debug.Log("Entrato in modalità visualizzazione.");
 
         // Disabilita il movimento del giocatore
@@ -134,7 +134,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isFlat)
         {
             // L'oggetto è coricato
-            targetRotation *= Quaternion.Euler(90, 0, 0);
+            targetRotation *= Quaternion.Euler(0, 0, 90);
         }
         else
         {
@@ -161,8 +161,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
         this.transform.position = targetPosition;
         this.transform.rotation = targetRotation;
-        
-        
+
         Debug.Log("Oggetto posizionato davanti al giocatore.");
     }
 
