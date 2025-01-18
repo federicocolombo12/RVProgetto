@@ -46,7 +46,7 @@ public class PickUpTorcia : MonoBehaviour
         if (isViewing)
         {
             RotateObject();
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 StartCoroutine(ExitView());
             }
