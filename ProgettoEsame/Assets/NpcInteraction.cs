@@ -6,7 +6,8 @@ public class NpcInteraction : MonoBehaviour
     [SerializeField] private float interactionDistance = 2f; // Distanza di interazione
     private Camera mainCamera;
     public bool isInteracting;
-    private List<Collider> npcs = new List<Collider>(); // Usa una lista per gestire dinamicamente gli NPC
+    [SerializeField] private List<Collider> npcs = new List<Collider>(); // Lista degli NPC vicini
+   [SerializeField] private List<Collider> interactingNpcs = new List<Collider>(); // Lista degli NPC con cui stai interagendo
 
     void Start()
     {
@@ -24,18 +25,42 @@ public class NpcInteraction : MonoBehaviour
             // Controlla se è un NPC con tag valido
             if (item.CompareTag("NPC1") || item.CompareTag("NPC2"))
             {
-                var npcScript = item.GetComponent<NpcScript>();
-                if (npcScript != null)
+                npcs.Add(item); // Aggiungi l'NPC alla lista
+            }
+        }
+
+        // Gestisci l'interazione solo quando premi il tasto E
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            foreach (Collider npc in npcs)
+            {
+                var npcScript = npc.GetComponent<NpcScript>();
+                if (npcScript != null && !interactingNpcs.Contains(npc))
                 {
                     isInteracting = true;
                     npcScript.Interact(mainCamera.transform);
-                    npcs.Add(item); // Aggiungi l'NPC alla lista
+                    interactingNpcs.Add(npc); // Aggiungi l'NPC alla lista degli interagiti
                 }
             }
         }
 
-        // Se nessun NPC è vicino, interrompi l'interazione
-        if (npcs.Count == 0)
+        // Verifica se qualche NPC è uscito dal range
+        for (int i = interactingNpcs.Count - 1; i >= 0; i--)
+        {
+            if (!npcs.Contains(interactingNpcs[i]))
+            {
+                // Se l'NPC non è più vicino, interrompi l'interazione
+                var npcScript = interactingNpcs[i].GetComponent<NpcScript>();
+                if (npcScript != null)
+                {
+                    npcScript.StopInteract();
+                }
+                interactingNpcs.RemoveAt(i);
+            }
+        }
+
+        // Se non stai più interagendo con nessuno, aggiorna lo stato globale
+        if (interactingNpcs.Count == 0)
         {
             isInteracting = false;
         }

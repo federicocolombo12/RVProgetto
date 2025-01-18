@@ -9,29 +9,25 @@ public class NpcScript : MonoBehaviour
     [SerializeField] float playerHeight = 0.8f;
     [SerializeField] Transform otherNpc;
     [SerializeField] NpcInteraction playerInteraction;
+    bool stopInteract=false;
     
     private void Awake()
     {
         npcHeadLookAt = GetComponent<NpcHeadLookAt>();
 
     }
-    private void Update()
-    {
-        if (!playerInteraction.isInteracting)
-        {
-            StopInteract();
-        }
     
-    }
 
     public void Interact(Transform interactorTransform)
     {
         Debug.Log("Interacting with NPC "+ gameObject.name);
         
         npcHeadLookAt.LookAtPosition(interactorTransform.position+ Vector3.up * playerHeight);
+        stopInteract = false;
     }
     public void StopInteract()
     {
+        stopInteract = true;
         npcHeadLookAt.LookAtPosition(otherNpc.position);
     }
 }

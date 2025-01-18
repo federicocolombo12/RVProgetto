@@ -6,7 +6,7 @@ public class NpcHeadLookAt : MonoBehaviour
 {
     [SerializeField] private Rig rig;
     [SerializeField] private Transform target;
-    private bool isLooking;
+    [SerializeField] private bool isLooking;
     void Start()
     {
         
@@ -18,6 +18,7 @@ public class NpcHeadLookAt : MonoBehaviour
         float targetWeight = isLooking ? 1.0f : 0.0f;
         float lerpSpeed = 2.0f;
         rig.weight = Mathf.Lerp(rig.weight, targetWeight, Time.deltaTime * lerpSpeed);
+        
     }
     public void LookAtPosition(Vector3 lookAtPosition)
     {

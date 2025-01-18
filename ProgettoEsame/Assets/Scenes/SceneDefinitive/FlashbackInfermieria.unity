@@ -1356,8 +1356,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -120
+    m_MaxLimit: 120
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 0
@@ -1597,6 +1597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 728943415}
   target: {fileID: 400445783}
+  isLooking: 0
 --- !u!114 &716971332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2505,6 +2506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 362160933}
   target: {fileID: 400445783}
+  isLooking: 0
 --- !u!4 &1403042840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2406858667065174375, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
