@@ -134,7 +134,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isFlat)
         {
             // L'oggetto è coricato
-            targetRotation *= Quaternion.Euler(0, 0, 90);
+            targetRotation *= Quaternion.Euler(90, 0, 0);
         }
         else
         {

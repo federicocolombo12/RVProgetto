@@ -10,12 +10,14 @@ public class UIOggetti : MonoBehaviour
     public Image interazioneSfondo; // Riferimento all'immagine di sfondo
     public TMP_Text uscitaTesto; // Riferimento al testo di uscita
     public Image uscitaSfondo; // Riferimento all'immagine di sfondo per l'uscita
+    public Image immagineProssimita; // Riferimento all'immagine di prossimità
     public string testoInterazioneOggetto1 = "E"; // Testo per il primo tipo di oggetto
     public string testoInterazioneOggetto2 = "F"; // Testo per il secondo tipo di oggetto
     private Transform oggettoInteragibile; // Riferimento all'oggetto interagibile
     private Camera playerCamera; // Riferimento alla camera del giocatore
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
-    public float rayDistance = 5f; // Distanza massima del raggio
+    public float rayDistance = 2f; // Distanza massima del raggio
+    public float proximityDistance = 3f; // Distanza di prossimità
     private bool inVisualizzazione = false; // Stato della modalità di visualizzazione
 
     // Start is called before the first frame update
@@ -45,11 +47,18 @@ public class UIOggetti : MonoBehaviour
             return;
         }
 
+        if (immagineProssimita == null)
+        {
+            Debug.LogError("immagineProssimita non è assegnato nel Inspector.");
+            return;
+        }
+
         interazioneTesto.text = ""; // Inizialmente il testo è vuoto
         interazioneTesto.gameObject.SetActive(false); // Nascondi il testo all'inizio
         interazioneSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo all'inizio
         uscitaTesto.gameObject.SetActive(false); // Nascondi il testo di uscita all'inizio
         uscitaSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo per l'uscita all'inizio
+        immagineProssimita.gameObject.SetActive(false); // Nascondi l'immagine di prossimità all'inizio
         playerCamera = Camera.main; // Assumi che la camera principale sia quella del giocatore
         if (playerCamera == null)
         {
@@ -64,24 +73,22 @@ public class UIOggetti : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerCamera == null)
-        {
-            Debug.LogError("Camera principale non trovata.");
-            return;
-        }
+        Debug.Log("Update chiamato.");
 
         if (inVisualizzazione)
         {
-            // Mostra il testo e l'immagine di sfondo per l'uscita in basso a destra
+            Debug.Log("Modalità visualizzazione attiva.");
             uscitaTesto.text = "E"; // Testo per uscire
             uscitaTesto.gameObject.SetActive(true); // Mostra il testo di uscita
             uscitaSfondo.gameObject.SetActive(true); // Mostra l'immagine di sfondo per l'uscita
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                Debug.Log("Tasto E premuto in modalità visualizzazione.");
                 inVisualizzazione = false;
                 uscitaTesto.gameObject.SetActive(false); // Nascondi il testo di uscita
                 uscitaSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo per l'uscita
+                Debug.Log("Uscito dalla modalità visualizzazione.");
             }
             return;
         }
@@ -95,6 +102,8 @@ public class UIOggetti : MonoBehaviour
         if (Physics.Raycast(ray, out hit, rayDistance, interactableLayer))
         {
             Debug.Log("Raycast ha colpito: " + hit.transform.name);
+            immagineProssimita.gameObject.SetActive(false); // Nascondi l'immagine di prossimità
+
             if (hit.transform.CompareTag("OggettoInteragibile1"))
             {
                 oggettoInteragibile = hit.transform;
@@ -106,12 +115,16 @@ public class UIOggetti : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    Debug.Log("Tasto E premuto per OggettoInteragibile1.");
                     inVisualizzazione = true;
                     interazioneTesto.gameObject.SetActive(false); // Nascondi il testo di interazione
                     interazioneSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo di interazione
+                    Debug.Log("Entrato in modalità visualizzazione per OggettoInteragibile1.");
                 }
-
-                Debug.Log("Testo interazione mostrato per OggettoInteragibile1.");
+                else
+                {
+                    Debug.Log("Tasto E non premuto per OggettoInteragibile1.");
+                }
             }
             else if (hit.transform.CompareTag("OggettoInteragibile2"))
             {
@@ -122,14 +135,18 @@ public class UIOggetti : MonoBehaviour
                 interazioneTesto.gameObject.SetActive(true); // Mostra il testo
                 interazioneSfondo.gameObject.SetActive(true); // Mostra l'immagine di sfondo
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
+                    Debug.Log("Tasto F premuto per OggettoInteragibile2.");
                     inVisualizzazione = true;
                     interazioneTesto.gameObject.SetActive(false); // Nascondi il testo di interazione
                     interazioneSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo di interazione
+                    Debug.Log("Entrato in modalità visualizzazione per OggettoInteragibile2.");
                 }
-
-                Debug.Log("Testo interazione mostrato per OggettoInteragibile2.");
+                else
+                {
+                    Debug.Log("Tasto F non premuto per OggettoInteragibile2.");
+                }
             }
             else
             {
@@ -146,7 +163,34 @@ public class UIOggetti : MonoBehaviour
             interazioneSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo
             uscitaTesto.gameObject.SetActive(false); // Nascondi il testo di uscita
             uscitaSfondo.gameObject.SetActive(false); // Nascondi l'immagine di sfondo per l'uscita
-            Debug.Log("Raycast non ha colpito nulla.");
+
+            // Controlla la distanza per mostrare l'immagine di prossimità
+            Collider[] colliders = Physics.OverlapSphere(playerCamera.transform.position, proximityDistance, interactableLayer);
+            if (colliders.Length > 0)
+            {
+                Transform nearestObject = colliders[0].transform;
+                float minDistance = Vector3.Distance(playerCamera.transform.position, nearestObject.position);
+
+                foreach (Collider collider in colliders)
+                {
+                    float distance = Vector3.Distance(playerCamera.transform.position, collider.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        nearestObject = collider.transform;
+                    }
+                }
+
+                Vector3 screenPosition = playerCamera.WorldToScreenPoint(nearestObject.position);
+                immagineProssimita.transform.position = screenPosition;
+                immagineProssimita.gameObject.SetActive(true); // Mostra l'immagine di prossimità
+                Debug.Log("Il giocatore è vicino a un oggetto interagibile.");
+            }
+            else
+            {
+                immagineProssimita.gameObject.SetActive(false); // Nascondi l'immagine di prossimità
+                Debug.Log("Il giocatore non è vicino a nessun oggetto interagibile.");
+            }
         }
     }
 }
