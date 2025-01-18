@@ -13,7 +13,7 @@ public class Paziente0Script : MonoBehaviour
     public GameObject knife; // Coltello dell'NPC
     public Camera playerCamera; // Camera del giocatore
     public float interactionDistance = 2f; // Distanza massima per l'interazione
-
+    public bool talking = false; // Variabile per indicare se l'NPC sta parlando
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     private bool isWaitingForPlayer = false;
@@ -88,9 +88,12 @@ public class Paziente0Script : MonoBehaviour
             Debug.Log("Interazioni attive per 1 secondo");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsYelling", true);
+            talking = true;
             yield return new WaitForSeconds(5f);
+            talking = false;
             animator.SetBool("IsYelling", false);
             animator.SetBool("TakeThis", true);
+
 
             // Attesa fino a quando il giocatore non prende il coltello
             yield return new WaitUntil(() => KnifePickUpandPlace.coltelloPreso);
