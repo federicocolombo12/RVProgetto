@@ -17,6 +17,11 @@ public class InteractWithNurse1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TalkWithNurse();
+
+    }
+    void TalkWithNurse()
+    {
         Ray ray = new Ray(player.position, player.forward);
         RaycastHit hit;
 
@@ -40,4 +45,5 @@ public class InteractWithNurse1 : MonoBehaviour
 
         }
     }
+    
 }

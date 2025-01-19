@@ -12,11 +12,14 @@ public class InfermieraBlocking : MonoBehaviour
     [SerializeField] Transform firstDestination;
     [SerializeField] DoorOpenerStandard doorOpenerStandard;
     [SerializeField] InteractWithNurse1 interactWithNurse1;
+    [SerializeField] NpcHeadLookAt npcHeadLookAt;
+    
     bool coroutineStarted=false;
     void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        npcHeadLookAt = GetComponent<NpcHeadLookAt>();
 
     }
 
@@ -27,8 +30,12 @@ public class InfermieraBlocking : MonoBehaviour
         {
            StartCoroutine(ReachDestination());
             coroutineStarted=true;
+            
         }
-
+        else {
+            NurseLook();
+        }
+        
         
     }
     public void NurseTalk()
@@ -39,7 +46,9 @@ public class InfermieraBlocking : MonoBehaviour
     IEnumerator ReachDestination()
     {
         interactWithNurse1.enabled = false;
+        npcHeadLookAt.enabled = false;
         doorOpenerStandard.enabled = true;
+        
         navMeshAgent.SetDestination(firstDestination.position);
         navMeshAgent.isStopped = false;
         
@@ -47,5 +56,9 @@ public class InfermieraBlocking : MonoBehaviour
         yield return new WaitUntil(()=>!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f);
         animator.SetTrigger("Stop");
         
+    }
+    void NurseLook()
+    {
+        npcHeadLookAt.LookAtPosition(Camera.main.transform.position);
     }
 }
