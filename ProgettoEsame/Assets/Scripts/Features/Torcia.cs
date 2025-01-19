@@ -9,9 +9,6 @@ public class Torcia : MonoBehaviour
     [SerializeField] private bool on;
     [SerializeField] private bool off;
 
-
-
-
     void Start()
     {
         on = true;
@@ -22,21 +19,19 @@ public class Torcia : MonoBehaviour
 
     void Update()
     {
-        
-
-        if (Input.GetButtonDown("F"))
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Tasto F premuto");
+            Debug.Log("Tasto sinistro del mouse premuto");
         }
 
-        if (off && Input.GetButtonDown("F"))
+        if (off && Input.GetMouseButtonDown(0))
         {
             flashlight.SetActive(true);
             off = false;
             on = true;
             Debug.Log("Torcia accesa");
         }
-        else if (on && Input.GetButtonDown("F"))
+        else if (on && Input.GetMouseButtonDown(0))
         {
             flashlight.SetActive(false);
             off = true;

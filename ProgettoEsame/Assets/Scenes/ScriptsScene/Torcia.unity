@@ -3500,6 +3500,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3db535f25818f4c439d2f29837353c6a, type: 3}
+--- !u!4 &929605329 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8730962041807227658, guid: 4142c7b0986154bb0998a15288b68a95, type: 3}
+  m_PrefabInstance: {fileID: 934681894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &934681894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6211,7 +6216,7 @@ Transform:
   - {fileID: 1809481705}
   - {fileID: 1760106020}
   - {fileID: 1282986795}
-  - {fileID: 1810639353}
+  - {fileID: 929605329}
   - {fileID: 2030392428}
   - {fileID: 1372663851}
   - {fileID: 64261372}
@@ -6627,11 +6632,6 @@ Transform:
   - {fileID: 522416429}
   m_Father: {fileID: 1703756083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1810639353 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1762132970566770723, guid: 4142c7b0986154bb0998a15288b68a95, type: 3}
-  m_PrefabInstance: {fileID: 934681894}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1827275913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7134,6 +7134,10 @@ PrefabInstance:
     - target: {fileID: 6820444348143298659, guid: d8b9915a58110314aa11017852511d74, type: 3}
       propertyPath: m_Name
       value: Torcia
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820444348143298659, guid: d8b9915a58110314aa11017852511d74, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7283312517865113461, guid: d8b9915a58110314aa11017852511d74, type: 3}
       propertyPath: m_LocalPosition.x
