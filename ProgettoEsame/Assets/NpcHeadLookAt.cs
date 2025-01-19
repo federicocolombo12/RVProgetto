@@ -2,27 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+
 public class NpcHeadLookAt : MonoBehaviour
 {
     [SerializeField] private Rig rig;
     [SerializeField] private Transform target;
     public bool isLooking;
-    void Start()
-    {
-        
-    }
+    private const float threshold = 0.01f; // Soglia per considerare la transizione completata
 
-    // Update is called once per frame
     void Update()
     {
         float targetWeight = isLooking ? 1.0f : 0.0f;
         float lerpSpeed = 2.0f;
+
+        // Aggiorna il peso del rig
         rig.weight = Mathf.Lerp(rig.weight, targetWeight, Time.deltaTime * lerpSpeed);
-        
+
+        // Controlla se il peso ha raggiunto il valore target
+        if (Mathf.Abs(rig.weight - targetWeight) < threshold)
+        {
+            rig.weight = targetWeight; // Imposta esattamente il valore target per precisione
+            if (isLooking && targetWeight == 1.0f)
+            {
+                // La transizione verso il "guardare" è completata
+                isLooking = false;
+            }
+        }
     }
+
     public void LookAtPosition(Vector3 lookAtPosition)
     {
-        isLooking = true;
+        isLooking = true; // Avvia la transizione
         target.position = lookAtPosition;
     }
 }
