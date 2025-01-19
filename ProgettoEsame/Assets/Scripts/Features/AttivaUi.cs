@@ -13,11 +13,14 @@ public class AttivaUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        canvasVedi.SetActive(false);
-        UiManager.instance.AttivaVicinanza(canvasVicinanza, this.gameObject);
-            
-            
         
+        UiManager.instance.AttivaVicinanza(canvasVicinanza, this.gameObject);
+        if (!vedi)
+        {
+            canvasVedi.SetActive(false);
+        }
+
+
 
     }
     public void Vedi()
