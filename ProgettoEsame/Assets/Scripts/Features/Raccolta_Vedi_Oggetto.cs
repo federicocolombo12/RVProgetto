@@ -82,13 +82,13 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
-            Debug.Log("Raycast ha colpito: " + hit.transform.name);
+            
             if (hit.transform == this.transform)
             {
-                Debug.Log("Giocatore sta guardando l'oggetto.");
+               
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log("Tasto E premuto.");
+                    
                     playAudio = true;
                     StartCoroutine(EnterView());
                 }
@@ -96,7 +96,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         }
         else
         {
-            Debug.Log("Raycast non ha colpito nulla.");
+            
         }
     }
 
@@ -106,7 +106,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 
         isViewing = true;
 
-        Debug.Log("Entrato in modalità visualizzazione.");
+        
 
         // Disabilita il movimento del giocatore
         if (playerController != null)
@@ -142,8 +142,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             targetRotation *= Quaternion.Euler(0, 180, 0);
         }
 
-        Debug.Log("Posizione target: " + targetPosition);
-        Debug.Log("Rotazione target: " + targetRotation);
+        
 
         // Assicurati che l'oggetto sia visibile
         objectRenderer.enabled = true;
@@ -162,7 +161,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         this.transform.position = targetPosition;
         this.transform.rotation = targetRotation;
 
-        Debug.Log("Oggetto posizionato davanti al giocatore.");
+        
     }
 
     IEnumerator ExitView()
@@ -170,7 +169,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (!isViewing) yield break;
 
         isViewing = false;
-        Debug.Log("Uscito dalla modalità visualizzazione.");
+        
 
         // Riabilita il movimento del giocatore
         if (playerController != null)
@@ -198,7 +197,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             objectCollider.enabled = true;
         }
 
-        Debug.Log("Oggetto riposizionato nella posizione originale.");
+        
     }
 
     void RotateObject()
