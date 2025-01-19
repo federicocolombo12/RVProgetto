@@ -673,55 +673,11 @@ MonoBehaviour:
     m_Bits: 8
   playAudio: 0
   attivaUi: {fileID: 0}
---- !u!114 &524433003 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5953686961217663175, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
-  m_PrefabInstance: {fileID: 409776628386751371}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &669110864 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6785580520079394801, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
-  m_PrefabInstance: {fileID: 409776628386751371}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &721686687 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6543890252280978444, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
-  m_PrefabInstance: {fileID: 409776628386751371}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &929750958 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2534478832574468221, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
   m_PrefabInstance: {fileID: 409776628386751371}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &929750960 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8262190461174715513, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
-  m_PrefabInstance: {fileID: 409776628386751371}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929750958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1122021802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1437,30 +1393,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
   m_PrefabInstance: {fileID: 1946334920}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1813372468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813372461}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800e2515a020edc4a9587df7d8f16e02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interazioneTesto: {fileID: 721686687}
-  interazioneSfondo: {fileID: 1837409868}
-  uscitaTesto: {fileID: 669110864}
-  uscitaSfondo: {fileID: 524433003}
-  immagineProssimita: {fileID: 929750960}
-  testoInterazioneOggetto1: E
-  testoInterazioneOggetto2: F
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  rayDistance: 2
-  proximityDistance: 2
 --- !u!114 &1813372475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,17 +1414,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6031093804996669317, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
   m_PrefabInstance: {fileID: 409776628386751371}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1837409868 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 988264189823634657, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
-  m_PrefabInstance: {fileID: 409776628386751371}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1946334920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1564,9 +1485,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1511865928}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1813372468}
     - targetCorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1813372475}

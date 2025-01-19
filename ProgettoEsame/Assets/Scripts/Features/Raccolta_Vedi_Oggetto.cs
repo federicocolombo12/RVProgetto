@@ -87,6 +87,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
             attivaUi.Vedi();
+            attivaUi.vedi = true;
             if (hit.transform == this.transform)
             {
                 
@@ -102,7 +103,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         }
         else
         {
-            
+            attivaUi.vedi = false;
         }
     }
 
