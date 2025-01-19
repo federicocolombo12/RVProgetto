@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Raccolta_Vedi_Oggetto : MonoBehaviour
 {
+    
     public float interactionDistance = 2f;
     public float transitionDuration = 1f; // Durata della transizione
     // public Vector3 targetPositionOffset = new Vector3(0, 0, 0.01f); // Offset della posizione target rispetto alla camera
@@ -18,12 +19,14 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     private Collider objectCollider;
     public bool playAudio;
+    public AttivaUi attivaUi;
 
     void Start()
     {
         // Assicurati che l'oggetto non sia statico
         gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
         playAudio = false;
+        attivaUi = FindObjectOfType<AttivaUi>();
 
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
@@ -57,6 +60,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 playAudio = false;
+                attivaUi.Vedi();
                 StartCoroutine(ExitView());
             }
         }
@@ -85,23 +89,26 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             
             if (hit.transform == this.transform)
             {
-               
+                attivaUi.vedi = true;
+                attivaUi.Vedi();
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     
                     playAudio = true;
+                    
                     StartCoroutine(EnterView());
                 }
             }
         }
         else
         {
-            
+            attivaUi.vedi = false;
         }
     }
 
     IEnumerator EnterView()
     {
+        attivaUi.Esci();
         if (isViewing) yield break;
 
         isViewing = true;
