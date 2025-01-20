@@ -9,7 +9,7 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     
     [SerializeField] private float detectionRadius = 2f;
-    [SerializeField] Collider[] colliders;
+    
 
 
     private void Awake()
@@ -29,7 +29,7 @@ public class UiManager : MonoBehaviour
         if (canvas == null) return;
 
         // Rileva i collider nell'area
-        colliders = Physics.OverlapSphere(player.transform.position, detectionRadius);
+        Collider[] colliders = Physics.OverlapSphere(player.transform.position, detectionRadius);
 
         bool oggettoTrovato = false;
 
