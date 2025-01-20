@@ -8,12 +8,11 @@ public class NpcInteraction : MonoBehaviour
     public bool isInteracting;
     private NpcHeadLookAt npcHeadLookAt;
     [SerializeField] private List<Collider> npcs = new List<Collider>(); // Lista degli NPC vicini
-   [SerializeField] private List<Collider> interactingNpcs = new List<Collider>(); // Lista degli NPC con cui stai interagendo
-    public AttivaUi attivaUi;
+    [SerializeField] private List<Collider> interactingNpcs = new List<Collider>(); // Lista degli NPC con cui stai interagendo
+
     void Start()
     {
         mainCamera = Camera.main;
-        attivaUi = FindObjectOfType<AttivaUi>();
     }
 
     void Update()
@@ -27,8 +26,6 @@ public class NpcInteraction : MonoBehaviour
             // Controlla se è un NPC con tag valido
             if (item.CompareTag("NPC1") || item.CompareTag("NPC2"))
             {
-                attivaUi.Vedi();
-                attivaUi.vedi = true;
                 npcs.Add(item); // Aggiungi l'NPC alla lista
             }
         }
@@ -42,7 +39,7 @@ public class NpcInteraction : MonoBehaviour
                 if (npcScript != null && !interactingNpcs.Contains(npc))
                 {
                     isInteracting = true;
-                    
+
                     npcScript.Interact(mainCamera.transform);
                     interactingNpcs.Add(npc); // Aggiungi l'NPC alla lista degli interagiti
                 }
@@ -61,7 +58,6 @@ public class NpcInteraction : MonoBehaviour
                     npcScript.StopInteract();
                 }
                 interactingNpcs.RemoveAt(i);
-                attivaUi.vedi = false;
             }
         }
 
@@ -69,7 +65,6 @@ public class NpcInteraction : MonoBehaviour
         if (interactingNpcs.Count == 0)
         {
             isInteracting = false;
-            
         }
     }
 }

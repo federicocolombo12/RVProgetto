@@ -3710,6 +3710,7 @@ MonoBehaviour:
   interactionDistance: 2
   transitionDuration: 1
   isFlat: 0
+  isViewing: 0
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -3769,7 +3770,6 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8192
-  attivaUi: {fileID: 0}
 --- !u!114 &2015589559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3787,7 +3787,6 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8192
-  attivaUi: {fileID: 0}
 --- !u!114 &2015589561 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3043572257708283167, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
@@ -3815,7 +3814,6 @@ MonoBehaviour:
   isInteracting: 0
   npcs: []
   interactingNpcs: []
-  attivaUi: {fileID: 0}
 --- !u!114 &2015589563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5553,7 +5551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7635504380835043336, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.01
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7635504380835043336, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: m_LocalRotation.w

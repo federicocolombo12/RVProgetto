@@ -10,13 +10,13 @@ public class TriggerFlashbackObject : MonoBehaviour
     
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField]   private LayerMask interactableLayer;
-    public AttivaUi attivaUi;
+    
     // Start is called before the first frame update
     private void Start()
     {
         
         player = mainCamera.transform;
-        attivaUi = FindObjectOfType<AttivaUi>();
+        
     }
     private void Update()
     {
@@ -34,8 +34,7 @@ public class TriggerFlashbackObject : MonoBehaviour
         {
             Debug.Log("Raycast ha colpito: " + hit.transform.name);
                 
-            attivaUi.Vedi();    
-            attivaUi.vedi = true;
+            
             Debug.Log("Giocatore sta guardando l'oggetto.");
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -49,9 +48,6 @@ public class TriggerFlashbackObject : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            attivaUi.vedi = false;
-        }
+        
     }
 }

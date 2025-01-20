@@ -112,7 +112,8 @@ public class StanzaFinaleManager : MonoBehaviour
             Oggetto4 = true;
             Debug.Log("Interagito con Oggetto4.");
         }
-        else if (interactedObject == quintoOggetto && Oggetto1 && Oggetto2 && Oggetto3 && Oggetto4 && !ultimoOggetto)
+        else if (interactedObject == quintoOggetto 
+            )
         {
             ultimoOggetto = true;
             Debug.Log("Interagito con l'ultimo oggetto. Video verrà avviato.");

@@ -47,7 +47,7 @@ public class UiManager : MonoBehaviour
                 // Calcola la posizione dello schermo
                 Vector3 screenPosition = Camera.main.WorldToScreenPoint(collider.transform.position);
                 uiVicinanza.SetActive(true);
-                uiVicinanza.GetComponent<Image>().transform.position = screenPosition;
+                uiVicinanza.GetComponent<RectTransform>().position = screenPosition;
                 oggettoTrovato = true;
                 break;
             }

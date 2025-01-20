@@ -11,10 +11,10 @@ public class TriggerController : MonoBehaviour
 
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer;
-    public AttivaUi attivaUi;
+    
     private void Start()
     {
-        attivaUi = FindObjectOfType<AttivaUi>();
+       
         player = mainCamera.transform;
 
     }
@@ -36,19 +36,14 @@ public class TriggerController : MonoBehaviour
         {
             Debug.Log("Raycast ha colpito: " + hit.transform.name);
 
-            attivaUi.vedi = true;
-            attivaUi.Vedi();
+            
+            
             Debug.Log("Giocatore sta guardando l'oggetto.");
             if (Input.GetKeyDown(KeyCode.E))
             {
                 playerLock.reachedPoint = true;
             }
         }
-        else
-           {
-            attivaUi.vedi = false;
-           
-           
-        }
+       
     }
 }

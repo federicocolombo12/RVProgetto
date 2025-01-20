@@ -9,11 +9,11 @@ public class InteractWithNurse1 : MonoBehaviour
     private Transform player;
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer;
-    public AttivaUi attivaUi;
+    
     void Start()
     {
         player = Camera.main.transform;
-        attivaUi = FindObjectOfType<AttivaUi>();
+        
     }
 
     // Update is called once per frame
@@ -34,8 +34,7 @@ public class InteractWithNurse1 : MonoBehaviour
         {
 
 
-            attivaUi.Vedi();
-            attivaUi.vedi = true;
+           
             if (Input.GetKeyDown(KeyCode.E))
             {
 
@@ -46,10 +45,7 @@ public class InteractWithNurse1 : MonoBehaviour
             }
 
         }
-        else
-        {
-            attivaUi.vedi = false;
-        }
+        
     }
     
 }
