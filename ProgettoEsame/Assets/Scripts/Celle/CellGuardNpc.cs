@@ -48,13 +48,14 @@ public class CellGuardNpc : MonoBehaviour
       
     }
 
-  
 
-    private IEnumerator GuardRoutine()
+
+    public IEnumerator GuardRoutine()
     {
-        // Attesa fino a quando il coltello non è stato preso
-        Debug.Log("In attesa che il coltello venga preso");
-        yield return new WaitUntil(() => KnifePickUpandPlace.coltelloPreso);
+
+        yield return new WaitUntil(() => CellaManager.instance.attivaGuardRoutine);
+        
+
         Debug.Log("Coltello preso, inizio la routine del guardiano");
 
         while (true)
@@ -108,7 +109,7 @@ public class CellGuardNpc : MonoBehaviour
 
             // Attesa fino a quando OggettoNascosto non diventa true
             Debug.Log("In attesa di OggettoNascosto");
-            yield return new WaitUntil(() => KnifePickUpandPlace.coltelloNascosto);
+            yield return new WaitUntil(() =>    CellaManager.instance.coltelloNascosto);
 
             // Rotazione a destra
             Debug.Log("Inizio Rotazione a Destra");
@@ -154,6 +155,6 @@ public class CellGuardNpc : MonoBehaviour
     }
 
 
-    
+
 }
 

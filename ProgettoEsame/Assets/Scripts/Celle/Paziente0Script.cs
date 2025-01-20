@@ -43,7 +43,7 @@ public class Paziente0Script : MonoBehaviour
         StartCoroutine(PazienteRoutine());
     }
 
-    private IEnumerator PazienteRoutine()
+    public IEnumerator PazienteRoutine()
     {
         while (true)
         {
@@ -94,9 +94,8 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("IsYelling", false);
             animator.SetBool("TakeThis", true);
 
-
             // Attesa fino a quando il giocatore non prende il coltello
-            yield return new WaitUntil(() => KnifePickUpandPlace.coltelloPreso);
+            yield return new WaitUntil(() => CellaManager.instance.coltelloPreso);
 
             animator.SetBool("TakeThis", false);
             animator.SetBool("SetIdle", true);
@@ -115,12 +114,13 @@ public class Paziente0Script : MonoBehaviour
             Debug.Log("Arrivato alla destinazione zero");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
-            animator.SetBool("IsTurningRight", true); // Aggiunto IsTurningRight
+            animator.SetBool("IsTurningRight", true); 
             animator.SetBool("SetIdle", true);
 
             break;
         }
     }
+
 
     void Update()
     {
@@ -136,8 +136,7 @@ public class Paziente0Script : MonoBehaviour
                     Debug.Log("Giocatore ha interagito con il Paziente 0");
                     interactions = true;
                     isWaitingForPlayer = false;
-                    CellaManager.instance.coltelloPreso = true;
-                    LookAtPlayer(); // Aggiungi questa riga per far guardare il paziente verso il giocatore
+                    LookAtPlayer(); 
                 }
             }
         }
@@ -150,8 +149,7 @@ public class Paziente0Script : MonoBehaviour
             Debug.Log("Giocatore ha interagito con il Paziente 0");
             interactions = true;
             isWaitingForPlayer = false;
-            CellaManager.instance.coltelloPreso = true;
-            LookAtPlayer(); // Aggiungi questa riga per far guardare il paziente verso il giocatore
+            LookAtPlayer(); 
         }
     }
 

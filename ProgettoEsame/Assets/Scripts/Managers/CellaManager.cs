@@ -9,10 +9,16 @@ public class CellaManager : MonoBehaviour
     public static CellaManager instance { get; private set; }
     public GameObject firstPersonController;
     public GameObject firstPersonControllerCorridoio1;
-    public bool oggettoNascosto = false;
-    public bool coltelloPreso = false;
+    public GameObject cellGuardPrefab;
+
+    [SerializeField] public bool coltelloNascosto = false;
+    [SerializeField] public bool coltelloPreso = false;
+    [SerializeField] public bool attivaGuardRoutine = false;
+    [SerializeField] private bool attivaPazienteRoutine = false;
 
     private CellGuardNpc cellGuardNpc;
+    private NpcScript npcScript;
+    private Paziente0Script paziente0Script;
 
     private void Awake()
     {
@@ -22,13 +28,16 @@ public class CellaManager : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject); // Mantieni questo oggetto tra le scene
+        DontDestroyOnLoad(gameObject); 
     }
 
     void Start()
     {
-        // Trova il componente CellGuardNpc nella scena
+
+        // Trova i componenti nella scena
         cellGuardNpc = FindObjectOfType<CellGuardNpc>();
+        npcScript = FindObjectOfType<NpcScript>();
+        paziente0Script = FindObjectOfType<Paziente0Script>();
 
         if (cellGuardNpc == null)
         {
@@ -36,8 +45,40 @@ public class CellaManager : MonoBehaviour
             return;
         }
 
+        if (npcScript == null)
+        {
+            Debug.LogError("NpcScript non trovato nella scena!");
+            return;
+        }
+
+        if (paziente0Script == null)
+        {
+            Debug.LogError("Paziente0Script non trovato nella scena!");
+            return;
+        }
+
         // Registra l'evento di fine animazione
         cellGuardNpc.OnAnimationEnd += HandleAnimationEnd;
+
+        // Inizia le routine di comportamento dei personaggi
+        StartCoroutine(StartCharacterRoutines());
+    }
+
+    private IEnumerator StartCharacterRoutines()
+    {
+        if (coltelloPreso)
+        {
+            
+            attivaGuardRoutine = true;
+        }
+
+        if (attivaPazienteRoutine)
+        {
+           
+            StartCoroutine(paziente0Script.PazienteRoutine());
+        }
+
+        yield return null;
     }
 
     private void HandleAnimationEnd()
@@ -64,4 +105,3 @@ public class CellaManager : MonoBehaviour
         });
     }
 }
-
