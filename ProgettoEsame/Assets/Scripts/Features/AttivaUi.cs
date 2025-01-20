@@ -14,11 +14,8 @@ public class AttivaUi : MonoBehaviour
     void Update()
     {
         
-        UiManager.instance.AttivaVicinanza(canvasVicinanza, this.gameObject);
-        if (!vedi)
-        {
-            canvasVedi.SetActive(false);
-        }
+        UiManager.instance.AttivaVicinanza(this.gameObject);
+     
 
 
 
@@ -26,16 +23,15 @@ public class AttivaUi : MonoBehaviour
     public void Vedi()
     {
 
-       UiManager.instance.AttivaVedi(canvasVedi);
-        canvasEsci.SetActive(false);
-        canvasVicinanza.SetActive(false);
+       UiManager.instance.AttivaVedi();
+        
+        
         
     }
     public void Esci()
     {
-        UiManager.instance.AttivaEsci(canvasEsci);
-        canvasVedi.SetActive(false);
-        canvasVicinanza.SetActive(false);
+        UiManager.instance.AttivaEsci();
+      
     }
     
 }

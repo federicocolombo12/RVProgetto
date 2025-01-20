@@ -9,8 +9,11 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     
     [SerializeField] private float detectionRadius = 2f;
-    
-
+    [SerializeField] GameObject uiEntra;
+    [SerializeField] GameObject uiVicinanza;
+    [SerializeField] GameObject uiEsci;
+    public bool vedi = false;
+    public bool esci = false;
 
     private void Awake()
     {
@@ -22,11 +25,15 @@ public class UiManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
-    public void AttivaVicinanza(GameObject canvas, GameObject player)
+    private void Update()
+    {
+        
+    }
+    public void AttivaVicinanza(GameObject player)
 
     {
 
-        if (canvas == null) return;
+        
 
         // Rileva i collider nell'area
         Collider[] colliders = Physics.OverlapSphere(player.transform.position, detectionRadius);
@@ -39,19 +46,19 @@ public class UiManager : MonoBehaviour
             {
                 // Calcola la posizione dello schermo
                 Vector3 screenPosition = Camera.main.WorldToScreenPoint(collider.transform.position);
-                canvas.SetActive(true);
-                canvas.GetComponent<RectTransform>().position = screenPosition;
+                uiVicinanza.SetActive(true);
+                uiVicinanza.GetComponent<Image>().transform.position = screenPosition;
                 oggettoTrovato = true;
                 break;
             }
         }
 
         // Disattiva il canvas se non ci sono oggetti validi
-        if (!oggettoTrovato)
+        if (!oggettoTrovato || uiEntra.activeSelf || uiEsci.activeSelf)
         {
-            canvas.SetActive(false);
+            uiVicinanza.SetActive(false);
         }
-
+       
 
 
 
@@ -59,14 +66,36 @@ public class UiManager : MonoBehaviour
 
 
     }
-    public void AttivaVedi(GameObject canvas)
+    public void AttivaVedi()
     {
-        canvas.SetActive(true);
+        if (vedi) 
+        {
+            uiEntra.SetActive(true);
+            uiEsci.SetActive(false);
+        }
+        else if (!vedi)
+        {
+               uiEntra.SetActive(false);
+            
+        
+        }
+        
+
 
     }
-    public void AttivaEsci(GameObject canvas)
+    public void AttivaEsci()
     {
-        canvas.SetActive(true);
+        if (esci) {
+            uiEntra.SetActive(false);
+            uiEsci.SetActive(true);
+        }
+        else if (!esci)
+           {
+            
+            
+            uiEsci.SetActive(false);
+        }
+       
     }
 
 }

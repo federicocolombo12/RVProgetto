@@ -10,7 +10,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     public float transitionDuration = 1f; // Durata della transizione
     // public Vector3 targetPositionOffset = new Vector3(0, 0, 0.01f); // Offset della posizione target rispetto alla camera
     public bool isFlat = false; // Variabile per indicare se l'oggetto è coricato
-    private bool isViewing = false;
+    [SerializeField] private bool isViewing = false;
     private Transform player;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -57,10 +57,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (isViewing)
         {
             RotateObject();
+            UiManager.instance.esci = true;
+            attivaUi.Esci();
             if (Input.GetKeyDown(KeyCode.E))
             {
                 playAudio = false;
-                attivaUi.Vedi();
+                
                 StartCoroutine(ExitView());
             }
         }
@@ -87,7 +89,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
             attivaUi.Vedi();
-            attivaUi.vedi = true;
+            UiManager.instance.vedi = true;
             if (hit.transform == this.transform)
             {
                 
@@ -98,20 +100,23 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
                     playAudio = true;
                     
                     StartCoroutine(EnterView());
+                    
                 }
             }
         }
         else
         {
-            attivaUi.vedi = false;
+            UiManager.instance.vedi = false;
+            attivaUi.Vedi();
         }
     }
 
     IEnumerator EnterView()
     {
-        attivaUi.Esci();
-        if (isViewing) yield break;
+        
 
+        if (isViewing) yield break;
+        
         isViewing = true;
 
         
@@ -165,6 +170,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             yield return null;
         }
 
+
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
         this.transform.position = targetPosition;
         this.transform.rotation = targetRotation;
@@ -175,9 +181,10 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     IEnumerator ExitView()
     {
         if (!isViewing) yield break;
-
+        UiManager.instance.esci = false;
+        UiManager.instance.AttivaEsci();
         isViewing = false;
-        
+        UiManager.instance.esci = false;
 
         // Riabilita il movimento del giocatore
         if (playerController != null)
