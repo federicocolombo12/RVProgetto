@@ -31,7 +31,7 @@ public class DrawerSound : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
 
         // Se il giocatore è abbastanza vicino e ha cliccato il mouse
-        if (distance <= interactionDistance && Input.GetMouseButtonDown(0)) // 0 = clic sinistro del mouse
+        if (distance <= interactionDistance && Input.GetKeyDown(KeyCode.E)) // 0 = clic sinistro del mouse
         {
             ToggleDrawer();  // Chiama il metodo per aprire o chiudere il cassetto
         }

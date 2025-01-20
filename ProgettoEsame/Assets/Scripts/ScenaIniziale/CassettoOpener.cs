@@ -45,6 +45,7 @@ public class CassettoOpener : MonoBehaviour
                 Debug.Log("Tasto E premuto.");
                 
                 cassettoAnimator1.SetBool("Aperta", !cassettoAnimator1.GetBool("Aperta"));
+
             }
         }
         else {             
