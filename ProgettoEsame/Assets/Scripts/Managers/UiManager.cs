@@ -19,11 +19,11 @@ public class UiManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
     private void Update()
     {
