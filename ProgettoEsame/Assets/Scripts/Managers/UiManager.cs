@@ -9,7 +9,9 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     
     [SerializeField] private float detectionRadius = 2f;
-    
+    [SerializeField] Collider[] colliders;
+
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -27,13 +29,13 @@ public class UiManager : MonoBehaviour
         if (canvas == null) return;
 
         // Rileva i collider nell'area
-        Collider[] colliders = Physics.OverlapSphere(player.transform.position, detectionRadius);
+        colliders = Physics.OverlapSphere(player.transform.position, detectionRadius);
 
         bool oggettoTrovato = false;
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("OggettoInteragibile1"))
+            if (collider.CompareTag("OggettoInteragibile1") || collider.CompareTag("NPC1") || collider.CompareTag("NPC2"))
             {
                 // Calcola la posizione dello schermo
                 Vector3 screenPosition = Camera.main.WorldToScreenPoint(collider.transform.position);

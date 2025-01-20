@@ -10,13 +10,14 @@ public class CassettoOpener : MonoBehaviour
     public Animator cassettoAnimator2;
     private Transform player;
     public Camera mainCamera;
-
+    public AttivaUi attivaUi;
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer1;
     [SerializeField] private LayerMask interactableLayer2;
     void Start()
     {
         player = mainCamera.transform;
+        attivaUi = FindObjectOfType<AttivaUi>();
     }
 
     // Update is called once per frame
@@ -34,29 +35,38 @@ public class CassettoOpener : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer1)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
-            
 
 
-           
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+
+            attivaUi.Vedi();
+            attivaUi.vedi = true;
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
                 
                 cassettoAnimator1.SetBool("Aperta", !cassettoAnimator1.GetBool("Aperta"));
             }
         }
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer2)) // ricordati di mettere il layer Interaclable agli oggetti su unity
+        else {             
+            attivaUi.vedi = false;
+        }
+        /*if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer2)) // ricordati di mettere il layer Interaclable agli oggetti su unity
         {
-            
 
 
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            attivaUi.Vedi();
+            attivaUi.vedi = true;
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
 
                 cassettoAnimator2.SetBool("Aperta", !cassettoAnimator2.GetBool("Aperta"));
             }
         }
+        else
+        {
+            attivaUi.vedi = false;
+        }*/
     }
 }
