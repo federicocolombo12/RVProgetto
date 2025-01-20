@@ -32,4 +32,9 @@ public class TransitionScript : MonoBehaviour
     {
         transitionAnim.SetTrigger("FadeOut");
     }
+    public bool IsFadingOut()
+    {
+        // Restituisce true se l'animazione FadeOut è attiva
+        return transitionAnim.GetCurrentAnimatorStateInfo(0).IsName("FadeOut");
+    }
 }
