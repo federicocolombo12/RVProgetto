@@ -706,6 +706,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raccolta_Vedi_Oggetto_script: {fileID: 0}
   audioSource: {fileID: 0}
+--- !u!114 &2001316126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001316113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dbb99e26fddcf419fbe0769fa8c7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raccoltaScript: {fileID: 0}
+  stopView: 0
 --- !u!1 &2034183169 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2541213481514791761, guid: 0e8ebd6417ba21f4984cdcf840587e87, type: 3}
@@ -1778,6 +1792,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -55.68
       objectReference: {fileID: 0}
+    - target: {fileID: 2674363020058147099, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2835567332569777783, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1930,6 +1948,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -57.01
       objectReference: {fileID: 0}
+    - target: {fileID: 8346413756715460678, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353407887940931781, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8479513773422153278, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_LocalScale.x
       value: 5.497075
@@ -1959,6 +1985,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1049853037}
     - targetCorrespondingSourceObject: {fileID: 2989267077303417961, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 2001316126}
+    - targetCorrespondingSourceObject: {fileID: 2989267077303417961, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2001316120}
     - targetCorrespondingSourceObject: {fileID: 2989267077303417961, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
@@ -1966,16 +1995,19 @@ PrefabInstance:
       addedObject: {fileID: 2001316119}
     - targetCorrespondingSourceObject: {fileID: 5498631503312187170, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8390640284049673733}
+    - targetCorrespondingSourceObject: {fileID: 5498631503312187170, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8390640284049673728}
+    - targetCorrespondingSourceObject: {fileID: 8223344870576733984, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4112675096904402385}
     - targetCorrespondingSourceObject: {fileID: 8223344870576733984, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1175770761834518671}
     - targetCorrespondingSourceObject: {fileID: 8223344870576733984, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4112675096904402380}
-    - targetCorrespondingSourceObject: {fileID: 8223344870576733984, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4112675096904402385}
     - targetCorrespondingSourceObject: {fileID: 8223344870576733984, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4112675096904402379}
@@ -2137,6 +2169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48dbb99e26fddcf419fbe0769fa8c7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raccoltaScript: {fileID: 0}
+  stopView: 0
 --- !u!1 &4373602233753602031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,6 +2832,7 @@ MonoBehaviour:
     m_Bits: 8
   playAudio: 0
   attivaUi: {fileID: 0}
+  interactable: {fileID: 0}
 --- !u!114 &7581483486306365113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2987,6 +3022,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2924478396747025372, guid: c7fc87a488b394e1c944e8f694a70432, type: 3}
+--- !u!114 &8390640284049673733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4112675096904402368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dbb99e26fddcf419fbe0769fa8c7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raccoltaScript: {fileID: 0}
+  stopView: 0
 --- !u!224 &8569018169761656236
 RectTransform:
   m_ObjectHideFlags: 0
