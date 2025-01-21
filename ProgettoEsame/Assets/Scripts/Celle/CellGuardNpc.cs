@@ -136,34 +136,79 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Arrivato alla terza destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
-            animator.SetBool("IsTurningLeft", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-            animator.SetBool("IsTurningLeft", false);
-            animator.SetBool("SetIdle", true);
 
-            player.playerCanMove = false;
-
-            // Passa allo stato di camminata verso la quarta destinazione
-            Debug.Log("Inizio Camminata verso la quarta destinazione");            
-            animator.SetBool("SetIdle", false);
-            animator.SetBool("IsWalking", true);
-            navMeshAgent.isStopped = false;
-            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-            Vector3 destination = playerTransform.position - directionToPlayer * playerStoppingDistance;
-            navMeshAgent.SetDestination(destination);
-            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+            if (DoorController.instance.isDoorOpened)
+            {
+                animator.SetBool("DoorOpen", true);
+                animator.SetBool("IsTurningLeft", true);
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                animator.SetBool("IsTurningLeft", false);
+                animator.SetBool("SetIdle", true);
+                yield return new WaitForSeconds(secondIdleTime);
 
 
-            // Torna allo stato di idle
-            Debug.Log("Arrivato alla quarta destinazione");
-            animator.SetBool("IsWalking", false);
-            navMeshAgent.isStopped = true;
-            RotateTowardsPlayer();      
-            animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(idleTime);
+                player.playerCanMove = false;
 
-            // Segnala la fine dell'animazione
-            OnAnimationEnd?.Invoke();
+                // Passa allo stato di camminata verso la quarta destinazione
+                Debug.Log("Inizio Camminata verso la quarta destinazione");
+                animator.SetBool("SetIdle", false);
+                animator.SetBool("IsWalking", true);
+                navMeshAgent.isStopped = false;
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                Vector3 destination = playerTransform.position - directionToPlayer * playerStoppingDistance;
+                navMeshAgent.SetDestination(destination);
+                yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+
+                // Torna allo stato di idle
+                Debug.Log("Arrivato alla quarta destinazione");
+                animator.SetBool("IsWalking", false);
+                navMeshAgent.isStopped = true;
+                RotateTowardsPlayer();
+                animator.SetBool("SetIdle", true);
+                yield return new WaitForSeconds(idleTime);
+
+                // Segnala la fine dell'animazione
+                OnAnimationEnd?.Invoke();
+            }
+            else
+            {
+                animator.SetBool("DoorOpen", false);
+                animator.SetBool("IsTurningLeft", true);
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                animator.SetBool("IsTurningLeft", false);
+                animator.SetBool("IsOpeningDoor", true);
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                animator.SetBool("IsOpeningDoor", false);
+                animator.SetBool("SetIdle", true);
+
+
+                player.playerCanMove = false;
+
+                // Passa allo stato di camminata verso la quarta destinazione
+                Debug.Log("Inizio Camminata verso la quarta destinazione");
+                animator.SetBool("SetIdle", false);
+                animator.SetBool("IsWalking", true);
+                navMeshAgent.isStopped = false;
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                Vector3 destination = playerTransform.position - directionToPlayer * playerStoppingDistance;
+                navMeshAgent.SetDestination(destination);
+                yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+
+                // Torna allo stato di idle
+                Debug.Log("Arrivato alla quarta destinazione");
+                animator.SetBool("IsWalking", false);
+                navMeshAgent.isStopped = true;
+                RotateTowardsPlayer();
+                animator.SetBool("SetIdle", true);
+                yield return new WaitForSeconds(idleTime);
+
+                // Segnala la fine dell'animazione
+                OnAnimationEnd?.Invoke();
+            }
+
+
         }
     }
     private void RotateTowardsPlayer()

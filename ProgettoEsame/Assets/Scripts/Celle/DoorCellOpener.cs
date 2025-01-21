@@ -4,12 +4,13 @@ public class DoorController : MonoBehaviour
 {
     public Animator doorAnimator; // Riferimento all'Animator della porta
     public Camera mainCamera;     // Riferimento alla telecamera del giocatore
+    public static DoorController instance;
 
     [SerializeField] private float interactionDistance = 2f; // Distanza massima di interazione
     [SerializeField] private LayerMask interactableLayer;    // Layer degli oggetti interagibili
 
     private Transform player;     // Riferimento al Transform del giocatore
-    private bool isDoorOpened = false; // Stato per controllare se la porta è già stata aperta
+    public bool isDoorOpened = false; // Stato per controllare se la porta è già stata aperta
 
     private void Start()
     {
