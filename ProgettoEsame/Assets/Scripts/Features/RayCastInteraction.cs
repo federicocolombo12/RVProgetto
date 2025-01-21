@@ -8,8 +8,11 @@ public class RayCastInteraction : MonoBehaviour
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     public bool playAudio; // Per gestire l'audio
     public AttivaUi attivaUi; // Gestore dell'interfaccia utente
-    [SerializeField] private Vedi_Oggetto interactable;
-
+    public IInteractable interactable;
+    [SerializeField] private Collider[] colliders; // Collider trovati nel raggio
+    public Material highlightMaterial; // Materiale rosso per evidenziare l'oggetto
+    private Material originalMaterial; // Materiale originale dell'oggetto
+    private Renderer currentRenderer;
     // Enum per gestire gli stati
     private enum InteractionState { Idle, Interact, StopInteract }
     private InteractionState currentState = InteractionState.Idle;
@@ -61,31 +64,85 @@ public class RayCastInteraction : MonoBehaviour
 
     void CheckForInteractableObject()
     {
-        // Crea un raggio dalla posizione del giocatore nella direzione in cui sta guardando
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
+        // Offset della sfera leggermente davanti al giocatore
+        float forwardOffset = 0.5f;
+        Vector3 spherePosition = transform.position + transform.forward * forwardOffset;
 
-        // Disegna il raggio nel Scene View per il debug
+        // Disegna la sfera nel debug per visualizzarla nella scena
+        Debug.DrawLine(transform.position, spherePosition, Color.red);
         Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.green);
 
-        // Controlla se il raggio colpisce un oggetto interagibile
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
+        // Trova i collider entro la distanza specificata
+        colliders = Physics.OverlapSphere(spherePosition, interactionDistance, interactableLayer);
+        if (currentRenderer != null)
         {
-            // L'oggetto interagibile è stato colpito
+            currentRenderer.material = originalMaterial;
+            currentRenderer = null;
+        }
+        // Inizialmente, non c'è un oggetto interagibile
+        interactable = null;
+
+        // Itera tra i collider trovati
+        foreach (var collider in colliders)
+        {
+            // Controlla se il collider ha un componente che implementa IInteractable
+            IInteractable potentialInteractable = collider.GetComponent<IInteractable>();
+            currentRenderer = collider.GetComponent<Renderer>();
+            if (currentRenderer != null)
+            {
+                originalMaterial = currentRenderer.material;
+                currentRenderer.material = highlightMaterial;
+            }
+            if (potentialInteractable != null)
+            {
+                // Verifica se il raycast punta effettivamente a questo oggetto
+                Ray ray = new Ray(transform.position, transform.forward);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
+                {
+                    // Se il raycast colpisce lo stesso oggetto, lo assegna come interagibile
+                    if (hit.collider == collider)
+                    {
+                        interactable = potentialInteractable;
+                        break; // Termina il ciclo, poiché hai trovato l'oggetto
+                    }
+                }
+            }
+        }
+
+        // Aggiorna la UI in base al risultato
+        if (interactable != null)
+        {
             UiManager.instance.vedi = true;
             attivaUi.Vedi();
-
-            // Salva l'oggetto interagibile
-            interactable = hit.transform.GetComponent<Vedi_Oggetto>();
         }
         else
         {
-            // Nessun oggetto interagibile colpito
             UiManager.instance.vedi = false;
             attivaUi.Vedi();
-            interactable = null;
         }
+    
+
+    // Debug: Disegna la sfera nel Scene View
+
+    // Controlla se il raggio colpisce un oggetto interagibile
+    /*if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
+    {
+        // L'oggetto interagibile è stato colpito
+        UiManager.instance.vedi = true;
+        attivaUi.Vedi();
+
+        // Salva l'oggetto interagibile
+        interactable = hit.collider.GetComponent<IInteractable>();
     }
+    else
+    {
+        // Nessun oggetto interagibile colpito
+        UiManager.instance.vedi = false;
+        attivaUi.Vedi();
+        interactable = null;
+    }*/
+}
 
     void PerformInteraction()
     {
