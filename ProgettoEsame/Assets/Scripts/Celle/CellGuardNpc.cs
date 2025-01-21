@@ -22,6 +22,8 @@ public class CellGuardNpc : MonoBehaviour
     // Evento che segnala la fine dell'animazione
     public event Action OnAnimationEnd;
 
+   
+
     void Start()
     {
         animator = GetComponent<Animator>();

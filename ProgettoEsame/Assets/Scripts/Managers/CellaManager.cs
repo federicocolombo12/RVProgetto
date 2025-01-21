@@ -9,7 +9,6 @@ public class CellaManager : MonoBehaviour
     public static CellaManager instance { get; private set; }
     public GameObject firstPersonController;
     public GameObject firstPersonControllerCorridoio1;
-    public GameObject cellGuardPrefab;
 
     [SerializeField] public bool coltelloNascosto = false;
     [SerializeField] public bool coltelloPreso = false;
@@ -33,7 +32,7 @@ public class CellaManager : MonoBehaviour
 
     void Start()
     {
-
+       
         // Trova i componenti nella scena
         cellGuardNpc = FindObjectOfType<CellGuardNpc>();
         npcScript = FindObjectOfType<NpcScript>();
@@ -68,7 +67,6 @@ public class CellaManager : MonoBehaviour
     {
         if (coltelloPreso)
         {
-            
             attivaGuardRoutine = true;
         }
 
