@@ -111,7 +111,7 @@ public class CellGuardNpc : MonoBehaviour
 
             // Attesa fino a quando OggettoNascosto non diventa true
             Debug.Log("In attesa di OggettoNascosto");
-            yield return new WaitUntil(() =>    CellaManager.instance.coltelloNascosto);
+            yield return new WaitUntil(() => CellaManager.instance.coltelloNascosto);
 
             // Rotazione a destra
             Debug.Log("Inizio Rotazione a Destra");

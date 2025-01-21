@@ -17,8 +17,8 @@ public class Paziente0Script : MonoBehaviour
     public bool talking = false; // Variabile per indicare se l'NPC sta parlando
     private Animator animator;
     private NavMeshAgent navMeshAgent;
-    private bool isWaitingForPlayer = false;
-    private bool interactions = false;
+    
+    
 
     void Start()
     {
@@ -97,10 +97,10 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("IsRunning", false);
             navMeshAgent.isStopped = true;
             animator.SetBool("SetIdle", true);
-            isWaitingForPlayer = true;
+            
 
             // Attesa fino a quando il giocatore non preme il tasto E
-            yield return new WaitUntil(() => interactions);
+            yield return new WaitUntil(() => NpcCelleInteractionManager.instance.paziente0Interaction);
 
             // Interazioni e comportamento successivo
             Debug.Log("Interazioni attive per 1 secondo");
@@ -140,43 +140,5 @@ public class Paziente0Script : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        if (isWaitingForPlayer && Input.GetKeyDown(KeyCode.E))
-        {
-            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, interactionDistance))
-            {
-                if (hit.transform == transform)
-                {
-                    Debug.Log("Giocatore ha interagito con il Paziente 0");
-                    interactions = true;
-                    isWaitingForPlayer = false;
-                    LookAtPlayer(); 
-                }
-            }
-        }
-    }
-
-    public void Interact()
-    {
-        if (isWaitingForPlayer)
-        {
-            Debug.Log("Giocatore ha interagito con il Paziente 0");
-            interactions = true;
-            isWaitingForPlayer = false;
-            LookAtPlayer(); 
-        }
-    }
-
-    private void LookAtPlayer()
-    {
-        Vector3 direction = (playerCamera.transform.position - transform.position).normalized;
-        direction.y = 0; // Mantieni la rotazione solo sull'asse Y
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = lookRotation;
-    }
-
+     
 }
