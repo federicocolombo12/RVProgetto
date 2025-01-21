@@ -13,7 +13,9 @@ public class CellaManager : MonoBehaviour
     [SerializeField] public bool coltelloNascosto = false;
     [SerializeField] public bool coltelloPreso = false;
     [SerializeField] public bool attivaGuardRoutine = false;
-    [SerializeField] private bool attivaPazienteRoutine = false;
+    [SerializeField] public bool attivaPazienteRoutine = false;
+
+   
 
     private CellGuardNpc cellGuardNpc;
     private NpcScript npcScript;

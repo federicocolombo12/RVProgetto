@@ -20,7 +20,8 @@ public class Paziente2ScriptNPC : MonoBehaviour
         if (NpcCelleInteractionManager.instance.paziente2Interaction)
         {
             Interagisci();
-            NpcCelleInteractionManager.instance.paziente2Interaction = false; 
+            NpcCelleInteractionManager.instance.paziente2Interaction = false;
+            CellaManager.instance.attivaPazienteRoutine = true;
         }
     }
 

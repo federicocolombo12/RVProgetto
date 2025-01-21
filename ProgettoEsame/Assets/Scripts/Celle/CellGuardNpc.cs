@@ -13,7 +13,7 @@ public class CellGuardNpc : MonoBehaviour
     public float walkSpeed = 1f; // Velocità di camminata
     public float stoppingDistance = 0.5f; // Distanza di arresto
     public float rightTurnDuration = 1f; // Durata della rotazione a destra
-    public float playerStoppingDistance = 2f;
+    public float playerStoppingDistance = 1f;
     public float blockDistance = 3f;
     FirstPersonController player;
 

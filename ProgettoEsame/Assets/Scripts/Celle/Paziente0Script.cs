@@ -10,7 +10,7 @@ public class Paziente0Script : MonoBehaviour
     [SerializeField] float walkSpeed = 1f; // Velocità di camminata
     public float runSpeed = 3f; // Velocità di corsa
     public float stoppingDistance = 0.5f; // Distanza di arresto
-    public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
+    public float idleTime = 6f; // Tempo in secondi prima che inizi a camminare
     public GameObject knife; // Coltello dell'NPC
     public Camera playerCamera; // Camera del giocatore
     public float interactionDistance = 2f; // Distanza massima per l'interazione
@@ -46,6 +46,8 @@ public class Paziente0Script : MonoBehaviour
 
     public IEnumerator PazienteRoutine()
     {
+        yield return new WaitUntil(() => CellaManager.instance.attivaPazienteRoutine);
+
         while (true)
         {
             // Stato iniziale: Idle
