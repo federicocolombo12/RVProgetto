@@ -4,7 +4,8 @@ using UnityEngine.AI;
 
 public class Paziente0Script : MonoBehaviour
 {
-    public Transform thirdDestination; // Terza destinazione
+    public Transform thirdDestination1; // Terza destinazione
+    public Transform firstDestination1; // Terza destinazione
     public Transform zeroDestination; // Destinazione zero
     [SerializeField] float walkSpeed = 1f; // Velocità di camminata
     public float runSpeed = 3f; // Velocità di corsa
@@ -53,15 +54,32 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
 
-            // Passa allo stato di corsa verso una destinazione intermedia
-            Debug.Log("Inizio Corsa verso destinazione intermedia");
+            // Passa allo stato di corsa verso la prima destinazione
+            Debug.Log("Inizio Corsa verso la prima destinazione");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsRunning", true);
             navMeshAgent.speed = runSpeed;
             navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(firstDestination1.position);
+
+            // Aspetta che l'NPC raggiunga la prima destinazione
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+            // Stato di idle e rotazione a destra
+            Debug.Log("Arrivato alla prima destinazione, rotazione a destra");
+            animator.SetBool("IsRunning", false);
+            navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningRight", true);
+            yield return new WaitForSeconds(0.3f); // Durata della rotazione
+            animator.SetBool("IsTurningRight", false);
+
+            // Passa allo stato di corsa verso una destinazione intermedia
+            Debug.Log("Inizio Corsa verso destinazione intermedia");
+            animator.SetBool("IsRunning", true);
+            navMeshAgent.isStopped = false;
 
             // Calcolo del punto intermedio
-            Vector3 intermediatePoint = Vector3.Lerp(transform.position, thirdDestination.position, 0.5f);
+            Vector3 intermediatePoint = Vector3.Lerp(transform.position, thirdDestination1.position, 0.5f);
             navMeshAgent.SetDestination(intermediatePoint);
 
             // Aspetta che l'NPC raggiunga il punto intermedio
@@ -69,7 +87,7 @@ public class Paziente0Script : MonoBehaviour
 
             // Passa direttamente alla terza destinazione
             Debug.Log("Raggiunto punto intermedio, inizio corsa verso la terza destinazione");
-            navMeshAgent.SetDestination(thirdDestination.position);
+            navMeshAgent.SetDestination(thirdDestination1.position);
 
             // Aspetta che l'NPC raggiunga la terza destinazione
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
