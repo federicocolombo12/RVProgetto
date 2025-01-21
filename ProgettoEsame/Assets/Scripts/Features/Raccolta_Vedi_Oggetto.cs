@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Raccolta_Vedi_Oggetto : MonoBehaviour
 {
     
-    public float interactionDistance = 2f;
+    //public float interactionDistance = 2f;
     public float transitionDuration = 1f; // Durata della transizione
     // public Vector3 targetPositionOffset = new Vector3(0, 0, 0.01f); // Offset della posizione target rispetto alla camera
     public bool isFlat = false; // Variabile per indicare se l'oggetto è coricato
@@ -16,10 +16,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private Quaternion originalRotation;
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
-    public LayerMask interactableLayer; // Layer per gli oggetti interagibili
+    //public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     private Collider objectCollider;
     public bool playAudio;
     public AttivaUi attivaUi;
+    private bool isInteracting = false;
+    public bool rotazione=false;
 
     void Start()
     {
@@ -51,64 +53,14 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             Debug.LogError("Collider non trovato sull'oggetto. Assicurati che l'oggetto abbia un componente Collider.");
         }
     }
-
-    void Update()
+    // Metodo pubblico per avviare la visualizzazione
+    public void StartViewing()
     {
-        if (isViewing)
-        {
-            RotateObject();
-            UiManager.instance.esci = true;
-            attivaUi.Esci();
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                playAudio = false;
-                
-                StartCoroutine(ExitView());
-            }
-        }
-        else
-        {
-            CheckForPlayer();
-            
-        }
+        StartCoroutine(EnterView());  
     }
-
-    void CheckForPlayer()
+    public void StopViewing()
     {
-        if (player == null || objectRenderer == null)
-        {
-            return;
-        }
-
-        Ray ray = new Ray(player.position, player.forward);
-        RaycastHit hit;
-
-        // Disegna il raggio nel Scene View per il debug
-        Debug.DrawRay(player.position, player.forward * interactionDistance, Color.red);
-
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
-        {
-            attivaUi.Vedi();
-            UiManager.instance.vedi = true;
-            if (hit.transform == this.transform)
-            {
-                
-                
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    
-                    playAudio = true;
-                    
-                    StartCoroutine(EnterView());
-                    
-                }
-            }
-        }
-        else
-        {
-            UiManager.instance.vedi = false;
-            attivaUi.Vedi();
-        }
+        StartCoroutine(ExitView());
     }
 
     IEnumerator EnterView()
@@ -174,17 +126,19 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
         this.transform.position = targetPosition;
         this.transform.rotation = targetRotation;
+        rotazione = true;
 
-        
     }
 
     IEnumerator ExitView()
     {
+        Debug.Log("Uscita dalla visualizzazione");
         if (!isViewing) yield break;
         UiManager.instance.esci = false;
         UiManager.instance.AttivaEsci();
         isViewing = false;
         UiManager.instance.esci = false;
+        rotazione = false;
 
         // Riabilita il movimento del giocatore
         if (playerController != null)
@@ -215,8 +169,9 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         
     }
 
-    void RotateObject()
+    public void RotateObject()
     {
+       
         float rotationSpeed = 100f;
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
         if (isFlat)
