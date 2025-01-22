@@ -936,7 +936,7 @@ PrefabInstance:
     - target: {fileID: 8005020803632698652, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: cassettoScript
       value: 
-      objectReference: {fileID: 5726403398150770881}
+      objectReference: {fileID: 0}
     - target: {fileID: 8005020803632698652, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: interactableLayer.m_Bits
       value: 1024
@@ -1314,9 +1314,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5726403398150770881}
-    - targetCorrespondingSourceObject: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7581483486306365100}
     - targetCorrespondingSourceObject: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       insertIndex: -1
@@ -1331,11 +1328,6 @@ PrefabInstance:
 --- !u!4 &1938910795759337340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608466737390796411, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-  m_PrefabInstance: {fileID: 1938910795759337339}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &1938910795759337341 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6608466738782180579, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
   m_PrefabInstance: {fileID: 1938910795759337339}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1938910795759337342 stripped
@@ -2616,29 +2608,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5726403398150770881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938910795759337342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b50a5b1c2692bfb44967e7f419734d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cassettoAnimator1: {fileID: 0}
-  cassettoAnimator2: {fileID: 0}
-  mainCamera: {fileID: 1938910795759337341}
-  attivaUi: {fileID: 0}
-  interactionDistance: 2
-  interactableLayer1:
-    serializedVersion: 2
-    m_Bits: 0
-  interactableLayer2:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &5902640324265893939
 GameObject:
   m_ObjectHideFlags: 0

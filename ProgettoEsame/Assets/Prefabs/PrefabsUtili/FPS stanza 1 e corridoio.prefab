@@ -336,9 +336,6 @@ PrefabInstance:
       addedObject: {fileID: 4528010457514705640}
     - targetCorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5658634824720264033}
-    - targetCorrespondingSourceObject: {fileID: 4459864850019384750, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2372974983059002834}
     - targetCorrespondingSourceObject: {fileID: 4459864851310106424, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       insertIndex: -1
@@ -393,7 +390,6 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 32896
-  attivaUi: {fileID: 0}
 --- !u!114 &2051714111210200863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,29 +427,6 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 65536
---- !u!114 &5658634824720264033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6608466737390796407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b50a5b1c2692bfb44967e7f419734d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cassettoAnimator1: {fileID: 0}
-  cassettoAnimator2: {fileID: 0}
-  mainCamera: {fileID: 6608466738782180579}
-  attivaUi: {fileID: 0}
-  interactionDistance: 2
-  interactableLayer1:
-    serializedVersion: 2
-    m_Bits: 256
-  interactableLayer2:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!114 &2372974983059002834
 MonoBehaviour:
   m_ObjectHideFlags: 0
