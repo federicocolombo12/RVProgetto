@@ -371,6 +371,11 @@ PrefabInstance:
       addedObject: {fileID: 212631455}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a92d632706e21747a433c6c99758697, type: 3}
+--- !u!4 &1493626003 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3980916119688244322, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
+  m_PrefabInstance: {fileID: 1938910795759337339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1538158313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -525,7 +530,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595090006}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a2af53aa50974e40b361ab6e337ef5c, type: 3}
   m_Name: 
@@ -559,7 +564,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595090006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48dbb99e26fddcf419fbe0769fa8c7ac, type: 3}
   m_Name: 
@@ -945,20 +950,24 @@ PrefabInstance:
       value: Electric Torch HighPoly
       objectReference: {fileID: 0}
     - target: {fileID: 2695777482564835125, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2695777482564835125, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: m_TagString
-      value: OggettoInteragibile1
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2761471592326986967, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.804
+      value: -1.036
       objectReference: {fileID: 0}
     - target: {fileID: 2761471592326986967, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.29
+      value: 0.626
       objectReference: {fileID: 0}
     - target: {fileID: 2761471592326986967, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.931
+      value: -1.645
       objectReference: {fileID: 0}
     - target: {fileID: 3324364588802526607, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: m_LocalScale.x
@@ -1018,11 +1027,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6405412478018482156, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: m_TagString
-      value: OggettoInteragibile1
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8005020803632698652, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8005020803632698652, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: holdPosition
@@ -1036,6 +1045,10 @@ PrefabInstance:
       propertyPath: cassettoScript
       value: 
       objectReference: {fileID: 5726403398150770881}
+    - target: {fileID: 8005020803632698652, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
+      propertyPath: targetPosition
+      value: 
+      objectReference: {fileID: 1493626003}
     - target: {fileID: 8005020803632698652, guid: f63e65675a6e1494f940b88d554ba138, type: 3}
       propertyPath: interactableLayer.m_Bits
       value: 8
@@ -1370,7 +1383,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -120305615667172709, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
     - {fileID: 5658634824720264033, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3421525293498469591, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6608466738782180580, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       insertIndex: 0
@@ -3256,10 +3270,10 @@ PrefabInstance:
       addedObject: {fileID: 8939937887735683390}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3d25ae626fcf5436c8832df942978d23, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8939937887735683388}
+      addedObject: {fileID: 8939937887735683387}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3d25ae626fcf5436c8832df942978d23, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8939937887735683387}
+      addedObject: {fileID: 8939937887735683393}
   m_SourcePrefab: {fileID: 100100000, guid: 3d25ae626fcf5436c8832df942978d23, type: 3}
 --- !u!4 &8939937887735683384 stripped
 Transform:
@@ -3284,20 +3298,6 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
---- !u!114 &8939937887735683388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187659220}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48dbb99e26fddcf419fbe0769fa8c7ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raccoltaScript: {fileID: 0}
-  stopView: 0
 --- !u!65 &8939937887735683389
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3335,6 +3335,26 @@ MonoBehaviour:
   raccoltaScript: {fileID: 0}
   stopView: 0
   stopPickUp: 0
+--- !u!114 &8939937887735683393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187659220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3833e9378ce3145469fdb0238e3c725a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdPosition: {fileID: 0}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isFlatObject: 0
+  rotazione: 0
+  targetPosition: {fileID: 1493626003}
+  duration: 2
 --- !u!224 &9062738644973367517
 RectTransform:
   m_ObjectHideFlags: 0
