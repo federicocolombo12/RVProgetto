@@ -5,11 +5,11 @@ using UnityEngine;
 public class Paziente2ScriptNPC : MonoBehaviour
 {
     private Animator animator;
-    private NpcHeadLookAt npcHeadLookAt;
+    private NpcHeadLookAtCelle npcHeadLookAtCelle;
 
     void Awake()
     {
-        npcHeadLookAt = GetComponent<NpcHeadLookAt>();
+        npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
     }
 
     void Start()
@@ -19,7 +19,7 @@ public class Paziente2ScriptNPC : MonoBehaviour
         {
             Debug.LogError("Animator non trovato sul Paziente 2!");
         }
-        npcHeadLookAt = GetComponent<NpcHeadLookAt>();
+        npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
     }
 
     void Update()
@@ -54,6 +54,6 @@ public class Paziente2ScriptNPC : MonoBehaviour
 
     private void PazienteLook()
     {
-        npcHeadLookAt.LookAtPosition(Camera.main.transform.position);
+        npcHeadLookAtCelle.LookAtPosition(Camera.main.transform.position);
     }
 }
