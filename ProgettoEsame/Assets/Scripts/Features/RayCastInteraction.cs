@@ -8,7 +8,7 @@ public class RayCastInteraction : MonoBehaviour
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     public bool playAudio; // Per gestire l'audio
     public AttivaUi attivaUi; // Gestore dell'interfaccia utente
-    [SerializeField] private Vedi_Oggetto interactable;
+    [SerializeField] private IInteractable interactable;
 
     // Enum per gestire gli stati
     private enum InteractionState { Idle, Interact, StopInteract }
@@ -17,11 +17,7 @@ public class RayCastInteraction : MonoBehaviour
     void Start()
     {
         // Trova il gestore dell'interfaccia utente
-        attivaUi = FindObjectOfType<AttivaUi>();
-        if (attivaUi == null)
-        {
-            Debug.LogError("AttivaUi non trovata. Assicurati che sia presente nella scena.");
-        }
+        
     }
 
     void Update()
@@ -72,17 +68,17 @@ public class RayCastInteraction : MonoBehaviour
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
             // L'oggetto interagibile è stato colpito
-            UiManager.instance.vedi = true;
-            attivaUi.Vedi();
+            //UiManager.instance.vedi = true;
+            //attivaUi.Vedi();
 
             // Salva l'oggetto interagibile
-            interactable = hit.transform.GetComponent<Vedi_Oggetto>();
+            interactable = hit.transform.GetComponent<IInteractable>();
         }
         else
         {
             // Nessun oggetto interagibile colpito
-            UiManager.instance.vedi = false;
-            attivaUi.Vedi();
+            //UiManager.instance.vedi = false;
+            //attivaUi.Vedi();
             interactable = null;
         }
     }
