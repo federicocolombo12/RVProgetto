@@ -109,8 +109,7 @@ public class NpcCelleInteractionManager : MonoBehaviour
     }
     public void ReturnToInitialPosition(Transform npcTransform)
     {
-        npcTransform.position = new Vector3(0, -90, 0);
-        npcTransform.rotation = Quaternion.Euler(0, 0, 0);
+        npcTransform.rotation = Quaternion.Euler(0, -90, 0);
     }
 }
 

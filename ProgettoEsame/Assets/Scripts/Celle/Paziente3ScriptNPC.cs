@@ -39,8 +39,16 @@ public class Paziente3ScriptNPC : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.SetTrigger("Interagisci");
+            StartCoroutine(InteragisciRoutine());
         }
+    }
+
+    private IEnumerator InteragisciRoutine()
+    {
+        animator.SetBool("Interagisci", true);
+        yield return new WaitForSeconds(3f);
+        animator.SetBool("Interagisci", false);
+        NpcCelleInteractionManager.instance.ReturnToInitialPosition(transform);
     }
 
     private void PazienteLook()
