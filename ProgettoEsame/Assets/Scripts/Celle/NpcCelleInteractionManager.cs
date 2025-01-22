@@ -46,7 +46,7 @@ public class NpcCelleInteractionManager : MonoBehaviour
         foreach (Collider item in objectList)
         {
             // Controlla se è un NPC con tag valido
-            if ( item.CompareTag("Paziente2") || item.CompareTag("Paziente3"))
+            if (item.CompareTag("Paziente0") || item.CompareTag("Paziente2") || item.CompareTag("Paziente3"))
             {
                 npcs.Add(item); // Aggiungi l'NPC alla lista
             }
