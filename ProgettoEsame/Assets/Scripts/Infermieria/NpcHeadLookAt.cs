@@ -1,11 +1,12 @@
-using UnityEngine.Animations.Rigging;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class NpcHeadLookAt : MonoBehaviour
 {
     [SerializeField] private Rig rig;
     [SerializeField] private Transform target;
-    [SerializeField] private float maxDistance = 2.0f; // Distanza massima per guardare il giocatore
     public bool isLooking;
     private const float threshold = 0.01f; // Soglia per considerare la transizione completata
 
@@ -31,11 +32,7 @@ public class NpcHeadLookAt : MonoBehaviour
 
     public void LookAtPosition(Vector3 lookAtPosition)
     {
-        float distance = Vector3.Distance(transform.position, lookAtPosition);
-        if (distance <= maxDistance)
-        {
-            isLooking = true; // Avvia la transizione
-            target.position = lookAtPosition;
-        }
+        isLooking = true; // Avvia la transizione
+        target.position = lookAtPosition;
     }
 }

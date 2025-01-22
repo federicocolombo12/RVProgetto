@@ -40,7 +40,7 @@ public class NpcInteraction : MonoBehaviour
                 {
                     isInteracting = true;
 
-                    npcScript.Interact(mainCamera.transform);
+                    npcScript.currentState = NpcScript.NpcState.Interacting;
                     interactingNpcs.Add(npc); // Aggiungi l'NPC alla lista degli interagiti
                 }
             }
@@ -55,7 +55,7 @@ public class NpcInteraction : MonoBehaviour
                 var npcScript = interactingNpcs[i].GetComponent<NpcScript>();
                 if (npcScript != null)
                 {
-                    npcScript.StopInteract();
+                    npcScript.currentState= NpcScript.NpcState.Idle;
                 }
                 interactingNpcs.RemoveAt(i);
             }
