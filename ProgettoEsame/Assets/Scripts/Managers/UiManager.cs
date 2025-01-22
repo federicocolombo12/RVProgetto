@@ -1,19 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     public static UiManager instance;
-    
+
     [SerializeField] private float detectionRadius = 2f;
-    [SerializeField] GameObject uiEntra;
-    [SerializeField] GameObject uiVicinanza;
-    [SerializeField] GameObject uiEsci;
-    public bool vedi = false;
-    public bool esci = false;
+    [SerializeField] private GameObject uiPrefab; // Prefab per gli elementi UI
+    [SerializeField] private int poolSize = 10; // Dimensione del pool
+    [SerializeField] private float altezza = 0.5f;
+
+    private Queue<GameObject> uiPool;
+    private List<GameObject> activeUis; // Per tenere traccia degli elementi attivi
 
     private void Awake()
     {
@@ -24,78 +23,82 @@ public class UiManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        InitializePool();
     }
+
+    // Inizializza il pool
+    private void InitializePool()
+    {
+        uiPool = new Queue<GameObject>();
+        activeUis = new List<GameObject>();
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject uiInstance = Instantiate(uiPrefab, transform);
+            uiInstance.SetActive(false);
+            uiPool.Enqueue(uiInstance);
+        }
+    }
+
+    // Ottieni un elemento dal pool
+    private GameObject GetUiFromPool()
+    {
+        if (uiPool.Count > 0)
+        {
+            GameObject uiInstance = uiPool.Dequeue();
+            uiInstance.SetActive(true);
+            activeUis.Add(uiInstance);
+            return uiInstance;
+        }
+        else
+        {
+            Debug.LogWarning("Pool esaurito! Aumenta la dimensione del pool.");
+            return null;
+        }
+    }
+
+    // Rilascia un elemento nel pool
+    private void ReturnUiToPool(GameObject uiInstance)
+    {
+        if (activeUis.Contains(uiInstance))
+        {
+            activeUis.Remove(uiInstance);
+            uiInstance.SetActive(false);
+            uiPool.Enqueue(uiInstance);
+        }
+    }
+
     private void Update()
     {
-        
+        // Ad esempio, attiva gli UI in base alla vicinanza
+        RilevaOggettiVicini();
     }
-    public void AttivaVicinanza(GameObject player)
 
+    // Rileva oggetti vicini e gestisce la UI
+    private void RilevaOggettiVicini()
     {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
 
-        
-
-        // Rileva i collider nell'area
-        Collider[] colliders = Physics.OverlapSphere(player.transform.position, detectionRadius);
-
-        bool oggettoTrovato = false;
+        // Disattiva tutte le UI attive prima di aggiornare
+        foreach (var ui in new List<GameObject>(activeUis))
+        {
+            ReturnUiToPool(ui);
+        }
 
         foreach (Collider collider in colliders)
         {
             if (collider.CompareTag("OggettoInteragibile1") || collider.CompareTag("NPC1") || collider.CompareTag("NPC2"))
             {
-                // Calcola la posizione dello schermo
-                Vector3 screenPosition = Camera.main.WorldToScreenPoint(collider.transform.position);
-                uiVicinanza.SetActive(true);
-                uiVicinanza.GetComponent<RectTransform>().position = screenPosition;
-                oggettoTrovato = true;
-                break;
+                // Ottieni un elemento dal pool
+                GameObject uiElement = GetUiFromPool();
+                if (uiElement != null)
+                {
+                    // Posiziona l'elemento UI sopra l'oggetto
+                    Vector3 screenPosition = collider.transform.position + Vector3.up * altezza;
+                    uiElement.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(screenPosition);
+                }
             }
         }
-
-        // Disattiva il canvas se non ci sono oggetti validi
-        if (!oggettoTrovato || uiEntra.activeSelf || uiEsci.activeSelf)
-        {
-            uiVicinanza.SetActive(false);
-        }
-       
-
-
-
-
-
-
     }
-    public void AttivaVedi()
-    {
-        if (vedi) 
-        {
-            uiEntra.SetActive(true);
-            uiEsci.SetActive(false);
-        }
-        else if (!vedi)
-        {
-               uiEntra.SetActive(false);
-            
-        
-        }
-        
-
-
-    }
-    public void AttivaEsci()
-    {
-        if (esci) {
-            uiEntra.SetActive(false);
-            uiEsci.SetActive(true);
-        }
-        else if (!esci)
-           {
-            
-            
-            uiEsci.SetActive(false);
-        }
-       
-    }
-
 }

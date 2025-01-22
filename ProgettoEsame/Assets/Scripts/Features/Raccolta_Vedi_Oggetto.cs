@@ -134,10 +134,10 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     {
         Debug.Log("Uscita dalla visualizzazione");
         if (!isViewing) yield break;
-        UiManager.instance.esci = false;
-        UiManager.instance.AttivaEsci();
+        //UiManager.instance.esci = false;
+        //UiManager.instance.AttivaEsci();
         isViewing = false;
-        UiManager.instance.esci = false;
+        //UiManager.instance.esci = false;
         rotazione = false;
 
         // Riabilita il movimento del giocatore

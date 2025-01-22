@@ -9,27 +9,7 @@ public class AttivaUi : MonoBehaviour
    
     public bool vedi = false;
     // Update is called once per frame
-    void Update()
-    {
-        
-        UiManager.instance.AttivaVicinanza(this.gameObject);
-     
-
-
-
-    }
-    public void Vedi()
-    {
-
-       UiManager.instance.AttivaVedi();
-        
-        
-        
-    }
-    public void Esci()
-    {
-        UiManager.instance.AttivaEsci();
-      
-    }
+    
+   
     
 }

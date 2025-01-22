@@ -10,9 +10,7 @@ public class RayCastInteraction : MonoBehaviour
     public AttivaUi attivaUi; // Gestore dell'interfaccia utente
     public IInteractable interactable;
     [SerializeField] private Collider[] colliders; // Collider trovati nel raggio
-    public Material highlightMaterial; // Materiale rosso per evidenziare l'oggetto
-    private Material originalMaterial; // Materiale originale dell'oggetto
-    private Renderer currentRenderer;
+    
     // Enum per gestire gli stati
     private enum InteractionState { Idle, Interact, StopInteract }
     private InteractionState currentState = InteractionState.Idle;
@@ -30,6 +28,8 @@ public class RayCastInteraction : MonoBehaviour
     void Update()
     {
         // Esegui le azioni in base allo stato corrente
+       
+        
         switch (currentState)
         {
             case InteractionState.Idle:
@@ -74,11 +74,7 @@ public class RayCastInteraction : MonoBehaviour
 
         // Trova i collider entro la distanza specificata
         colliders = Physics.OverlapSphere(spherePosition, interactionDistance, interactableLayer);
-        if (currentRenderer != null)
-        {
-            currentRenderer.material = originalMaterial;
-            currentRenderer = null;
-        }
+        
         // Inizialmente, non c'è un oggetto interagibile
         interactable = null;
 
@@ -87,12 +83,7 @@ public class RayCastInteraction : MonoBehaviour
         {
             // Controlla se il collider ha un componente che implementa IInteractable
             IInteractable potentialInteractable = collider.GetComponent<IInteractable>();
-            currentRenderer = collider.GetComponent<Renderer>();
-            if (currentRenderer != null)
-            {
-                originalMaterial = currentRenderer.material;
-                currentRenderer.material = highlightMaterial;
-            }
+            collider.gameObject.GetComponentInChildren<MeshRenderer>(true).enabled=true;
             if (potentialInteractable != null)
             {
                 // Verifica se il raycast punta effettivamente a questo oggetto
@@ -113,13 +104,13 @@ public class RayCastInteraction : MonoBehaviour
         // Aggiorna la UI in base al risultato
         if (interactable != null)
         {
-            UiManager.instance.vedi = true;
-            attivaUi.Vedi();
+            //UiManager.instance.vedi = true;
+            //attivaUi.Vedi();
         }
         else
         {
-            UiManager.instance.vedi = false;
-            attivaUi.Vedi();
+            //UiManager.instance.vedi = false;
+            //attivaUi.Vedi();
         }
     
 

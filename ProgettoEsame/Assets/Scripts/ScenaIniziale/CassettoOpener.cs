@@ -38,8 +38,8 @@ public class CassettoOpener : MonoBehaviour
 
 
 
-            attivaUi.Vedi();
-            attivaUi.vedi = true;
+            //attivaUi.Vedi();
+            //attivaUi.vedi = true;
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
