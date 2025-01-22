@@ -1010,6 +1010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 433780510}
   target: {fileID: 904918133}
+  maxDistance: 5
   isLooking: 0
 --- !u!1 &347489265
 GameObject:
@@ -2404,6 +2405,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3402638124294796992, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.688
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402638124294796992, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402638124294796992, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402638124294796992, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402638124294796992, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402638124294796992, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402638124294796992, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 3512288251895774953, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.16
@@ -2904,6 +2933,7 @@ MonoBehaviour:
   paziente0Interaction: 0
   paziente2Interaction: 0
   paziente3Interaction: 0
+  isInteracting: 0
 --- !u!1 &1096922419
 GameObject:
   m_ObjectHideFlags: 0
@@ -3814,6 +3844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 598065372}
   target: {fileID: 283798415}
+  maxDistance: 3
   isLooking: 0
 --- !u!4 &1556023924 stripped
 Transform:

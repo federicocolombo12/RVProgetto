@@ -5,6 +5,12 @@ using UnityEngine;
 public class Paziente3ScriptNPC : MonoBehaviour
 {
     private Animator animator;
+    private NpcHeadLookAt npcHeadLookAt;
+
+    void Awake()
+    {
+        npcHeadLookAt = GetComponent<NpcHeadLookAt>();
+    }
 
     void Start()
     {
@@ -13,6 +19,7 @@ public class Paziente3ScriptNPC : MonoBehaviour
         {
             Debug.LogError("Animator non trovato sul Paziente 3!");
         }
+        npcHeadLookAt = GetComponent<NpcHeadLookAt>();
     }
 
     void Update()
@@ -22,6 +29,10 @@ public class Paziente3ScriptNPC : MonoBehaviour
             Interagisci();
             NpcCelleInteractionManager.instance.paziente3Interaction = false;
         }
+        else
+        {
+            PazienteLook();
+        }
     }
 
     private void Interagisci()
@@ -30,5 +41,10 @@ public class Paziente3ScriptNPC : MonoBehaviour
         {
             animator.SetTrigger("Interagisci");
         }
+    }
+
+    private void PazienteLook()
+    {
+        npcHeadLookAt.LookAtPosition(Camera.main.transform.position);
     }
 }
