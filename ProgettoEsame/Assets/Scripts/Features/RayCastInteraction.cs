@@ -10,6 +10,7 @@ public class RayCastInteraction : MonoBehaviour
     public AttivaUi attivaUi; // Gestore dell'interfaccia utente
     [SerializeField] private IInteractable interactable;
 
+
     // Enum per gestire gli stati
     private enum InteractionState { Idle, Interact, StopInteract }
     private InteractionState currentState = InteractionState.Idle;

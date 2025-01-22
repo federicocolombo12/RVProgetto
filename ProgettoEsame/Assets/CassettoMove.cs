@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CassettoMove : MonoBehaviour, IInteractable
 {
-    private bool isOpen = false; // Stato del cassetto
-    private bool isMoving = false; // Controlla se il cassetto è in movimento
+    [SerializeField] private bool isOpen = false; // Stato del cassetto
+    [SerializeField] private bool isMoving = false; // Controlla se il cassetto è in movimento
 
     public float moveDistance = 0.5f; // Distanza che il cassetto deve muoversi
     public float moveSpeed = 2f; // Velocità del movimento
@@ -15,6 +15,7 @@ public class CassettoMove : MonoBehaviour, IInteractable
         {
             if (!isOpen)
             {
+                Debug.Log("Interazione con il cassetto");
                 StartCoroutine(Open());
             }
             else

@@ -1750,7 +1750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Intensity
-      value: 261.453
+      value: 134.38
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_ShapeWidth
@@ -1758,7 +1758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_ShadowNearPlane
-      value: 0.54
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_PointlightHDType
@@ -1766,7 +1766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_AreaLightShadowCone
-      value: 45.8
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_ShadowResolution.m_Level
@@ -1893,12 +1893,20 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      propertyPath: m_Range
+      value: 11.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Intensity
-      value: 86.29522
+      value: 44.353485
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_AreaSize.x
       value: 1.9287992
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -1906,7 +1914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 10
+      value: 11.02
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_UseBoundingSphereOverride
@@ -2832,7 +2840,6 @@ MonoBehaviour:
     m_Bits: 8
   playAudio: 0
   attivaUi: {fileID: 0}
-  interactable: {fileID: 0}
 --- !u!114 &7581483486306365113
 MonoBehaviour:
   m_ObjectHideFlags: 0
