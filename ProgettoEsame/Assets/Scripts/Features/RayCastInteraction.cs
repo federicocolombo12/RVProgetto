@@ -87,7 +87,7 @@ public class RayCastInteraction : MonoBehaviour
             if (potentialInteractable != null)
             {
                 // Verifica se il raycast punta effettivamente a questo oggetto
-                Ray ray = new Ray(transform.position, transform.forward);
+                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
                 {
