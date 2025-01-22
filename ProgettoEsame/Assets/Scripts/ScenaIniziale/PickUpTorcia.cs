@@ -18,6 +18,9 @@ public class PickUpTorcia : MonoBehaviour
     private bool isHolding = false;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public bool isFlatObject = false; // Flag per determinare se l'oggetto è piatto
+    public bool rotazione = false;
+    [SerializeField] Transform targetPosition; // Posizione desiderata
+    [SerializeField] float duration = 2.0f; // Durata dell'animazione
 
     void Start()
     {
@@ -32,242 +35,52 @@ public class PickUpTorcia : MonoBehaviour
         }
     }
 
-    void Update()
+    public void StartReturnAndDestroy(GameObject interactor)
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (pickedObject == null)
-            {
-                // Prova a raccogliere un oggetto
-                RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxPickupDistance, interactableLayer))
-                {
-                    Debug.Log("Raycast hit: " + hit.transform.name);
-                    pickedObject = hit.transform.gameObject;
+        // Esempio di destinazione (modifica secondo le tue necessità)
+         // Rotazione desiderata
 
-                    // Memorizza la posizione e la rotazione originale
-                    originalPosition = pickedObject.transform.position;
-                    originalRotation = pickedObject.transform.rotation;
-
-                    // Disabilita il MeshCollider per evitare problemi di fisica
-                    MeshCollider meshCollider = pickedObject.GetComponent<MeshCollider>();
-                    if (meshCollider != null)
-                    {
-                        meshCollider.enabled = false;
-                    }
-
-                    // Disabilita il Rigidbody per evitare che cada mentre è tenuto
-                    Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        rb.isKinematic = true;
-                    }
-
-                    // Inizia la visualizzazione dell'oggetto
-                    StartCoroutine(EnterView());
-
-                    Debug.Log("Picked up: " + pickedObject.name);
-                }
-                else
-                {
-                    Debug.Log("Raycast did not hit any object");
-                }
-            }
-            else if (isViewing)
-            {
-                // Esci dalla visualizzazione e metti l'oggetto in mano
-                StartCoroutine(ExitView());
-                isHolding = true;
-            }
-            else if (isHolding)
-            {
-                // Trova la posizione in cui stai guardando
-                RaycastHit hit;
-                Vector3 dropPosition = pickedObject.transform.position;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
-                {
-                    dropPosition = hit.point;
-                }
-
-                // Verifica se la distanza di rilascio è entro il limite
-                if (Vector3.Distance(transform.position, dropPosition) <= maxDropDistance)
-                {
-                    // Rilascia l'oggetto
-                    pickedObject.transform.parent = null;
-
-                    // Inizia la coroutine per animare l'oggetto verso la posizione di rilascio
-                    StartCoroutine(DropObject(pickedObject, dropPosition, originalRotation));
-
-                    Debug.Log("Dropped: " + pickedObject.name);
-                    pickedObject = null;
-                    isHolding = false;
-                }
-                else
-                {
-                    Debug.Log("Drop position is too far away");
-                }
-            }
-        }
-
-        if (isViewing && pickedObject != null)
-        {
-            RotateObjectWithMouse();
-        }
+        // Avvia la coroutine per riportare l'oggetto indietro e distruggerlo
+        StartCoroutine(AnimateAndDestroy(gameObject, targetPosition.position, targetPosition.rotation, duration, interactor));
+        
     }
 
-    private IEnumerator PickupObject(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)
+    public IEnumerator AnimateAndDestroy(GameObject obj, Vector3 targetPosition, Quaternion targetRotation, float duration, GameObject interactor)
     {
-        // Anima l'oggetto verso la posizione di raccolta
-        while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
+        if (obj == null)
         {
-            obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, animationSpeed * Time.deltaTime);
-            obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, targetRotation, animationSpeed * Time.deltaTime * 100);
-            yield return null;
+            Debug.LogError("L'oggetto passato a AnimateAndDestroy è null.");
+            yield break;
         }
 
-        // Imposta la posizione finale e il parent
-        obj.transform.position = targetPosition;
-        obj.transform.rotation = targetRotation;
-        obj.transform.parent = holdPosition;
-    }
-
-    private IEnumerator DropObject(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)
-    {
-        // Riabilita il MeshCollider
-        MeshCollider meshCollider = obj.GetComponent<MeshCollider>();
-        if (meshCollider != null)
-        {
-            meshCollider.enabled = true;
-            meshCollider.convex = true; // Rendi il MeshCollider convesso
-        }
-
-        // Aggiungi un Rigidbody per far cadere l'oggetto
-        Rigidbody rb = obj.GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            rb = obj.AddComponent<Rigidbody>();
-        }
-        rb.isKinematic = true; // Rendi il Rigidbody cinematico per l'animazione
-
-        // Anima l'oggetto verso la posizione di rilascio
-        while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f || Quaternion.Angle(obj.transform.rotation, targetRotation) > 1.0f)
-        {
-            obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, animationSpeed * Time.deltaTime);
-            obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, targetRotation, animationSpeed * Time.deltaTime * 100);
-            yield return null;
-        }
-
-        // Disabilita il Rigidbody per far cadere l'oggetto
-        rb.isKinematic = false;
-    }
-
-    private IEnumerator EnterView()
-    {
-        if (isViewing || pickedObject == null) yield break;
-
-        isViewing = true;
-        pickedObject.GetComponent<Collider>().enabled = false;
-
-        Debug.Log("Entrato in modalità visualizzazione.");
-
-        // Disabilita il movimento del giocatore
-        if (playerController != null)
-        {
-            playerController.enabled = false;
-        }
-
-        // Salva la posizione e la rotazione originali dell'oggetto
-        originalPosition = pickedObject.transform.position;
-        originalRotation = pickedObject.transform.rotation;
-
-        // Calcola la posizione target
-        Vector3 targetPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.6f; // Posiziona l'oggetto molto vicino alla camera
-
-        // Calcola la rotazione target per far guardare l'oggetto verso la camera
-        Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.position - pickedObject.transform.position);
-
-        // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
-        if (isFlatObject)
-        {
-            // L'oggetto è coricato
-            targetRotation *= Quaternion.Euler(90, 0, 0);
-        }
-        else
-        {
-            // L'oggetto è in piedi
-            targetRotation *= Quaternion.Euler(0, 180, 0);
-        }
-
-        // Transizione fluida verso la posizione e la rotazione target
+        Vector3 initialPosition = obj.transform.position;
+        Quaternion initialRotation = obj.transform.rotation;
         float elapsedTime = 0f;
-        while (elapsedTime < 1f)
+
+        while (elapsedTime < duration)
         {
-            pickedObject.transform.position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / 1f);
-            pickedObject.transform.rotation = Quaternion.Lerp(originalRotation, targetRotation, elapsedTime / 1f);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
-        pickedObject.transform.position = targetPosition;
-        pickedObject.transform.rotation = targetRotation;
-
-        Debug.Log("Oggetto posizionato davanti al giocatore.");
-    }
-
-    private IEnumerator ExitView()
-    {
-        if (!isViewing || pickedObject == null) yield break;
-
-        isViewing = false;
-        Debug.Log("Uscito dalla modalità visualizzazione.");
-
-        // Riabilita il movimento del giocatore
-        if (playerController != null)
-        {
-            playerController.enabled = true;
-        }
-
-        // Transizione fluida verso la posizione e la rotazione originali
-        float elapsedTime = 0f;
-        while (elapsedTime < 1f)
-        {
-            if (pickedObject != null)
+            if (obj == null)
             {
-                pickedObject.transform.position = Vector3.Lerp(pickedObject.transform.position, holdPosition.position, elapsedTime / 1f);
-                pickedObject.transform.rotation = Quaternion.Lerp(pickedObject.transform.rotation, holdPosition.rotation, elapsedTime / 1f);
+                Debug.LogWarning("L'oggetto è stato distrutto durante l'animazione.");
+                yield break;
             }
+
             elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+
+            // Interpolazione della posizione e della rotazione
+            obj.transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            obj.transform.rotation = Quaternion.Lerp(initialRotation, targetRotation, t);
+
             yield return null;
         }
-        Destroy(pickedObject);
-        FirstSceneManager.instance.doorOpenable = true;
-        // Assicurati che l'oggetto sia esattamente nella posizione e rotazione finali
-        if (pickedObject != null)
-        {
-            pickedObject.transform.position = holdPosition.position;
-            pickedObject.transform.rotation = holdPosition.rotation;
-            pickedObject.transform.parent = holdPosition;
-        }
 
-        Debug.Log("Oggetto posizionato in mano.");
-    }
-
-    private void RotateObjectWithMouse()
-    {
-        float rotationSpeed = 100f;
-        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
-
-        if (isFlatObject)
+        // Distruzione dell'oggetto
+        if (obj != null)
         {
-            // Ruota l'oggetto coricato sull'asse Z
-            pickedObject.transform.Rotate(Vector3.forward, mouseX, Space.Self);
-        }
-        else
-        {
-            // Ruota l'oggetto in piedi sull'asse Y
-            pickedObject.transform.Rotate(Vector3.up, mouseX, Space.Self);
+            Destroy(obj);
+            interactor.gameObject.GetComponent<FirstPersonController>().enabled = true;
+            Debug.Log("Oggetto distrutto: " + obj.name);
         }
     }
 }
