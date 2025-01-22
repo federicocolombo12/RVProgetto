@@ -20,7 +20,8 @@ public class CellGuardNpc : MonoBehaviour
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     private Transform playerTransform;
-    public bool OggettoNascosto = false; 
+    public bool OggettoNascosto = false;
+    [SerializeField] private bool thirdPosition = false;
 
     // Evento che segnala la fine dell'animazione
     public event Action OnAnimationEnd;
@@ -55,7 +56,14 @@ public class CellGuardNpc : MonoBehaviour
       
     }
 
-
+    void Update()
+    {
+        if (thirdPosition && DoorController.instance != null)
+        {
+            DoorController.instance.guardOpenDoor = true;
+            Debug.Log("La porta è stata aperta dalla guardia.");
+        }
+    }
 
     public IEnumerator GuardRoutine()
     {
@@ -138,11 +146,11 @@ public class CellGuardNpc : MonoBehaviour
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-            animator.SetBool("IsTurningLeft", false);
+            animator.SetBool("IsTurningLeft", false);           
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
-
+            thirdPosition = true;
             player.playerCanMove = false;
 
             // Passa allo stato di camminata verso la quarta destinazione
