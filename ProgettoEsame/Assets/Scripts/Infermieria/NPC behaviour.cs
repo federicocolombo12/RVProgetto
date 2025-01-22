@@ -52,7 +52,7 @@ public class CharacterBehavior : MonoBehaviour
         
         
 
-        yield return new WaitForSeconds(4.567f); // Durata dell'animazione
+        yield return new WaitForSeconds(4f); // Durata dell'animazione
 
         // Cammina verso il punto di uscita
         animator.SetBool("isWalking", true);

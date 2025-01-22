@@ -10,12 +10,11 @@ public class KnifePickUpandPlace : MonoBehaviour
     private float animationSpeed = 5.0f; // Velocità di animazione per raccogliere e posare l'oggetto
     private float maxPickupDistance = 3.0f; // Distanza massima per raccogliere l'oggetto
     private float maxDropDistance = 3.0f; // Distanza massima per posare l'oggetto
-    public static bool coltelloPreso = false;
-    public static bool coltelloNascosto = false;
+  
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (pickedObject == null)
             {
@@ -95,8 +94,9 @@ public class KnifePickUpandPlace : MonoBehaviour
 
         // Verifica se l'oggetto raccolto è il coltello
         
-         Debug.Log("Coltello raccolto");
-         coltelloPreso = true;
+        Debug.Log("Coltello raccolto");
+        CellaManager.instance.coltelloPreso = true;
+        CellaManager.instance.attivaGuardRoutine = true;
     }
 
     private IEnumerator DropObject(GameObject obj, Vector3 targetPosition)
@@ -127,7 +127,7 @@ public class KnifePickUpandPlace : MonoBehaviour
         // Disabilita il Rigidbody per far cadere l'oggetto
         rb.isKinematic = false;
 
-        coltelloNascosto = true;
+        CellaManager.instance.coltelloNascosto = true;
     }
 }
 
