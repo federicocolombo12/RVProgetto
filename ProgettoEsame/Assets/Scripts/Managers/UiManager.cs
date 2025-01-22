@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject uiPrefab; // Prefab per gli elementi UI
     [SerializeField] private int poolSize = 10; // Dimensione del pool
     [SerializeField] private float altezza = 0.5f;
-
+    [SerializeField] private Collider[] colliders; // Per rilevare gli oggetti vicini
     private Queue<GameObject> uiPool;
     private List<GameObject> activeUis; // Per tenere traccia degli elementi attivi
 
@@ -78,7 +78,7 @@ public class UiManager : MonoBehaviour
     // Rileva oggetti vicini e gestisce la UI
     private void RilevaOggettiVicini()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        colliders = Physics.OverlapSphere(transform.position, detectionRadius);
 
         // Disattiva tutte le UI attive prima di aggiornare
         foreach (var ui in new List<GameObject>(activeUis))
@@ -88,7 +88,7 @@ public class UiManager : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("OggettoInteragibile1") || collider.CompareTag("NPC1") || collider.CompareTag("NPC2"))
+            if (collider.CompareTag("OggettoInteragibile1"))
             {
                 // Ottieni un elemento dal pool
                 GameObject uiElement = GetUiFromPool();
@@ -96,7 +96,7 @@ public class UiManager : MonoBehaviour
                 {
                     // Posiziona l'elemento UI sopra l'oggetto
                     Vector3 screenPosition = collider.transform.position + Vector3.up * altezza;
-                    uiElement.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(screenPosition);
+                    uiElement.GetComponent<RectTransform>().position = screenPosition;
                 }
             }
         }
