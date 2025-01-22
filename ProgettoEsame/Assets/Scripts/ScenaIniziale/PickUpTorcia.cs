@@ -18,6 +18,7 @@ public class PickUpTorcia : MonoBehaviour
     private bool isHolding = false;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public bool isFlatObject = false; // Flag per determinare se l'oggetto è piatto
+    public bool rotazione = false;
 
     void Start()
     {
@@ -31,7 +32,29 @@ public class PickUpTorcia : MonoBehaviour
             Debug.LogError("Main Camera non trovata. Assicurati che la tua scena abbia una camera con il tag 'MainCamera'.");
         }
     }
+    public void PickUp() {
+        //StartCoroutine(PickupObject());
+        StartCoroutine(EnterView());
+    }
+    public void Drop()
+    {
+        // Ottieni la posizione del giocatore
+        //Vector3 playerPosition = playerController.position; // Assicurati che 'player' sia un riferimento valido alla trasform del giocatore
 
+        // Rotazione target (nessuna rotazione: Quaternion.identity)
+        Quaternion targetRotation = Quaternion.identity;
+        //StartCoroutine(DropObject(this.gameObject, playerPosition, targetRotation));
+    }
+    public void StartReturnAndDestroy()
+    {
+        // Esempio di destinazione (modifica secondo le tue necessità)
+        Vector3 targetPosition = new Vector3(0, 0, 0); // Posizione desiderata
+        Quaternion targetRotation = Quaternion.identity; // Rotazione desiderata
+
+        // Avvia la coroutine per riportare l'oggetto indietro e distruggerlo
+        StartCoroutine(AnimateAndDestroy(gameObject, targetPosition, targetRotation, 10.0f));
+    }
+    /*
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -113,9 +136,9 @@ public class PickUpTorcia : MonoBehaviour
         {
             RotateObjectWithMouse();
         }
-    }
+    }*/
 
-    private IEnumerator PickupObject(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)
+    public IEnumerator PickupObject(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)
     {
         // Anima l'oggetto verso la posizione di raccolta
         while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
@@ -131,7 +154,7 @@ public class PickUpTorcia : MonoBehaviour
         obj.transform.parent = holdPosition;
     }
 
-    private IEnumerator DropObject(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)
+    public IEnumerator DropObject(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)
     {
         // Riabilita il MeshCollider
         MeshCollider meshCollider = obj.GetComponent<MeshCollider>();
@@ -161,10 +184,10 @@ public class PickUpTorcia : MonoBehaviour
         rb.isKinematic = false;
     }
 
-    private IEnumerator EnterView()
+    public IEnumerator EnterView()
     {
         if (isViewing || pickedObject == null) yield break;
-
+        rotazione = true;
         isViewing = true;
         pickedObject.GetComponent<Collider>().enabled = false;
 
@@ -215,7 +238,7 @@ public class PickUpTorcia : MonoBehaviour
         Debug.Log("Oggetto posizionato davanti al giocatore.");
     }
 
-    private IEnumerator ExitView()
+    public IEnumerator ExitView()
     {
         if (!isViewing || pickedObject == null) yield break;
 
@@ -253,7 +276,7 @@ public class PickUpTorcia : MonoBehaviour
         Debug.Log("Oggetto posizionato in mano.");
     }
 
-    private void RotateObjectWithMouse()
+    public void RotateObjectWithMouse()
     {
         float rotationSpeed = 100f;
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
@@ -268,6 +291,43 @@ public class PickUpTorcia : MonoBehaviour
         {
             // Ruota l'oggetto in piedi sull'asse Y
             pickedObject.transform.Rotate(Vector3.up, mouseX, Space.Self);
+        }
+    }
+    public IEnumerator AnimateAndDestroy(GameObject obj, Vector3 targetPosition, Quaternion targetRotation, float duration)
+    {
+        if (obj == null)
+        {
+            Debug.LogError("L'oggetto passato a AnimateAndDestroy è null.");
+            yield break;
+        }
+
+        Vector3 initialPosition = obj.transform.position;
+        Quaternion initialRotation = obj.transform.rotation;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            if (obj == null)
+            {
+                Debug.LogWarning("L'oggetto è stato distrutto durante l'animazione.");
+                yield break;
+            }
+
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+
+            // Interpolazione della posizione e della rotazione
+            obj.transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            obj.transform.rotation = Quaternion.Lerp(initialRotation, targetRotation, t);
+
+            yield return null;
+        }
+
+        // Distruzione dell'oggetto
+        if (obj != null)
+        {
+            obj.SetActive(false);
+            Debug.Log("Oggetto distrutto: " + obj.name);
         }
     }
 }

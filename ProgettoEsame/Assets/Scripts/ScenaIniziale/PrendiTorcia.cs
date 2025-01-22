@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vedi_Oggetto : MonoBehaviour, IInteractable
+public class PrendiTorcia : MonoBehaviour, IInteractable
 {
+    [SerializeField] PickUpTorcia pickUpScript;
     [SerializeField] Raccolta_Vedi_Oggetto raccoltaScript;
     public bool stopView = false;
-    void Start() {
+    public bool stopPickUp = false;
+    void Start()
+    {
+        pickUpScript = GetComponent<PickUpTorcia>();
         raccoltaScript = GetComponent<Raccolta_Vedi_Oggetto>();
     }
     void Update()
@@ -16,7 +20,7 @@ public class Vedi_Oggetto : MonoBehaviour, IInteractable
             raccoltaScript.RotateObject();
         }
     }
-    
+
     // Metodo per l'interazione
     public void Interact(GameObject interactor)
     {
@@ -26,20 +30,7 @@ public class Vedi_Oggetto : MonoBehaviour, IInteractable
         {
             // Avvia la visualizzazione dell'oggetto
             raccoltaScript.StartViewing();
-            
-        }
-        else
-        {
-            Debug.LogWarning("L'interactor non ha il componente Raccolta_Vedi_Oggetto!");
-        }
-    }
-    public void StopInteract(GameObject interactor)
-    {
-        // Trova il componente Raccolta_Vedi_Oggetto sull'interactor
-        if (raccoltaScript != null)
-        {
-            // Interrompi la visualizzazione dell'oggetto
-            raccoltaScript.StopViewing();
+            Debug.Log("Torcia presa");
         }
         else
         {
@@ -47,4 +38,12 @@ public class Vedi_Oggetto : MonoBehaviour, IInteractable
         }
     }
 
+    public void StopInteract(GameObject interactor)
+    {
+        if (!stopPickUp) { 
+        pickUpScript.StartReturnAndDestroy();
+            stopPickUp = true;
+        }
+    }
 }
+

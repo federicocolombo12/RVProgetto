@@ -4,4 +4,6 @@ public interface IInteractable
 {
     void Interact(GameObject interactor);
     void StopInteract(GameObject interactor);
+
+
 }
