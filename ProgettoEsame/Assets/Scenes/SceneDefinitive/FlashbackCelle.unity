@@ -984,6 +984,8 @@ MonoBehaviour:
   playerHeight: 0.3
   otherNpc: {fileID: 0}
   playerInteraction: {fileID: 0}
+  target: {fileID: 0}
+  currentState: 0
 --- !u!114 &328789003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1685,6 +1687,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6488670332629265327, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
   m_PrefabInstance: {fileID: 1020885317}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &881831455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2650922211872458734, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+  m_PrefabInstance: {fileID: 1883183917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &881831456 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2699748144841681825, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+  m_PrefabInstance: {fileID: 1883183917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &881831459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881831455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7340f1bedc99fd4dae1bad2ab627744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cassetto: {fileID: 881831456}
+  zPosizioneAperta: 0.3
+  velocitaApertura: 2
+  raycastDistance: 5
+  cassettoLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!64 &881831460
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881831455}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4161965323473633393, guid: 1b6083f3d6337554d88d253903116430, type: 3}
 --- !u!4 &885261295 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6202584959312238525, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
@@ -3911,6 +3964,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1356324746435155395, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
   m_PrefabInstance: {fileID: 1020885317}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1586094438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6016109229024560177, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+  m_PrefabInstance: {fileID: 1883183917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1586094439 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3431776489894520118, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+  m_PrefabInstance: {fileID: 1883183917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1586094440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586094438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7340f1bedc99fd4dae1bad2ab627744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cassetto: {fileID: 1586094439}
+  zPosizioneAperta: 0.4
+  velocitaApertura: 2
+  raycastDistance: 5
+  cassettoLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!64 &1586094443
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586094438}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -286831280553676620, guid: 1b6083f3d6337554d88d253903116430, type: 3}
 --- !u!4 &1612936623 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8232606174477031491, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
@@ -4150,6 +4254,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: -4018286686147086024, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+    - target: {fileID: -6016109229024560177, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -5203378795954524299, guid: 1b6083f3d6337554d88d253903116430, type: 3}
       propertyPath: m_Materials.Array.data[7]
       value: 
@@ -4158,6 +4266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawer
       objectReference: {fileID: 0}
+    - target: {fileID: 2650922211872458734, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6424213889562141996, guid: 1b6083f3d6337554d88d253903116430, type: 3}
       propertyPath: m_Materials.Array.data[7]
       value: 
@@ -4165,7 +4277,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -6016109229024560177, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1586094440}
+    - targetCorrespondingSourceObject: {fileID: -6016109229024560177, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1586094443}
+    - targetCorrespondingSourceObject: {fileID: 2650922211872458734, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881831460}
+    - targetCorrespondingSourceObject: {fileID: 2650922211872458734, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881831459}
   m_SourcePrefab: {fileID: 100100000, guid: 1b6083f3d6337554d88d253903116430, type: 3}
 --- !u!4 &1893423485 stripped
 Transform:
