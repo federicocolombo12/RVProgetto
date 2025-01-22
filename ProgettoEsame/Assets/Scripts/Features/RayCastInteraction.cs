@@ -8,7 +8,7 @@ public class RayCastInteraction : MonoBehaviour
     public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     public bool playAudio; // Per gestire l'audio
     public AttivaUi attivaUi; // Gestore dell'interfaccia utente
-    [SerializeField] private Vedi_Oggetto interactable;
+    [SerializeField] private IInteractable interactable;
 
     // Enum per gestire gli stati
     private enum InteractionState { Idle, Interact, StopInteract }
@@ -76,7 +76,7 @@ public class RayCastInteraction : MonoBehaviour
             attivaUi.Vedi();
 
             // Salva l'oggetto interagibile
-            interactable = hit.transform.GetComponent<Vedi_Oggetto>();
+            interactable = hit.transform.GetComponent<IInteractable>();
         }
         else
         {
