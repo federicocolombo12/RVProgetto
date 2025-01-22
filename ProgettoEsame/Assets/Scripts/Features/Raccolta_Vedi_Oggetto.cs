@@ -19,7 +19,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     //public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     private Collider objectCollider;
     public bool playAudio;
-    public AttivaUi attivaUi;
+    
     private bool isInteracting = false;
     public bool rotazione=false;
 
@@ -28,7 +28,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Assicurati che l'oggetto non sia statico
         gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
         playAudio = false;
-        attivaUi = FindObjectOfType<AttivaUi>();
+        
 
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
@@ -134,10 +134,9 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     {
         Debug.Log("Uscita dalla visualizzazione");
         if (!isViewing) yield break;
-        UiManager.instance.esci = false;
-        UiManager.instance.AttivaEsci();
+        
         isViewing = false;
-        UiManager.instance.esci = false;
+        
         rotazione = false;
 
         // Riabilita il movimento del giocatore

@@ -9,21 +9,14 @@ public class RayCastInteraction : MonoBehaviour
     public bool playAudio; // Per gestire l'audio
     public AttivaUi attivaUi; // Gestore dell'interfaccia utente
     [SerializeField] private IInteractable interactable;
-
+    [SerializeField] private Collider interactableCollider; // Collider visibile nell'Inspector
 
     // Enum per gestire gli stati
     private enum InteractionState { Idle, Interact, StopInteract }
     private InteractionState currentState = InteractionState.Idle;
 
-    void Start()
-    {
-        // Trova il gestore dell'interfaccia utente
-        
-    }
-
     void Update()
     {
-        // Esegui le azioni in base allo stato corrente
         switch (currentState)
         {
             case InteractionState.Idle:
@@ -44,9 +37,7 @@ public class RayCastInteraction : MonoBehaviour
 
             case InteractionState.StopInteract:
                 StopInteraction();
-                
-                    ChangeState(InteractionState.Idle);
-                
+                ChangeState(InteractionState.Idle);
                 break;
         }
     }
@@ -59,28 +50,27 @@ public class RayCastInteraction : MonoBehaviour
     void CheckForInteractableObject()
     {
         // Crea un raggio dalla posizione del giocatore nella direzione in cui sta guardando
-        Ray ray = new Ray(transform.position, transform.forward);
+        Transform player = Camera.main.transform;
+        Ray ray = new Ray(player.position, player.forward);
         RaycastHit hit;
 
         // Disegna il raggio nel Scene View per il debug
-        Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.green);
+        Debug.DrawRay(player.position, player.forward * interactionDistance, Color.green);
 
         // Controlla se il raggio colpisce un oggetto interagibile
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
-            // L'oggetto interagibile è stato colpito
-            //UiManager.instance.vedi = true;
-            //attivaUi.Vedi();
-
-            // Salva l'oggetto interagibile
+            // Salva il riferimento al componente interagibile
             interactable = hit.transform.GetComponent<IInteractable>();
+
+            // Salva il collider dell'oggetto colpito
+            interactableCollider = hit.collider;
         }
         else
         {
-            // Nessun oggetto interagibile colpito
-            //UiManager.instance.vedi = false;
-            //attivaUi.Vedi();
+            // Resetta i riferimenti se non c'è nulla
             interactable = null;
+            interactableCollider = null;
         }
     }
 
@@ -99,6 +89,7 @@ public class RayCastInteraction : MonoBehaviour
         {
             interactable.StopInteract(gameObject); // Richiama il metodo di interruzione
             interactable = null;
+            interactableCollider = null;
         }
     }
 }
