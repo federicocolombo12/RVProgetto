@@ -62,7 +62,7 @@ public class RayCastInteraction : MonoBehaviour
     void CheckForInteractableObject()
     {
         // Crea un raggio dalla posizione del giocatore nella direzione in cui sta guardando
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
 
         // Disegna il raggio nel Scene View per il debug

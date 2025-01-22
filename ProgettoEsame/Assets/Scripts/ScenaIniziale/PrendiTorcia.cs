@@ -41,8 +41,11 @@ public class PrendiTorcia : MonoBehaviour, IInteractable
     public void StopInteract(GameObject interactor)
     {
         if (!stopPickUp) { 
-        pickUpScript.StartReturnAndDestroy();
+        pickUpScript.StartReturnAndDestroy(interactor);
             stopPickUp = true;
+            
+            
+            FirstSceneManager.instance.doorOpenable = true;
         }
     }
 }

@@ -9,12 +9,39 @@ public class NpcScript : MonoBehaviour
     [SerializeField] float playerHeight = 0.8f;
     [SerializeField] Transform otherNpc;
     [SerializeField] NpcInteraction playerInteraction;
+    [SerializeField] Transform target;
     bool stopInteract=false;
+    public NpcState currentState = NpcState.Idle;
     
+    public enum NpcState
+    {
+        Idle,
+        Interacting
+    }
     private void Awake()
     {
         npcHeadLookAt = GetComponent<NpcHeadLookAt>();
 
+    }
+    void Update()
+    {
+        switch (currentState)
+        {
+            case NpcState.Idle:
+                if (!stopInteract)
+                {
+                    StopInteract();
+                }
+                
+                break;
+            case NpcState.Interacting:
+                if (stopInteract)
+                {
+                    Interact(Camera.main.transform);
+                }
+                
+                break;
+        }
     }
     
 

@@ -19,6 +19,8 @@ public class PickUpTorcia : MonoBehaviour
     private FirstPersonController playerController; // Riferimento al FirstPersonController
     public bool isFlatObject = false; // Flag per determinare se l'oggetto è piatto
     public bool rotazione = false;
+    [SerializeField] Transform targetPosition; // Posizione desiderata
+    [SerializeField] float duration = 2.0f; // Durata dell'animazione
 
     void Start()
     {
@@ -45,14 +47,14 @@ public class PickUpTorcia : MonoBehaviour
         Quaternion targetRotation = Quaternion.identity;
         //StartCoroutine(DropObject(this.gameObject, playerPosition, targetRotation));
     }
-    public void StartReturnAndDestroy()
+    public void StartReturnAndDestroy(GameObject interactor)
     {
         // Esempio di destinazione (modifica secondo le tue necessità)
-        Vector3 targetPosition = new Vector3(0, 0, 0); // Posizione desiderata
-        Quaternion targetRotation = Quaternion.identity; // Rotazione desiderata
+         // Rotazione desiderata
 
         // Avvia la coroutine per riportare l'oggetto indietro e distruggerlo
-        StartCoroutine(AnimateAndDestroy(gameObject, targetPosition, targetRotation, 10.0f));
+        StartCoroutine(AnimateAndDestroy(gameObject, targetPosition.position, targetPosition.rotation, duration, interactor));
+        
     }
     /*
     void Update()
@@ -293,7 +295,7 @@ public class PickUpTorcia : MonoBehaviour
             pickedObject.transform.Rotate(Vector3.up, mouseX, Space.Self);
         }
     }
-    public IEnumerator AnimateAndDestroy(GameObject obj, Vector3 targetPosition, Quaternion targetRotation, float duration)
+    public IEnumerator AnimateAndDestroy(GameObject obj, Vector3 targetPosition, Quaternion targetRotation, float duration, GameObject interactor)
     {
         if (obj == null)
         {
@@ -326,7 +328,8 @@ public class PickUpTorcia : MonoBehaviour
         // Distruzione dell'oggetto
         if (obj != null)
         {
-            obj.SetActive(false);
+            Destroy(obj);
+            interactor.gameObject.GetComponent<FirstPersonController>().enabled = true;
             Debug.Log("Oggetto distrutto: " + obj.name);
         }
     }
