@@ -10,22 +10,29 @@ public class CellGuardNpc : MonoBehaviour
     public Transform firstDestination; // Prima destinazione
     public Transform secondDestination; // Seconda destinazione
     public Transform thirdDestination; // Terza destinazione
-    public Transform fourthDestination; // Quarta destinazione
     public float walkSpeed = 1f; // Velocità di camminata
     public float stoppingDistance = 0.5f; // Distanza di arresto
     public float rightTurnDuration = 1f; // Durata della rotazione a destra
+    public float playerStoppingDistance = 1f;
+    public float blockDistance = 3f;
+    FirstPersonController player;
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
-    public bool OggettoNascosto = false; // Variabile pubblica per controllare lo stato di OggettoNascosto
+    private Transform playerTransform;
+    public bool OggettoNascosto = false; 
 
     // Evento che segnala la fine dell'animazione
     public event Action OnAnimationEnd;
+
+   
 
     void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        player = playerTransform.GetComponent<FirstPersonController>();
 
         if (animator == null)
         {
@@ -48,13 +55,14 @@ public class CellGuardNpc : MonoBehaviour
       
     }
 
-  
 
-    private IEnumerator GuardRoutine()
+
+    public IEnumerator GuardRoutine()
     {
-        // Attesa fino a quando il coltello non è stato preso
-        Debug.Log("In attesa che il coltello venga preso");
-        yield return new WaitUntil(() => KnifePickUpandPlace.coltelloPreso);
+
+        yield return new WaitUntil(() => CellaManager.instance.attivaGuardRoutine);
+        
+
         Debug.Log("Coltello preso, inizio la routine del guardiano");
 
         while (true)
@@ -108,7 +116,7 @@ public class CellGuardNpc : MonoBehaviour
 
             // Attesa fino a quando OggettoNascosto non diventa true
             Debug.Log("In attesa di OggettoNascosto");
-            yield return new WaitUntil(() => KnifePickUpandPlace.coltelloNascosto);
+            yield return new WaitUntil(() => CellaManager.instance.coltelloNascosto);
 
             // Rotazione a destra
             Debug.Log("Inizio Rotazione a Destra");
@@ -132,28 +140,45 @@ public class CellGuardNpc : MonoBehaviour
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
             animator.SetBool("SetIdle", true);
+            yield return new WaitForSeconds(secondIdleTime);
+
+
+            player.playerCanMove = false;
 
             // Passa allo stato di camminata verso la quarta destinazione
             Debug.Log("Inizio Camminata verso la quarta destinazione");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
-            navMeshAgent.SetDestination(fourthDestination.position);
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            Vector3 destination = playerTransform.position - directionToPlayer * playerStoppingDistance;
+            navMeshAgent.SetDestination(destination);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
 
             // Torna allo stato di idle
             Debug.Log("Arrivato alla quarta destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            RotateTowardsPlayer();
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
 
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
+            
+         
+
+
         }
+    }
+    private void RotateTowardsPlayer()
+    {
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
 
-    
 }
 
