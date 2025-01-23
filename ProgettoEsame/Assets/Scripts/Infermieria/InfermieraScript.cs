@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +18,21 @@ public class InfermieraScript : MonoBehaviour
         // Attiva l'animazione dell'infermiera
         animator.SetTrigger("NurseReact");
     }
-    public void TriggerNurseTalk()
+
+    public void TriggerNurseTalk(GameObject interactor)
+    {
+        // Attiva l'animazione dell'infermiera
+        StartCoroutine(TriggerNurseTalkCoroutine(interactor));
+        
+    }
+
+    private IEnumerator TriggerNurseTalkCoroutine(GameObject interactor)
     {
         // Attiva l'animazione dell'infermiera
         animator.SetTrigger("NurseTalk");
+        yield return new WaitForSeconds(2f);
+        animator.SetTrigger("NurseIdle");
+        PlayerLock playerLock = interactor.GetComponent<PlayerLock>();
+        playerLock.reachedPoint = false;
     }
 }

@@ -57,6 +57,7 @@ public class QueueManager : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
         lineFinished = true;
+
         coroutineRunning = false;
     }
 }
