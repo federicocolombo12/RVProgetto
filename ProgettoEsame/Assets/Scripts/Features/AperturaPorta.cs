@@ -13,11 +13,26 @@ public class AperturaPorta : MonoBehaviour
     private float tempoTrascorso = 0f;
     private Camera playerCamera;
 
+    // Audio
+    public AudioClip suonoApertura; // Clip audio per l'apertura della porta
+    public AudioClip suonoChiusura; // Clip audio per la chiusura della porta
+    public AudioSource audioSource; // Riferimento al componente AudioSource
+
     void Start()
     {
         playerCamera = Camera.main; // Assumiamo che la camera principale sia quella del player
         rotazioneIniziale = transform.rotation;
         rotazioneFinale = transform.rotation;
+
+        // Controllo se esiste un AudioSource sull'oggetto
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                Debug.LogError("AudioSource non assegnato o mancante! Aggiungilo all'oggetto o assegnalo dall'Inspector.");
+            }
+        }
     }
 
     void Update()
@@ -58,5 +73,17 @@ public class AperturaPorta : MonoBehaviour
         tempoTrascorso = 0f;
         rotazioneIniziale = transform.rotation;
         rotazioneFinale = Quaternion.Euler(transform.eulerAngles + new Vector3(0, isOpen ? angoloApertura : -angoloApertura, 0));
+
+        // Riproduci il suono appropriato
+        if (audioSource != null)
+        {
+            audioSource.clip = isOpen ? suonoApertura : suonoChiusura;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource non assegnato! Nessun suono sarà riprodotto.");
+        }
     }
 }
+

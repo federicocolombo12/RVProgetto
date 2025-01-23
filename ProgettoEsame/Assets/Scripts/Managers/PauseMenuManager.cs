@@ -7,6 +7,8 @@ public class PauseMenuManager : MonoBehaviour
     public Canvas pauseCanvas; // Riferimento al Canvas del menu di pausa
     private FirstPersonController firstPersonController; // Riferimento al componente che gestisce il movimento della camera
     public static PauseMenuManager instance { get; private set; }
+    public PauseSoundManager pauseSoundManager; // Riferimento al nuovo script
+    public bool abilitaSuonoMenu = true; // Booleano per attivare/disattivare il suono
 
     private void Awake()
     {
@@ -80,6 +82,11 @@ public class PauseMenuManager : MonoBehaviour
         {
             firstPersonController.enabled = false;
         }
+
+        if (pauseSoundManager != null && abilitaSuonoMenu)
+        {
+            pauseSoundManager.RiproduciSuoni(); // Riproduce entrambi i suoni contemporaneamente
+        }
     }
 
     public void ResumeGame()
@@ -97,6 +104,12 @@ public class PauseMenuManager : MonoBehaviour
         {
             firstPersonController.enabled = true;
         }
+
+        // Ferma entrambi i suoni quando il gioco riprende
+        if (pauseSoundManager != null)
+        {
+            pauseSoundManager.FermaSuoni(); // Ferma entrambi i suoni
+        }
     }
 
     public void OpenOptions()
@@ -109,5 +122,11 @@ public class PauseMenuManager : MonoBehaviour
         // Carica la scena del menu principale
         Time.timeScale = 1f; // Assicurati che il tempo riprenda
         SceneManager.LoadScene("TitleScreen");
+
+        // Ferma entrambi i suoni quando si esce dal menu
+        if (pauseSoundManager != null)
+        {
+            pauseSoundManager.FermaSuoniQuandoEsci(); // Ferma entrambi i suoni
+        }
     }
 }
