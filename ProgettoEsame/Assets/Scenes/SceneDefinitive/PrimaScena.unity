@@ -282,6 +282,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9093810522960544110, guid: 3a231fb4a5c0fd24583fa7797efa5530, type: 3}
   m_PrefabInstance: {fileID: 405073285}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &575879474 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2916059337155537067, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
+  m_PrefabInstance: {fileID: 1938910795759337339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &840448673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,7 +1311,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -120305615667172709, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
     - {fileID: 5658634824720264033, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3421525293498469591, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6608466738782180580, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       insertIndex: 0
@@ -3737,7 +3743,7 @@ MonoBehaviour:
     m_Bits: 8
   isFlatObject: 0
   rotazione: 0
-  targetPosition: {fileID: 1938910795759337344}
+  targetPosition: {fileID: 575879474}
   duration: 2
 --- !u!114 &8939937887735683389
 MonoBehaviour:

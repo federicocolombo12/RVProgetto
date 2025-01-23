@@ -56,7 +56,10 @@ public class CorridoioManager : MonoBehaviour
             StartCoroutine(LoadFinale());
         }
     }
-
+    public void FlickerTorch()
+    {
+        firstPersonController.GetComponent<Torcia>().Flickering();
+    }
     IEnumerator LoadInfermieria()
     {
         Debug.Log("First object found!");

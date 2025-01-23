@@ -8,6 +8,8 @@ public class Torcia : MonoBehaviour
 
     [SerializeField] private bool on;
     [SerializeField] private bool off;
+    [SerializeField] private float flickerTime = 2.5f;
+    [SerializeField] private float elapsedTime;
 
     void Start()
     {
@@ -37,6 +39,20 @@ public class Torcia : MonoBehaviour
             off = true;
             on = false;
             Debug.Log("Torcia spenta");
+        }
+    }
+    public void Flickering()
+    {
+        StartCoroutine(FlickeringLight());
+    }
+    IEnumerator FlickeringLight()
+    {   
+        elapsedTime=0f;
+        while (elapsedTime<flickerTime)
+        {
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+            flashlight.SetActive(!flashlight.activeSelf);
+            elapsedTime += Time.deltaTime*10;
         }
     }
 }
