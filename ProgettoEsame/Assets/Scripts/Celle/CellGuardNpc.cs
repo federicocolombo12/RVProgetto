@@ -140,9 +140,7 @@ public class CellGuardNpc : MonoBehaviour
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-            animator.SetBool("IsTurningLeft", false);           
-            animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(secondIdleTime);
+            animator.SetBool("IsTurningLeft", false);
 
             thirdPosition = true;
             player.playerCanMove = false;
@@ -151,6 +149,12 @@ public class CellGuardNpc : MonoBehaviour
             {
                 aperturaPorta.ApriPorta();
             }
+
+
+            animator.SetBool("SetIdle", true);
+            yield return new WaitForSeconds(secondIdleTime);
+
+            
 
             // Passa allo stato di camminata verso la quarta destinazione
             Debug.Log("Inizio Camminata verso la quarta destinazione");
