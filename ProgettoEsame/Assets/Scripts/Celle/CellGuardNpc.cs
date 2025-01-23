@@ -24,6 +24,14 @@ public class CellGuardNpc : MonoBehaviour
     public bool OggettoNascosto = false;
     [SerializeField] public bool thirdPosition = false;
 
+
+    //AudioManager
+    public bool audioTalking = false;
+    public bool audioRunning = false;
+    public bool audioIdle = false;
+    public bool audioWalking = false;
+
+
     // Evento che segnala la fine dell'animazione
     public event Action OnAnimationEnd;
 
