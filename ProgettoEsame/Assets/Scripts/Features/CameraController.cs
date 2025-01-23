@@ -4,31 +4,20 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform _camera;
-    public Transform hand;
-    public float cameraSensitivity = 200f;
-    public float cameraAcceleration = 5f;
+    [SerializeField] Vector3 vectOffset;
+    [SerializeField] GameObject gofollow;
+    [SerializeField] float speed = 1.0f;
 
-    private float rotation_x_axis;
-    private float rotation_y_axis;
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        vectOffset = transform.position - gofollow.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rotation_x_axis += Input.GetAxis("Mouse Y") * cameraSensitivity * Time.deltaTime;
-        rotation_y_axis += Input.GetAxis("Mouse X") * cameraSensitivity * Time.deltaTime;
-
-        rotation_x_axis = Mathf.Clamp(rotation_x_axis, -90f, 90f);
-
-        hand.localRotation = Quaternion.Euler(-rotation_x_axis, rotation_y_axis, 0);
-
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, rotation_y_axis, 0), cameraAcceleration * Time.deltaTime);
-
-        _camera.localRotation = Quaternion.Lerp(_camera.localRotation, Quaternion.Euler(-rotation_x_axis, 0, 0), cameraAcceleration * Time.deltaTime);
+        transform.position = gofollow.transform.position + vectOffset;
+        transform.rotation = Quaternion.Slerp(transform.rotation, gofollow.transform.rotation, speed * Time.deltaTime);
     }
 }
