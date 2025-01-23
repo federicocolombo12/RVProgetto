@@ -7,7 +7,7 @@ public class AperturaPorta : MonoBehaviour
     public float angoloApertura = 120f; // Angolo di apertura della porta
     public float durataApertura = 2f; // Durata dell'animazione di apertura
     public float distanzaInterazione = 3f; // Distanza massima per l'interazione
-    [SerializeField] private bool isOpen = false; 
+    [SerializeField] private bool isOpen = false;
     private Quaternion rotazioneIniziale;
     private Quaternion rotazioneFinale;
     private float tempoTrascorso = 0f;
@@ -16,6 +16,8 @@ public class AperturaPorta : MonoBehaviour
     void Start()
     {
         playerCamera = Camera.main; // Assumiamo che la camera principale sia quella del player
+        rotazioneIniziale = transform.rotation;
+        rotazioneFinale = transform.rotation;
     }
 
     void Update()
@@ -37,7 +39,8 @@ public class AperturaPorta : MonoBehaviour
         if (tempoTrascorso < durataApertura)
         {
             tempoTrascorso += Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(rotazioneIniziale, rotazioneFinale, tempoTrascorso / durataApertura);
+            float t = Mathf.Clamp01(tempoTrascorso / durataApertura);
+            transform.rotation = Quaternion.Lerp(rotazioneIniziale, rotazioneFinale, t);
         }
     }
 
