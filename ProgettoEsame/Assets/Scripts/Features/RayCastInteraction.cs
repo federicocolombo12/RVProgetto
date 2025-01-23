@@ -18,11 +18,11 @@ public class RayCastInteraction : MonoBehaviour
     void Start()
     {
         // Trova il gestore dell'interfaccia utente
-        attivaUi = FindObjectOfType<AttivaUi>();
+        /*attivaUi = FindObjectOfType<AttivaUi>();
         if (attivaUi == null)
         {
             Debug.LogError("AttivaUi non trovata. Assicurati che sia presente nella scena.");
-        }
+        }*/
     }
 
     void Update()

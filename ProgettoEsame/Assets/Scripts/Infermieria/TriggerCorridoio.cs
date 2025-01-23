@@ -8,7 +8,7 @@ public class TriggerCorridoio : MonoBehaviour
     private Transform player;
     public Camera mainCamera;
     [SerializeField] private AttivaPorta script;
-    
+    [SerializeField] private PlayerLock playerLock;
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField]   private LayerMask interactableLayer;
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class TriggerCorridoio : MonoBehaviour
     {
         
         player = mainCamera.transform;
-        
+        playerLock = GetComponent<PlayerLock>();
     }
     private void Update()
     {
@@ -36,7 +36,10 @@ public class TriggerCorridoio : MonoBehaviour
                 
                 
             Debug.Log("Giocatore sta guardando l'oggetto.");
-            script.enabled = true;
+            if (playerLock.reachedPoint)
+            {
+                script.enabled = true;
+            }
         }
     }
 }
