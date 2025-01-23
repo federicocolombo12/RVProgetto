@@ -15,13 +15,14 @@ public class CellGuardNpc : MonoBehaviour
     public float rightTurnDuration = 1f; // Durata della rotazione a destra
     public float playerStoppingDistance = 1f;
     public float blockDistance = 3f;
+    public static CellGuardNpc instance;
     FirstPersonController player;
-
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     private Transform playerTransform;
+    private AperturaPorta aperturaPorta;
     public bool OggettoNascosto = false;
-    [SerializeField] private bool thirdPosition = false;
+    [SerializeField] public bool thirdPosition = false;
 
     // Evento che segnala la fine dell'animazione
     public event Action OnAnimationEnd;
@@ -34,6 +35,7 @@ public class CellGuardNpc : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<FirstPersonController>();
+        aperturaPorta = FindObjectOfType<AperturaPorta>();
 
         if (animator == null)
         {
@@ -56,14 +58,6 @@ public class CellGuardNpc : MonoBehaviour
       
     }
 
-    void Update()
-    {
-        if (thirdPosition && DoorController.instance != null)
-        {
-            DoorController.instance.guardOpenDoor = true;
-            Debug.Log("La porta è stata aperta dalla guardia.");
-        }
-    }
 
     public IEnumerator GuardRoutine()
     {
@@ -152,6 +146,11 @@ public class CellGuardNpc : MonoBehaviour
 
             thirdPosition = true;
             player.playerCanMove = false;
+
+            if (thirdPosition && aperturaPorta != null)
+            {
+                aperturaPorta.ApriPorta();
+            }
 
             // Passa allo stato di camminata verso la quarta destinazione
             Debug.Log("Inizio Camminata verso la quarta destinazione");

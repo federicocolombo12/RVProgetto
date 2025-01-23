@@ -1260,6 +1260,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7041199022029874645, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
   m_PrefabInstance: {fileID: 1091525825}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &426597717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426597705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a1b3408b066264fa847630777ef048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angoloApertura: -120
+  durataApertura: 2
+  distanzaInterazione: 3
+  isOpen: 0
 --- !u!1 &433780508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,6 +2749,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5894814283419655800, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: doorAnimator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894814283419655800, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: guardOpenDoor
       value: 0
       objectReference: {fileID: 0}
@@ -3012,6 +3032,8 @@ PrefabInstance:
     - {fileID: 4997607303816218772, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     - {fileID: 1450245269317808499, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     - {fileID: 8022799108639622127, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    - {fileID: 4174842409274199582, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+    - {fileID: 5894814283419655800, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     m_RemovedGameObjects:
     - {fileID: 9089367971522463959, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
     - {fileID: 6604404123588892893, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
@@ -3069,6 +3091,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7073243072644627191, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       insertIndex: -1
       addedObject: {fileID: 426597707}
+    - targetCorrespondingSourceObject: {fileID: 7073243072644627191, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 426597717}
     - targetCorrespondingSourceObject: {fileID: 1154378918589736779, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1091525836}

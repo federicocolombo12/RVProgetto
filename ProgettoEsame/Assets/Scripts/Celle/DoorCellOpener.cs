@@ -11,7 +11,6 @@ public class DoorController : MonoBehaviour
 
     private Transform player;
     public bool isDoorOpened = false;
-    public bool guardOpenDoor = false;
 
     private void Start()
     {
@@ -20,12 +19,8 @@ public class DoorController : MonoBehaviour
 
     private void Update()
     {
-        if (guardOpenDoor && !isDoorOpened)
-        {
-            OpenDoor();
-        }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || CellGuardNpc.instance.thirdPosition)
         {
             TryOpenDoor();
         }
@@ -56,10 +51,5 @@ public class DoorController : MonoBehaviour
         }
     }
 
-    private void OpenDoor()
-    {
-        isDoorOpened = true;
-        doorAnimator.SetBool("DoorOpen", true);
-        Debug.Log("La porta è stata aperta dal guardiano.");
-    }
+   
 }
