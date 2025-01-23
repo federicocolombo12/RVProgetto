@@ -14,10 +14,15 @@ public class Paziente0Script : MonoBehaviour
     public GameObject knife; // Coltello dell'NPC
     public Camera playerCamera; // Camera del giocatore
     public float interactionDistance = 2f; // Distanza massima per l'interazione
-    public bool talking = false; // Variabile per indicare se l'NPC sta parlando
+    
     private Animator animator;
     private NavMeshAgent navMeshAgent;
-    
+
+    //AudioManager
+    public bool audiotalking = false;
+    public bool audioRunning = false;
+    public bool audioidle = false;
+    public bool audiowalking = false;
     
 
     void Start()
@@ -59,6 +64,7 @@ public class Paziente0Script : MonoBehaviour
             // Passa allo stato di corsa verso la prima destinazione
             Debug.Log("Inizio Corsa verso la prima destinazione");
             animator.SetBool("SetIdle", false);
+            audioRunning = true;
             animator.SetBool("IsRunning", true);
             navMeshAgent.speed = runSpeed;
             navMeshAgent.isStopped = false;
@@ -70,6 +76,7 @@ public class Paziente0Script : MonoBehaviour
             // Stato di idle e rotazione a destra
             Debug.Log("Arrivato alla prima destinazione, rotazione a destra");
             animator.SetBool("IsRunning", false);
+            audioRunning = false;
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningRight", true);
             yield return new WaitForSeconds(0.3f); // Durata della rotazione
@@ -77,6 +84,7 @@ public class Paziente0Script : MonoBehaviour
 
             // Passa allo stato di corsa verso una destinazione intermedia
             Debug.Log("Inizio Corsa verso destinazione intermedia");
+            audioRunning = true;
             animator.SetBool("IsRunning", true);
             navMeshAgent.isStopped = false;
 
@@ -97,6 +105,7 @@ public class Paziente0Script : MonoBehaviour
             // Stato di idle
             Debug.Log("Arrivato alla terza destinazione");
             animator.SetBool("IsRunning", false);
+            audioRunning = false;
             navMeshAgent.isStopped = true;
             animator.SetBool("SetIdle", true);
             
@@ -108,9 +117,9 @@ public class Paziente0Script : MonoBehaviour
             Debug.Log("Interazioni attive per 1 secondo");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsYelling", true);
-            talking = true;
+            audiotalking = true;
             yield return new WaitForSeconds(5f);
-            talking = false;
+            audiotalking = false;
             animator.SetBool("IsYelling", false);
             animator.SetBool("TakeThis", true);
 
