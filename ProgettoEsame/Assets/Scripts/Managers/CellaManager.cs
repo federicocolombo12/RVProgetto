@@ -46,12 +46,6 @@ public class CellaManager : MonoBehaviour
             return;
         }
 
-        if (npcScript == null)
-        {
-            Debug.LogError("NpcScript non trovato nella scena!");
-            return;
-        }
-
         if (paziente0Script == null)
         {
             Debug.LogError("Paziente0Script non trovato nella scena!");
