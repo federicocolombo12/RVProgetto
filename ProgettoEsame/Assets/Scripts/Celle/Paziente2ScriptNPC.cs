@@ -6,10 +6,12 @@ public class Paziente2ScriptNPC : MonoBehaviour
 {
     private Animator animator;
     private NpcHeadLookAtCelle npcHeadLookAtCelle;
+    private Paziente2AudioManager audioManager; // Riferimento al gestore audio
 
     void Awake()
     {
         npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
+        audioManager = GetComponent<Paziente2AudioManager>(); // Recupera il componente audio
     }
 
     void Start()
@@ -42,12 +44,17 @@ public class Paziente2ScriptNPC : MonoBehaviour
         {
             StartCoroutine(InteragisciRoutine());
         }
+
+        if (audioManager != null)
+        {
+            audioManager.AvviaDialogo(); // Avvia il dialogo audio
+        }
     }
 
     private IEnumerator InteragisciRoutine()
     {
         animator.SetBool("Interagisci", true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(7f);
         animator.SetBool("Interagisci", false);
         NpcCelleInteractionManager.instance.ReturnToInitialPosition(transform);
     }

@@ -118,7 +118,7 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsYelling", true);
             audiotalking = true;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(7.6f);
             audiotalking = false;
             animator.SetBool("IsYelling", false);
             animator.SetBool("TakeThis", true);

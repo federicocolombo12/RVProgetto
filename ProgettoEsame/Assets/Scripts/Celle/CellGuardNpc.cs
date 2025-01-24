@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,18 +23,14 @@ public class CellGuardNpc : MonoBehaviour
     public bool OggettoNascosto = false;
     [SerializeField] public bool thirdPosition = false;
 
-
-    //AudioManager
+    // AudioManager: Stati audio
     public bool audioTalking = false;
     public bool audioRunning = false;
     public bool audioIdle = false;
     public bool audioWalking = false;
 
-
     // Evento che segnala la fine dell'animazione
-    public event Action OnAnimationEnd;
-
-   
+    public event System.Action OnAnimationEnd;
 
     void Start()
     {
@@ -62,16 +57,11 @@ public class CellGuardNpc : MonoBehaviour
 
         // Inizia la routine di comportamento
         StartCoroutine(GuardRoutine());
-
-      
     }
-
 
     public IEnumerator GuardRoutine()
     {
-
         yield return new WaitUntil(() => CellaManager.instance.attivaGuardRoutine);
-        
 
         Debug.Log("Coltello preso, inizio la routine del guardiano");
 
@@ -81,12 +71,14 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Inizio Idle");
             animator.SetBool("IsWalking", false);
             animator.SetBool("SetIdle", true);
+            UpdateAudioState(true, false, false, false); // Aggiorna stato audio a Idle
             yield return new WaitForSeconds(idleTime);
 
             // Passa allo stato di camminata verso la prima destinazione
             Debug.Log("Inizio Camminata verso la prima destinazione");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
+            UpdateAudioState(false, true, false, false); // Aggiorna stato audio a Walking
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(firstDestination.position);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
@@ -95,6 +87,7 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Arrivato alla prima destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            UpdateAudioState(true, false, false, false); // Aggiorna stato audio a Idle
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
@@ -105,12 +98,14 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsTurningRight", true);
+            UpdateAudioState(false, false, false, false); // Nessun audio durante la rotazione
             yield return new WaitForSeconds(rightTurnDuration);
             animator.SetBool("IsTurningRight", false);
 
             // Passa allo stato di camminata verso la seconda destinazione
             Debug.Log("Inizio Camminata verso la seconda destinazione");
             animator.SetBool("IsWalking", true);
+            UpdateAudioState(false, true, false, false); // Aggiorna stato audio a Walking
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(secondDestination.position);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
@@ -119,6 +114,7 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Arrivato alla seconda destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            UpdateAudioState(true, false, false, false); // Aggiorna stato audio a Idle
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
@@ -132,12 +128,14 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsTurningRight", true);
+            UpdateAudioState(false, false, false, false); // Nessun audio durante la rotazione
             yield return new WaitForSeconds(rightTurnDuration);
             animator.SetBool("IsTurningRight", false);
 
             // Passa allo stato di camminata verso la terza destinazione
             Debug.Log("Inizio Camminata verso la terza destinazione");
             animator.SetBool("IsWalking", true);
+            UpdateAudioState(false, true, false, false); // Aggiorna stato audio a Walking
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(thirdDestination.position);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
@@ -146,6 +144,7 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Arrivato alla terza destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            UpdateAudioState(true, false, false, false); // Aggiorna stato audio a Idle
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
@@ -158,39 +157,34 @@ public class CellGuardNpc : MonoBehaviour
                 aperturaPorta.ApriPorta();
             }
 
-
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
-            
-
-            // Passa allo stato di camminata verso la quarta destinazione
-            Debug.Log("Inizio Camminata verso la quarta destinazione");
+            // Camminata verso il giocatore
+            Debug.Log("Inizio Camminata verso il giocatore");
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
+            UpdateAudioState(false, true, false, false); // Aggiorna stato audio a Walking
             navMeshAgent.isStopped = false;
             Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
             Vector3 destination = playerTransform.position - directionToPlayer * playerStoppingDistance;
             navMeshAgent.SetDestination(destination);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-
             // Torna allo stato di idle
             Debug.Log("Arrivato alla quarta destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            UpdateAudioState(true, false, false, false); // Aggiorna stato audio a Idle
             RotateTowardsPlayer();
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
 
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
-            
-         
-
-
         }
     }
+
     private void RotateTowardsPlayer()
     {
         Vector3 direction = (playerTransform.position - transform.position).normalized;
@@ -198,6 +192,12 @@ public class CellGuardNpc : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
-
+    // Metodo per aggiornare lo stato audio
+    private void UpdateAudioState(bool idle, bool walking, bool talking, bool running)
+    {
+        audioIdle = idle;
+        audioWalking = walking;
+        audioTalking = talking;
+        audioRunning = running;
+    }
 }
-
