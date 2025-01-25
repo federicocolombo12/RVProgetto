@@ -1894,10 +1894,12 @@ MonoBehaviour:
   cassetto: {fileID: 881831456}
   zPosizioneAperta: 0.3
   velocitaApertura: 2
+  velocitaChiusura: 3
   raycastDistance: 5
   cassettoLayer:
     serializedVersion: 2
     m_Bits: 8
+  drawerSound: {fileID: 0}
 --- !u!64 &881831460
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2468,6 +2470,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 173890709879883809, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.289935
+      objectReference: {fileID: 0}
+    - target: {fileID: 173890709879883809, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.2899346
+      objectReference: {fileID: 0}
+    - target: {fileID: 173890709879883809, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.289935
+      objectReference: {fileID: 0}
+    - target: {fileID: 173890709879883809, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 64.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 173890709879883809, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -48.35
+      objectReference: {fileID: 0}
     - target: {fileID: 264229682567321672, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.012922879
@@ -2572,6 +2594,14 @@ PrefabInstance:
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 0333be78698afab4097640ed94215df2, type: 2}
+    - target: {fileID: 1536697546597457134, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 63.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536697546597457134, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.52
+      objectReference: {fileID: 0}
     - target: {fileID: 1975670601138671680, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2856,6 +2886,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 12.376
       objectReference: {fileID: 0}
+    - target: {fileID: 5429570086819735997, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 61.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429570086819735997, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -46.27
+      objectReference: {fileID: 0}
     - target: {fileID: 5797398942581313195, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_PointlightHDType
       value: 1
@@ -2871,6 +2909,14 @@ PrefabInstance:
     - target: {fileID: 5954115703359696217, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_PointlightHDType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989701292576306859, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 61.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989701292576306859, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -51.16
       objectReference: {fileID: 0}
     - target: {fileID: 6042880730452992963, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_Intensity
@@ -2951,6 +2997,14 @@ PrefabInstance:
     - target: {fileID: 6544131205955378035, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 6892164636627981294, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 62.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6892164636627981294, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -48.6
       objectReference: {fileID: 0}
     - target: {fileID: 6909964156162497827, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4364,10 +4418,12 @@ MonoBehaviour:
   cassetto: {fileID: 1586094439}
   zPosizioneAperta: 0.4
   velocitaApertura: 2
+  velocitaChiusura: 3
   raycastDistance: 5
   cassettoLayer:
     serializedVersion: 2
     m_Bits: 8
+  drawerSound: {fileID: 0}
 --- !u!64 &1586094443
 MeshCollider:
   m_ObjectHideFlags: 0
