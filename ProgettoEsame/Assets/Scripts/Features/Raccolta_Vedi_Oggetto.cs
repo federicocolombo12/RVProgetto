@@ -5,10 +5,7 @@ using UnityEngine.UI;
 
 public class Raccolta_Vedi_Oggetto : MonoBehaviour
 {
-    
-    //public float interactionDistance = 2f;
     public float transitionDuration = 1f; // Durata della transizione
-    // public Vector3 targetPositionOffset = new Vector3(0, 0, 0.01f); // Offset della posizione target rispetto alla camera
     public bool isFlat = false; // Variabile per indicare se l'oggetto è coricato
     [SerializeField] private bool isViewing = false;
     private Transform player;
@@ -16,25 +13,23 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private Quaternion originalRotation;
     private Renderer objectRenderer;
     private FirstPersonController playerController; // Riferimento al FirstPersonController
-    //public LayerMask interactableLayer; // Layer per gli oggetti interagibili
     private Collider objectCollider;
-    public bool playAudio;
+    public bool playAudio; // Booleano per attivare/disattivare l'audio
     public AttivaUi attivaUi;
     private bool isInteracting = false;
-    public bool rotazione=false;
+    public bool rotazione = false;
 
     void Start()
     {
-        // Assicurati che l'oggetto non sia statico
-        gameObject.isStatic = false; // per ora fai cosi, ma poi basta levare static al prefab dell'oggetto e questa riga si può eliminare
-        playAudio = false;
+        gameObject.isStatic = false; // Rende l'oggetto non statico
+        playAudio = false; // Inizializza l'audio come disattivato
         attivaUi = FindObjectOfType<AttivaUi>();
 
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
         {
             player = mainCamera.transform;
-            playerController = player.GetComponentInParent<FirstPersonController>(); // Assumi che il FirstPersonController sia sul genitore della camera
+            playerController = player.GetComponentInParent<FirstPersonController>();
         }
         else
         {
@@ -53,11 +48,13 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             Debug.LogError("Collider non trovato sull'oggetto. Assicurati che l'oggetto abbia un componente Collider.");
         }
     }
+
     // Metodo pubblico per avviare la visualizzazione
     public void StartViewing()
     {
-        StartCoroutine(EnterView());  
+        StartCoroutine(EnterView());
     }
+
     public void StopViewing()
     {
         StartCoroutine(ExitView());
@@ -65,13 +62,9 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 
     IEnumerator EnterView()
     {
-        
-
         if (isViewing) yield break;
-        
-        isViewing = true;
 
-        
+        isViewing = true;
 
         // Disabilita il movimento del giocatore
         if (playerController != null)
@@ -98,16 +91,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
         if (isFlat)
         {
-            // L'oggetto è coricato
             targetRotation *= Quaternion.Euler(90, 0, 0);
         }
         else
         {
-            // L'oggetto è in piedi
             targetRotation *= Quaternion.Euler(0, 180, 0);
         }
-
-        
 
         // Assicurati che l'oggetto sia visibile
         objectRenderer.enabled = true;
@@ -122,23 +111,26 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
             yield return null;
         }
 
-
         // Assicurati che l'oggetto sia esattamente nella posizione e rotazione target
         this.transform.position = targetPosition;
         this.transform.rotation = targetRotation;
+
         rotazione = true;
 
+        // Attiva l'audio
+        playAudio = true;
     }
 
     IEnumerator ExitView()
     {
         Debug.Log("Uscita dalla visualizzazione");
         if (!isViewing) yield break;
-        //UiManager.instance.esci = false;
-        //UiManager.instance.AttivaEsci();
+
         isViewing = false;
-        //UiManager.instance.esci = false;
         rotazione = false;
+
+        // Disattiva l'audio
+        playAudio = false;
 
         // Riabilita il movimento del giocatore
         if (playerController != null)
@@ -165,23 +157,18 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         {
             objectCollider.enabled = true;
         }
-
-        
     }
 
     public void RotateObject()
     {
-       
         float rotationSpeed = 100f;
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
         if (isFlat)
         {
-            // Ruota l'oggetto coricato sull'asse Z
             this.transform.Rotate(Vector3.forward, mouseX, Space.Self);
         }
         else
         {
-            // Ruota l'oggetto in piedi sull'asse Y
             this.transform.Rotate(Vector3.up, mouseX, Space.Self);
         }
     }
