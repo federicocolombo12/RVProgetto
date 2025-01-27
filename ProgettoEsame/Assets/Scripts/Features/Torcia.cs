@@ -12,7 +12,6 @@ public class Torcia : MonoBehaviour
     [SerializeField] private float flickerTime = 2.5f;
     [SerializeField] private float elapsedTime;
 
-    private bool independentMovement = false;
     private Camera mainCamera;
     private Vector3 defaultRotation = new Vector3(0f, 0f, 0f);
 
@@ -26,32 +25,6 @@ public class Torcia : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && on)
-        {
-            independentMovement = true;
-            mainCamera.GetComponent<CameraController>().enabled = false;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            independentMovement = false;
-            mainCamera.GetComponent<CameraController>().enabled = true;
-            flashlightTransform.localRotation = Quaternion.Euler(defaultRotation);
-        }
-
-        if (!independentMovement)
-        {
-            flashlightTransform.localRotation = Quaternion.Euler(defaultRotation);
-        }
-
-        if (independentMovement && on)
-        {
-            float mouseX = Input.GetAxis("Mouse X") * 5f;
-            float mouseY = -Input.GetAxis("Mouse Y") * 5f;
-            flashlightTransform.Rotate(Vector3.up, mouseX, Space.World);
-            flashlightTransform.Rotate(Vector3.right, mouseY, Space.World);
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
             if (off)
@@ -68,6 +41,25 @@ public class Torcia : MonoBehaviour
                 on = false;
                 Debug.Log("Torcia spenta");
             }
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("OggettoInteragibile1"))
+            {
+                Vector3 directionToTarget = hit.point - flashlightTransform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+                flashlightTransform.rotation = Quaternion.Slerp(flashlightTransform.rotation, targetRotation, Time.deltaTime * 5f);
+            }
+            else
+            {
+                flashlightTransform.localRotation = Quaternion.Euler(defaultRotation);
+            }
+        }
+        else
+        {
+            flashlightTransform.localRotation = Quaternion.Euler(defaultRotation);
         }
     }
 
@@ -87,4 +79,3 @@ public class Torcia : MonoBehaviour
         }
     }
 }
-
