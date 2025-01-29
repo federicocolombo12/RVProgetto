@@ -13,7 +13,8 @@ public class InfermieraBlocking : MonoBehaviour
     [SerializeField] DoorOpenerStandard doorOpenerStandard;
     [SerializeField] InteractWithNurse1 interactWithNurse1;
     [SerializeField] NpcHeadLookAt npcHeadLookAt;
-    
+    [SerializeField] private InfermieraBlockingAudio infermieraAudio; // Riferimento allo script audio
+
     bool coroutineStarted=false;
     void Start()
     {
@@ -41,8 +42,23 @@ public class InfermieraBlocking : MonoBehaviour
     public void NurseTalk()
     {
         animator.SetTrigger("Blocked");
-        
+
+        // Avvia il suono se lo script audio è presente
+        if (infermieraAudio != null)
+        {
+            infermieraAudio.PlayNurseTalk();
+        }
+
     }
+
+    public void EndInteraction()
+    {
+        if (infermieraAudio != null)
+        {
+            infermieraAudio.StopNurseTalk();
+        }
+    }
+
     IEnumerator ReachDestination()
     {
         interactWithNurse1.enabled = false;

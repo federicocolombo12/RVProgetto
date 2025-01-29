@@ -6,6 +6,7 @@ public class InfermieraScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> characters; // Lista dei personaggi in fila
     private Animator animator;
+    [SerializeField] private InfermieraSound infermieraSound; // Aggiungi il riferimento allo script audio separato
 
     void Start()
     {
@@ -21,16 +22,23 @@ public class InfermieraScript : MonoBehaviour
 
     public void TriggerNurseTalk(GameObject interactor)
     {
-        // Attiva l'animazione dell'infermiera
+        // Attiva l'animazione dell'infermiera e riproduce il suono
         StartCoroutine(TriggerNurseTalkCoroutine(interactor));
-        
     }
 
     private IEnumerator TriggerNurseTalkCoroutine(GameObject interactor)
     {
         // Attiva l'animazione dell'infermiera
         animator.SetTrigger("NurseTalk");
-        yield return new WaitForSeconds(2f);
+
+        // Riproduce il suono dell'infermiera che parla solo se non è già in riproduzione
+        if (infermieraSound != null && !infermieraSound.IsPlaying())
+        {
+            infermieraSound.PlayNurseTalkSound();  // Riproduce il suono
+        }
+
+        yield return new WaitForSeconds(2f);  // Attendi che l'animazione finisca
+
         animator.SetTrigger("NurseIdle");
         PlayerLock playerLock = interactor.GetComponent<PlayerLock>();
         playerLock.reachedPoint = false;
