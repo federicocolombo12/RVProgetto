@@ -21,7 +21,7 @@ public class InfermieraBlockingAudio : MonoBehaviour
         audioSource.loop = false;
 
         // Trova il componente InfermieraBlocking
-        infermieraBlocking = GetComponent<InfermieraBlocking>();
+        
 
         if (infermieraBlocking == null)
         {

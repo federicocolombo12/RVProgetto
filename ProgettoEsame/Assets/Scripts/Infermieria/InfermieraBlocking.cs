@@ -21,7 +21,7 @@ public class InfermieraBlocking : MonoBehaviour
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         npcHeadLookAt = GetComponent<NpcHeadLookAt>();
-
+        infermieraAudio = GetComponent<InfermieraBlockingAudio>();
     }
 
     // Update is called once per frame

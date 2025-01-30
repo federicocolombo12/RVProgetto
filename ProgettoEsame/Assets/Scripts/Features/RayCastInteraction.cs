@@ -83,7 +83,10 @@ public class RayCastInteraction : MonoBehaviour
         {
             // Controlla se il collider ha un componente che implementa IInteractable
             IInteractable potentialInteractable = collider.GetComponent<IInteractable>();
-            collider.gameObject.GetComponentInChildren<MeshRenderer>(true).enabled=true;
+            if (collider.gameObject.GetComponentInChildren<MeshRenderer>(true) != null)
+                { 
+                collider.gameObject.GetComponentInChildren<MeshRenderer>(true).enabled = true; 
+            }
             if (potentialInteractable != null)
             {
                 // Verifica se il raycast punta effettivamente a questo oggetto

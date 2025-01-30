@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PazienteSound : MonoBehaviour
+public class PazienteSound : MonoBehaviour, IInteractable
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip talkClip; // Suono della voce del paziente
+    bool interacted = false;
 
     void Start()
     {
@@ -16,19 +17,31 @@ public class PazienteSound : MonoBehaviour
 
         audioSource.playOnAwake = false;
         audioSource.loop = false;
+        talkClip = audioSource.clip;
     }
 
-    public void PlayTalkSound()
+    public void Interact(GameObject interactor)
     {
-        if (talkClip != null && !audioSource.isPlaying)
+        Debug.Log("Interazione con il paziente.");
+        if (!interacted)
         {
-            Debug.Log("Riproduzione suono paziente.");
-            audioSource.clip = talkClip;
-            audioSource.Play();
+            interacted = true;
+            if (talkClip != null && !audioSource.isPlaying)
+            {
+                Debug.Log("Riproduzione suono paziente.");
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("AudioClip mancante o già in riproduzione!");
+            }
         }
-        else
-        {
-            Debug.LogWarning("AudioClip mancante o già in riproduzione!");
-        }
+        
+        
+    }
+    public void StopInteract(GameObject interactor)
+    {
+        interacted = false;
+        audioSource.Stop();
     }
 }
