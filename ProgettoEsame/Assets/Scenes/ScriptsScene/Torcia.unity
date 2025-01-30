@@ -930,7 +930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vectOffset: {x: 0, y: 0, z: 0}
-  gofollow: {fileID: 1094921593}
+  gofollow: {fileID: 712106972}
   speed: 1
 --- !u!4 &239967647
 Transform:
@@ -7482,8 +7482,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashlight: {fileID: 1221983271}
+  flashlightTransform: {fileID: 0}
   on: 0
   off: 0
+  flickerTime: 2.5
+  elapsedTime: 0
+  torciaAudio: {fileID: 0}
 --- !u!1001 &2052495970315178028
 PrefabInstance:
   m_ObjectHideFlags: 0
