@@ -76,6 +76,11 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (objectCollider != null)
         {
             objectCollider.enabled = false;
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
         }
 
         // Salva la posizione e la rotazione originali dell'oggetto
@@ -156,6 +161,11 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         if (objectCollider != null)
         {
             objectCollider.enabled = true;
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = true;
+            }
         }
     }
 
