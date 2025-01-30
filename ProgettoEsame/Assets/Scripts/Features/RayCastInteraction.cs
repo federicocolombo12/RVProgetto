@@ -10,6 +10,7 @@ public class RayCastInteraction : MonoBehaviour
     public AttivaUi attivaUi; // Gestore dell'interfaccia utente
     public IInteractable interactable;
     [SerializeField] private Collider[] colliders; // Collider trovati nel raggio
+    [SerializeField] Canvas canvasVisualizzazione; // Aggiunto riferimento al Canvas
     
     // Enum per gestire gli stati
     private enum InteractionState { Idle, Interact, StopInteract }
@@ -23,6 +24,10 @@ public class RayCastInteraction : MonoBehaviour
         {
             Debug.LogError("AttivaUi non trovata. Assicurati che sia presente nella scena.");
         }*/
+        if (canvasVisualizzazione != null)
+        {
+            canvasVisualizzazione.gameObject.SetActive(false); // Assicura che il Canvas sia inizialmente disattivato
+        }
     }
 
     void Update()
@@ -144,6 +149,12 @@ public class RayCastInteraction : MonoBehaviour
         {
             playAudio = true;
             interactable.Interact(gameObject); // Richiama il metodo di visualizzazione
+
+            // Attiva il Canvas quando l'oggetto viene visualizzato
+            if (canvasVisualizzazione != null)
+            {
+                canvasVisualizzazione.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -153,6 +164,12 @@ public class RayCastInteraction : MonoBehaviour
         {
             interactable.StopInteract(gameObject); // Richiama il metodo di interruzione
             interactable = null;
+
+            // Disattiva il Canvas quando la visualizzazione termina
+            if (canvasVisualizzazione != null)
+            {
+                canvasVisualizzazione.gameObject.SetActive(false);
+            }
         }
     }
 }
