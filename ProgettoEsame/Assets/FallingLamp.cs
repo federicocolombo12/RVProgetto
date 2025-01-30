@@ -9,7 +9,7 @@ public class FallingLamp : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-    void TriggerFall()
+    public void TriggerFall()
     {
         rb.isKinematic = false;
     }

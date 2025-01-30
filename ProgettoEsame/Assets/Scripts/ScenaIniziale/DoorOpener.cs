@@ -25,6 +25,11 @@ public class DoorOpener : MonoBehaviour
         if (FirstSceneManager.instance.doorOpenable)
         {
             Debug.Log("Door is now openable!");
+            if (doorPrefab == null)
+            {
+                
+                return;
+            }
             doorPrefab.tag = "OggettoInteragibile1";  // Impostiamo il tag per l'interazione
             DoorActivate();
         }
