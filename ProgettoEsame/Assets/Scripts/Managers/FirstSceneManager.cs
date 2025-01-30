@@ -34,9 +34,9 @@ public class FirstSceneManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        currentScene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         currentSceneName = currentScene.name;
-        
+
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class FirstSceneManager : MonoBehaviour
         {
 
             doorOpenable = true;
-            
+
 
         }
         if (doorOpenable)
@@ -65,16 +65,16 @@ public class FirstSceneManager : MonoBehaviour
     IEnumerator LoadScene()
     {
         TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(2f);    
+        yield return new WaitForSeconds(2f);
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Additive, () =>
         {
-            startAnimation=true;
+            startAnimation = true;
             TransitionScript.instance.FadeIn();
             firstSceneVolume.enabled = false;
 
         });
-            
+
         Destroy(gameObject);
     }
-    
+
 }
