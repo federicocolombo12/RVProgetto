@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Torcia : MonoBehaviour
@@ -15,17 +14,25 @@ public class Torcia : MonoBehaviour
     private Camera mainCamera;
     private Vector3 defaultRotation = new Vector3(0f, 0f, 0f);
 
+    [SerializeField] private TorciaAudio torciaAudio; // Riferimento allo script audio
+
     void Start()
     {
         on = true;
         off = false;
         flashlight.SetActive(false);
         mainCamera = Camera.main;
+
+        // Controlla se lo script audio è assegnato
+        if (torciaAudio == null)
+        {
+            torciaAudio = GetComponent<TorciaAudio>();
+        }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // Clic sinistro per accendere/spegnere la torcia
         {
             if (off)
             {
@@ -33,6 +40,12 @@ public class Torcia : MonoBehaviour
                 off = false;
                 on = true;
                 Debug.Log("Torcia accesa");
+
+                // Riproduce il suono di accensione
+                if (torciaAudio != null)
+                {
+                    torciaAudio.PlayAccensioneSound();
+                }
             }
             else if (on)
             {
@@ -40,6 +53,12 @@ public class Torcia : MonoBehaviour
                 off = true;
                 on = false;
                 Debug.Log("Torcia spenta");
+
+                // Riproduce il suono di spegnimento
+                if (torciaAudio != null)
+                {
+                    torciaAudio.PlaySpegnimentoSound();
+                }
             }
         }
 

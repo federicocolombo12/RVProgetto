@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorOpener : MonoBehaviour
@@ -12,33 +11,30 @@ public class DoorOpener : MonoBehaviour
 
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer;
+
+    // Riferimento allo script audio
+    [SerializeField] private PortaUnoAudio portaAudio;
+
     private void Start()
     {
-
         player = mainCamera.transform;
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (FirstSceneManager.instance.doorOpenable)
         {
             Debug.Log("Door is now openable!");
-            doorPrefab.tag = "OggettoInteragibile1";
+            doorPrefab.tag = "OggettoInteragibile1";  // Impostiamo il tag per l'interazione
             DoorActivate();
-
         }
     }
+
     private IEnumerator WaitForAnimationStart()
     {
-        // Wait until startAnimation becomes true
+        // Attende che la porta inizi l'animazione
         yield return new WaitUntil(() => FirstSceneManager.instance.startAnimation);
-
-        // Execute the code after startAnimation becomes true
-        // Place your code here
-        
-        doorAnimator.SetBool("DoorOpen", true);
+        doorAnimator.SetBool("DoorOpen", true); // Avvia l'animazione di apertura
     }
 
     private void DoorActivate()
@@ -46,24 +42,28 @@ public class DoorOpener : MonoBehaviour
         Ray ray = new Ray(player.position, player.forward);
         RaycastHit hit;
 
-        // Disegna il raggio nel Scene View per il debug
+        // Disegna il raggio per il debug
         Debug.DrawRay(player.position, player.forward * interactionDistance, Color.red);
 
-        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // ricordati di mettere il layer Interaclable agli oggetti su unity
+        if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer)) // Se colpisce una porta interagibile
         {
             Debug.Log("Raycast ha colpito: " + hit.transform.name);
 
-
-            Debug.Log("Giocatore sta guardando l'oggetto.");
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E)) // Se preme il tasto "E"
             {
                 Debug.Log("Tasto E premuto.");
-                FirstSceneManager.instance.doorOpen = true;
-                // Wait until Scene is loaded
-                StartCoroutine(WaitForAnimationStart());
 
+                if (FirstSceneManager.instance.doorOpenable) // Se la porta è apribile
+                {
+                    FirstSceneManager.instance.doorOpen = true; // La porta si apre
+                    portaAudio.PlayPortaAperta(); // Suono di porta apribile
+                    StartCoroutine(WaitForAnimationStart()); // Iniziamo l'animazione di apertura
+                }
+                else // Se la porta non è apribile
+                {
+                    portaAudio.PlayPortaChiusa(); // Suono di porta chiusa
+                }
             }
-
         }
     }
 }
