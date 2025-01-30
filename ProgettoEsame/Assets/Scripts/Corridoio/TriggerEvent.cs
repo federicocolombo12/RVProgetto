@@ -16,4 +16,5 @@ public class TriggerEvent : MonoBehaviour
         eventTracker.corridoioEvents[eventIndex].Invoke();
         Destroy(gameObject);
     }
+    
 }
