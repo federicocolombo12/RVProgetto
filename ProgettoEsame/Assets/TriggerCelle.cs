@@ -13,17 +13,11 @@ public class TriggerCelle : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        
-        
-            if (eventIndex == 0)
-            {
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    eventTracker.corridoioEvents[eventIndex].Invoke();
-                    Destroy(gameObject);
-                }
-            }
-        
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.F))
+        {
+            eventTracker.corridoioEvents[eventIndex].Invoke();
+            Destroy(gameObject);
+        }
        
         
     }
