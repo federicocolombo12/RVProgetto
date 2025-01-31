@@ -6,11 +6,11 @@ public class KnifePickUpandPlace : MonoBehaviour
 {
     private GameObject pickedObject = null;
     public Transform holdPosition;
+    public Transform drawerAnchorPoint; // Punto di ancoraggio nel cassetto
     public LayerMask interactableLayer; // LayerMask per gli oggetti interagibili
     private float animationSpeed = 5.0f; // Velocità di animazione per raccogliere e posare l'oggetto
     private float maxPickupDistance = 3.0f; // Distanza massima per raccogliere l'oggetto
     private float maxDropDistance = 3.0f; // Distanza massima per posare l'oggetto
-  
 
     void Update()
     {
@@ -30,6 +30,13 @@ public class KnifePickUpandPlace : MonoBehaviour
                     if (meshCollider != null)
                     {
                         meshCollider.enabled = false;
+                    }
+
+                    // Disabilita il BoxCollider per evitare problemi di fisica
+                    BoxCollider boxCollider = pickedObject.GetComponent<BoxCollider>();
+                    if (boxCollider != null)
+                    {
+                        boxCollider.enabled = false;
                     }
 
                     // Disabilita il Rigidbody per evitare che cada mentre è tenuto
@@ -93,7 +100,6 @@ public class KnifePickUpandPlace : MonoBehaviour
         obj.transform.parent = holdPosition;
 
         // Verifica se l'oggetto raccolto è il coltello
-        
         Debug.Log("Coltello raccolto");
         CellaManager.instance.coltelloPreso = true;
         CellaManager.instance.attivaGuardRoutine = true;
@@ -127,7 +133,10 @@ public class KnifePickUpandPlace : MonoBehaviour
         // Disabilita il Rigidbody per far cadere l'oggetto
         rb.isKinematic = false;
 
+        // Attacca l'oggetto al punto di ancoraggio nel cassetto
+        obj.transform.position = drawerAnchorPoint.position;
+        obj.transform.parent = drawerAnchorPoint;
+
         CellaManager.instance.coltelloNascosto = true;
     }
 }
-
