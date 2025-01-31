@@ -12,8 +12,15 @@ public class KnifePickUpandPlace : MonoBehaviour
     private float maxDropDistance = 3.0f; // Distanza massima per posare l'oggetto
 
 
+    public void ActivateKnifeTag()
+    {
+        gameObject.tag = "OggettoInteragibile2";
+    }
+
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (pickedObject == null)

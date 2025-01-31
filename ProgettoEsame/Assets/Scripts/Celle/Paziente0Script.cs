@@ -15,7 +15,7 @@ public class Paziente0Script : MonoBehaviour
     public GameObject knife; // Coltello dell'NPC
     public Camera playerCamera; // Camera del giocatore
     public float interactionDistance = 2f; // Distanza massima per l'interazione
-    [SerializeField] public bool activateCollider = false; // Attiva il collider del coltello
+    
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
@@ -124,7 +124,9 @@ public class Paziente0Script : MonoBehaviour
             audiotalking = false;
             animator.SetBool("IsYelling", false);
             animator.SetBool("TakeThis", true);
-            activateCollider = true;
+
+            KnifePickUpandPlace knifeScript = knife.GetComponent<KnifePickUpandPlace>();
+            knifeScript.ActivateKnifeTag(); ;
 
             // Attesa fino a quando il giocatore non prende il coltello
             yield return new WaitUntil(() => CellaManager.instance.coltelloPreso);
