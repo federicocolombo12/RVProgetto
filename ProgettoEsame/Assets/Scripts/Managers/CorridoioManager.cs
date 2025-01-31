@@ -42,19 +42,7 @@ public class CorridoioManager : MonoBehaviour
             firstPersonController.GetComponent<FirstPersonController>().fov = 85;
             firstPersonController.GetComponent<FirstPersonController>().walkSpeed = walkSpeed;
         }
-        if (firstObjectFound)
-        {
-
-            StartCoroutine(LoadInfermieriaCoroutine());
-        }
-        if (secondObjectFound)
-        {
-            StartCoroutine(LoadCelleCoroutine());
-        } 
-        if (doorOpen)
-        {
-            StartCoroutine(LoadFinaleCoroutine());
-        }
+        
     }
     public void FlickerTorch()
     {
@@ -73,9 +61,11 @@ public class CorridoioManager : MonoBehaviour
         MySceneManager.instance.LoadNextScene("FlashbackInfermieria", LoadSceneMode.Single, () =>
         {
             Debug.Log("FlashbackInfermieria caricato con successo!");
+            
         });
-        Destroy(gameObject);
+        
         Destroy(firstPersonController);
+        Destroy(gameObject);
     }
     public void LoadCelle()
     {
@@ -88,10 +78,15 @@ public class CorridoioManager : MonoBehaviour
             
         Debug.Log("Second object found!");
         MySceneManager.instance.LoadNextScene("FlashbackCelle", LoadSceneMode.Single, () => 
-            {Debug.Log("FlashbackCelle caricato con successo!");});
-            
-        Destroy(gameObject);
+            {
+                Debug.Log("FlashbackCelle caricato con successo!");
+                
+                
+            });
         Destroy(firstPersonController);
+        Destroy(gameObject);
+
+
     }
     public void LoadFinale()
     {
@@ -108,6 +103,7 @@ public class CorridoioManager : MonoBehaviour
             () => {
                 startAnimationPorta = true;
                 TransitionScript.instance.FadeIn();
+                
             });
         Destroy(gameObject);
     }

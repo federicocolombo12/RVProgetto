@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerInfermieria : MonoBehaviour
+public class TriggerCelle : MonoBehaviour
 {
+    // Start is called before the first frame update
     CorridoioEventTracker eventTracker;
     [SerializeField] private int eventIndex;
     private void Start()
@@ -14,15 +15,16 @@ public class TriggerInfermieria : MonoBehaviour
     {
         
         
-            
-            
+            if (eventIndex == 0)
+            {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     eventTracker.corridoioEvents[eventIndex].Invoke();
                     Destroy(gameObject);
                 }
-            
+            }
         
+       
         
     }
 }
