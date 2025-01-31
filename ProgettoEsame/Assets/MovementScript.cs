@@ -17,15 +17,10 @@ public class NPCMovement : MonoBehaviour
             animator = GetComponent<Animator>(); // Recupera l'Animator se non assegnato
         }
         audioSource = GetComponent<AudioSource>();
+        StartCoroutine(MoveNPC());
     }
 
-    public void TriggerMovement()
-    {
-        if (!isMoving)
-        {
-            StartCoroutine(MoveNPC());
-        }
-    }
+    
 
     private IEnumerator MoveNPC()
     {
