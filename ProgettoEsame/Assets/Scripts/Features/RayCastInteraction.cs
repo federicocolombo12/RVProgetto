@@ -1,40 +1,36 @@
+using UnityEngine;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RayCastInteraction : MonoBehaviour
 {
-    public float interactionDistance = 2f; // Distanza massima per l'interazione
-    public LayerMask interactableLayer; // Layer per gli oggetti interagibili
-    public bool playAudio; // Per gestire l'audio
-    public AttivaUi attivaUi; // Gestore dell'interfaccia utente
+    public float interactionDistance = 2f;
+    public LayerMask interactableLayer;
+    public bool playAudio;
+    public AttivaUi attivaUi;
     public IInteractable interactable;
-    [SerializeField] private Collider[] colliders; // Collider trovati nel raggio
-    [SerializeField] Canvas canvasVisualizzazione; // Aggiunto riferimento al Canvas
-    
-    // Enum per gestire gli stati
+    [SerializeField] private Collider[] colliders;
+    [SerializeField] Canvas canvasVisualizzazione;
+
+    // Cooldown variables
+    public float interactionCooldown = 3f; // Time before allowing StopInteract
+    private float currentCooldown;
+
     private enum InteractionState { Idle, Interact, StopInteract }
     private InteractionState currentState = InteractionState.Idle;
 
     void Start()
     {
-        // Trova il gestore dell'interfaccia utente
-        /*attivaUi = FindObjectOfType<AttivaUi>();
-        if (attivaUi == null)
-        {
-            Debug.LogError("AttivaUi non trovata. Assicurati che sia presente nella scena.");
-        }*/
         if (canvasVisualizzazione != null)
         {
-            canvasVisualizzazione.gameObject.SetActive(false); // Assicura che il Canvas sia inizialmente disattivato
+            canvasVisualizzazione.gameObject.SetActive(false);
         }
     }
 
     void Update()
     {
-        // Esegui le azioni in base allo stato corrente
-       
-        
         switch (currentState)
         {
             case InteractionState.Idle:
@@ -47,7 +43,10 @@ public class RayCastInteraction : MonoBehaviour
 
             case InteractionState.Interact:
                 PerformInteraction();
-                if (Input.GetKeyDown(KeyCode.E))
+                // Update cooldown timer
+                currentCooldown -= Time.deltaTime;
+                // Only allow stopping interaction after cooldown
+                if (currentCooldown <= 0 && Input.GetKeyDown(KeyCode.E))
                 {
                     ChangeState(InteractionState.StopInteract);
                 }
@@ -55,15 +54,18 @@ public class RayCastInteraction : MonoBehaviour
 
             case InteractionState.StopInteract:
                 StopInteraction();
-                
-                    ChangeState(InteractionState.Idle);
-                
+                ChangeState(InteractionState.Idle);
                 break;
         }
     }
 
     void ChangeState(InteractionState newState)
     {
+        // Reset cooldown when entering Interact state
+        if (newState == InteractionState.Interact)
+        {
+            currentCooldown = interactionCooldown;
+        }
         currentState = newState;
     }
 
