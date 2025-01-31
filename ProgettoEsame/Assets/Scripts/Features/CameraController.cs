@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         transform.position = gofollow.transform.position + vectOffset;
-        transform.rotation = Quaternion.Slerp(transform.rotation, gofollow.transform.rotation, speed * Time.deltaTime);
+        Quaternion targetRotation = Quaternion.Euler(gofollow.transform.eulerAngles.x, gofollow.transform.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
     }
 }

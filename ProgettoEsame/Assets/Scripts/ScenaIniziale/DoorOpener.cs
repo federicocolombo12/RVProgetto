@@ -40,7 +40,7 @@ public class DoorOpener : MonoBehaviour
         // Attende che la porta inizi l'animazione
         yield return new WaitUntil(() => FirstSceneManager.instance.startAnimation);
         doorAnimator.SetBool("DoorOpen", true); // Avvia l'animazione di apertura
-        doorPrefab.GetComponent<AudioSource>().Play(); // Riproduce il suono di porta aperta
+        //doorPrefab.GetComponent<AudioSource>().Play(); // Riproduce il suono di porta aperta
     }
 
     private void DoorActivate()

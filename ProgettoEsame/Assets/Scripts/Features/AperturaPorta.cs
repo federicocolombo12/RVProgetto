@@ -30,7 +30,7 @@ public class AperturaPorta : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null)
             {
-                Debug.LogError("AudioSource non assegnato o mancante! Aggiungilo all'oggetto o assegnalo dall'Inspector.");
+                //Debug.LogError("AudioSource non assegnato o mancante! Aggiungilo all'oggetto o assegnalo dall'Inspector.");
             }
         }
     }
