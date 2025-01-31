@@ -12,7 +12,7 @@ public class TriggerInfermieria : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
             {
             eventTracker.corridoioEvents[eventIndex].Invoke();
             Destroy(gameObject);

@@ -11,7 +11,7 @@ public class CorridoioManager : MonoBehaviour
     public bool doorOpen = false;
     public GameObject firstPersonController;
     public DoorOpener doorOpener;
-    public TriggerFlashbackObject triggerFlashbackObject;
+    
     public bool startAnimationPorta = false;
     [SerializeField] private float walkSpeed;
     public static CorridoioManager instance { get; private set; }
@@ -36,35 +36,39 @@ public class CorridoioManager : MonoBehaviour
         {
             firstPersonController = GameObject.FindGameObjectWithTag("Player");
             doorOpener = firstPersonController.GetComponent<DoorOpener>();
-            triggerFlashbackObject = firstPersonController.GetComponent<TriggerFlashbackObject>();
+            
             doorOpener.enabled = false;
-            triggerFlashbackObject.enabled = true;
+            
             firstPersonController.GetComponent<FirstPersonController>().fov = 85;
             firstPersonController.GetComponent<FirstPersonController>().walkSpeed = walkSpeed;
         }
         if (firstObjectFound)
         {
 
-            StartCoroutine(LoadInfermieria());
+            StartCoroutine(LoadInfermieriaCoroutine());
         }
         if (secondObjectFound)
         {
-            StartCoroutine(LoadCelle());
+            StartCoroutine(LoadCelleCoroutine());
         } 
         if (doorOpen)
         {
-            StartCoroutine(LoadFinale());
+            StartCoroutine(LoadFinaleCoroutine());
         }
     }
     public void FlickerTorch()
     {
         firstPersonController.GetComponent<Torcia>().Flickering();
     }
-    IEnumerator LoadInfermieria()
+    public void LoadInfermieria()
+    {
+        StartCoroutine(LoadInfermieriaCoroutine());  
+    }
+    IEnumerator LoadInfermieriaCoroutine()
     {
         Debug.Log("First object found!");
         TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
             
         MySceneManager.instance.LoadNextScene("FlashbackInfermieria", LoadSceneMode.Single, () =>
         {
@@ -73,10 +77,14 @@ public class CorridoioManager : MonoBehaviour
         Destroy(gameObject);
         Destroy(firstPersonController);
     }
-    IEnumerator LoadCelle()
+    public void LoadCelle()
+    {
+        StartCoroutine(LoadCelleCoroutine());
+    }
+    IEnumerator LoadCelleCoroutine()
     {
         TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
             
         Debug.Log("Second object found!");
         MySceneManager.instance.LoadNextScene("FlashbackCelle", LoadSceneMode.Single, () => 
@@ -85,11 +93,15 @@ public class CorridoioManager : MonoBehaviour
         Destroy(gameObject);
         Destroy(firstPersonController);
     }
-    IEnumerator LoadFinale()
+    public void LoadFinale()
+    {
+        StartCoroutine(LoadFinaleCoroutine());
+    }
+    IEnumerator LoadFinaleCoroutine()
     {
         
         TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
             
         Debug.Log("Door is now open!");
         MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
