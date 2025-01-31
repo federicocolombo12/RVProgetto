@@ -5,22 +5,20 @@ using UnityEngine;
 public class PlayerLock : MonoBehaviour
 {
     public GameObject queueManager;
-    
+
     [SerializeField] private bool locked;
     public bool reachedPoint;
     FirstPersonController player;
-    [SerializeField] InfermieraScript nurse;
+    
     [SerializeField] TriggerController triggerController;
 
     void Start()
     {
-        
         locked = !QueueManager.instance.lineFinished;
         player = GetComponent<FirstPersonController>();
-        triggerController= GetComponent<TriggerController>();
+        triggerController = GetComponent<TriggerController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         locked = !QueueManager.instance.lineFinished;
@@ -33,16 +31,12 @@ public class PlayerLock : MonoBehaviour
             player.playerCanMove = true;
             player.cameraCanMove = true;
             triggerController.enabled = true;
-
         }
         else if (!locked && reachedPoint)
         {
-           
             player.playerCanMove = false;
-            
             player.cameraCanMove = true;
-            nurse.TriggerNurseTalk(gameObject);
-
+            
         }
     }
 }

@@ -11,6 +11,7 @@ public class TriggerController : MonoBehaviour
 
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private InfermieraScript nurse;
     
     private void Start()
     {
@@ -42,6 +43,8 @@ public class TriggerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 playerLock.reachedPoint = true;
+                
+                nurse.TriggerNurseTalk(gameObject);
             }
         }
        
