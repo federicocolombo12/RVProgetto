@@ -17,6 +17,8 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] private Torcia torciaScript;
     public TransitionScript transitionScript;
     [SerializeField] Volume firstSceneVolume;
+    [SerializeField] Camera oldCamera;
+    [SerializeField] GameObject newCamera;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -71,6 +73,11 @@ public class FirstSceneManager : MonoBehaviour
             startAnimation = true;
             TransitionScript.instance.FadeIn();
             firstSceneVolume.enabled = false;
+            oldCamera.enabled = false;
+            newCamera.SetActive(true);
+            newCamera.transform.position = oldCamera.transform.position;
+            newCamera.transform.rotation = oldCamera.transform.rotation;
+            newCamera.transform.localScale = oldCamera.transform.localScale;
 
         });
 

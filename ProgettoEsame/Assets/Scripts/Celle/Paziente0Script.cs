@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class Paziente0Script : MonoBehaviour
 {
+    public static Paziente0Script instance { get; private set; }
     public Transform thirdDestination1; // Terza destinazione
     public Transform firstDestination1; // Terza destinazione
     public Transform zeroDestination; // Destinazione zero
@@ -14,7 +15,8 @@ public class Paziente0Script : MonoBehaviour
     public GameObject knife; // Coltello dell'NPC
     public Camera playerCamera; // Camera del giocatore
     public float interactionDistance = 2f; // Distanza massima per l'interazione
-    
+    [SerializeField] public bool activateCollider = false; // Attiva il collider del coltello
+
     private Animator animator;
     private NavMeshAgent navMeshAgent;
 
@@ -122,6 +124,7 @@ public class Paziente0Script : MonoBehaviour
             audiotalking = false;
             animator.SetBool("IsYelling", false);
             animator.SetBool("TakeThis", true);
+            activateCollider = true;
 
             // Attesa fino a quando il giocatore non prende il coltello
             yield return new WaitUntil(() => CellaManager.instance.coltelloPreso);

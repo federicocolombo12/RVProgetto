@@ -50,4 +50,12 @@ public class TriggerFlashbackObject : MonoBehaviour
         }
         
     }
+    public void TriggerFlashbackInfermieria()
+    {
+        CorridoioManager.instance.firstObjectFound = true;
+    }
+    public void TriggerFlashbackCelle()
+    {
+        CorridoioManager.instance.secondObjectFound = true;
+    }
 }
