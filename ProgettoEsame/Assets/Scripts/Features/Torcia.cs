@@ -62,7 +62,7 @@ public class Torcia : MonoBehaviour
             }
         }
 
-        RaycastHit hit;
+        /*RaycastHit hit;
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, Mathf.Infinity))
         {
             if (hit.collider.CompareTag("OggettoInteragibile1"))
@@ -79,7 +79,7 @@ public class Torcia : MonoBehaviour
         else
         {
             flashlightTransform.localRotation = Quaternion.Euler(defaultRotation);
-        }
+        }*/
     }
 
     public void Flickering()

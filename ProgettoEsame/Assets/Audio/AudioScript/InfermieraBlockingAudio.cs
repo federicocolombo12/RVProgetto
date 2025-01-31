@@ -22,11 +22,8 @@ public class InfermieraBlockingAudio : MonoBehaviour
 
         // Trova il componente InfermieraBlocking
         
-
-        if (infermieraBlocking == null)
-        {
-            Debug.LogError("InfermieraBlocking non trovato su " + gameObject.name + ". Assicurati che sia presente nello stesso GameObject.");
-        }
+        
+        
     }
 
     // Questo metodo viene chiamato quando inizia l'interazione con l'infermiera
