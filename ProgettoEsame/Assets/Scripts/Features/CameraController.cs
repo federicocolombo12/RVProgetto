@@ -20,5 +20,8 @@ public class CameraController : MonoBehaviour
         transform.position = gofollow.transform.position + vectOffset;
         Quaternion targetRotation = Quaternion.Euler(gofollow.transform.eulerAngles.x, gofollow.transform.eulerAngles.y, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
+       
+        // Forza l'asse Z della rotazione a zero
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
     }
 }
