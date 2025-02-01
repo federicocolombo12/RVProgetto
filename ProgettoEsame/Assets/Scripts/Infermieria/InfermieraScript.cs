@@ -52,7 +52,7 @@ public class InfermieraScript : MonoBehaviour
         else
         {
             // Interazioni successive: riproduce sempre il secondo dialogo
-            child.tag = "Untagged";
+            childUi.tag = "Untagged";
             Debug.Log("Puoi posare l'oggetto sul tavolo.");
             isTalking = true; // Imposta lo stato a "parlando"
             animator.SetTrigger("NurseTalk");
@@ -72,7 +72,7 @@ public class InfermieraScript : MonoBehaviour
         yield return new WaitForSeconds(10f);  // Attendi che l'animazione finisca
 
         animator.SetTrigger("NurseIdle");
-        gameObject.tag = "OggettoInteragibile1";
+        childUi.tag = "OggettoInteragibile1";
         PlayerLock playerLock = interactor.GetComponent<PlayerLock>();
         playerLock.reachedPoint = false;
         isTalking = false; // Reimposta lo stato a "non parlando"
