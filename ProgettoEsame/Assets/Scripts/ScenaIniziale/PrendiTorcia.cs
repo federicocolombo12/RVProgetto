@@ -6,6 +6,7 @@ public class PrendiTorcia : MonoBehaviour, IInteractable
 {
     [SerializeField] PickUpTorcia pickUpScript;
     [SerializeField] Raccolta_Vedi_Oggetto raccoltaScript;
+    [SerializeField] Canvas canvasVisualizzazione;
     public bool stopView = false;
     public bool stopPickUp = false;
     void Start()
@@ -36,6 +37,10 @@ public class PrendiTorcia : MonoBehaviour, IInteractable
         {
             Debug.LogWarning("L'interactor non ha il componente Raccolta_Vedi_Oggetto!");
         }
+        if (canvasVisualizzazione != null)
+        {
+            canvasVisualizzazione.gameObject.SetActive(true);
+        }
     }
 
     public void StopInteract(GameObject interactor)
@@ -47,6 +52,11 @@ public class PrendiTorcia : MonoBehaviour, IInteractable
             
             FirstSceneManager.instance.doorOpenable = true;
         }
+        if (canvasVisualizzazione != null)
+        {
+            canvasVisualizzazione.gameObject.SetActive(false);
+        }
+
     }
 }
 

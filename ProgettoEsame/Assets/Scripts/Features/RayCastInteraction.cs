@@ -12,7 +12,7 @@ public class RayCastInteraction : MonoBehaviour
     public AttivaUi attivaUi;
     public IInteractable interactable;
     [SerializeField] private Collider[] colliders;
-    [SerializeField] Canvas canvasVisualizzazione;
+    
 
     // Cooldown variables
     public float interactionCooldown = 3f; // Time before allowing StopInteract
@@ -23,10 +23,7 @@ public class RayCastInteraction : MonoBehaviour
 
     void Start()
     {
-        if (canvasVisualizzazione != null)
-        {
-            canvasVisualizzazione.gameObject.SetActive(false);
-        }
+        
     }
 
     void Update()
@@ -149,14 +146,11 @@ public class RayCastInteraction : MonoBehaviour
     {
         if (interactable != null)
         {
-            playAudio = true;
+            
             interactable.Interact(gameObject); // Richiama il metodo di visualizzazione
-
+            playAudio = true;
             // Attiva il Canvas quando l'oggetto viene visualizzato
-            if (canvasVisualizzazione != null)
-            {
-                canvasVisualizzazione.gameObject.SetActive(true);
-            }
+
         }
     }
 
@@ -168,10 +162,7 @@ public class RayCastInteraction : MonoBehaviour
             interactable = null;
 
             // Disattiva il Canvas quando la visualizzazione termina
-            if (canvasVisualizzazione != null)
-            {
-                canvasVisualizzazione.gameObject.SetActive(false);
-            }
+            
         }
     }
 }

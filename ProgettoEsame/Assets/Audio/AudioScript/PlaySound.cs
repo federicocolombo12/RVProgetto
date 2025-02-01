@@ -36,8 +36,10 @@ public class PlaySound : MonoBehaviour
         else
         {
             // Ripristina lo stato se `playAudio` è false
+            audioSource.Stop();
             if (hasPlayed)
             {
+               
                 hasPlayed = false;
             }
         }
