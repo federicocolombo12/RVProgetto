@@ -8,6 +8,7 @@ public class AperturaPorta : MonoBehaviour
     public float durataApertura = 2f; // Durata dell'animazione di apertura
     public float distanzaInterazione = 3f; // Distanza massima per l'interazione
     [SerializeField] private bool isOpen = false;
+    private bool isMoving = false; // Variabile per tracciare se la porta è in movimento
     private Quaternion rotazioneIniziale;
     private Quaternion rotazioneFinale;
     private float tempoTrascorso = 0f;
@@ -37,7 +38,7 @@ public class AperturaPorta : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) // Premi 'E' per aprire/chiudere la porta
+        if (Input.GetKeyDown(KeyCode.E) && !isMoving) // Premi 'E' per aprire/chiudere la porta solo se non è in movimento
         {
             RaycastHit hit;
             Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -51,17 +52,22 @@ public class AperturaPorta : MonoBehaviour
             }
         }
 
-        if (tempoTrascorso < durataApertura)
+        if (isMoving)
         {
             tempoTrascorso += Time.deltaTime;
             float t = Mathf.Clamp01(tempoTrascorso / durataApertura);
             transform.rotation = Quaternion.Lerp(rotazioneIniziale, rotazioneFinale, t);
+
+            if (tempoTrascorso >= durataApertura)
+            {
+                isMoving = false; // L'animazione è terminata, la porta non è più in movimento
+            }
         }
     }
 
     public void ApriPorta()
     {
-        if (!isOpen)
+        if (!isOpen && !isMoving)
         {
             TogglePorta();
         }
@@ -70,6 +76,7 @@ public class AperturaPorta : MonoBehaviour
     private void TogglePorta()
     {
         isOpen = !isOpen;
+        isMoving = true; // La porta è in movimento
         tempoTrascorso = 0f;
         rotazioneIniziale = transform.rotation;
         rotazioneFinale = Quaternion.Euler(transform.eulerAngles + new Vector3(0, isOpen ? angoloApertura : -angoloApertura, 0));
@@ -86,4 +93,3 @@ public class AperturaPorta : MonoBehaviour
         }
     }
 }
-
