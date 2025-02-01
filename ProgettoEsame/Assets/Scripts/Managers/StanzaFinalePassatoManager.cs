@@ -19,6 +19,11 @@ public class StanzaFinalePassatoManager : MonoBehaviour
     [Header("Luce Puntiforme")]
     public Light lucePuntiforme; // Riferimento alla luce puntiforme
 
+    [SerializeField] ObjectInteraction triggerScript;
+    [SerializeField] public float delayTime = 30f; // Tempo di attesa per avviare il video
+
+    private bool videoDelayStarted = false; // Variabile per evitare di avviare la coroutine più volte
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -53,15 +58,28 @@ public class StanzaFinalePassatoManager : MonoBehaviour
         {
             Debug.LogError("Luce puntiforme non assegnata nel StanzaFinaleManager.");
         }
+
+        if (triggerScript == null)
+        {
+            triggerScript = FindObjectOfType<ObjectInteraction>();
+            if (triggerScript == null)
+            {
+                Debug.LogError("Nessun componente ObjectInteraction trovato.");
+            }
+        }
     }
 
     private void Update()
     {
-
+        if (triggerScript != null && triggerScript.hasActivated && !videoDelayStarted)
+        {
+            videoDelayStarted = true;
+            StartVideoAfterDelay();
+        }
     }
 
     // Metodo per avviare il video
-    private void AvviaVideo()
+    public void AvviaVideo()
     {
         if (canvasObject != null && videoObject != null && !canvasObject.activeSelf)
         {
@@ -118,5 +136,18 @@ public class StanzaFinalePassatoManager : MonoBehaviour
             lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
             yield return new WaitForSeconds(5f); // Attende 15 secondi
         }
+    }
+
+    // Metodo per avviare il video dopo un ritardo
+    public void StartVideoAfterDelay()
+    {
+        StartCoroutine(WaitAndStartVideo());
+    }
+
+    // Coroutine per attendere 30 secondi e poi avviare il video
+    private IEnumerator WaitAndStartVideo()
+    {
+        yield return new WaitForSeconds(delayTime); // Attende 30 secondi
+        AvviaVideo(); // Chiama il metodo AvviaVideo
     }
 }
