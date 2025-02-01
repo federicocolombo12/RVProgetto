@@ -45,14 +45,21 @@ public class InfermieriaManager : MonoBehaviour
     {
         TransitionScript.instance.FadeOut();
         yield return new WaitForSeconds(4f);
-        
-        
+
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
         {
-            
-            Instantiate(firstPersonController, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            // Trova il punto di spawn nella nuova scena
+            GameObject spawnPoint = GameObject.Find("PlayerSpawnPos");
+            if (spawnPoint != null)
+            {
+                Instantiate(firstPersonController, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            }
+            else
+            {
+                Debug.LogError("PlayerSpawnPos1 non trovato nella scena Corridoio1!");
+            }
             Destroy(gameObject);
         });
     }
-    
+
 }
