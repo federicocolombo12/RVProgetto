@@ -9,12 +9,15 @@ public class InfermieraScript : MonoBehaviour
     [SerializeField] private InfermieraSound infermieraSound; // Aggiungi il riferimento allo script audio separato
     [SerializeField] private int interactionCount = 0; // Contatore delle interazioni
     private bool isTalking = false; // Variabile di stato per tracciare se l'infermiera sta parlando
-    [SerializeField] private AttivaPorta attivaPorta; // Riferimento allo script AttivaPorta
+    [SerializeField] private AttivaPorta attivaPorta;
+    [SerializeField] private GameObject childUi;  // Riferimento allo script AttivaPorta
+
     void Start()
     {
         animator = GetComponent<Animator>();
         characters = QueueManager.instance.characters;
         infermieraSound = GetComponent<InfermieraSound>();
+        childUi = transform.GetChild(2).gameObject;
     }
 
     public void TriggerNurseAnimation()
@@ -34,25 +37,30 @@ public class InfermieraScript : MonoBehaviour
 
     private IEnumerator TriggerNurseTalkCoroutine(GameObject interactor)
     {
-        isTalking = true; // Imposta lo stato a "parlando"
-        animator.SetTrigger("NurseTalk");
-
-        // Riproduce il suono dell'infermiera che parla solo se non è già in riproduzione
-        if (infermieraSound != null && !infermieraSound.IsPlaying())
-        {
-            infermieraSound.PlayNurseTalkSound();  // Riproduce il suono
-        }
-
         if (interactionCount == 0)
         {
             // Prima interazione: permetti di esplorare la stanza
             Debug.Log("Puoi esplorare la stanza.");
+            isTalking = true; // Imposta lo stato a "parlando"
+            animator.SetTrigger("NurseTalk");
+            childUi.tag = "Untagged"; // Rimuovi il tag "Interactable" dall'infermiera
+            if (infermieraSound != null && !infermieraSound.IsPlaying())
+            {
+                infermieraSound.PlayNurseTalkSound(1);  // Riproduce il primo suono
+            }
         }
-        else if (interactionCount == 1)
+        else
         {
-            // Seconda interazione: permetti di far cadere l'oggetto sul tavolo e triggerare il corridoio
+            // Interazioni successive: riproduce sempre il secondo dialogo
+            child.tag = "Untagged";
             Debug.Log("Puoi posare l'oggetto sul tavolo.");
-            
+            isTalking = true; // Imposta lo stato a "parlando"
+            animator.SetTrigger("NurseTalk");
+            if (infermieraSound != null && !infermieraSound.IsPlaying())
+            {
+                infermieraSound.PlayNurseTalkSound(2);  // Riproduce il secondo suono
+            }
+
             if (attivaPorta != null)
             {
                 attivaPorta.enabled = true;
@@ -61,9 +69,10 @@ public class InfermieraScript : MonoBehaviour
 
         interactionCount++;
 
-        yield return new WaitForSeconds(5f);  // Attendi che l'animazione finisca
+        yield return new WaitForSeconds(10f);  // Attendi che l'animazione finisca
 
         animator.SetTrigger("NurseIdle");
+        gameObject.tag = "OggettoInteragibile1";
         PlayerLock playerLock = interactor.GetComponent<PlayerLock>();
         playerLock.reachedPoint = false;
         isTalking = false; // Reimposta lo stato a "non parlando"
