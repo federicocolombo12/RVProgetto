@@ -34,6 +34,7 @@ public class RayCastInteraction : MonoBehaviour
                 CheckForInteractableObject();
                 if (Input.GetKeyDown(KeyCode.E) && interactable != null)
                 {
+                    
                     ChangeState(InteractionState.Interact);
                 }
                 break;
@@ -147,8 +148,7 @@ public class RayCastInteraction : MonoBehaviour
         if (interactable != null)
         {
             
-            interactable.Interact(gameObject); // Richiama il metodo di visualizzazione
-            playAudio = true;
+            interactable.Interact(gameObject); 
             // Attiva il Canvas quando l'oggetto viene visualizzato
 
         }
