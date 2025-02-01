@@ -264,6 +264,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 131072
+  interactionCooldown: 3
 --- !u!65 &68193871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2946,6 +2947,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -4018286686147086024, guid: 1b6083f3d6337554d88d253903116430, type: 3}
+    - target: {fileID: 1154378918589736769, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      propertyPath: walkSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1154378918589736779, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       propertyPath: m_Name
       value: FPScelle
@@ -3787,7 +3792,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   colliders: []
-  canvasVisualizzazione: {fileID: 0}
+  interactionCooldown: 3
 --- !u!114 &1091525840
 MonoBehaviour:
   m_ObjectHideFlags: 0
