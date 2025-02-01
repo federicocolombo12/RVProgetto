@@ -134,7 +134,7 @@ public class StanzaFinalePassatoManager : MonoBehaviour
             lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
             yield return new WaitForSeconds(0.2f);
             lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
-            yield return new WaitForSeconds(5f); // Attende 15 secondi
+            yield return new WaitForSeconds(5f); // Attende 5 secondi
         }
     }
 

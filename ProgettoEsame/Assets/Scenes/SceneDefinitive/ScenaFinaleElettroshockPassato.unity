@@ -741,6 +741,8 @@ MonoBehaviour:
   videoObject: {fileID: 153845215}
   canvasObject: {fileID: 992572048}
   lucePuntiforme: {fileID: 996050987}
+  triggerScript: {fileID: 0}
+  delayTime: 30
 --- !u!114 &356207496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3161,6 +3163,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1735066282}
     m_Modifications:
+    - target: {fileID: 465897552532052731, guid: 55b2257bfe1d2884297ff30e8e29e131, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c6e6e4e3559e904cb6fed98a4441a29, type: 2}
     - target: {fileID: 1602190234877583764, guid: 55b2257bfe1d2884297ff30e8e29e131, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.100836016
@@ -4306,6 +4312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1409921066}
+  hasActivated: 0
 --- !u!4 &2120081739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4837693977132404, guid: 4e12d279753093a40a6c88deea619dfe, type: 3}
