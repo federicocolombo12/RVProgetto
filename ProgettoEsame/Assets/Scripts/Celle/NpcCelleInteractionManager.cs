@@ -102,14 +102,50 @@ public class NpcCelleInteractionManager : MonoBehaviour
 
     private void LookAtPlayer(Transform npcTransform)
     {
-        Vector3 direction = (playerCamera.transform.position - npcTransform.position).normalized;
-        direction.y = 0; // Mantieni la rotazione solo sull'asse Y
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        npcTransform.rotation = lookRotation;
+        StartCoroutine(RotateTowards(npcTransform, playerCamera.transform.position));
     }
+
     public void ReturnToInitialPosition(Transform npcTransform)
     {
-        npcTransform.rotation = Quaternion.Euler(0, -90, 0);
+        StartCoroutine(RotateToInitialPosition(npcTransform));
     }
+
+    private IEnumerator RotateToInitialPosition(Transform npcTransform)
+    {
+        Quaternion initialRotation = npcTransform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(0, -90, 0);
+        float elapsedTime = 0f;
+        float duration = 1f; // Durata della rotazione in secondi
+
+        while (elapsedTime < duration)
+        {
+            npcTransform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        npcTransform.rotation = targetRotation;
+    }
+
+
+    private IEnumerator RotateTowards(Transform npcTransform, Vector3 targetPosition)
+    {
+        Quaternion initialRotation = npcTransform.rotation;
+        Vector3 direction = (targetPosition - npcTransform.position).normalized;
+        direction.y = 0; // Mantieni la rotazione solo sull'asse Y
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        float elapsedTime = 0f;
+        float duration = 1f; // Durata della rotazione in secondi
+
+        while (elapsedTime < duration)
+        {
+            npcTransform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        npcTransform.rotation = targetRotation;
+    }
+
 }
 
