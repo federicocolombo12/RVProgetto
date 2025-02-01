@@ -126,7 +126,7 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("TakeThis", true);
 
             KnifePickUpandPlace knifeScript = knife.GetComponent<KnifePickUpandPlace>();
-            knifeScript.ActivateKnifeTag(); ;
+            knifeScript.ActivateKnifeTag(); 
 
             // Attesa fino a quando il giocatore non prende il coltello
             yield return new WaitUntil(() => CellaManager.instance.coltelloPreso);
