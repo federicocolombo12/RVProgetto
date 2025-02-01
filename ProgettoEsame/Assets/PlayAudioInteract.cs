@@ -14,27 +14,34 @@ public class PlayAudioInteract : MonoBehaviour, IInteractable
     }
     public void Interact(GameObject interactor)
     {
-       
-        
         Debug.Log("Interacting with " + gameObject.name);
-        if (!audioSource.isPlaying && !played&&counter==0)
+        if (!audioSource.isPlaying && !played && counter == 0)
         {
-            gameObject.tag ="Untagged";
+            // Cambia il tag dell'oggetto corrente
+            gameObject.tag = "Untagged";
+
+            // Cambia il tag di tutti i figli
+            ChangeTagOfChildren(gameObject, "Untagged");
+
             audioSource.PlayOneShot(audioSource.clip);
 
             played = true;
             counter++;
         }
-        
-        
-       
-        
-           
     }
     public void StopInteract(GameObject interactor)
     {
         played = false;
     }
-    
-   
+
+    // Metodo per cambiare il tag di tutti i figli
+    void ChangeTagOfChildren(GameObject parent, string newTag)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            child.gameObject.tag = newTag;
+            // Ricorsivamente cambia il tag dei figli dei figli
+            ChangeTagOfChildren(child.gameObject, newTag);
+        }
+    }
 }
