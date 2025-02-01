@@ -1,89 +1,104 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AttivaPorta : MonoBehaviour
 {
-   
     [SerializeField] private GameObject pickedObject = null;
     public Transform holdPosition;
-    public LayerMask interactableLayer; // LayerMask per gli oggetti interagibili
-    private float animationSpeed = 5.0f; // Velocità di animazione per raccogliere e posare l'oggetto
-    private float maxPickupDistance = 3.0f; // Distanza massima per raccogliere l'oggetto
-    private float maxDropDistance = 3.0f; // Distanza massima per posare l'oggetto
+    public LayerMask interactableLayer;
+    private float animationSpeed = 5.0f;
+    private float maxPickupDistance = 3.0f;
+    private float maxDropDistance = 3.0f;
     [SerializeField] private FirstPersonController FirstPersonController;
+
+    // Cooldown variables
+    public float interactionCooldown = 3f;
+    private float currentCooldown;
+
+    private enum InteractionState { Idle, Interact }
+    private InteractionState currentState = InteractionState.Idle;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        switch (currentState)
         {
-            if (pickedObject == null)
-            {
-                // Prova a raccogliere un oggetto
-                RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxPickupDistance, interactableLayer))
+            case InteractionState.Idle:
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    Debug.Log("Raycast hit: " + hit.transform.name);
-                    pickedObject = hit.transform.gameObject;
-
-                    // Disabilita il MeshCollider per evitare problemi di fisica
-                    MeshCollider meshCollider = pickedObject.GetComponent<MeshCollider>();
-                    if (meshCollider != null)
+                    if (pickedObject == null)
                     {
-                        meshCollider.enabled = false;
+                        TryPickupObject();
                     }
-
-                    // Disabilita il Rigidbody per evitare che cada mentre è tenuto
-                    Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
-                    if (rb != null)
+                    else
                     {
-                        rb.isKinematic = true;
+                        TryDropObject();
                     }
-
-                    // Inizia la coroutine per animare l'oggetto verso la posizione di raccolta
-                    StartCoroutine(PickupObject(pickedObject, holdPosition.position));
-
-                    Debug.Log("Picked up: " + pickedObject.name);
                 }
-                else
+                break;
+
+            case InteractionState.Interact:
+                // Update cooldown timer
+                currentCooldown -= Time.deltaTime;
+                if (currentCooldown <= 0)
                 {
-                    Debug.Log("Raycast did not hit any object");
+                    ChangeState(InteractionState.Idle);
                 }
-            }
-            else
+                break;
+        }
+    }
+
+    void ChangeState(InteractionState newState)
+    {
+        if (newState == InteractionState.Interact)
+        {
+            currentCooldown = interactionCooldown;
+        }
+        currentState = newState;
+    }
+
+    void TryPickupObject()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxPickupDistance, interactableLayer))
+        {
+            pickedObject = hit.transform.gameObject;
+            Collider collider = pickedObject.GetComponent<Collider>();
+            if (collider != null)
             {
-                // Trova la posizione in cui stai guardando
-                RaycastHit hit;
-                Vector3 dropPosition = pickedObject.transform.position;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
-                {
-                    dropPosition = hit.point;
-                }
-
-                // Verifica se la distanza di rilascio è entro il limite
-                if (Vector3.Distance(transform.position, dropPosition) <= maxDropDistance)
-                {
-                    // Rilascia l'oggetto
-                    pickedObject.transform.parent = null;
-
-                    // Inizia la coroutine per animare l'oggetto verso la posizione di rilascio
-                    StartCoroutine(DropObject(pickedObject, dropPosition));
-
-                    Debug.Log("Dropped: " + pickedObject.name);
-                    pickedObject = null;
-                }
-                else
-                {
-                    Debug.Log("Drop position is too far away");
-                }
+                collider.enabled = false;
             }
+
+            Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+
+            StartCoroutine(PickupObject(pickedObject, holdPosition.position));
+            ChangeState(InteractionState.Interact);
+        }
+    }
+
+    void TryDropObject()
+    {
+        RaycastHit hit;
+        Vector3 dropPosition = pickedObject.transform.position;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
+        {
+            dropPosition = hit.point;
+        }
+
+        if (Vector3.Distance(transform.position, dropPosition) <= maxDropDistance)
+        {
+            pickedObject.transform.parent = null;
+            StartCoroutine(DropObject(pickedObject, dropPosition));
+            pickedObject = null;
+            ChangeState(InteractionState.Interact);
         }
     }
 
     private IEnumerator PickupObject(GameObject obj, Vector3 targetPosition)
     {
-        // Anima l'oggetto verso la posizione di raccolta
         while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
         {
             FirstPersonController.cameraCanMove = false;
@@ -91,44 +106,38 @@ public class AttivaPorta : MonoBehaviour
             yield return null;
         }
 
-        // Imposta la posizione finale e il parent
         obj.transform.position = targetPosition;
         obj.transform.parent = holdPosition;
         InfermieriaManager.instance.pastigliaTrovata = true;
 
-        this.enabled= false;
         FirstPersonController.cameraCanMove = true;
+        this.enabled = false; // Disattiva lo script dopo aver raccolto l'oggetto
     }
 
     private IEnumerator DropObject(GameObject obj, Vector3 targetPosition)
     {
-        // Riabilita il MeshCollider
-        MeshCollider meshCollider = obj.GetComponent<MeshCollider>();
-        if (meshCollider != null)
+        Collider collider = obj.GetComponent<Collider>();
+        if (collider != null)
         {
-            meshCollider.enabled = true;
-            meshCollider.convex = true; // Rendi il MeshCollider convesso
+            collider.enabled = true;
         }
 
-        // Aggiungi un Rigidbody per far cadere l'oggetto
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         if (rb == null)
         {
             rb = obj.AddComponent<Rigidbody>();
         }
-        rb.isKinematic = true; // Rendi il Rigidbody cinematico per l'animazione
+        rb.isKinematic = true;
 
-        // Anima l'oggetto verso la posizione di rilascio
         while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
         {
             obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, animationSpeed * Time.deltaTime);
             yield return null;
         }
 
-        // Disabilita il Rigidbody per far cadere l'oggetto
         rb.isKinematic = false;
-        
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Tavolo"))
@@ -139,7 +148,6 @@ public class AttivaPorta : MonoBehaviour
         else
         {
             Debug.Log("Oggetto non posato");
-            
         }
     }
 }

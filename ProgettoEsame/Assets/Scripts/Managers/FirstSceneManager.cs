@@ -54,6 +54,7 @@ public class FirstSceneManager : MonoBehaviour
         if (doorOpenable)
         {
             torciaScript.enabled = true;
+            
 
         }
         if (doorOpen)
@@ -78,6 +79,7 @@ public class FirstSceneManager : MonoBehaviour
             newCamera.transform.position = oldCamera.transform.position;
             newCamera.transform.rotation = oldCamera.transform.rotation;
             newCamera.transform.localScale = oldCamera.transform.localScale;
+            
 
         });
 
