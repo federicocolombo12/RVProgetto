@@ -16,6 +16,8 @@ public class StanzaFinalePassatoManager : MonoBehaviour
 
     public GameObject canvasObject; // Aggiungi il riferimento al Canvas
 
+    [Header("Luce Puntiforme")]
+    public Light lucePuntiforme; // Riferimento alla luce puntiforme
 
     private void Awake()
     {
@@ -42,11 +44,20 @@ public class StanzaFinalePassatoManager : MonoBehaviour
         {
             Debug.LogError("Oggetto video o Canvas non assegnato nel StanzaFinaleManager.");
         }
+
+        if (lucePuntiforme != null)
+        {
+            StartCoroutine(LuceRottaCoroutine());
+        }
+        else
+        {
+            Debug.LogError("Luce puntiforme non assegnata nel StanzaFinaleManager.");
+        }
     }
 
     private void Update()
     {
-      
+
     }
 
     // Metodo per avviare il video
@@ -90,6 +101,22 @@ public class StanzaFinalePassatoManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Oggetto non riconosciuto o interazione non consentita: " + interactedObject.name);
+        }
+    }
+
+    // Coroutine per gestire l'effetto luce rotta
+    private IEnumerator LuceRottaCoroutine()
+    {
+        while (true)
+        {
+            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
+            yield return new WaitForSeconds(0.2f);
+            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
+            yield return new WaitForSeconds(0.2f);
+            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
+            yield return new WaitForSeconds(0.2f);
+            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
+            yield return new WaitForSeconds(5f); // Attende 15 secondi
         }
     }
 }
