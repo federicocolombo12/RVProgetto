@@ -127,16 +127,22 @@ public class StanzaFinalePassatoManager : MonoBehaviour
     {
         while (true)
         {
-            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
-            yield return new WaitForSeconds(0.2f);
-            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
-            yield return new WaitForSeconds(0.2f);
-            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
-            yield return new WaitForSeconds(0.2f);
-            lucePuntiforme.enabled = !lucePuntiforme.enabled; // Alterna lo stato della luce
-            yield return new WaitForSeconds(5f); // Attende 5 secondi
+            yield return new WaitForSeconds(Random.Range(10,20)); // Attende 10 secondi
+
+            // Flicker veloce per 1 secondo
+            float flickerDuration = 2f;
+            float flickerEndTime = Time.time + flickerDuration;
+            while (Time.time < flickerEndTime)
+            {
+                lucePuntiforme.gameObject.SetActive(!lucePuntiforme.gameObject.activeSelf);
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.3f)); // Cambia lo stato della luce ogni 0.1 secondi
+            }
+
+            // Assicurati che la luce sia accesa alla fine del flicker
+            lucePuntiforme.gameObject.SetActive(true);
         }
     }
+
 
     // Metodo per avviare il video dopo un ritardo
     public void StartVideoAfterDelay()
