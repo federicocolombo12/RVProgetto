@@ -102,6 +102,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2916059337155537067}
     m_Modifications:
+    - target: {fileID: 1256342217726405417, guid: d8b9915a58110314aa11017852511d74, type: 3}
+      propertyPath: m_Intensity
+      value: 387.3034
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382683222128901587, guid: d8b9915a58110314aa11017852511d74, type: 3}
+      propertyPath: m_Intensity
+      value: 228
+      objectReference: {fileID: 0}
     - target: {fileID: 5382683222128901587, guid: d8b9915a58110314aa11017852511d74, type: 3}
       propertyPath: m_UseContactShadow.m_Level
       value: 2
@@ -359,8 +367,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashlight: {fileID: 903989617911628660}
+  flashlightTransform: {fileID: 0}
   on: 0
   off: 0
+  flickerTime: 2.5
+  elapsedTime: 0
+  torciaAudio: {fileID: 0}
 --- !u!114 &7737782192284760591
 MonoBehaviour:
   m_ObjectHideFlags: 0
