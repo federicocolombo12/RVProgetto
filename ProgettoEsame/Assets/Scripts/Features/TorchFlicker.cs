@@ -7,7 +7,8 @@ public class TorchFlicker : MonoBehaviour
     public Light torchLight; // Riferimento alla luce
     public float minWaitTime = 0.1f; // Tempo minimo tra accensioni/spegnimenti
     public float maxWaitTime = 0.5f; // Tempo massimo tra accensioni/spegnimenti
-    public float longWaitTime = 3f;  // Tempo lungo tra un ciclo e l'altro
+    public float minlongWaitTime = 3f;  // Tempo lungo tra un ciclo e l'altro
+    public float maxlongWaitTime = 5f;  // Tempo lungo tra un ciclo e l'altro
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class TorchFlicker : MonoBehaviour
             }
 
             torchLight.enabled = false; // Spegne la luce per un intervallo più lungo
-            yield return new WaitForSeconds(longWaitTime);
+            yield return new WaitForSeconds(Random.Range(minlongWaitTime,maxlongWaitTime));
         }
     }
 }
