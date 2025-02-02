@@ -26,6 +26,12 @@ public class StanzaFinaleManager : MonoBehaviour
 
     public GameObject canvasObject; // Aggiungi il riferimento al Canvas
 
+    [Header("Trigger Animazioni")]
+    [SerializeField] private string triggerWalk = "TriggerWalk";
+    [SerializeField] private string triggerIdle = "TriggerIdle";
+    [SerializeField] private string triggerBackward = "TriggerBackward";
+
+    [SerializeField] private Animator animator; // Riferimento all'Animator
 
     private void Awake()
     {
@@ -51,6 +57,15 @@ public class StanzaFinaleManager : MonoBehaviour
         else
         {
             Debug.LogError("Oggetto video o Canvas non assegnato nel StanzaFinaleManager.");
+        }
+
+        if (animator == null)
+        {
+            Debug.LogError("Nessun componente Animator assegnato.");
+        }
+        else
+        {
+            StartCoroutine(TriggerSequence());
         }
     }
 
@@ -112,8 +127,7 @@ public class StanzaFinaleManager : MonoBehaviour
             Oggetto4 = true;
             Debug.Log("Interagito con Oggetto4.");
         }
-        else if (interactedObject == quintoOggetto 
-            )
+        else if (interactedObject == quintoOggetto)
         {
             ultimoOggetto = true;
             Debug.Log("Interagito con l'ultimo oggetto. Video verrà avviato.");
@@ -124,4 +138,22 @@ public class StanzaFinaleManager : MonoBehaviour
             Debug.LogWarning("Oggetto non riconosciuto o interazione non consentita: " + interactedObject.name);
         }
     }
+
+    // Coroutine per attivare i trigger in sequenza
+    private IEnumerator TriggerSequence()
+    {
+        yield return new WaitForSeconds(2f);
+        animator.SetTrigger(triggerWalk);
+        Debug.Log("TriggerWalk attivato.");
+
+        yield return new WaitForSeconds(10f);
+        animator.SetTrigger(triggerIdle);
+        Debug.Log("TriggerIdle attivato.");
+        /*
+        yield return new WaitForSeconds(2f);
+        animator.SetTrigger(triggerBackward);
+        Debug.Log("TriggerBackward attivato.");
+        */
+    }
 }
+
