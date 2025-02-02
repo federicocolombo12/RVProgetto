@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rileva : MonoBehaviour
 {
-    [SerializeField] private float interactionDistance = 2f;
+    /*[SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer;
     private Transform player;
 
@@ -35,5 +35,5 @@ public class Rileva : MonoBehaviour
                 StanzaFinaleManager.instance.CheckInteraction(hit.transform.gameObject);
             }
         }
-    }
+    }*/
 }

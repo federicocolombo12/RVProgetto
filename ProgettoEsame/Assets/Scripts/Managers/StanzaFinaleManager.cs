@@ -21,10 +21,6 @@ public class StanzaFinaleManager : MonoBehaviour
     public bool Oggetto4 = false;
     public bool ultimoOggetto = false; // Stato del quinto oggetto
 
-    [Header("Oggetto Finale")]
-    public GameObject videoObject; // Oggetto che contiene il VideoPlayer
-
-    public GameObject canvasObject; // Aggiungi il riferimento al Canvas
 
     [Header("Trigger Animazioni")]
     [SerializeField] private string triggerWalk = "TriggerWalk";
@@ -49,15 +45,7 @@ public class StanzaFinaleManager : MonoBehaviour
 
     private void Start()
     {
-        if (videoObject != null && canvasObject != null)
-        {
-            videoObject.SetActive(false); // Disattiva il video all'inizio
-            canvasObject.SetActive(false); // Disattiva anche il Canvas all'inizio
-        }
-        else
-        {
-            Debug.LogError("Oggetto video o Canvas non assegnato nel StanzaFinaleManager.");
-        }
+        
 
         if (animator == null)
         {
@@ -71,37 +59,18 @@ public class StanzaFinaleManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"Oggetto1: {Oggetto1}, Oggetto2: {Oggetto2}, Oggetto3: {Oggetto3}, Oggetto4: {Oggetto4}, UltimoOggetto: {ultimoOggetto}");
+        
 
-        // Verifica se tutti gli oggetti sono stati interagiti e se non è stato ancora avviato il video
-        if (Oggetto1 && Oggetto2 && Oggetto3 && Oggetto4 && !ultimoOggetto)
-        {
-            Debug.Log("Tutti gli oggetti sono stati interagiti. Puoi ora interagire con il quinto oggetto.");
-        }
+        
     }
 
     // Metodo per avviare il video
-    private void AvviaVideo()
+    public void LoadStanzaPassato()
     {
-        if (canvasObject != null && videoObject != null && !canvasObject.activeSelf)
+        MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshockPassato", UnityEngine.SceneManagement.LoadSceneMode.Single, () =>
         {
-            canvasObject.SetActive(true); // Attiva il Canvas che contiene il video
-            videoObject.SetActive(true);  // Attiva il GameObject del VideoPlayer (lo rende visibile)
-
-            Debug.Log("Video avviato.");
-
-            VideoPlayer videoPlayer = videoObject.GetComponent<VideoPlayer>();
-            if (videoPlayer != null)
-            {
-                // Avvia il video
-                videoPlayer.Play();
-                Debug.Log("VideoPlayer avviato.");
-            }
-            else
-            {
-                Debug.LogError("Nessun componente VideoPlayer trovato sull'oggetto video.");
-            }
-        }
+            Debug.Log("StanzaPassato caricata con successo!");
+        });
     }
 
     // Metodo per controllare se un oggetto è stato interagito
@@ -131,7 +100,7 @@ public class StanzaFinaleManager : MonoBehaviour
         {
             ultimoOggetto = true;
             Debug.Log("Interagito con l'ultimo oggetto. Video verrà avviato.");
-            AvviaVideo();
+            LoadStanzaPassato();
         }
         else
         {
