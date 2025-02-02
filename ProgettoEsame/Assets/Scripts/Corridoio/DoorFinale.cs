@@ -14,7 +14,7 @@ public class DoorFinale : MonoBehaviour
     private void Start()
     {
         doorAnimator = GameObject.Find("DoppiaPortaPivot").GetComponent<Animator>();
-        mainCamera = Camera.main;
+        
         player = mainCamera.transform;
 
 
@@ -57,12 +57,17 @@ public class DoorFinale : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Tasto E premuto.");
-                CorridoioManager.instance.doorOpen = true;
+                CorridoioManager.instance.LoadFinale();
                 // Wait until Scene is loaded
                 StartCoroutine(WaitForAnimationStart());
 
             }
 
         }
+    }
+    public void LoadPassato()
+    {
+
+       StanzaFinaleManager.instance.LoadStanzaPassato();
     }
 }
