@@ -19,6 +19,7 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] Volume firstSceneVolume;
     [SerializeField] Camera oldCamera;
     [SerializeField] GameObject newCamera;
+    [SerializeField] UiTorcia uiTorcia;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -80,7 +81,7 @@ public class FirstSceneManager : MonoBehaviour
             newCamera.transform.position = oldCamera.transform.position;
             newCamera.transform.rotation = oldCamera.transform.rotation;
             newCamera.transform.localScale = oldCamera.transform.localScale;
-            
+            uiTorcia.OnTorchFound();
 
         });
 
