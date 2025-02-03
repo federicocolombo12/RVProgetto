@@ -6438,7 +6438,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.696
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -13170,7 +13170,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6d5ed0e53cd1d614abcaf8fa84e495ff, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.533
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -13180,7 +13180,7 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: -0.3
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -13214,7 +13214,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.727
+      value: 0.167
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -17333,12 +17333,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587614176051827652, guid: bf60ca05a43a8554bb2484837a5c6c02, type: 3}
       propertyPath: m_Volume
-      value: 0.024
+      value: 0.067
       objectReference: {fileID: 0}
     - target: {fileID: 4587614176051827652, guid: bf60ca05a43a8554bb2484837a5c6c02, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4587614176051827652, guid: bf60ca05a43a8554bb2484837a5c6c02, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 610d49be98d00dc4188d657de15ab181, type: 3}
     - target: {fileID: 4587614176051827652, guid: bf60ca05a43a8554bb2484837a5c6c02, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
