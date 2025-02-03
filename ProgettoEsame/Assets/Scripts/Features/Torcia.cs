@@ -20,7 +20,7 @@ public class Torcia : MonoBehaviour
     {
         on = true;
         off = false;
-        flashlight.SetActive(false);
+        flashlight.SetActive(true);
         mainCamera = Camera.main;
 
         // Controlla se lo script audio è assegnato
