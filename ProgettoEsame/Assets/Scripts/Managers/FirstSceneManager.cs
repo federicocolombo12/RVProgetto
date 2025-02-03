@@ -54,6 +54,7 @@ public class FirstSceneManager : MonoBehaviour
         if (doorOpenable)
         {
             torciaScript.enabled = true;
+
             
 
         }

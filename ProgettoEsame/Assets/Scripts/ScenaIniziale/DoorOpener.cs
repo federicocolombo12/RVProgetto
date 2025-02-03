@@ -32,7 +32,9 @@ public class DoorOpener : MonoBehaviour
                 
                 return;
             }
-            doorPrefab.tag = "OggettoInteragibile1";  // Impostiamo il tag per l'interazione
+            doorPrefab.tag = "OggettoInteragibile1";
+            doorPrefab.GetComponent<PlayAudioInteract>().enabled = false;
+            doorPrefab.GetComponent<AudioSource>().enabled = false;
             DoorActivate();
         }
     }
