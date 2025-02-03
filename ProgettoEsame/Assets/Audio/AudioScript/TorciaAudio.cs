@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class TorciaAudio : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip accensioneClip; // Suono accensione
-    [SerializeField] private AudioClip spegnimentoClip; // Suono spegnimento
+    private AudioSource audioSource;
 
-    private Torcia torcia;
+    [SerializeField] private AudioClip accensioneClip; // Suono accensione torcia
+    [SerializeField] private AudioClip spegnimentoClip; // Suono spegnimento torcia
+    [SerializeField] private float pitchMin = 0.8f; // Valore minimo del pitch
+    [SerializeField] private float pitchMax = 0.9f; // Valore massimo del pitch
 
-    void Start()
+    private void Awake()
     {
-        torcia = GetComponent<Torcia>();
+        audioSource = GetComponent<AudioSource>();
 
         if (audioSource == null)
         {
@@ -20,16 +21,18 @@ public class TorciaAudio : MonoBehaviour
 
     public void PlayAccensioneSound()
     {
-        if (accensioneClip != null)
+        if (audioSource != null && accensioneClip != null)
         {
+            audioSource.pitch = Random.Range(pitchMin, pitchMax); // Imposta un pitch più basso casuale
             audioSource.PlayOneShot(accensioneClip);
         }
     }
 
     public void PlaySpegnimentoSound()
     {
-        if (spegnimentoClip != null)
+        if (audioSource != null && spegnimentoClip != null)
         {
+            audioSource.pitch = Random.Range(pitchMin, pitchMax); // Imposta un pitch più basso casuale
             audioSource.PlayOneShot(spegnimentoClip);
         }
     }

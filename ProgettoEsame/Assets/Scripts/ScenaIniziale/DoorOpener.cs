@@ -13,11 +13,13 @@ public class DoorOpener : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;
 
     // Riferimento allo script audio
-   
+    private PortaAudio portaAudio;
+
 
     private void Start()
     {
         player = mainCamera.transform;
+        portaAudio = GetComponent<PortaAudio>();
     }
 
     void Update()
@@ -30,7 +32,9 @@ public class DoorOpener : MonoBehaviour
                 
                 return;
             }
-            doorPrefab.tag = "OggettoInteragibile1";  // Impostiamo il tag per l'interazione
+            doorPrefab.tag = "OggettoInteragibile1";
+            doorPrefab.GetComponent<PlayAudioInteract>().enabled = false;
+            doorPrefab.GetComponent<AudioSource>().enabled = false;
             DoorActivate();
         }
     }
@@ -40,7 +44,12 @@ public class DoorOpener : MonoBehaviour
         // Attende che la porta inizi l'animazione
         yield return new WaitUntil(() => FirstSceneManager.instance.startAnimation);
         doorAnimator.SetBool("DoorOpen", true); // Avvia l'animazione di apertura
-        //doorPrefab.GetComponent<AudioSource>().Play(); // Riproduce il suono di porta aperta
+        //doorPrefab.GetComponent<AudioSource>().Play(); 
+        // Riproduce il suono di porta aperta
+        if (portaAudio != null)
+        {
+            portaAudio.PlayPortaAperta();
+        }
     }
 
     private void DoorActivate()
@@ -66,7 +75,15 @@ public class DoorOpener : MonoBehaviour
                     StartCoroutine(WaitForAnimationStart());
                     
                 }
-                
+                else
+                {
+                    // **Se la porta è chiusa, suona il suono della porta bloccata**
+                    if (portaAudio != null)
+                    {
+                        portaAudio.PlayPortaChiusa();
+                    }
+                }
+
             }
         }
     }
