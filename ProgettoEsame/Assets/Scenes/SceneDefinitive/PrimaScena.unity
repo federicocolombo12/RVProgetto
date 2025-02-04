@@ -5196,7 +5196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6608466737390796413, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       propertyPath: crosshair
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6608466737390796413, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       propertyPath: m_Enabled
@@ -5952,11 +5952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2465670481311753939, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.19
+      value: -22.71
       objectReference: {fileID: 0}
     - target: {fileID: 2465670481311753939, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -55.68
+      value: -55.7
       objectReference: {fileID: 0}
     - target: {fileID: 2674363020058147099, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Enabled
@@ -7670,8 +7670,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   playAudio: 0
-  attivaUi: {fileID: 0}
   colliders:
+  - {fileID: 0}
   - {fileID: 0}
   interactionCooldown: 2
 --- !u!114 &7581483486306365123
@@ -7691,7 +7691,13 @@ MonoBehaviour:
   uiPrefab: {fileID: 6581245343422655493, guid: d6d4e177fd98df446a40238af89b6d9e, type: 3}
   poolSize: 10
   altezza: 0.1
-  colliders: []
+  colliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  boxLength: 2
+  boxWidth: 0.2
+  boxHeight: 0.2
+  playerCamera: {fileID: 1938910795759337345}
   sprite1: {fileID: 21300000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
   sprite2: {fileID: 21300002, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
 --- !u!114 &7581483486306365134
@@ -7711,7 +7717,15 @@ MonoBehaviour:
   uiPrefab: {fileID: 6581245343422655493, guid: d80bda072235ebd41978c446889461dc, type: 3}
   poolSize: 10
   altezza: 0.1
-  colliders: []
+  colliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  boxLength: 2
+  boxWidth: 0.2
+  boxHeight: 0.2
+  playerCamera: {fileID: 0}
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!114 &7581483486306365145
 MonoBehaviour:
   m_ObjectHideFlags: 0

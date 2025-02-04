@@ -3,12 +3,11 @@ using UnityEngine;
 public class RayCastInteraction : MonoBehaviour
 {
     public Camera playerCamera;
-    public float boxLength = 5f; // La lunghezza della box nella direzione della camera
-    public float boxWidth = 1f; // La larghezza della box (asse X)
-    public float boxHeight = 1f; // L'altezza della box (asse Y)
+    public float boxLength = 2f; // La lunghezza della box nella direzione della camera
+    public float boxWidth = 0.1f; // La larghezza della box (asse X)
+    public float boxHeight = 0.1f; // L'altezza della box (asse Y)
     public LayerMask interactableLayer;
     public bool playAudio;
-    public AttivaUi attivaUi;
     public IInteractable interactable;
     [SerializeField] private Collider[] colliders;
 
