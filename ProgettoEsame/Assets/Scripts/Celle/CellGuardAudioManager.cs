@@ -1,68 +1,46 @@
 using UnityEngine;
+using System.Collections;
 
-public class CellGuardAudio : MonoBehaviour
+public class CellGuardAudioManager : MonoBehaviour
 {
-    [SerializeField] private CellGuardNpc script; // Riferimento allo script NPC
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip runningClip;
-    [SerializeField] private AudioClip idleClip;
-    [SerializeField] private AudioClip walkingClip;
-    [SerializeField] private AudioClip talkingClip;
+    public AudioSource audioSource;
 
-    void Start()
+    [Header("Idle Audio Clips")]
+    public AudioClip[] idleClips;
+    private int currentIdleIndex = 0; // Tiene traccia della sequenza
+
+    [Header("Walking Audio Clip")]
+    public AudioClip walkingClip;
+
+    private bool isPlayingIdle = false; // Per evitare sovrapposizioni
+
+    public void PlayIdle()
     {
-        // Ottieni i riferimenti necessari
-        script = GetComponent<CellGuardNpc>();
-        audioSource = GetComponent<AudioSource>();
-
-        if (script == null || audioSource == null)
+        if (idleClips.Length > 0 && !isPlayingIdle)
         {
-            Debug.LogError("CellGuardNpc o AudioSource non trovati!");
+            isPlayingIdle = true; // Segna che sta suonando
+            StartCoroutine(PlayIdleSequence());
         }
     }
 
-    void Update()
+    private IEnumerator PlayIdleSequence()
     {
-        ManageAudioStates();
+        if (currentIdleIndex >= idleClips.Length) currentIdleIndex = 0; // Riavvolge la sequenza
+
+        AudioClip clipToPlay = idleClips[currentIdleIndex];
+        audioSource.PlayOneShot(clipToPlay);
+
+        yield return new WaitForSeconds(clipToPlay.length); // Aspetta che finisca
+
+        isPlayingIdle = false;
+        currentIdleIndex++; // Passa alla clip successiva
     }
 
-    private void ManageAudioStates()
+    public void PlayWalking()
     {
-        if (script.audioRunning && audioSource.clip != runningClip)
+        if (walkingClip != null && !audioSource.isPlaying)
         {
-            PlayAudioClip(runningClip);
-        }
-        else if (script.audioIdle && audioSource.clip != idleClip)
-        {
-            PlayAudioClip(idleClip);
-        }
-        else if (script.audioWalking && audioSource.clip != walkingClip)
-        {
-            PlayAudioClip(walkingClip);
-        }
-        else if (script.audioTalking && audioSource.clip != talkingClip)
-        {
-            PlayAudioClip(talkingClip);
-        }
-        else if (!script.audioRunning && !script.audioIdle && !script.audioWalking && !script.audioTalking)
-        {
-            StopAudio();
-        }
-    }
-
-    private void PlayAudioClip(AudioClip clip)
-    {
-        if (audioSource.isPlaying && audioSource.clip == clip) return; // Evita di interrompere lo stesso audio
-        audioSource.clip = clip;
-        audioSource.Play();
-    }
-
-    private void StopAudio()
-    {
-        if (audioSource.isPlaying)
-        {
-            audioSource.Stop();
-            audioSource.clip = null;
+            audioSource.PlayOneShot(walkingClip);
         }
     }
 }
