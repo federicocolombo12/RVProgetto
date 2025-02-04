@@ -101,26 +101,25 @@ public class UiManager : MonoBehaviour
                 if (uiElement != null)
                 {
                     // Recupera il componente Image dal prefab
-                    Image imageComponent = uiElement.GetComponentInChildren<Image>();
-                    if (imageComponent != null)
+                    if (interactSet.Contains(collider))
                     {
-                        // Se il collider è anche presente nell'interact sphere, usa la sprite2,
-                        // altrimenti usa la sprite1
-                        Debug.Log("Collider: " + collider);
-                        if (interactSet.Contains(collider))
-                        {
-                            Debug.Log("Vicino: " + collider);
-                            imageComponent.sprite = sprite2;
-                        }
-                        else
-                        {
-                           Debug.Log("Lontano: " + collider);
-                            imageComponent.sprite = sprite1;
-                        }
+                        Debug.Log("Vicino: " + collider);
+
+                        // Attiva il GameObject "Interagisci" e disattiva "Indicatore_Vicinanza"
+                        Transform interagisci = uiElement.transform.Find("Interagisci");
+                        Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
+                        if (interagisci != null) interagisci.gameObject.SetActive(true);
+                        if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(false);
                     }
                     else
                     {
-                        Debug.LogWarning("Image component non trovato nell'elemento UI!");
+                        Debug.Log("Lontano: " + collider);
+
+                        // Disattiva il GameObject "Interagisci" e attiva "Indicatore_Vicinanza"
+                        Transform interagisci = uiElement.transform.Find("Interagisci");
+                        Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
+                        if (interagisci != null) interagisci.gameObject.SetActive(false);
+                        if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(true);
                     }
 
                     // Posiziona l'elemento UI sopra l'oggetto, aggiungendo l'altezza desiderata
