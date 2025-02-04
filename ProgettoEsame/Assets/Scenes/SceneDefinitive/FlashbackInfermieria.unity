@@ -1809,6 +1809,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -6582363087258302635, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
   m_PrefabInstance: {fileID: 4298592}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &152064084 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7635504381691802256, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+  m_PrefabInstance: {fileID: 6122731296308333319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &152717637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 382605793903754381, guid: 3307bb1daf4f753498c855de0353aa4b, type: 3}
@@ -2844,7 +2849,7 @@ Transform:
   m_GameObject: {fileID: 384370672}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000020862683, y: 0.70710695, z: -0.70710665, w: 0.0000020862692}
-  m_LocalPosition: {x: -0.04, y: -0.03, z: 0.03}
+  m_LocalPosition: {x: -0.04, y: 0.27, z: 0.03}
   m_LocalScale: {x: 2.3025029, y: 2.3025026, z: 2.3025026}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8516,7 +8521,7 @@ GameObject:
   - component: {fileID: 1465488405}
   m_Layer: 18
   m_Name: Ui
-  m_TagString: Untagged
+  m_TagString: OggettoInteragibile2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11455,7 +11460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 642795323736148383, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_CastShadows
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 642795323736148383, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11871,7 +11876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3909303129419015364, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_CastShadows
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3909303129419015364, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12089,6 +12094,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a5f0de6fd544a6c49a964bce22345dfb, type: 2}
+    - target: {fileID: 5843434804337395011, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5843434804337395011, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -12367,7 +12376,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8a5bb1f8189228d40b23e333163990b6, type: 2}
     - target: {fileID: 8346692002191782363, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_CastShadows
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8346692002191782363, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -13902,6 +13911,10 @@ PrefabInstance:
       propertyPath: nurse
       value: 
       objectReference: {fileID: 8431963242725611124}
+    - target: {fileID: 5468904217331392377, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 152064084}
     - target: {fileID: 6701145469837472915, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: script
       value: 
