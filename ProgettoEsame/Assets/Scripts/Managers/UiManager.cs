@@ -7,10 +7,14 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
 
     [SerializeField] private float detectionRadius = 2f;
+    [SerializeField] private float interactRadius = 1f;
     [SerializeField] private GameObject uiPrefab; // Prefab per gli elementi UI
     [SerializeField] private int poolSize = 10; // Dimensione del pool
     [SerializeField] private float altezza = 0.5f;
-    [SerializeField] private Collider[] colliders; // Per rilevare gli oggetti vicini
+    [SerializeField] private Collider[] colliders;// Per rilevare gli oggetti vicini
+    
+    [SerializeField] Sprite sprite1;
+    [SerializeField] Sprite sprite2;
     private Queue<GameObject> uiPool;
     private List<GameObject> activeUis; // Per tenere traccia degli elementi attivi
 
@@ -72,7 +76,14 @@ public class UiManager : MonoBehaviour
     // Rileva oggetti vicini e gestisce la UI
     private void RilevaOggettiVicini()
     {
-        colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        // Primo OverlapSphere: tutti gli oggetti entro il detectionRadius
+        Collider[] detectedColliders = Physics.OverlapSphere(transform.position, detectionRadius);
+
+        // Secondo OverlapSphere: solo gli oggetti entro l'interactRadius
+        Collider[] interactColliders = Physics.OverlapSphere(transform.position, interactRadius);
+
+        // Creiamo un semplice HashSet per verificare velocemente se un collider è nell'interact radius
+        HashSet<Collider> interactSet = new HashSet<Collider>(interactColliders);
 
         // Disattiva tutte le UI attive prima di aggiornare
         foreach (var ui in new List<GameObject>(activeUis))
@@ -80,19 +91,47 @@ public class UiManager : MonoBehaviour
             ReturnUiToPool(ui);
         }
 
-        foreach (Collider collider in colliders)
+        // Per ogni collider rilevato entro il detectionRadius
+        foreach (Collider collider in detectedColliders)
         {
             if (collider.CompareTag("OggettoInteragibile1"))
             {
-                // Ottieni un elemento dal pool
+                // Ottieni un elemento UI dal pool
                 GameObject uiElement = GetUiFromPool();
                 if (uiElement != null)
                 {
-                    // Posiziona l'elemento UI sopra l'oggetto
+                    // Recupera il componente Image dal prefab
+                    if (interactSet.Contains(collider))
+                    {
+                        Debug.Log("Vicino: " + collider);
+
+                        // Attiva il GameObject "Interagisci" e disattiva "Indicatore_Vicinanza"
+                        Transform interagisci = uiElement.transform.Find("Interagisci");
+                        Transform background = uiElement.transform.Find("Background");
+                        Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
+                        if (interagisci != null) interagisci.gameObject.SetActive(true);
+                        if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(false);
+                        if (background != null) background.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        Debug.Log("Lontano: " + collider);
+
+                        // Disattiva il GameObject "Interagisci" e attiva "Indicatore_Vicinanza"
+                        Transform background = uiElement.transform.Find("Background");
+                        Transform interagisci = uiElement.transform.Find("Interagisci");
+                        Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
+                        if (interagisci != null) interagisci.gameObject.SetActive(false);
+                        if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(true);
+                        if (background != null) background.gameObject.SetActive(false);
+                    }
+
+                    // Posiziona l'elemento UI sopra l'oggetto, aggiungendo l'altezza desiderata
                     Vector3 screenPosition = collider.transform.position + Vector3.up * altezza;
                     uiElement.GetComponent<RectTransform>().position = screenPosition;
                 }
             }
         }
     }
+
 }

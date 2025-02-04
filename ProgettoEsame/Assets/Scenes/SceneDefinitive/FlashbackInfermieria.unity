@@ -8516,7 +8516,7 @@ GameObject:
   - component: {fileID: 1465488405}
   m_Layer: 18
   m_Name: Ui
-  m_TagString: OggettoInteragibile2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11074,7 +11074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4850911a56fe374e85922cbad9a2a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 2
+  detectionRadius: 4
+  interactRadius: 2
   uiPrefab: {fileID: 6581245343422655493, guid: d80bda072235ebd41978c446889461dc, type: 3}
   poolSize: 2
   altezza: 0.1
@@ -13876,6 +13877,10 @@ PrefabInstance:
     - target: {fileID: 657078491619591320, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 852839567800885618, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: detectionRadius
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3025008266560724589, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: infermieraBlocking
