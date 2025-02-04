@@ -5,49 +5,45 @@ using UnityEngine.AI;
 public class Paziente0Script : MonoBehaviour
 {
     public static Paziente0Script instance { get; private set; }
-    public Transform thirdDestination1; // Terza destinazione
-    public Transform firstDestination1; // Terza destinazione
-    public Transform zeroDestination; // Destinazione zero
-    [SerializeField] float walkSpeed = 1f; // Velocità di camminata
-    public float runSpeed = 3f; // Velocità di corsa
-    public float stoppingDistance = 0.5f; // Distanza di arresto
-    public float idleTime = 6f; // Tempo in secondi prima che inizi a camminare
-    public GameObject knife; // Coltello dell'NPC
-    public Camera playerCamera; // Camera del giocatore
-    public float interactionDistance = 2f; // Distanza massima per l'interazione
-    
+    public Transform thirdDestination1;
+    public Transform firstDestination1;
+    public Transform zeroDestination;
+    [SerializeField] float walkSpeed = 1f;
+    public float runSpeed = 3f;
+    public float stoppingDistance = 0.5f;
+    public float idleTime = 6f;
+    public GameObject knife;
+    public Camera playerCamera;
+    public float interactionDistance = 2f;
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
+    private CellBackground cellBackground; // Riferimento allo script della musica
 
-    //AudioManager
+    // AudioManager
     public bool audiotalking = false;
     public bool audioRunning = false;
     public bool audioidle = false;
     public bool audiowalking = false;
-    
 
     void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        cellBackground = FindObjectOfType<CellBackground>(); // Trova lo script della musica
 
         if (animator == null)
-        {
             Debug.LogError("Animator non trovato sul personaggio!");
-            return;
-        }
 
         if (navMeshAgent == null)
-        {
             Debug.LogError("NavMeshAgent non trovato sul personaggio!");
-            return;
-        }
+
+        if (cellBackground == null)
+            Debug.LogError("CellBackground non trovato nella scena!");
 
         navMeshAgent.speed = walkSpeed;
         navMeshAgent.stoppingDistance = stoppingDistance;
 
-        // Inizia la routine di comportamento
         StartCoroutine(PazienteRoutine());
     }
 
@@ -57,66 +53,50 @@ public class Paziente0Script : MonoBehaviour
 
         while (true)
         {
-            // Stato iniziale: Idle
-            Debug.Log("Inizio Idle");
+            // Stato Idle
             animator.SetBool("IsWalking", false);
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
 
-            // Passa allo stato di corsa verso la prima destinazione
-            Debug.Log("Inizio Corsa verso la prima destinazione");
+            // Corsa verso la prima destinazione
             animator.SetBool("SetIdle", false);
             audioRunning = true;
             animator.SetBool("IsRunning", true);
             navMeshAgent.speed = runSpeed;
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(firstDestination1.position);
-
-            // Aspetta che l'NPC raggiunga la prima destinazione
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Stato di idle e rotazione a destra
-            Debug.Log("Arrivato alla prima destinazione, rotazione a destra");
+            // Rotazione a destra
             animator.SetBool("IsRunning", false);
             audioRunning = false;
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningRight", true);
-            yield return new WaitForSeconds(0.3f); // Durata della rotazione
+            yield return new WaitForSeconds(0.3f);
             animator.SetBool("IsTurningRight", false);
 
-            // Passa allo stato di corsa verso una destinazione intermedia
-            Debug.Log("Inizio Corsa verso destinazione intermedia");
+            // Corsa verso il punto intermedio
             audioRunning = true;
             animator.SetBool("IsRunning", true);
             navMeshAgent.isStopped = false;
-
-            // Calcolo del punto intermedio
             Vector3 intermediatePoint = Vector3.Lerp(transform.position, thirdDestination1.position, 0.5f);
             navMeshAgent.SetDestination(intermediatePoint);
-
-            // Aspetta che l'NPC raggiunga il punto intermedio
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Passa direttamente alla terza destinazione
-            Debug.Log("Raggiunto punto intermedio, inizio corsa verso la terza destinazione");
+            // Corsa verso la terza destinazione
             navMeshAgent.SetDestination(thirdDestination1.position);
-
-            // Aspetta che l'NPC raggiunga la terza destinazione
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Stato di idle
-            Debug.Log("Arrivato alla terza destinazione");
+            // Stato Idle
             animator.SetBool("IsRunning", false);
             audioRunning = false;
             navMeshAgent.isStopped = true;
             animator.SetBool("SetIdle", true);
-            
 
-            // Attesa fino a quando il giocatore non preme il tasto E
+            // Attesa interazione con il giocatore
             yield return new WaitUntil(() => NpcCelleInteractionManager.instance.paziente0Interaction);
 
-            // Interazioni e comportamento successivo
-            Debug.Log("Interazioni attive per 1 secondo");
+            // Inizio dialogo
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsYelling", true);
             audiotalking = true;
@@ -126,17 +106,22 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("TakeThis", true);
 
             KnifePickUpandPlace knifeScript = knife.GetComponent<KnifePickUpandPlace>();
-            knifeScript.ActivateKnifeTag(); 
+            knifeScript.ActivateKnifeTag();
 
-            // Attesa fino a quando il giocatore non prende il coltello
+            // Aspetta fino a quando il giocatore non prende il coltello
             yield return new WaitUntil(() => CellaManager.instance.coltelloPreso);
+
+            // ?? Avvia la musica di sottofondo quando il coltello viene preso
+            if (cellBackground != null)
+            {
+                cellBackground.PlaySuspenseMusic();
+            }
 
             animator.SetBool("TakeThis", false);
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(1f);
 
-            // Passa allo stato di camminata verso la destinazione zero
-            Debug.Log("Inizio Camminata verso la destinazione zero");
+            // Camminata verso la destinazione zero
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
             navMeshAgent.speed = walkSpeed;
@@ -145,7 +130,6 @@ public class Paziente0Script : MonoBehaviour
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
             // Stato di idle
-            Debug.Log("Arrivato alla destinazione zero");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningRight", true);
@@ -155,7 +139,5 @@ public class Paziente0Script : MonoBehaviour
             break;
         }
     }
-
-
-     
 }
+

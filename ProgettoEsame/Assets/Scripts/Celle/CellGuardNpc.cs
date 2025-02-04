@@ -4,8 +4,8 @@ using UnityEngine.AI;
 
 public class CellGuardNpc : MonoBehaviour
 {
-    public float idleTime = 2f;
-    public float secondIdleTime = 5f;
+    public float idleTime = 3f;
+    public float secondIdleTime = 6f;
     public Transform firstDestination;
     public Transform secondDestination;
     public Transform thirdDestination;
