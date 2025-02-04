@@ -11084,7 +11084,15 @@ MonoBehaviour:
   uiPrefab: {fileID: 6581245343422655493, guid: d80bda072235ebd41978c446889461dc, type: 3}
   poolSize: 2
   altezza: 0.1
-  colliders: []
+  colliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  boxLength: 2
+  boxWidth: 0.2
+  boxHeight: 0.2
+  playerCamera: {fileID: 1820768200}
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!1 &2016174145
 GameObject:
   m_ObjectHideFlags: 0
@@ -13884,8 +13892,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 852839567800885618, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1820768200}
+    - target: {fileID: 852839567800885618, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: detectionRadius
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 852839567800885618, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: colliders.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3025008266560724589, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: infermieraBlocking
@@ -13925,7 +13941,7 @@ PrefabInstance:
       objectReference: {fileID: 1820768200}
     - target: {fileID: 5468904217331392377, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: colliders.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6701145469837472915, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: script

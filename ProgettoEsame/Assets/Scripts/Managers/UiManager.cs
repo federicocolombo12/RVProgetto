@@ -18,7 +18,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private float boxHeight = 0.2f;
     
 
-    [SerializeField] private Camera playerCamera; // Riferimento alla camera del giocatore
+    [SerializeField] public Camera playerCamera; // Riferimento alla camera del giocatore
 
     [SerializeField] Sprite sprite1;
     [SerializeField] Sprite sprite2;
@@ -27,6 +27,7 @@ public class UiManager : MonoBehaviour
 
     private void Awake()
     {
+        playerCamera = GetComponentInChildren<Camera>();
         InitializePool();
     }
 
@@ -88,10 +89,10 @@ public class UiManager : MonoBehaviour
         Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
         Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
         Quaternion boxRotation = playerCamera.transform.rotation;
-        int interactableLayer = LayerMask.GetMask("Interactable");
+
 
         // Secondo OverlapBoxNonAlloc: solo gli oggetti entro l'interactRadius
-        int numColliders = Physics.OverlapBoxNonAlloc(boxCenter, halfExtents, colliders, boxRotation, interactableLayer);
+        int numColliders = Physics.OverlapBoxNonAlloc(boxCenter, halfExtents, colliders, boxRotation);
 
         // Creiamo un semplice HashSet per verificare velocemente se un collider è nell'interact radius
         HashSet<Collider> interactSet = new HashSet<Collider>();

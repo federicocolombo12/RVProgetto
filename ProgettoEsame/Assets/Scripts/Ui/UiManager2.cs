@@ -4,21 +4,30 @@ using UnityEngine.UI;
 
 public class UiManager2 : MonoBehaviour
 {
-    public static UiManager2 instance;
+    public static UiManager instance;
 
-    [SerializeField] private float detectionRadius = 4f;
-    [SerializeField] private float interactRadius = 2f;
+    [SerializeField] private float detectionRadius = 2f;
+    [SerializeField] private float interactRadius = 1f;
     [SerializeField] private GameObject uiPrefab; // Prefab per gli elementi UI
     [SerializeField] private int poolSize = 10; // Dimensione del pool
     [SerializeField] private float altezza = 0.5f;
     [SerializeField] private Collider[] colliders; // Per rilevare gli oggetti vicini
+
+    [SerializeField] private float boxLength = 2f;
+    [SerializeField] private float boxWidth = 0.2f;
+    [SerializeField] private float boxHeight = 0.2f;
+
+
+    [SerializeField] public Camera playerCamera; // Riferimento alla camera del giocatore
+
+    [SerializeField] Sprite sprite1;
+    [SerializeField] Sprite sprite2;
     private Queue<GameObject> uiPool;
     private List<GameObject> activeUis; // Per tenere traccia degli elementi attivi
 
     private void Awake()
     {
-        
-
+        playerCamera = GetComponentInChildren<Camera>();
         InitializePool();
     }
 
@@ -73,13 +82,24 @@ public class UiManager2 : MonoBehaviour
     // Rileva oggetti vicini e gestisce la UI
     private void RilevaOggettiVicini()
     {
+        // Primo OverlapSphere: tutti gli oggetti entro il detectionRadius
         Collider[] detectedColliders = Physics.OverlapSphere(transform.position, detectionRadius);
 
-        // Secondo OverlapSphere: solo gli oggetti entro l'interactRadius
-        Collider[] interactColliders = Physics.OverlapSphere(transform.position, interactRadius);
+        // Parametri per OverlapBoxNonAlloc
+        Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
+        Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+        Quaternion boxRotation = playerCamera.transform.rotation;
+      
+
+        // Secondo OverlapBoxNonAlloc: solo gli oggetti entro l'interactRadius
+        int numColliders = Physics.OverlapBoxNonAlloc(boxCenter, halfExtents, colliders, boxRotation);
 
         // Creiamo un semplice HashSet per verificare velocemente se un collider è nell'interact radius
-        HashSet<Collider> interactSet = new HashSet<Collider>(interactColliders);
+        HashSet<Collider> interactSet = new HashSet<Collider>();
+        for (int i = 0; i < numColliders; i++)
+        {
+            interactSet.Add(colliders[i]);
+        }
 
         // Disattiva tutte le UI attive prima di aggiornare
         foreach (var ui in new List<GameObject>(activeUis))
@@ -127,6 +147,20 @@ public class UiManager2 : MonoBehaviour
                     uiElement.GetComponent<RectTransform>().position = screenPosition;
                 }
             }
+        }
+    }
+
+    // Metodo per visualizzare la OverlapBox
+    private void OnDrawGizmosSelected()
+    {
+        if (playerCamera != null)
+        {
+            Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
+            Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+            Quaternion boxRotation = playerCamera.transform.rotation;
+            Gizmos.color = Color.green;
+            Gizmos.matrix = Matrix4x4.TRS(boxCenter, boxRotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, halfExtents * 2);
         }
     }
 }
