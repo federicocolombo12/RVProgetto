@@ -4,50 +4,58 @@ using UnityEngine.AI;
 
 public class CellGuardNpc : MonoBehaviour
 {
-    public float idleTime = 3f;
-    public float secondIdleTime = 6f;
-    public Transform firstDestination;
-    public Transform secondDestination;
-    public Transform thirdDestination;
-    public float walkSpeed = 1f;
-    public float stoppingDistance = 0.5f;
-    public float rightTurnDuration = 1f;
+    public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
+    public float secondIdleTime = 5f; // Tempo in secondi per il secondo idle
+    public Transform firstDestination; // Prima destinazione
+    public Transform secondDestination; // Seconda destinazione
+    public Transform thirdDestination; // Terza destinazione
+    public float walkSpeed = 1f; // Velocità di camminata
+    public float stoppingDistance = 0.5f; // Distanza di arresto
+    public float rightTurnDuration = 1f; // Durata della rotazione a destra
     public float playerStoppingDistance = 1f;
-
+    public float blockDistance = 3f;
     public static CellGuardNpc instance;
-
-    private FirstPersonController player;
+    FirstPersonController player;
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     private Transform playerTransform;
     private AperturaPorta aperturaPorta;
-    private CellGuardAudioManager guardAudioManager;
+    public bool OggettoNascosto = false;
+    [SerializeField] public bool thirdPosition = false;
 
-    public bool thirdPosition = false;
+    // AudioManager: Stati audio
+    public bool audioTalking = false;
+    public bool audioTalkingClip1 = false;
+    public bool audioIdle = false;
+    public bool audioWalking = false;
 
-    private KnifePickUpandPlace knifePickUpAndPlaceScript; // Aggiungi un riferimento a KnifePickUpandPlace
-    private bool isKnifePickupAudioPlaying = false; // Controllo per evitare l'interruzione dell'audio del pick-up
-
+    // Evento che segnala la fine dell'animazione
     public event System.Action OnAnimationEnd;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        guardAudioManager = GetComponent<CellGuardAudioManager>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<FirstPersonController>();
         aperturaPorta = FindObjectOfType<AperturaPorta>();
 
-        knifePickUpAndPlaceScript = FindObjectOfType<KnifePickUpandPlace>(); // Riferimento a KnifePickUpandPlace
+        if (animator == null)
+        {
+            Debug.LogError("Animator non trovato sul personaggio!");
+            return;
+        }
 
-        if (animator == null) Debug.LogError("Animator non trovato!");
-        if (navMeshAgent == null) Debug.LogError("NavMeshAgent non trovato!");
-        if (guardAudioManager == null) Debug.LogError("GuardAudioManager non trovato!");
+        if (navMeshAgent == null)
+        {
+            Debug.LogError("NavMeshAgent non trovato sul personaggio!");
+            return;
+        }
 
         navMeshAgent.speed = walkSpeed;
         navMeshAgent.stoppingDistance = stoppingDistance;
 
+        // Inizia la routine di comportamento
         StartCoroutine(GuardRoutine());
     }
 
@@ -55,119 +63,118 @@ public class CellGuardNpc : MonoBehaviour
     {
         yield return new WaitUntil(() => CellaManager.instance.attivaGuardRoutine);
 
+        Debug.Log("Coltello preso, inizio la routine del guardiano");
+
         while (true)
         {
-            // Verifica se l'audio del pick-up del coltello è in esecuzione
-            if (knifePickUpAndPlaceScript != null && knifePickUpAndPlaceScript.isKnifePickupAudioPlaying)
-            {
-                // Se l'audio del coltello è in esecuzione, saltare la routine del guardiano
-                yield return null;
-                continue;
-            }
-
-            // Stato Idle
-            SetAnimationState(idle: true);
-            guardAudioManager.PlayIdle();
+            // Stato iniziale: Idle
+            Debug.Log("Inizio Idle");
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("SetIdle", true);
+            
             yield return new WaitForSeconds(idleTime);
 
-            // Camminata verso la prima destinazione
-            MoveToDestination(firstDestination.position);
-            guardAudioManager.PlayWalking();
-            yield return WaitForNavMesh();
+            // Passa allo stato di camminata verso la prima destinazione
+            Debug.Log("Inizio Camminata verso la prima destinazione");
+            animator.SetBool("SetIdle", false);
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(firstDestination.position);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Idle + Rotazione a sinistra
-            SetAnimationState(idle: true);
-            guardAudioManager.PlayIdle();
-            Rotate("IsTurningLeft");
+            // Stato di idle e rotazione a sinistra
+            Debug.Log("Arrivato alla prima destinazione");
+            animator.SetBool("IsWalking", false);
+            navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningLeft", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            animator.SetBool("IsTurningLeft", false);
+            audioTalkingClip1 = true;
+            animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
             // Rotazione a destra
-            Rotate("IsTurningRight");
+            Debug.Log("Inizio Rotazione a Destra");
+            animator.SetBool("SetIdle", false);
+            audioTalkingClip1 = false;
+            animator.SetBool("IsTurningRight", true);
+            yield return new WaitForSeconds(rightTurnDuration);
+            animator.SetBool("IsTurningRight", false);
 
-            // Camminata verso la seconda destinazione
-            MoveToDestination(secondDestination.position);
-            guardAudioManager.PlayWalking();
-            yield return WaitForNavMesh();
+            // Passa allo stato di camminata verso la seconda destinazione
+            Debug.Log("Inizio Camminata verso la seconda destinazione");
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(secondDestination.position);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Idle + Rotazione a sinistra
-            SetAnimationState(idle: true);
-            guardAudioManager.PlayIdle();
-            Rotate("IsTurningLeft");
+            // Stato di idle e rotazione a sinistra
+            Debug.Log("Arrivato alla seconda destinazione");
+            animator.SetBool("IsWalking", false);
+            navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningLeft", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            animator.SetBool("IsTurningLeft", false);
+            animator.SetBool("SetIdle", true);
 
-            // Aspetta che il coltello sia nascosto
+            // Attesa fino a quando OggettoNascosto non diventa true
+            Debug.Log("In attesa di OggettoNascosto");
             yield return new WaitUntil(() => CellaManager.instance.coltelloNascosto);
 
             // Rotazione a destra
-            Rotate("IsTurningRight");
+            Debug.Log("Inizio Rotazione a Destra");
+            animator.SetBool("SetIdle", false);
+            animator.SetBool("IsTurningRight", true);
+            yield return new WaitForSeconds(rightTurnDuration);
+            animator.SetBool("IsTurningRight", false);
 
-            // Camminata verso la terza destinazione
-            MoveToDestination(thirdDestination.position);
-            guardAudioManager.PlayWalking();
-            yield return WaitForNavMesh();
+            // Passa allo stato di camminata verso la terza destinazione
+            Debug.Log("Inizio Camminata verso la terza destinazione");
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(thirdDestination.position);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Idle + Rotazione a sinistra
-            SetAnimationState(idle: true);
-            guardAudioManager.PlayIdle();
-            Rotate("IsTurningLeft");
+            // Stato di idle e rotazione a sinistra
+            Debug.Log("Arrivato alla terza destinazione");
+            animator.SetBool("IsWalking", false);
+            navMeshAgent.isStopped = true;
+            animator.SetBool("IsTurningLeft", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            animator.SetBool("IsTurningLeft", false);
 
             thirdPosition = true;
             player.playerCanMove = false;
-            if (thirdPosition && aperturaPorta != null) aperturaPorta.ApriPorta();
 
+            if (thirdPosition && aperturaPorta != null)
+            {
+                aperturaPorta.ApriPorta();
+            }
+
+            animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
             // Camminata verso il giocatore
-            MoveToDestination(GetPlayerApproachPosition());
-            guardAudioManager.PlayWalking();
-            yield return WaitForNavMesh();
+            Debug.Log("Inizio Camminata verso il giocatore");
+            animator.SetBool("SetIdle", false);
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            Vector3 destination = playerTransform.position - directionToPlayer * playerStoppingDistance;
+            navMeshAgent.SetDestination(destination);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Idle davanti al giocatore
-            SetAnimationState(idle: true);
-            guardAudioManager.PlayIdle();
+            // Torna allo stato di idle
+            Debug.Log("Arrivato alla quarta destinazione");
+            animator.SetBool("IsWalking", false);
+            navMeshAgent.isStopped = true;
             RotateTowardsPlayer();
+            animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
 
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
         }
-    }
-
-    private void SetAnimationState(bool idle = false, bool walking = false)
-    {
-        animator.SetBool("SetIdle", idle);
-        animator.SetBool("IsWalking", walking);
-    }
-
-    private void MoveToDestination(Vector3 destination)
-    {
-        SetAnimationState(walking: true);
-        navMeshAgent.isStopped = false;
-        navMeshAgent.SetDestination(destination);
-    }
-
-    private IEnumerator WaitForNavMesh()
-    {
-        yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
-        navMeshAgent.isStopped = true;
-        SetAnimationState(idle: true);
-    }
-
-    private void Rotate(string animationBool)
-    {
-        animator.SetBool(animationBool, true);
-        StartCoroutine(ResetAnimationBool(animationBool, rightTurnDuration));
-    }
-
-    private IEnumerator ResetAnimationBool(string boolName, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        animator.SetBool(boolName, false);
-    }
-
-    private Vector3 GetPlayerApproachPosition()
-    {
-        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-        return playerTransform.position - directionToPlayer * playerStoppingDistance;
     }
 
     private void RotateTowardsPlayer()
@@ -176,4 +183,7 @@ public class CellGuardNpc : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+
+    // Metodo per aggiornare lo stato audio
+   
 }
