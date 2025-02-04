@@ -1,30 +1,22 @@
 using UnityEngine;
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class RayCastInteraction : MonoBehaviour
 {
-    public float interactionDistance = 2f;
+    public Camera playerCamera;
+    public float boxLength = 5f; // La lunghezza della box nella direzione della camera
+    public float boxWidth = 1f; // La larghezza della box (asse X)
+    public float boxHeight = 1f; // L'altezza della box (asse Y)
     public LayerMask interactableLayer;
     public bool playAudio;
     public AttivaUi attivaUi;
     public IInteractable interactable;
     [SerializeField] private Collider[] colliders;
-    
 
-    // Cooldown variables
-    public float interactionCooldown = 3f; // Time before allowing StopInteract
+    public float interactionCooldown = 3f;
     private float currentCooldown;
 
     private enum InteractionState { Idle, Interact, StopInteract }
     private InteractionState currentState = InteractionState.Idle;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -34,16 +26,13 @@ public class RayCastInteraction : MonoBehaviour
                 CheckForInteractableObject();
                 if (Input.GetKeyDown(KeyCode.E) && interactable != null)
                 {
-                    
                     ChangeState(InteractionState.Interact);
                 }
                 break;
 
             case InteractionState.Interact:
                 PerformInteraction();
-                // Update cooldown timer
                 currentCooldown -= Time.deltaTime;
-                // Only allow stopping interaction after cooldown
                 if (currentCooldown <= 0 && Input.GetKeyDown(KeyCode.E))
                 {
                     ChangeState(InteractionState.StopInteract);
@@ -57,9 +46,49 @@ public class RayCastInteraction : MonoBehaviour
         }
     }
 
+    private void CheckForInteractableObject()
+    {
+        Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
+        Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+        Quaternion boxRotation = playerCamera.transform.rotation;
+        int numColliders = Physics.OverlapBoxNonAlloc(boxCenter, halfExtents, colliders, boxRotation, interactableLayer);
+
+        interactable = null;
+
+        for (int i = 0; i < numColliders; i++)
+        {
+            Collider collider = colliders[i];
+            IInteractable potentialInteractable = collider.GetComponent<IInteractable>();
+            if (potentialInteractable != null)
+            {
+                interactable = potentialInteractable;
+                break;
+            }
+        }
+       
+    }
+
+ 
+
+    private void PerformInteraction()
+    {
+        if (interactable != null)
+        {
+            interactable.Interact(gameObject);
+        }
+    }
+
+    private void StopInteraction()
+    {
+        if (interactable != null)
+        {
+            interactable.StopInteract(gameObject);
+            interactable = null;
+        }
+    }
+
     void ChangeState(InteractionState newState)
     {
-        // Reset cooldown when entering Interact state
         if (newState == InteractionState.Interact)
         {
             currentCooldown = interactionCooldown;
@@ -67,102 +96,15 @@ public class RayCastInteraction : MonoBehaviour
         currentState = newState;
     }
 
-    void CheckForInteractableObject()
+    private void OnDrawGizmosSelected()
     {
-        // Offset della sfera leggermente davanti al giocatore
-        float forwardOffset = 0.5f;
-        Vector3 spherePosition = transform.position + transform.forward * forwardOffset;
-
-        // Disegna la sfera nel debug per visualizzarla nella scena
-        Debug.DrawLine(transform.position, spherePosition, Color.red);
-        Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.green);
-
-        // Trova i collider entro la distanza specificata
-        colliders = Physics.OverlapSphere(spherePosition, interactionDistance, interactableLayer);
-        
-        // Inizialmente, non c'è un oggetto interagibile
-        interactable = null;
-
-        // Itera tra i collider trovati
-        foreach (var collider in colliders)
+        if (playerCamera != null)
         {
-            // Controlla se il collider ha un componente che implementa IInteractable
-            IInteractable potentialInteractable = collider.GetComponent<IInteractable>();
-            if (collider.gameObject.GetComponentInChildren<MeshRenderer>(true) != null)
-                { 
-                collider.gameObject.GetComponentInChildren<MeshRenderer>(true).enabled = true; 
-            }
-            if (potentialInteractable != null)
-            {
-                // Verifica se il raycast punta effettivamente a questo oggetto
-                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
-                {
-                    // Se il raycast colpisce lo stesso oggetto, lo assegna come interagibile
-                    if (hit.collider == collider)
-                    {
-                        interactable = potentialInteractable;
-                        break; // Termina il ciclo, poiché hai trovato l'oggetto
-                    }
-                }
-            }
-        }
-
-        // Aggiorna la UI in base al risultato
-        if (interactable != null)
-        {
-            //UiManager.instance.vedi = true;
-            //attivaUi.Vedi();
-        }
-        else
-        {
-            //UiManager.instance.vedi = false;
-            //attivaUi.Vedi();
-        }
-    
-
-    // Debug: Disegna la sfera nel Scene View
-
-    // Controlla se il raggio colpisce un oggetto interagibile
-    /*if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
-    {
-        // L'oggetto interagibile è stato colpito
-        UiManager.instance.vedi = true;
-        attivaUi.Vedi();
-
-        // Salva l'oggetto interagibile
-        interactable = hit.collider.GetComponent<IInteractable>();
-    }
-    else
-    {
-        // Nessun oggetto interagibile colpito
-        UiManager.instance.vedi = false;
-        attivaUi.Vedi();
-        interactable = null;
-    }*/
-}
-
-    void PerformInteraction()
-    {
-        if (interactable != null)
-        {
-            
-            interactable.Interact(gameObject); 
-            // Attiva il Canvas quando l'oggetto viene visualizzato
-
-        }
-    }
-
-    void StopInteraction()
-    {
-        if (interactable != null)
-        {
-            interactable.StopInteract(gameObject); // Richiama il metodo di interruzione
-            interactable = null;
-
-            // Disattiva il Canvas quando la visualizzazione termina
-            
+            Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
+            Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+            Gizmos.color = Color.red;
+            Gizmos.matrix = Matrix4x4.TRS(boxCenter, playerCamera.transform.rotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, halfExtents * 2);
         }
     }
 }

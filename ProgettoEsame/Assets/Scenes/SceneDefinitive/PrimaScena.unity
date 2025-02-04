@@ -6952,14 +6952,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e3e9216ce1f1c4295b3f82cbe57c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 2
+  playerCamera: {fileID: 1938910795759337345}
+  boxLength: 2
+  boxWidth: 0.2
+  boxHeight: 0.2
   interactableLayer:
     serializedVersion: 2
     m_Bits: 72
   playAudio: 0
   attivaUi: {fileID: 0}
-  colliders: []
-  interactionCooldown: 3
+  colliders:
+  - {fileID: 0}
+  interactionCooldown: 2
 --- !u!114 &7581483486306365123
 MonoBehaviour:
   m_ObjectHideFlags: 0
