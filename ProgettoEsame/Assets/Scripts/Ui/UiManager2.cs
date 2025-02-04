@@ -103,19 +103,23 @@ public class UiManager2 : MonoBehaviour
 
                         // Attiva il GameObject "Interagisci" e disattiva "Indicatore_Vicinanza"
                         Transform interagisci = uiElement.transform.Find("Interagisci");
+                        Transform background = uiElement.transform.Find("Background");
                         Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
                         if (interagisci != null) interagisci.gameObject.SetActive(true);
                         if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(false);
+                        if (background != null) background.gameObject.SetActive(true);
                     }
                     else
                     {
                         Debug.Log("Lontano: " + collider);
 
                         // Disattiva il GameObject "Interagisci" e attiva "Indicatore_Vicinanza"
+                        Transform background = uiElement.transform.Find("Background");
                         Transform interagisci = uiElement.transform.Find("Interagisci");
                         Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
                         if (interagisci != null) interagisci.gameObject.SetActive(false);
                         if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(true);
+                        if (background != null) background.gameObject.SetActive(false);
                     }
 
                     // Posiziona l'elemento UI sopra l'oggetto, aggiungendo l'altezza desiderata
