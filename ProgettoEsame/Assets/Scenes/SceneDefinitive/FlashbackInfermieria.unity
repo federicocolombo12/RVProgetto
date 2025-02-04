@@ -10085,6 +10085,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820737639}
   m_Mesh: {fileID: 4300000, guid: 6be80b734ed76984e8eecff249860d64, type: 3}
+--- !u!20 &1820768200 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7635504381691802256, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+  m_PrefabInstance: {fileID: 6122731296308333319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1820958719 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8744150045182693423, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
@@ -13902,6 +13907,26 @@ PrefabInstance:
       propertyPath: nurse
       value: 
       objectReference: {fileID: 8431963242725611124}
+    - target: {fileID: 5468904217331392377, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: boxWidth
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468904217331392377, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: boxHeight
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468904217331392377, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: boxLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468904217331392377, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1820768200}
+    - target: {fileID: 5468904217331392377, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      propertyPath: colliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6701145469837472915, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: script
       value: 

@@ -11,8 +11,14 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject uiPrefab; // Prefab per gli elementi UI
     [SerializeField] private int poolSize = 10; // Dimensione del pool
     [SerializeField] private float altezza = 0.5f;
-    [SerializeField] private Collider[] colliders;// Per rilevare gli oggetti vicini
-    
+    [SerializeField] private Collider[] colliders; // Per rilevare gli oggetti vicini
+
+    [SerializeField] private float boxWidth = 1f;
+    [SerializeField] private float boxHeight = 0.1f;
+    [SerializeField] private float boxLength = 0.1f;
+
+    [SerializeField] private Camera playerCamera; // Riferimento alla camera del giocatore
+
     [SerializeField] Sprite sprite1;
     [SerializeField] Sprite sprite2;
     private Queue<GameObject> uiPool;
@@ -20,8 +26,6 @@ public class UiManager : MonoBehaviour
 
     private void Awake()
     {
-        
-
         InitializePool();
     }
 
@@ -79,11 +83,21 @@ public class UiManager : MonoBehaviour
         // Primo OverlapSphere: tutti gli oggetti entro il detectionRadius
         Collider[] detectedColliders = Physics.OverlapSphere(transform.position, detectionRadius);
 
-        // Secondo OverlapSphere: solo gli oggetti entro l'interactRadius
-        Collider[] interactColliders = Physics.OverlapSphere(transform.position, interactRadius);
+        // Parametri per OverlapBoxNonAlloc
+        Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
+        Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+        Quaternion boxRotation = playerCamera.transform.rotation;
+        int interactableLayer = LayerMask.GetMask("Interactable");
+
+        // Secondo OverlapBoxNonAlloc: solo gli oggetti entro l'interactRadius
+        int numColliders = Physics.OverlapBoxNonAlloc(boxCenter, halfExtents, colliders, boxRotation, interactableLayer);
 
         // Creiamo un semplice HashSet per verificare velocemente se un collider è nell'interact radius
-        HashSet<Collider> interactSet = new HashSet<Collider>(interactColliders);
+        HashSet<Collider> interactSet = new HashSet<Collider>();
+        for (int i = 0; i < numColliders; i++)
+        {
+            interactSet.Add(colliders[i]);
+        }
 
         // Disattiva tutte le UI attive prima di aggiornare
         foreach (var ui in new List<GameObject>(activeUis))
@@ -134,4 +148,17 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    // Metodo per visualizzare la OverlapBox
+    private void OnDrawGizmosSelected()
+    {
+        if (playerCamera != null)
+        {
+            Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
+            Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+            Quaternion boxRotation = playerCamera.transform.rotation;
+            Gizmos.color = Color.green;
+            Gizmos.matrix = Matrix4x4.TRS(boxCenter, boxRotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, halfExtents * 2);
+        }
+    }
 }
