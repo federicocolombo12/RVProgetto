@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ObjectInteraction : MonoBehaviour
@@ -7,10 +8,28 @@ public class ObjectInteraction : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !hasActivated) // Puoi cambiare la condizione di attivazione
+        if (Input.GetKeyDown(KeyCode.E) && !hasActivated)
         {
-            animator.SetTrigger("ActivateAction");
-            hasActivated = true; // Evita che venga attivato più volte
+            StartCoroutine(TriggerDisapprova());
         }
+        else if (Input.GetKeyDown(KeyCode.E) && hasActivated)
+        {
+            StartCoroutine(TriggerActivateAction());
+        }
+    }
+
+    private IEnumerator TriggerDisapprova()
+    {
+        animator.SetTrigger("Disapprova");
+        yield return new WaitForSeconds(5f); // Aspetta prima di tornare indietro
+        animator.SetTrigger("TornaIndietro");
+        hasActivated = true;
+    }
+
+    private IEnumerator TriggerActivateAction()
+    {
+        animator.SetTrigger("ActivateAction");
+        hasActivated = false;
+        yield return null; // Puoi cambiare se serve una pausa
     }
 }
