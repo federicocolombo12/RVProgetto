@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Paziente0Audio : MonoBehaviour
+public class Paziente0AudioManager : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private NavMeshAgent navMeshAgent;
@@ -13,10 +12,10 @@ public class Paziente0Audio : MonoBehaviour
     [SerializeField] private AudioClip idleClip;
     [SerializeField] private AudioClip walkingClip;
     [SerializeField] private AudioClip talkingClip;
+    [SerializeField] private AudioClip knifePickupAudioClip; // Nuovo clip audio per il pick-up del coltello
 
     void Start()
     {
-        // Recupera i riferimenti agli altri componenti se non sono stati assegnati manualmente
         if (animator == null)
         {
             animator = GetComponent<Animator>();
@@ -40,7 +39,6 @@ public class Paziente0Audio : MonoBehaviour
 
     private void ManageAudio()
     {
-        // Verifica se l'animatore è in un certo stato per determinare l'audio
         if (animator.GetBool("IsRunning") && audioSource.clip != runningClip)
         {
             PlayAudioClip(runningClip);
@@ -61,6 +59,12 @@ public class Paziente0Audio : MonoBehaviour
                  !animator.GetBool("IsWalking") && !animator.GetBool("IsYelling"))
         {
             StopAudio();
+        }
+
+        // Se il coltello è stato preso, riproduci il nuovo suono
+        if (CellaManager.instance.coltelloPreso && audioSource.clip != knifePickupAudioClip)
+        {
+            PlayAudioClip(knifePickupAudioClip);
         }
     }
 

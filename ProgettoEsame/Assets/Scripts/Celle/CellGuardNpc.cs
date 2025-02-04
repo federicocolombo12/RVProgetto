@@ -25,6 +25,9 @@ public class CellGuardNpc : MonoBehaviour
 
     public bool thirdPosition = false;
 
+    private KnifePickUpandPlace knifePickUpAndPlaceScript; // Aggiungi un riferimento a KnifePickUpandPlace
+    private bool isKnifePickupAudioPlaying = false; // Controllo per evitare l'interruzione dell'audio del pick-up
+
     public event System.Action OnAnimationEnd;
 
     void Start()
@@ -35,6 +38,8 @@ public class CellGuardNpc : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<FirstPersonController>();
         aperturaPorta = FindObjectOfType<AperturaPorta>();
+
+        knifePickUpAndPlaceScript = FindObjectOfType<KnifePickUpandPlace>(); // Riferimento a KnifePickUpandPlace
 
         if (animator == null) Debug.LogError("Animator non trovato!");
         if (navMeshAgent == null) Debug.LogError("NavMeshAgent non trovato!");
@@ -52,6 +57,14 @@ public class CellGuardNpc : MonoBehaviour
 
         while (true)
         {
+            // Verifica se l'audio del pick-up del coltello è in esecuzione
+            if (knifePickUpAndPlaceScript != null && knifePickUpAndPlaceScript.isKnifePickupAudioPlaying)
+            {
+                // Se l'audio del coltello è in esecuzione, saltare la routine del guardiano
+                yield return null;
+                continue;
+            }
+
             // Stato Idle
             SetAnimationState(idle: true);
             guardAudioManager.PlayIdle();
@@ -164,4 +177,3 @@ public class CellGuardNpc : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 }
-
