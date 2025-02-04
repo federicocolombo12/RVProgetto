@@ -24,16 +24,14 @@ public class CellGuardNpc : MonoBehaviour
     [SerializeField] public bool thirdPosition = false;
 
     // AudioManager: Stati audio
-    public bool audioTalking = false;
-    public bool audioTalkingClip1 = false;
-    public bool audioIdle = false;
-    public bool audioWalking = false;
+    [SerializeField] CellGuardAudioManager audioManager;
 
     // Evento che segnala la fine dell'animazione
     public event System.Action OnAnimationEnd;
 
     void Start()
     {
+        audioManager = GetComponent<CellGuardAudioManager>();
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -89,14 +87,13 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
-            audioTalkingClip1 = true;
+            audioManager.TalkingClip1();
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
             // Rotazione a destra
             Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
-            audioTalkingClip1 = false;
             animator.SetBool("IsTurningRight", true);
             yield return new WaitForSeconds(rightTurnDuration);
             animator.SetBool("IsTurningRight", false);

@@ -8,6 +8,7 @@ public class CellGuardAudioManager : MonoBehaviour
     [SerializeField] private AudioClip idleClip;
     [SerializeField] private AudioClip walkingClip;
     [SerializeField] private AudioClip talkingClip;
+    bool notStarted = false;
 
     void Start()
     {
@@ -21,40 +22,13 @@ public class CellGuardAudioManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        ManageAudioStates();
-    }
+ 
 
-    private void ManageAudioStates()
-    {
-        if (script.audioTalkingClip1 && audioSource.clip != talkingClip1)
-        {
-            PlayAudioClip(talkingClip1);
-        }
-        else if (script.audioIdle && audioSource.clip != idleClip)
-        {
-            PlayAudioClip(idleClip);
-        }
-        else if (script.audioWalking && audioSource.clip != walkingClip)
-        {
-            PlayAudioClip(walkingClip);
-        }
-        else if (script.audioTalking && audioSource.clip != talkingClip)
-        {
-            PlayAudioClip(talkingClip);
-        }
-        else if (!script.audioTalking && !script.audioIdle && !script.audioWalking && !script.audioTalking)
-        {
-            StopAudio();
-        }
-    }
-
-    private void PlayAudioClip(AudioClip clip)
+    public  void PlayAudioClip(AudioClip clip)
     {
         if (audioSource.isPlaying && audioSource.clip == clip) return; // Evita di interrompere lo stesso audio
         audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.PlayOneShot(clip);
     }
 
     private void StopAudio()
@@ -64,5 +38,17 @@ public class CellGuardAudioManager : MonoBehaviour
             audioSource.Stop();
             audioSource.clip = null;
         }
+    }
+    public void TalkingClip1() { 
+        PlayAudioClip(talkingClip1);
+    }
+    public void IdleClip() { 
+        PlayAudioClip(idleClip);
+    }
+    public void WalkingClip() { 
+        PlayAudioClip(walkingClip);
+    }
+    public void TalkingClip() { 
+        PlayAudioClip(talkingClip);
     }
 }
