@@ -8,7 +8,6 @@ public class RayCastInteraction : MonoBehaviour
     public float boxHeight = 0.1f; // L'altezza della box (asse Y)
     public LayerMask interactableLayer;
     public bool playAudio;
-    public AttivaUi attivaUi;
     public IInteractable interactable;
     [SerializeField] private Collider[] colliders;
 

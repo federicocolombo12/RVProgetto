@@ -13,9 +13,10 @@ public class UiManager : MonoBehaviour
     [SerializeField] private float altezza = 0.5f;
     [SerializeField] private Collider[] colliders; // Per rilevare gli oggetti vicini
 
-    [SerializeField] private float boxWidth = 1f;
-    [SerializeField] private float boxHeight = 0.1f;
-    [SerializeField] private float boxLength = 0.1f;
+    [SerializeField] private float boxLength = 2f;
+    [SerializeField] private float boxWidth = 0.2f;
+    [SerializeField] private float boxHeight = 0.2f;
+    
 
     [SerializeField] private Camera playerCamera; // Riferimento alla camera del giocatore
 
