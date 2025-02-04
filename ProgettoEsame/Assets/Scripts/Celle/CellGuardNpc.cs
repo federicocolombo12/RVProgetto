@@ -69,8 +69,9 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Inizio Idle");
             animator.SetBool("IsWalking", false);
             animator.SetBool("SetIdle", true);
-            
+            audioManager.TalkingClip0();
             yield return new WaitForSeconds(idleTime);
+            
 
             // Passa allo stato di camminata verso la prima destinazione
             Debug.Log("Inizio Camminata verso la prima destinazione");
@@ -112,6 +113,7 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
+            audioManager.TalkingClip2();
             animator.SetBool("SetIdle", true);
 
             // Attesa fino a quando OggettoNascosto non diventa true
@@ -139,6 +141,7 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
+            audioManager.TalkingClip3();
 
             thirdPosition = true;
             player.playerCanMove = false;
@@ -166,9 +169,9 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
             RotateTowardsPlayer();
+            audioManager.TalkingClip4();
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(idleTime);
-
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
         }
