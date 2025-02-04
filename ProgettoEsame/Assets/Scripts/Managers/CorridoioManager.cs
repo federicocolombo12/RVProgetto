@@ -107,4 +107,22 @@ public class CorridoioManager : MonoBehaviour
             });
         Destroy(gameObject);
     }
+    public void LoadPassato()
+    {
+        StartCoroutine(LoadPassatoCoroutine());
+    }
+    IEnumerator LoadPassatoCoroutine()
+    {
+        TransitionScript.instance.FadeOut();
+        yield return new WaitForSeconds(5f);
+            
+        Debug.Log("Door is now open!");
+        MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshockPassato", LoadSceneMode.Single,
+            () => {
+                
+                TransitionScript.instance.FadeIn();
+                
+            });
+        Destroy(gameObject);
+    }
 }
