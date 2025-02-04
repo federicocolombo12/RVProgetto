@@ -23,6 +23,7 @@ public class ObjectInteraction : MonoBehaviour
         animator.SetTrigger("Disapprova");
         yield return new WaitForSeconds(5f); // Aspetta prima di tornare indietro
         animator.SetTrigger("TornaIndietro");
+        animator.ResetTrigger("Disapprova");
         hasActivated = true;
     }
 
