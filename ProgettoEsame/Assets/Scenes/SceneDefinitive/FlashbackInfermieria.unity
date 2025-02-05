@@ -4653,7 +4653,7 @@ PrefabInstance:
       addedObject: {fileID: 716971332}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 716971331}
+      addedObject: {fileID: 716971335}
   m_SourcePrefab: {fileID: 100100000, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
 --- !u!1 &716971327 stripped
 GameObject:
@@ -4675,7 +4675,8 @@ MonoBehaviour:
   playerHeight: 0.3
   otherNpc: {fileID: 877634010}
   playerInteraction: {fileID: 2015589562}
-  target: {fileID: 0}
+  target: {fileID: 78957846}
+  transitionDuration: 1
   currentState: 0
   npcSound: {fileID: 0}
 --- !u!136 &716971330
@@ -4701,21 +4702,6 @@ CapsuleCollider:
   m_Height: 1.93
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &716971331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716971327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ee24b0db901e44f9f7aeacae187ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rig: {fileID: 728943415}
-  target: {fileID: 78957846}
-  isLooking: 0
 --- !u!114 &716971332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4816,6 +4802,21 @@ MonoBehaviour:
   - m_Rig: {fileID: 728943415}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &716971335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716971327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ee24b0db901e44f9f7aeacae187ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rig: {fileID: 728943415}
+  target: {fileID: 78957846}
+  isLooking: 0
 --- !u!4 &719564810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8378266211628665386, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
@@ -7691,13 +7692,13 @@ PrefabInstance:
       addedObject: {fileID: 1371384473}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1371384475}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1371384478}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1371384477}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1371384480}
   m_SourcePrefab: {fileID: 100100000, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
 --- !u!1 &1371384469 stripped
 GameObject:
@@ -7719,7 +7720,8 @@ MonoBehaviour:
   playerHeight: 0.3
   otherNpc: {fileID: 1356744910}
   playerInteraction: {fileID: 2015589562}
-  target: {fileID: 0}
+  target: {fileID: 400445783}
+  transitionDuration: 1
   currentState: 0
   npcSound: {fileID: 0}
 --- !u!136 &1371384472
@@ -7845,21 +7847,6 @@ MonoBehaviour:
   - {fileID: 595167794}
   - {fileID: 1326894184}
   - {fileID: 551368492}
---- !u!114 &1371384475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371384469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ee24b0db901e44f9f7aeacae187ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rig: {fileID: 362160933}
-  target: {fileID: 400445783}
-  isLooking: 0
 --- !u!82 &1371384477
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7970,6 +7957,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionSound: {fileID: 8300000, guid: 8e90cee4f8af73b46af797fe12806b33, type: 3}
   audioSource: {fileID: 1371384477}
+--- !u!114 &1371384480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371384469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ee24b0db901e44f9f7aeacae187ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rig: {fileID: 362160933}
+  target: {fileID: 400445783}
+  isLooking: 0
 --- !u!4 &1382029407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4360043509953530, guid: fc9c58f21e7a1f24197eae26baeee04b, type: 3}

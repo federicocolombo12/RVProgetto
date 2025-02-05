@@ -9,18 +9,19 @@ public class NpcSound : MonoBehaviour
 
     void Start()
     {
-        if (audioSource == null)
-        {
+        
+        
             audioSource = GetComponent<AudioSource>();  // Se non è assegnato, prova a cercarlo sul GameObject
-        }
+        
     }
 
     // Funzione per riprodurre il suono
     public void PlayInteractionSound()
     {
-        if (interactionSound != null && audioSource != null)
-        {
+        
+        
             audioSource.PlayOneShot(interactionSound);
-        }
+        
+        
     }
 }

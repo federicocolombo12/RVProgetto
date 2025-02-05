@@ -6,7 +6,6 @@ public class NpcInteraction : MonoBehaviour
     [SerializeField] private float interactionDistance = 2f; // Distanza di interazione
     private Camera mainCamera;
     public bool isInteracting;
-    private NpcHeadLookAt npcHeadLookAt;
     [SerializeField] private List<Collider> npcs = new List<Collider>(); // Lista degli NPC vicini
     [SerializeField] private List<Collider> interactingNpcs = new List<Collider>(); // Lista degli NPC con cui stai interagendo
 
@@ -39,8 +38,7 @@ public class NpcInteraction : MonoBehaviour
                 if (npcScript != null && !interactingNpcs.Contains(npc))
                 {
                     isInteracting = true;
-
-                    npcScript.currentState = NpcScript.NpcState.Interacting;
+                    npcScript.StartInteraction(); // Avvia la transizione dell'NPC
                     interactingNpcs.Add(npc); // Aggiungi l'NPC alla lista degli interagiti
                 }
             }
@@ -55,7 +53,7 @@ public class NpcInteraction : MonoBehaviour
                 var npcScript = interactingNpcs[i].GetComponent<NpcScript>();
                 if (npcScript != null)
                 {
-                    npcScript.currentState= NpcScript.NpcState.Idle;
+                    npcScript.StartInteraction();
                 }
                 interactingNpcs.RemoveAt(i);
             }
