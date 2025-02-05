@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class TorciaOnOffUI : MonoBehaviour
 {
     [SerializeField] private Image imgOn;  // Immagine quando la torcia è accesa
     [SerializeField] private Image imgOff; // Immagine quando la torcia è spenta
-    
-    [SerializeField] private Torcia gestioneTorcia;
+
+    [SerializeField] private GameObject torciaGameObject; // GameObject che contiene il componente Torcia
+    private Torcia gestioneTorcia;
+
+    void Start()
+    {
+        // Trova il componente Torcia nel GameObject specificato
+        if (torciaGameObject != null)
+        {
+            gestioneTorcia = torciaGameObject.GetComponent<Torcia>();
+            if (gestioneTorcia == null)
+            {
+                Debug.LogError("Nessun componente Torcia trovato nel GameObject specificato.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Nessun GameObject specificato per la torcia.");
+        }
+    }
 
     void Update()
     {
@@ -27,9 +44,10 @@ public class TorciaOnOffUI : MonoBehaviour
                 imgOff.gameObject.SetActive(true);
                 Debug.Log("UI Torcia spenta");
             }
-
-            //imgOn.gameObject.SetActive(isTorchOn);
-            //imgOff.gameObject.SetActive(!isTorchOn);
+            else
+            {
+                Debug.Log("Script non preso");
+            }
         }
         else
         {
@@ -37,3 +55,4 @@ public class TorciaOnOffUI : MonoBehaviour
         }
     }
 }
+
