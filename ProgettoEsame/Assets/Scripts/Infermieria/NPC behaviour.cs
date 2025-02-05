@@ -10,16 +10,16 @@ public class CharacterBehavior : MonoBehaviour
 
     private NavMeshAgent agent;
     private Animator animator;
-    [SerializeField] InfermieraScript nurse;
-    private NpcFootstepAudio footstepAudio; // Aggiunto per il suono dei passi
+    [SerializeField] private InfermieraScript nurse;
+    private NpcFootstepAudio footstepAudio; // Per il suono dei passi
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        footstepAudio = GetComponent<NpcFootstepAudio>(); // Trova il componente audio
+        footstepAudio = GetComponent<NpcFootstepAudio>();
+        
 
-        // Assicurati che il personaggio sia in idle inizialmente
         animator.SetBool("isWalking", false);
     }
 
@@ -30,34 +30,36 @@ public class CharacterBehavior : MonoBehaviour
 
     private IEnumerator PerformActions()
     {
+
         // Cammina verso il punto della medicina
         StartWalking();
         agent.SetDestination(medicinePoint.position);
-
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.1f);
 
-        // Prendi la medicina
+        // Ferma la camminata
         StopWalking();
+
+        // Avvisa l'infermiera
         if (nurse != null)
         {
-            Debug.Log("Notifying nurse");
             nurse.TriggerNurseAnimation();
         }
         else
         {
             Debug.LogWarning("Nurse reference is missing");
         }
+
         yield return new WaitForSeconds(3f);
         animator.SetTrigger("takeMedicine");
-
         yield return new WaitForSeconds(4f);
 
-        // Cammina verso il punto di uscita
+        // Cammina verso l'uscita
         StartWalking();
         HasFinished = true;
         agent.SetDestination(exitPoint.position);
 
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.5f);
+
 
         // Termina le azioni
         StopWalking();
@@ -67,7 +69,7 @@ public class CharacterBehavior : MonoBehaviour
     private void StartWalking()
     {
         animator.SetBool("isWalking", true);
-        footstepAudio?.StartFootsteps(); // Avvia i passi se il componente esiste
+        footstepAudio?.StartFootsteps(); // Suono dei passi
     }
 
     private void StopWalking()

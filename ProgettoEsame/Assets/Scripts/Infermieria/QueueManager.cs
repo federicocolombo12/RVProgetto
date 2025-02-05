@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class QueueManager : MonoBehaviour
 {
@@ -13,8 +11,11 @@ public class QueueManager : MonoBehaviour
     public float delayBetweenTurns = 3f; // Tempo tra un turno e l'altro
     private int currentIndex = 0;       // Indice del personaggio attuale
     public bool lineFinished = false;   // Indica se la fila è finita
-    private bool coroutineRunning = false;
-    [SerializeField] private PlayerLock playerLock;// Indica se la coroutine è in esecuzione
+    private bool coroutineRunning = false; // Indica se la coroutine è in esecuzione
+    [SerializeField] private PlayerLock playerLock;
+    private DialogueManager dialogueManager; // Riferimento al DialogueManager
+    private bool audioPlayed = false; // Variabile per tenere traccia se l'audio è stato riprodotto
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -23,13 +24,22 @@ public class QueueManager : MonoBehaviour
             return;
         }
         instance = this;
+
+        // Trova l'oggetto DialogueManager nella scena
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
-   
 
     void Update()
     {
         if (InfermieriaManager.instance.isInRow && !coroutineRunning)
         {
+            // Riproduci l'audio solo la prima volta che la fila inizia
+            if (!audioPlayed)
+            {
+                dialogueManager?.PlayStartQueueAudio();
+                audioPlayed = true; // Imposta audioPlayed a true per evitare che venga riprodotto nuovamente
+            }
+
             StartCoroutine(ProcessQueue());
         }
     }

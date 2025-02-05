@@ -15,7 +15,7 @@ public class InfermieraBlocking : MonoBehaviour
     [SerializeField] NpcHeadLookAt npcHeadLookAt;
     [SerializeField] private InfermieraBlockingAudio infermieraAudio; // Riferimento allo script audio
 
-    bool coroutineStarted=false;
+    bool coroutineStarted = false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,17 +27,18 @@ public class InfermieraBlocking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InfermieriaManager.instance.pastigliaTrovata&&!coroutineStarted)
+        if (InfermieriaManager.instance.pastigliaTrovata && !coroutineStarted)
         {
-           StartCoroutine(ReachDestination());
-            coroutineStarted=true;
-            
+            StartCoroutine(ReachDestination());
+            coroutineStarted = true;
+
         }
-        else {
+        else
+        {
             NurseLook();
         }
-        
-        
+
+
     }
     public void NurseTalk()
     {
@@ -64,14 +65,27 @@ public class InfermieraBlocking : MonoBehaviour
         interactWithNurse1.enabled = false;
         npcHeadLookAt.enabled = false;
         doorOpenerStandard.enabled = true;
-        
+
         navMeshAgent.SetDestination(firstDestination.position);
         navMeshAgent.isStopped = false;
-        
+
         animator.SetTrigger("Walk");
-        yield return new WaitUntil(()=>!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f);
+
+        // Avvia il suono della camminata
+        if (infermieraAudio != null)
+        {
+            infermieraAudio.PlayNurseWalking();
+        }
+
+        yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f);
+
         animator.SetTrigger("Stop");
-        
+
+        // Ferma il suono della camminata
+        if (infermieraAudio != null)
+        {
+            infermieraAudio.StopNurseWalking();
+        }
     }
     void NurseLook()
     {
