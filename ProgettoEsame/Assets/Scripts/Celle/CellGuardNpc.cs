@@ -173,6 +173,7 @@ public class CellGuardNpc : MonoBehaviour
             yield return new WaitForSeconds(3f);
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
+            break;
         }
     }
 
