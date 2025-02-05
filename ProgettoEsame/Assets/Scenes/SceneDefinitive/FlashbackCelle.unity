@@ -264,7 +264,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 131072
-  interactionCooldown: 3
+  interactionCooldown: 2
   audioSource1: {fileID: 332192278}
   audioSource2: {fileID: 332853599}
   knifePickupClip: {fileID: 8300000, guid: cf28ee570a7a38d4cb7a0814fc45edc8, type: 3}
@@ -5433,43 +5433,46 @@ PrefabInstance:
       insertIndex: 17
       addedObject: {fileID: 16842044}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 13
+      insertIndex: 0
+      addedObject: {fileID: 1594675832}
+    - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
+      insertIndex: 14
       addedObject: {fileID: 1090909955}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 16
+      insertIndex: 17
       addedObject: {fileID: 1031497093}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 17
+      insertIndex: 18
       addedObject: {fileID: 962524317}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 18
+      insertIndex: 19
       addedObject: {fileID: 1519108735}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 19
+      insertIndex: 20
       addedObject: {fileID: 1258231047}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 20
+      insertIndex: 21
       addedObject: {fileID: 1218021141}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 21
+      insertIndex: 22
       addedObject: {fileID: 493869865}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 22
+      insertIndex: 23
       addedObject: {fileID: 376488590}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 23
+      insertIndex: 24
       addedObject: {fileID: 2124386175}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 24
+      insertIndex: 25
       addedObject: {fileID: 1358992494}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 25
+      insertIndex: 26
       addedObject: {fileID: 1382760437}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 26
+      insertIndex: 27
       addedObject: {fileID: 191655270}
     - targetCorrespondingSourceObject: {fileID: 6484751233874343390, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
-      insertIndex: 27
+      insertIndex: 28
       addedObject: {fileID: 1312567699}
     - targetCorrespondingSourceObject: {fileID: 1154378919911919064, guid: a3358af3b8e2d1540b00e468f85e6080, type: 3}
       insertIndex: -1
@@ -7824,6 +7827,72 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   drawerOpenClip: {fileID: 8300000, guid: 3f09676f964008445bb25c5f95e10d94, type: 3}
   drawerCloseClip: {fileID: 8300000, guid: 37813561109621d4799dc1a71edc22fe, type: 3}
+--- !u!1 &1594675831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1594675832}
+  - component: {fileID: 1594675834}
+  - component: {fileID: 1594675833}
+  m_Layer: 0
+  m_Name: AreaTriggerColtello
+  m_TagString: DropArea
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1594675832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594675831}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 71.42, y: 18.46, z: -52.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1853760999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1594675833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594675831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac20532806f5f8a4483aa8ab7e23a7cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1594675834
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594675831}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 22.302942, y: 19.36719, z: 34.079735}
+  m_Center: {x: -0.002449483, y: 9.183606, z: 2.2522607}
 --- !u!4 &1612936623 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8232606174477031491, guid: 915606d2664f1024086f8f17a3c59112, type: 3}

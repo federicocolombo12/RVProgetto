@@ -9,6 +9,7 @@ public class CellGuardNpc : MonoBehaviour
     public Transform firstDestination; // Prima destinazione
     public Transform secondDestination; // Seconda destinazione
     public Transform thirdDestination; // Terza destinazione
+    public Transform fourthDestination; // Terza destinazione
     public float walkSpeed = 1f; // Velocità di camminata
     public float stoppingDistance = 0.5f; // Distanza di arresto
     public float rightTurnDuration = 1f; // Durata della rotazione a destra
@@ -159,9 +160,7 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("SetIdle", false);
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
-            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-            Vector3 destination = playerTransform.position - directionToPlayer * playerStoppingDistance;
-            navMeshAgent.SetDestination(destination);
+            navMeshAgent.SetDestination(fourthDestination.position);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
             // Torna allo stato di idle
