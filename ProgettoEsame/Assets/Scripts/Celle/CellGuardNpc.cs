@@ -171,7 +171,7 @@ public class CellGuardNpc : MonoBehaviour
             RotateTowardsPlayer();
             audioManager.TalkingClip4();
             animator.SetBool("SetIdle", true);
-            yield return new WaitForSeconds(idleTime);
+            yield return new WaitForSeconds(3f);
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
         }
