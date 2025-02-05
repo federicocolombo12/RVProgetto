@@ -1,95 +1,122 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
+
+
+public class UiIdentifier : MonoBehaviour
+{
+    public new string tag;
+}
 
 public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
 
+    [System.Serializable]
+    public class InteractableType
+    {
+        public string tag;
+        public GameObject uiPrefab;
+        public float uiHeight = 0.5f;
+    }
+
     [SerializeField] private float detectionRadius = 2f;
     [SerializeField] private float interactRadius = 1f;
-    [SerializeField] private GameObject uiPrefab; // Prefab per gli elementi UI
-    [SerializeField] private int poolSize = 10; // Dimensione del pool
-    [SerializeField] private float altezza = 0.5f;
-    [SerializeField] private Collider[] colliders; // Per rilevare gli oggetti vicini
+    [SerializeField] private InteractableType[] interactableTypes; // Array di configurazioni per i tipi interagibili
+    [SerializeField] private int poolSize = 10; // Dimensione del pool totale
+    [SerializeField] private Collider[] colliders; // Array temporaneo per rilevare gli oggetti vicini
 
     [SerializeField] private float boxLength = 2f;
     [SerializeField] private float boxWidth = 0.2f;
     [SerializeField] private float boxHeight = 0.2f;
-    
 
     [SerializeField] public Camera playerCamera; // Riferimento alla camera del giocatore
 
-    [SerializeField] Sprite sprite1;
-    [SerializeField] Sprite sprite2;
-    private Queue<GameObject> uiPool;
-    private List<GameObject> activeUis; // Per tenere traccia degli elementi attivi
+    private Dictionary<string, Queue<GameObject>> pools;
+    private List<GameObject> activeUis;
 
     private void Awake()
     {
         playerCamera = GetComponentInChildren<Camera>();
-        InitializePool();
+        colliders = new Collider[5]; // Initialize the colliders array with a default size
+        InitializePools();
     }
 
-    // Inizializza il pool
-    private void InitializePool()
+    // Inizializza i pool per ciascun tipo di UI
+    private void InitializePools()
     {
-        uiPool = new Queue<GameObject>();
+        pools = new Dictionary<string, Queue<GameObject>>();
         activeUis = new List<GameObject>();
 
-        for (int i = 0; i < poolSize; i++)
+        foreach (var type in interactableTypes)
         {
-            GameObject uiInstance = Instantiate(uiPrefab, transform);
-            uiInstance.SetActive(false);
-            uiPool.Enqueue(uiInstance);
+            var queue = new Queue<GameObject>();
+            for (int i = 0; i < poolSize; i++)
+            {
+                GameObject uiInstance = Instantiate(type.uiPrefab, transform);
+                uiInstance.SetActive(false);
+                queue.Enqueue(uiInstance);
+            }
+            pools[type.tag] = queue;
         }
     }
 
-    // Ottieni un elemento dal pool
-    private GameObject GetUiFromPool()
+    // Ottieni un elemento UI dal pool specifico per il tag
+    private GameObject GetUiFromPool(string tag)
     {
-        if (uiPool.Count > 0)
+        if (pools.ContainsKey(tag) && pools[tag].Count > 0)
         {
-            GameObject uiInstance = uiPool.Dequeue();
+            GameObject uiInstance = pools[tag].Dequeue();
             uiInstance.SetActive(true);
+
+            // Assicurati che l'oggetto UI abbia un UiIdentifier e assegnagli il tag
+            UiIdentifier identifier = uiInstance.GetComponent<UiIdentifier>();
+            if (identifier == null)
+            {
+                identifier = uiInstance.AddComponent<UiIdentifier>(); // Se manca, lo aggiunge
+            }
+            identifier.tag = tag;
+
             activeUis.Add(uiInstance);
             return uiInstance;
         }
         else
         {
-            Debug.LogWarning("Pool esaurito! Aumenta la dimensione del pool.");
+            Debug.LogWarning("Pool for " + tag + " is exhausted! Consider increasing the pool size.");
             return null;
         }
     }
 
-    // Rilascia un elemento nel pool
-    private void ReturnUiToPool(GameObject uiInstance)
+
+    // Rilascia un elemento nel pool generico
+    private void ReturnUiToPool(GameObject uiInstance, string tag)
     {
         if (activeUis.Contains(uiInstance))
         {
             activeUis.Remove(uiInstance);
             uiInstance.SetActive(false);
-            uiPool.Enqueue(uiInstance);
+            if (pools.ContainsKey(tag))
+            {
+                pools[tag].Enqueue(uiInstance);
+            }
         }
     }
 
     private void Update()
     {
-        // Ad esempio, attiva gli UI in base alla vicinanza
         RilevaOggettiVicini();
     }
 
     // Rileva oggetti vicini e gestisce la UI
     private void RilevaOggettiVicini()
     {
-        // Primo OverlapSphere: tutti gli oggetti entro il detectionRadius
+        // Rileva tutti i collider entro il detectionRadius
         Collider[] detectedColliders = Physics.OverlapSphere(transform.position, detectionRadius);
 
         // Parametri per OverlapBoxNonAlloc
         Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
         Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
         Quaternion boxRotation = playerCamera.transform.rotation;
-
 
         // Secondo OverlapBoxNonAlloc: solo gli oggetti entro l'interactRadius
         int numColliders = Physics.OverlapBoxNonAlloc(boxCenter, halfExtents, colliders, boxRotation);
@@ -104,63 +131,65 @@ public class UiManager : MonoBehaviour
         // Disattiva tutte le UI attive prima di aggiornare
         foreach (var ui in new List<GameObject>(activeUis))
         {
-            ReturnUiToPool(ui);
+            UiIdentifier identifier = ui.GetComponent<UiIdentifier>();
+            if (identifier != null)
+            {
+                ReturnUiToPool(ui, identifier.tag);
+            }
         }
 
         // Per ogni collider rilevato entro il detectionRadius
         foreach (Collider collider in detectedColliders)
         {
-            if (collider.CompareTag("OggettoInteragibile1"))
+            foreach (var type in interactableTypes)
             {
-                // Ottieni un elemento UI dal pool
-                GameObject uiElement = GetUiFromPool();
-                if (uiElement != null)
+                if (collider.CompareTag(type.tag))
                 {
-                    // Recupera il componente Image dal prefab
-                    if (interactSet.Contains(collider))
+                    // Ottieni un elemento UI dal pool
+                    GameObject uiElement = GetUiFromPool(type.tag);
+                    if (uiElement != null)
                     {
-                        Debug.Log("Vicino: " + collider);
+                        if (interactSet.Contains(collider))
+                        {
+                            Debug.Log("Vicino: " + collider);
 
-                        // Attiva il GameObject "Interagisci" e disattiva "Indicatore_Vicinanza"
-                        Transform interagisci = uiElement.transform.Find("Interagisci");
-                        Transform background = uiElement.transform.Find("Background");
-                        Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
-                        if (interagisci != null) interagisci.gameObject.SetActive(true);
-                        if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(false);
-                        if (background != null) background.gameObject.SetActive(true);
+                            // Attiva "Interagisci" e disattiva "Indicatore_Vicinanza"
+                            Transform interagisci = uiElement.transform.Find("Interagisci");
+                            Transform background = uiElement.transform.Find("Background");
+                            Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
+                            if (interagisci != null) interagisci.gameObject.SetActive(true);
+                            if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(false);
+                            if (background != null) background.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            Debug.Log("Lontano: " + collider);
+
+                            // Disattiva "Interagisci" e attiva "Indicatore_Vicinanza"
+                            Transform background = uiElement.transform.Find("Background");
+                            Transform interagisci = uiElement.transform.Find("Interagisci");
+                            Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
+                            if (interagisci != null) interagisci.gameObject.SetActive(false);
+                            if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(true);
+                            if (background != null) background.gameObject.SetActive(false);
+                        }
+
+                        // Posiziona l'elemento UI sopra l'oggetto, aggiungendo l'altezza desiderata
+                        Vector3 screenPosition = collider.transform.position + Vector3.up * type.uiHeight;
+                        uiElement.GetComponent<RectTransform>().position = screenPosition;
                     }
-                    else
-                    {
-                        Debug.Log("Lontano: " + collider);
-
-                        // Disattiva il GameObject "Interagisci" e attiva "Indicatore_Vicinanza"
-                        Transform background = uiElement.transform.Find("Background");
-                        Transform interagisci = uiElement.transform.Find("Interagisci");
-                        Transform indicatoreVicinanza = uiElement.transform.Find("Indicatore_Vicinanza");
-                        if (interagisci != null) interagisci.gameObject.SetActive(false);
-                        if (indicatoreVicinanza != null) indicatoreVicinanza.gameObject.SetActive(true);
-                        if (background != null) background.gameObject.SetActive(false);
-                    }
-
-                    // Posiziona l'elemento UI sopra l'oggetto, aggiungendo l'altezza desiderata
-                    Vector3 screenPosition = collider.transform.position + Vector3.up * altezza;
-                    uiElement.GetComponent<RectTransform>().position = screenPosition;
+                    break;
                 }
             }
         }
     }
 
-    // Metodo per visualizzare la OverlapBox
-    private void OnDrawGizmosSelected()
+    private void HandleUIActivation(HashSet<Collider> interactSet, Collider collider, GameObject uiElement, float uiHeight)
     {
-        if (playerCamera != null)
-        {
-            Vector3 boxCenter = playerCamera.transform.position + playerCamera.transform.forward * (boxLength / 2);
-            Vector3 halfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
-            Quaternion boxRotation = playerCamera.transform.rotation;
-            Gizmos.color = Color.green;
-            Gizmos.matrix = Matrix4x4.TRS(boxCenter, boxRotation, Vector3.one);
-            Gizmos.DrawWireCube(Vector3.zero, halfExtents * 2);
-        }
-    }
+        bool isNear = interactSet.Contains(collider);
+
+        // Qui puoi personalizzare ulteriormente il comportamento di attivazione/disattivazione basandoti su isNear, ecc.
+        uiElement.transform.position = collider.transform.position + Vector3.up * uiHeight;
+        uiElement.SetActive(isNear); // Attiva o disattiva l'elemento UI in base alla vicinanza
+    }
 }
