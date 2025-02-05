@@ -6,8 +6,8 @@ public class Torcia : MonoBehaviour
     public GameObject flashlight;
     public Transform flashlightTransform;
 
-    [SerializeField] private bool on;
-    [SerializeField] private bool off;
+    [SerializeField] public bool on;
+    [SerializeField] public bool off;
     [SerializeField] private float flickerTime = 2.5f;
     [SerializeField] private float elapsedTime;
 
