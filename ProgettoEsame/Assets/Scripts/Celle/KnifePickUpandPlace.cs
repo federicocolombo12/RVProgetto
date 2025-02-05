@@ -32,6 +32,15 @@ public class KnifePickUpandPlace : MonoBehaviour
     public float secondAudioDelay = 2f;  // Ritardo per il secondo audio (Paziente Zero)
     public float guardAudioDelay = 5f;  // Ritardo aggiuntivo per il suono della guardia
 
+    public void SetPlayerInTriggerArea(bool isInTriggerArea)
+    {
+        isPlayerInTriggerArea = isInTriggerArea;
+    }
+
+
+    // Variabile per tenere traccia se il player è nell'area del trigger
+    private bool isPlayerInTriggerArea = false;
+
     void Start()
     {
         // Assicurati che gli AudioSource siano assegnati se non lo sono già
@@ -120,6 +129,12 @@ public class KnifePickUpandPlace : MonoBehaviour
 
     void TryDropObject()
     {
+        if (!isPlayerInTriggerArea)
+        {
+            Debug.Log("Il player non è nell'area del trigger, non è possibile posare il coltello.");
+            return;
+        }
+
         RaycastHit hit;
         Vector3 dropPosition = pickedObject.transform.position;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
@@ -248,5 +263,21 @@ public class KnifePickUpandPlace : MonoBehaviour
     public void ActivateKnifeTag()
     {
         gameObject.tag = "OggettoInteragibile2";
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInTriggerArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInTriggerArea = false;
+        }
     }
 }
