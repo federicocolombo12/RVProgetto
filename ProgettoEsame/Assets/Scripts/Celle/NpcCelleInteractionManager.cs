@@ -79,6 +79,12 @@ public class NpcCelleInteractionManager : MonoBehaviour
                         Debug.Log("Giocatore ha interagito con il Paziente 3");
                         paziente3Interaction = true;
                     }
+
+                    // Cambia il tag dell'oggetto corrente
+                    npc.gameObject.tag = "Untagged";
+
+                    // Cambia il tag di tutti i figli
+                    ChangeTagOfChildren(npc.gameObject, "Untagged");
                 }
             }
         }
@@ -127,7 +133,6 @@ public class NpcCelleInteractionManager : MonoBehaviour
         npcTransform.rotation = targetRotation;
     }
 
-
     private IEnumerator RotateTowards(Transform npcTransform, Vector3 targetPosition)
     {
         Quaternion initialRotation = npcTransform.rotation;
@@ -147,5 +152,12 @@ public class NpcCelleInteractionManager : MonoBehaviour
         npcTransform.rotation = targetRotation;
     }
 
+    private void ChangeTagOfChildren(GameObject parent, string newTag)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            child.gameObject.tag = newTag;
+            ChangeTagOfChildren(child.gameObject, newTag); // Ricorsione per i figli dei figli
+        }
+    }
 }
-

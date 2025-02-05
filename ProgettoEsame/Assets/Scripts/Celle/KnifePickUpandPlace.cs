@@ -178,6 +178,12 @@ public class KnifePickUpandPlace : MonoBehaviour
         CellaManager.instance.coltelloPreso = true;
         CellaManager.instance.attivaGuardRoutine = true;
 
+        // Cambia il tag dell'oggetto corrente
+        obj.tag = "Untagged";
+
+        // Cambia il tag di tutti i figli
+        ChangeTagOfChildren(obj, "Untagged");
+
         // Disattiva i suoni dopo un certo tempo (5 secondi)
         yield return new WaitForSeconds(5f);
         audioSource1.Stop();
@@ -230,6 +236,14 @@ public class KnifePickUpandPlace : MonoBehaviour
         CellaManager.instance.coltelloNascosto = true;
     }
 
+    private void ChangeTagOfChildren(GameObject parent, string newTag)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            child.gameObject.tag = newTag;
+            ChangeTagOfChildren(child.gameObject, newTag); // Ricorsione per i figli dei figli
+        }
+    }
 
     public void ActivateKnifeTag()
     {
