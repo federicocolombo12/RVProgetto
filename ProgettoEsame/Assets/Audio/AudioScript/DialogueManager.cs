@@ -1,59 +1,34 @@
-using System.Collections; // Necessario per IEnumerator
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    public AudioSource audioSource; // L'AudioSource per riprodurre il suono del dialogo
-    public AudioClip startDialogueClip; // Clip audio per l'inizio del dialogo
-    public AudioClip moveDialogueClip; // Clip audio per il dialogo mentre l'NPC si muove
-    public AudioClip endDialogueClip; // Clip audio per la fine del dialogo
+    public AudioSource audioSource; // Riferimento all'AudioSource, assegnabile tramite Inspector
+    public AudioClip startQueueAudio; // Clip audio da far partire all'inizio della fila
 
-    private bool isAudioPlaying = false; // Variabile per controllare se l'audio è già in riproduzione
-
-    public void StartDialogue(string dialogue)
+    private void Awake()
     {
-        // Mostra il dialogo o inizia la sequenza
-        Debug.Log("Dialogo in corso: " + dialogue);
-
-        // Riproduce il clip audio relativo all'inizio del dialogo solo se non è già in riproduzione
-        if (!isAudioPlaying && audioSource != null && startDialogueClip != null)
+        // Verifica che l'AudioSource sia assegnato
+        if (audioSource == null)
         {
-            isAudioPlaying = true;
-            audioSource.PlayOneShot(startDialogueClip);
-            // Imposta isAudioPlaying su false quando l'audio è terminato
-            StartCoroutine(ResetAudioFlag(startDialogueClip.length));
+            Debug.LogError("AudioSource non assegnato in DialogueManager! Assegna un AudioSource nell'Inspector.");
         }
     }
 
-    public void PlayMovementDialogue()
+    public void PlayStartQueueAudio()
     {
-        // Riproduce il clip audio relativo al movimento solo se non è già in riproduzione
-        if (!isAudioPlaying && audioSource != null && moveDialogueClip != null)
+        // Verifica che l'AudioSource e la clip audio siano validi
+        if (audioSource != null && startQueueAudio != null)
         {
-            isAudioPlaying = true;
-            audioSource.PlayOneShot(moveDialogueClip);
-            StartCoroutine(ResetAudioFlag(moveDialogueClip.length));
+            audioSource.PlayOneShot(startQueueAudio);
         }
-    }
-
-    public void EndDialogue()
-    {
-        // Termina il dialogo
-        Debug.Log("Dialogo terminato");
-
-        // Riproduce il clip audio relativo alla fine del dialogo solo se non è già in riproduzione
-        if (!isAudioPlaying && audioSource != null && endDialogueClip != null)
+        else
         {
-            isAudioPlaying = true;
-            audioSource.PlayOneShot(endDialogueClip);
-            StartCoroutine(ResetAudioFlag(endDialogueClip.length));
+            if (startQueueAudio == null)
+            {
+                Debug.LogWarning("Start queue audio clip non assegnato!");
+            }
         }
-    }
-
-    // Coroutine per resettare il flag quando l'audio finisce
-    private IEnumerator ResetAudioFlag(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        isAudioPlaying = false;
     }
 }

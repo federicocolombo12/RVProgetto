@@ -11,18 +11,15 @@ public class CharacterBehavior : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
     [SerializeField] private InfermieraScript nurse;
-    private NpcFootstepAudio footstepAudio; // Aggiunto per il suono dei passi
-    private DialogueManager dialogueManager; // Riferimento al DialogueManager
-    private bool hasStartedDialogue = false; // Per evitare di chiamare il dialogo più volte
+    private NpcFootstepAudio footstepAudio; // Per il suono dei passi
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        footstepAudio = GetComponent<NpcFootstepAudio>(); // Trova il componente audio
-        dialogueManager = FindObjectOfType<DialogueManager>(); // Trova il DialogueManager nella scena
+        footstepAudio = GetComponent<NpcFootstepAudio>();
+        
 
-        // Assicurati che il personaggio sia in idle inizialmente
         animator.SetBool("isWalking", false);
     }
 
@@ -33,53 +30,36 @@ public class CharacterBehavior : MonoBehaviour
 
     private IEnumerator PerformActions()
     {
+
         // Cammina verso il punto della medicina
         StartWalking();
         agent.SetDestination(medicinePoint.position);
-
-        // Avvia il dialogo se non è già iniziato
-        if (!hasStartedDialogue && dialogueManager != null)
-        {
-            dialogueManager.StartDialogue("L'NPC sta andando a prendere la medicina.");
-            hasStartedDialogue = true;
-        }
-
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.1f);
 
-        // Prendi la medicina
+        // Ferma la camminata
         StopWalking();
+
+        // Avvisa l'infermiera
         if (nurse != null)
         {
-            Debug.Log("Notifying nurse");
             nurse.TriggerNurseAnimation();
         }
         else
         {
             Debug.LogWarning("Nurse reference is missing");
         }
+
         yield return new WaitForSeconds(3f);
         animator.SetTrigger("takeMedicine");
-
         yield return new WaitForSeconds(4f);
 
-        // Cammina verso il punto di uscita
+        // Cammina verso l'uscita
         StartWalking();
         HasFinished = true;
         agent.SetDestination(exitPoint.position);
 
-        // Aggiorna il dialogo mentre l'NPC si muove verso l'uscita
-        if (dialogueManager != null)
-        {
-            dialogueManager.PlayMovementDialogue();
-        }
-
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance < 0.5f);
 
-        // Termina il dialogo quando l'NPC arriva a destinazione
-        if (dialogueManager != null)
-        {
-            dialogueManager.EndDialogue();
-        }
 
         // Termina le azioni
         StopWalking();
@@ -89,7 +69,7 @@ public class CharacterBehavior : MonoBehaviour
     private void StartWalking()
     {
         animator.SetBool("isWalking", true);
-        footstepAudio?.StartFootsteps(); // Avvia i passi se il componente esiste
+        footstepAudio?.StartFootsteps(); // Suono dei passi
     }
 
     private void StopWalking()
