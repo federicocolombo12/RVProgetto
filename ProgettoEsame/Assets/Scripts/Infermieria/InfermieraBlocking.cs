@@ -68,6 +68,13 @@ public class InfermieraBlocking : MonoBehaviour
 
         navMeshAgent.SetDestination(firstDestination.position);
         navMeshAgent.isStopped = false;
+        transform.gameObject.tag = "Untagged";
+
+        // Remove tag from children
+        foreach (Transform child in transform)
+        {
+            child.gameObject.tag = "Untagged";
+        }
 
         animator.SetTrigger("Walk");
 
