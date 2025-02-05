@@ -21,6 +21,7 @@ public class InfermieraSound : MonoBehaviour
         {
             if (clipIndex == 1)
             {
+                Debug.Log("Playing nurse talk sound");
                 audioSource.clip = nurseTalkClip;
             }
             else if (clipIndex == 2)

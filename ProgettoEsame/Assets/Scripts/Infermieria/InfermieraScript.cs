@@ -44,7 +44,7 @@ public class InfermieraScript : MonoBehaviour
             isTalking = true; // Imposta lo stato a "parlando"
             animator.SetTrigger("NurseTalk");
             childUi.tag = "Untagged"; // Rimuovi il tag "Interactable" dall'infermiera
-            if (infermieraSound != null && !infermieraSound.IsPlaying())
+            if (!infermieraSound.IsPlaying())
             {
                 infermieraSound.PlayNurseTalkSound(1);  // Riproduce il primo suono
             }
