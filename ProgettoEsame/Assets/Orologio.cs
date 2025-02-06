@@ -1,38 +1,35 @@
-using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;  // Assicurati di includere questo namespace per usare UI elements
+using TMPro;  // Solo se usi TextMeshPro
 
-public class DigitalClock : MonoBehaviour
+public class CountdownTimer : MonoBehaviour
 {
-    public Text textClock;
-    public int countdownTime = 60; // Tempo di conto alla rovescia in secondi
-    private float remainingTime;
+    public TextMeshProUGUI countdownText;  // Cambia in 'public Text countdownText;' se non usi TextMeshPro
+    public float countdownTime = 60;  // Durata del timer in secondi
 
-    void Awake()
+    private void Start()
     {
-        textClock = GetComponent<Text>();
-        remainingTime = countdownTime;
+        StartCoroutine(CountdownRoutine());
     }
 
-    void Update()
+    IEnumerator CountdownRoutine()
     {
-        if (remainingTime > 0)
+        float currentTime = countdownTime;
+        while (currentTime > 0)
         {
-            remainingTime -= Time.deltaTime;
-            TimeSpan timeSpan = TimeSpan.FromSeconds(remainingTime);
-            string hour = LeadingZero(timeSpan.Hours);
-            string minute = LeadingZero(timeSpan.Minutes);
-            string second = LeadingZero(timeSpan.Seconds);
-            textClock.text = $"{hour}:{minute}:{second}";
+            currentTime -= Time.deltaTime;
+            UpdateTimeDisplay(currentTime);
+            yield return null;
         }
-        else
-        {
-            textClock.text = "00:00:00";
-        }
+        countdownText.text = "Finito!";
     }
 
-    string LeadingZero(int n)
+    void UpdateTimeDisplay(float timeToDisplay)
     {
-        return n.ToString().PadLeft(2, '0');
+        timeToDisplay += 1;
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
