@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Paziente2ScriptNPC : MonoBehaviour
 {
     private Animator animator;
     private NpcHeadLookAtCelle npcHeadLookAtCelle;
     private Paziente2AudioManager audioManager; // Riferimento al gestore audio
+    private NavMeshAgent navMeshAgent;
+    public Transform PosizionePaziente2; // Assicurati di assegnare questa posizione nel tuo inspector
 
     void Awake()
     {
         npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
         audioManager = GetComponent<Paziente2AudioManager>(); // Recupera il componente audio
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Start()
@@ -22,6 +26,7 @@ public class Paziente2ScriptNPC : MonoBehaviour
             Debug.LogError("Animator non trovato sul Paziente 2!");
         }
         npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
+        StartCoroutine(MoveToPositionRoutine());
     }
 
     void Update()
@@ -49,6 +54,25 @@ public class Paziente2ScriptNPC : MonoBehaviour
         {
             audioManager.AvviaDialogo(); // Avvia il dialogo audio
         }
+    }
+
+    private IEnumerator MoveToPositionRoutine()
+    {
+        // Parte in idle
+        
+        animator.SetBool("IsWalking", true);
+        navMeshAgent.SetDestination(PosizionePaziente2.position);
+
+        // Attendi fino a raggiungere la posizione
+        while (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        // Ferma il cammino e torna in idle
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsIdle", true);
+        yield return new WaitForSeconds(2f); // Tempo in idle
     }
 
     private IEnumerator InteragisciRoutine()
