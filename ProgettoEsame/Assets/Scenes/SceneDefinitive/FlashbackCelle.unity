@@ -4583,7 +4583,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius: 2
   interactRadius: 1
-  interactableTypes: []
+  interactableTypes:
+  - tag: OggettoInteragibile1
+    uiPrefab: {fileID: 6581245343422655493, guid: d6d4e177fd98df446a40238af89b6d9e, type: 3}
+    uiHeight: 0
+  - tag: OggettoInteragibile2
+    uiPrefab: {fileID: 6581245343422655493, guid: d80bda072235ebd41978c446889461dc, type: 3}
+    uiHeight: 0
   poolSize: 4
   colliders:
   - {fileID: 0}
@@ -4616,32 +4622,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   interactionCooldown: 3
---- !u!114 &1091525840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1091525826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4850911a56fe374e85922cbad9a2a66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRadius: 2
-  interactRadius: 2
-  uiPrefab: {fileID: 6581245343422655493, guid: d80bda072235ebd41978c446889461dc, type: 3}
-  poolSize: 3
-  altezza: 0.1
-  colliders:
-  - {fileID: 0}
-  - {fileID: 0}
-  boxLength: 2
-  boxWidth: 0.2
-  boxHeight: 0.2
-  playerCamera: {fileID: 0}
-  sprite1: {fileID: 0}
-  sprite2: {fileID: 0}
 --- !u!114 &1091525842 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5649186036490839630, guid: 5bd018cb92a47594c9987c2b20661592, type: 3}
@@ -9470,9 +9450,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5649186036490839620, guid: 5bd018cb92a47594c9987c2b20661592, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1091525838}
-    - targetCorrespondingSourceObject: {fileID: 5649186036490839620, guid: 5bd018cb92a47594c9987c2b20661592, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1091525840}
     - targetCorrespondingSourceObject: {fileID: 5649186036490839620, guid: 5bd018cb92a47594c9987c2b20661592, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1091525847}
