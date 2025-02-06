@@ -32966,6 +32966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tablets and Capsules
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3de3d48030cd2144a8afe8e68a345d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1457965569210716363, guid: c3de3d48030cd2144a8afe8e68a345d7, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.63327146
@@ -37154,7 +37158,7 @@ Transform:
   m_GameObject: {fileID: 1465488403}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.865, z: 0.13}
+  m_LocalPosition: {x: 0, y: 0.997, z: 0.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52059,7 +52063,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2624059778181706277}
   - {fileID: 2124603687}
   - {fileID: 6062846796712011089}
   - {fileID: 1423317006}
@@ -53822,6 +53825,7 @@ PrefabInstance:
     - {fileID: 8065740185899839404, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
     - {fileID: 878867692966618719, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
     - {fileID: 4430836920117153525, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+    - {fileID: 2511241883853872489, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8013800285685181129, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       insertIndex: 1
@@ -53938,13 +53942,13 @@ PrefabInstance:
       insertIndex: 160
       addedObject: {fileID: 925467346}
     - targetCorrespondingSourceObject: {fileID: 3667108122735967711, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
-      insertIndex: 166
+      insertIndex: 165
       addedObject: {fileID: 1099031175}
     - targetCorrespondingSourceObject: {fileID: 3667108122735967711, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
-      insertIndex: 168
+      insertIndex: 167
       addedObject: {fileID: 962273906}
     - targetCorrespondingSourceObject: {fileID: 3667108122735967711, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
-      insertIndex: 169
+      insertIndex: 168
       addedObject: {fileID: 1339442759}
     - targetCorrespondingSourceObject: {fileID: 3667108122735967711, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       insertIndex: -1
@@ -54907,12 +54911,12 @@ Transform:
   m_GameObject: {fileID: 7803482789757135915}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 76, y: 76, z: 76}
+  m_LocalPosition: {x: 24.758402, y: 0.752, z: -4.398}
+  m_LocalScale: {x: 76, y: 75.999985, z: 75.999985}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 844776092030943954}
-  m_Father: {fileID: 543450653093482137}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2661200783601159134
 Transform:
@@ -57083,7 +57087,7 @@ PrefabInstance:
     - target: {fileID: 6701145469837472915, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: script
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8132377813948751978}
     - target: {fileID: 6701145469837472915, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -57616,7 +57620,7 @@ GameObject:
   - component: {fileID: 8132377813948751977}
   - component: {fileID: 8132377813948751976}
   m_Layer: 11
-  m_Name: Cap 1
+  m_Name: MedicinaImpostante
   m_TagString: OggettoInteragibile2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58057,7 +58061,7 @@ MonoBehaviour:
   - {fileID: 1926933802}
   infermieraSound: {fileID: 0}
   interactionCount: 0
-  attivaPorta: {fileID: 0}
+  attivaPorta: {fileID: 8132377813948751978}
   childUi: {fileID: 0}
 --- !u!136 &8431963242725611126
 CapsuleCollider:
@@ -58799,6 +58803,7 @@ SceneRoots:
   - {fileID: 527863899}
   - {fileID: 560421467}
   - {fileID: 2093248622}
+  - {fileID: 2624059778181706277}
   - {fileID: 543450653093482137}
   - {fileID: 1288066408}
   - {fileID: 1176754196}
