@@ -1,26 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
-public class DelayedAudioPlayer : MonoBehaviour
+public class DelayedAudio : MonoBehaviour
 {
     public AudioSource audioSource; // Assegna l'AudioSource dall'Inspector
-    public float delay = 5f; // Ritardo in secondi
+    public float delay = 60f; // Ritardo in secondi
 
     void Start()
     {
-        if (audioSource != null)
-        {
-            StartCoroutine(PlayAudioWithDelay());
-        }
-        else
-        {
-            Debug.LogError("AudioSource non assegnato!");
-        }
+        StartCoroutine(PlayAudioWithDelay());
     }
 
     IEnumerator PlayAudioWithDelay()
     {
         yield return new WaitForSeconds(delay);
-        audioSource.Play();
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogError("AudioSource non assegnato!");
+        }
     }
 }
