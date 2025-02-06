@@ -6,7 +6,8 @@ using TMPro;
 public class CountdownTimer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI countdownText;
-    public float countdownTime = 60;
+    private TimeSpan startTime = new TimeSpan(12, 30, 0); 
+    private TimeSpan endTime = new TimeSpan(12, 31, 0); 
     public static event Action OnTimerEnd; // Evento per notificare la fine del timer
 
     private void Start()
@@ -17,22 +18,19 @@ public class CountdownTimer : MonoBehaviour
 
     IEnumerator CountdownRoutine()
     {
-        float currentTime = countdownTime;
-        while (currentTime > 0)
+        TimeSpan currentTime = startTime;
+        while (currentTime < endTime)
         {
-            currentTime -= Time.deltaTime;
+            currentTime = currentTime.Add(TimeSpan.FromSeconds(Time.deltaTime));
             UpdateTimeDisplay(currentTime);
             yield return null;
         }
-        countdownText.text = "Finito!";
+        countdownText.text = "00:00:00";
         OnTimerEnd?.Invoke(); // Invoca l'evento quando il timer scade
     }
 
-    void UpdateTimeDisplay(float timeToDisplay)
+    void UpdateTimeDisplay(TimeSpan timeToDisplay)
     {
-        timeToDisplay += 1;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        countdownText.text = string.Format("{0:00}:{1:00}:{2:00}", timeToDisplay.Hours, timeToDisplay.Minutes, timeToDisplay.Seconds);
     }
 }
