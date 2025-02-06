@@ -1214,7 +1214,7 @@ MonoBehaviour:
   canvasObject: {fileID: 992572048}
   lucePuntiforme: {fileID: 996050987}
   triggerScript: {fileID: 0}
-  delayTime: 30
+  delayTime: 5
 --- !u!114 &356207496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4821,6 +4821,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1409921066}
   hasActivated: 0
+  delayTime: 30
+  startVideo: 0
 --- !u!4 &1690164310
 Transform:
   m_ObjectHideFlags: 0
@@ -5702,6 +5704,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1409921066}
   hasActivated: 0
+  delayTime: 2
+  startVideo: 0
 --- !u!4 &2120081739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4837693977132404, guid: 4e12d279753093a40a6c88deea619dfe, type: 3}
