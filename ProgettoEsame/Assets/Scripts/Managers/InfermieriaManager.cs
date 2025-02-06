@@ -43,8 +43,8 @@ public class InfermieriaManager : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(4f);
+        TransitionScript.instance.FadeOut(1);
+        yield return new WaitForSeconds(1);
 
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
         {
