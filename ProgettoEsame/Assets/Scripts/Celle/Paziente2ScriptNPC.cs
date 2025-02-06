@@ -10,6 +10,7 @@ public class Paziente2ScriptNPC : MonoBehaviour
     private Paziente2AudioManager audioManager; // Riferimento al gestore audio
     private NavMeshAgent navMeshAgent;
     public Transform PosizionePaziente2; // Assicurati di assegnare questa posizione nel tuo inspector
+    [SerializeField]  public bool shouldMoveToPosition = false; // Flag per controllare la routine di movimento
 
     void Awake()
     {
@@ -26,11 +27,16 @@ public class Paziente2ScriptNPC : MonoBehaviour
             Debug.LogError("Animator non trovato sul Paziente 2!");
         }
         npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
-        StartCoroutine(MoveToPositionRoutine());
     }
 
     void Update()
     {
+        if (shouldMoveToPosition)
+        {
+            StartCoroutine(MoveToPositionRoutine());
+            shouldMoveToPosition = false; // Resetta il flag dopo aver avviato la routine
+        }
+
         if (NpcCelleInteractionManager.instance.paziente2Interaction)
         {
             Interagisci();
@@ -74,7 +80,6 @@ public class Paziente2ScriptNPC : MonoBehaviour
         yield return new WaitForSeconds(2f); // Tempo in idle
     }
 
-
     private IEnumerator InteragisciRoutine()
     {
         animator.SetBool("Interagisci", true);
@@ -87,4 +92,11 @@ public class Paziente2ScriptNPC : MonoBehaviour
     {
         npcHeadLookAtCelle.LookAtPosition(Camera.main.transform.position);
     }
+
+    // Metodo per impostare il flag
+    public void SetShouldMoveToPosition(bool value)
+    {
+        shouldMoveToPosition = value;
+    }
 }
+
