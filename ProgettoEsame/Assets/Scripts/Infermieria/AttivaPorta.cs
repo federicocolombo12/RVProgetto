@@ -104,10 +104,12 @@ public class AttivaPorta : MonoBehaviour
         {
             FirstPersonController.cameraCanMove = false;
             obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, animationSpeed * Time.deltaTime);
+            obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, holdPosition.rotation, animationSpeed * Time.deltaTime);
             yield return null;
         }
 
         obj.transform.position = targetPosition;
+        
         obj.transform.parent = holdPosition;
 
         InfermieriaManager.instance.pastigliaTrovata = true;
