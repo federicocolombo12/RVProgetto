@@ -83,7 +83,7 @@ public class CellaManager : MonoBehaviour
 
     private void LoadCorridoio1Scene()
     {
-        TransitionScript.instance.FadeOut();
+        TransitionScript.instance.FadeOut(1);
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
         {
             // Trova il punto di spawn nella nuova scena

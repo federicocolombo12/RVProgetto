@@ -55,12 +55,12 @@ public class CorridoioManager : MonoBehaviour
     IEnumerator LoadInfermieriaCoroutine()
     {
         Debug.Log("First object found!");
-        TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(5f);
+        TransitionScript.instance.FadeOut(1);
+        yield return new WaitForSeconds(1);
             
         MySceneManager.instance.LoadNextScene("FlashbackInfermieria", LoadSceneMode.Single, () =>
         {
-            Debug.Log("FlashbackInfermieria caricato con successo!");
+            TransitionScript.instance.FadeIn(1);
             
         });
         
@@ -73,14 +73,14 @@ public class CorridoioManager : MonoBehaviour
     }
     IEnumerator LoadCelleCoroutine()
     {
-        TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(5f);
+        TransitionScript.instance.FadeOut(1);
+        yield return new WaitForSeconds(1);
             
         Debug.Log("Second object found!");
         MySceneManager.instance.LoadNextScene("FlashbackCelle", LoadSceneMode.Single, () => 
             {
                 Debug.Log("FlashbackCelle caricato con successo!");
-                
+                TransitionScript.instance.FadeIn(1);
                 
             });
         Destroy(firstPersonController);
@@ -95,14 +95,14 @@ public class CorridoioManager : MonoBehaviour
     IEnumerator LoadFinaleCoroutine()
     {
         
-        TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(5f);
+        TransitionScript.instance.FadeOut(0);
+        yield return new WaitForSeconds(1);
             
         Debug.Log("Door is now open!");
         MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
             () => {
                 startAnimationPorta = true;
-                TransitionScript.instance.FadeIn();
+                TransitionScript.instance.FadeIn(0);
                 
             });
         Destroy(gameObject);
@@ -113,14 +113,14 @@ public class CorridoioManager : MonoBehaviour
     }
     IEnumerator LoadPassatoCoroutine()
     {
-        TransitionScript.instance.FadeOut();
-        yield return new WaitForSeconds(5f);
+        TransitionScript.instance.FadeOut(1);
+        yield return new WaitForSeconds(1);
             
         Debug.Log("Door is now open!");
         MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshockPassato", LoadSceneMode.Single,
             () => {
                 
-                TransitionScript.instance.FadeIn();
+                TransitionScript.instance.FadeIn(1);
                 
             });
         Destroy(gameObject);

@@ -22,7 +22,7 @@ public class DoorSoundOnFadeOut : MonoBehaviour
         if (TransitionScript.instance != null && !hasPlayedSound)
         {
             // Se il FadeOut è iniziato (vuoi un modo per sapere se è attivo)
-            if (TransitionScript.instance.IsFadingOut())
+            if (TransitionScript.instance.IsFadingOut(0))
             {
                 PlayDoorSound();
             }

@@ -7,7 +7,7 @@ public class TransitionScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public static TransitionScript instance { get; private set; }
-    Animator transitionAnim;
+    Animator[] transitionAnim;
 
     private void Awake()
     {
@@ -21,20 +21,20 @@ public class TransitionScript : MonoBehaviour
 
     void Start()
     {
-        transitionAnim = GetComponentInChildren<Animator>();
+        transitionAnim = GetComponentsInChildren<Animator>();
     }
-    public void FadeIn()
+    public void FadeIn(int Index)
     {
-        transitionAnim.SetTrigger("FadeIn");
+        transitionAnim[Index].SetTrigger("FadeIn");
     }
 
-    public void FadeOut()
+    public void FadeOut(int Index)
     {
-        transitionAnim.SetTrigger("FadeOut");
+        transitionAnim[Index].SetTrigger("FadeOut");
     }
-    public bool IsFadingOut()
+    public bool IsFadingOut(int Index)
     {
         // Restituisce true se l'animazione FadeOut è attiva
-        return transitionAnim.GetCurrentAnimatorStateInfo(0).IsName("FadeOut");
+        return transitionAnim[Index].GetCurrentAnimatorStateInfo(0).IsName("FadeOut");
     }
 }
