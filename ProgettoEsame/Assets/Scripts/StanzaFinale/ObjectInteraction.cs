@@ -1,45 +1,52 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Video;
 
 public class ObjectInteraction : MonoBehaviour
 {
-    public Animator animator; // Assegna l'Animator dell'oggetto animato
+    public Animator animator;
     public bool hasActivated = false;
-    private bool isColliding = false; // Variabile per tenere traccia della collisione
-    //public GameObject videoObject; // Oggetto che contiene il VideoPlayer
-    //public GameObject canvasObject; // Aggiungi il riferimento al Canva
-    public float delayTime = 2f; // Tempo di attesa per avviare il video
+    private bool isColliding = false;
+    public float delayTime = 2f;
     public bool startVideo = false;
-/*
-    private void Start()
+
+    private GiorgioCodaAudio audioScript; // Riferimento allo script audio
+
+    void Start()
     {
-        if (videoObject != null && canvasObject != null)
-        {
-            videoObject.SetActive(false); // Disattiva il video all'inizio
-            canvasObject.SetActive(false); // Disattiva anche il Canvas all'inizio
-        }
+        // Trova lo script GiorgioCodaAudio sullo stesso oggetto
+        audioScript = GetComponent<GiorgioCodaAudio>();
     }
-*/
+
     void Update()
     {
-        if (isColliding && Input.GetKeyDown(KeyCode.E) && !hasActivated)
+        if (isColliding && Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(TriggerDisapprova());
-        }
-        else if (isColliding && Input.GetKeyDown(KeyCode.E) && hasActivated)
-        {
-            StartCoroutine(TriggerActivateAction());
-            //StartVideoAfterDelay();
+            if (!hasActivated)
+            {
+                StartCoroutine(TriggerDisapprova());
+            }
+            else
+            {
+                StartCoroutine(TriggerActivateAction());
+            }
+
+            // Avvia il suono quando si interagisce
+            if (audioScript != null)
+            {
+                audioScript.PlayInteractionSound();
+            }
+            else
+            {
+                Debug.LogWarning("GiorgioCodaAudio non trovato su " + gameObject.name);
+            }
         }
     }
 
     private IEnumerator TriggerDisapprova()
     {
         animator.SetTrigger("Disapprova");
-        yield return new WaitForSeconds(1f); // Aspetta prima di tornare indietro
+        yield return new WaitForSeconds(1f);
         animator.SetTrigger("TornaIndietro");
-        animator.ResetTrigger("Disapprova");
         hasActivated = true;
     }
 
@@ -47,13 +54,13 @@ public class ObjectInteraction : MonoBehaviour
     {
         animator.SetTrigger("ActivateAction");
         hasActivated = false;
+        yield return new WaitForSeconds(47f);
         startVideo = true;
-        yield return null; // Puoi cambiare se serve una pausa
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Assicurati che l'altro oggetto abbia il tag "Player"
+        if (other.CompareTag("Player"))
         {
             isColliding = true;
         }
@@ -61,44 +68,9 @@ public class ObjectInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) // Assicurati che l'altro oggetto abbia il tag "Player"
+        if (other.CompareTag("Player"))
         {
             isColliding = false;
         }
     }
-    /*
-    private void AvviaVideo()
-    {
-        if (canvasObject != null && videoObject != null && !canvasObject.activeSelf)
-        {
-            canvasObject.SetActive(true); // Attiva il Canvas che contiene il video
-            videoObject.SetActive(true);  // Attiva il GameObject del VideoPlayer (lo rende visibile)
-
-            Debug.Log("Video avviato.");
-
-            VideoPlayer videoPlayer = videoObject.GetComponent<VideoPlayer>();
-            if (videoPlayer != null)
-            {
-                // Avvia il video
-                videoPlayer.Play();
-                Debug.Log("VideoPlayer avviato.");
-            }
-            else
-            {
-                Debug.LogError("Nessun componente VideoPlayer trovato sull'oggetto video.");
-            }
-        }
-    }
-    private void StartVideoAfterDelay()
-    {
-        StartCoroutine(WaitAndStartVideo());
-    }
-
-    // Coroutine per attendere 30 secondi e poi avviare il video
-    private IEnumerator WaitAndStartVideo()
-    {
-        yield return new WaitForSeconds(delayTime); // Attende 30 secondi
-        AvviaVideo(); // Chiama il metodo AvviaVideo
-    }*/
 }
-
