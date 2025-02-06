@@ -1,16 +1,17 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;  // Assicurati di includere questo namespace per usare UI elements
-using TMPro;  // Solo se usi TextMeshPro
+using TMPro;
 
 public class CountdownTimer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI countdownText;  // Cambia in 'public Text countdownText;' se non usi TextMeshPro
-    public float countdownTime = 60;  // Durata del timer in secondi
+    [SerializeField] TextMeshProUGUI countdownText;
+    public float countdownTime = 60;
+    public static event Action OnTimerEnd; // Evento per notificare la fine del timer
 
     private void Start()
     {
-        countdownText = GetComponent<TextMeshProUGUI>();  // Cambia in 'GetComponent<Text>();' se non usi TextMeshPro
+        countdownText = GetComponent<TextMeshProUGUI>();
         StartCoroutine(CountdownRoutine());
     }
 
@@ -24,6 +25,7 @@ public class CountdownTimer : MonoBehaviour
             yield return null;
         }
         countdownText.text = "Finito!";
+        OnTimerEnd?.Invoke(); // Invoca l'evento quando il timer scade
     }
 
     void UpdateTimeDisplay(float timeToDisplay)
