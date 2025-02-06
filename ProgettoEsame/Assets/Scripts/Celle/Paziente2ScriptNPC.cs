@@ -59,21 +59,21 @@ public class Paziente2ScriptNPC : MonoBehaviour
     private IEnumerator MoveToPositionRoutine()
     {
         // Parte in idle
-        
+        Debug.Log("Inizio Camminata verso la prima destinazione");
+        animator.SetBool("IsIdle", false);
         animator.SetBool("IsWalking", true);
+        navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(PosizionePaziente2.position);
 
         // Attendi fino a raggiungere la posizione
-        while (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
-        {
-            yield return null;
-        }
+        yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
         // Ferma il cammino e torna in idle
         animator.SetBool("IsWalking", false);
         animator.SetBool("IsIdle", true);
         yield return new WaitForSeconds(2f); // Tempo in idle
     }
+
 
     private IEnumerator InteragisciRoutine()
     {
