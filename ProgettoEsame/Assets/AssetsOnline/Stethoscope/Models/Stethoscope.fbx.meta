@@ -1,54 +1,22 @@
 fileFormatVersion: 2
-guid: 1f9aa598d690943938d5a82a88ddfcd5
+guid: d25340873c19dba49928dbd37c240717
 ModelImporter:
-  serializedVersion: 22200
-  internalIDToNameTable: []
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      74: 5856081020077295166
+    second: Stethoscope|StethoscopeAction
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_cover
-    second: {fileID: 2100000, guid: ac1efde294d86b6448a4f99bcaff3e58, type: 2}
+      name: Parts
+    second: {fileID: 2100000, guid: 1a4e14a0dbfa96f458474e6973650adc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_paper
-    second: {fileID: 2100000, guid: d2c27170fbd08204894b742eb2bbd0b4, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_cover_diff_8k
-    second: {fileID: 2800000, guid: badbf8b1c36404526a63b0bf61d68f82, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_cover_metallic_8k
-    second: {fileID: 2800000, guid: bbbafe7b63c7348dda11c9e99d7d3773, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_cover_nor_gl_8k
-    second: {fileID: 2800000, guid: beb6f9b889b744f0f87b8c3de3263483, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_cover_roughness_8k
-    second: {fileID: 2800000, guid: 181cd5c4dea1645f48258717c722574d, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_paper_diff_8k
-    second: {fileID: 2800000, guid: 46ae16220484548539221a1d1e7ab497, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_paper_nor_gl_8k
-    second: {fileID: 2800000, guid: d20b3d4703deb4588b8362355deacd92, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: book_encyclopedia_set_01_paper_roughness_8k
-    second: {fileID: 2800000, guid: eba2c54c319de49608159016c474dc12, type: 3}
+      name: Tube
+    second: {fileID: 2100000, guid: 673c199b93a73e54fbf07b361af4666f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -59,7 +27,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -85,7 +53,6 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -102,7 +69,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
+    optimizeBones: 0
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -113,7 +80,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -123,7 +89,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -146,8 +112,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
-  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
