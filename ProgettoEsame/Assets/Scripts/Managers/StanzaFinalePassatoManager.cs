@@ -20,7 +20,7 @@ public class StanzaFinalePassatoManager : MonoBehaviour
     public Light lucePuntiforme; // Riferimento alla luce puntiforme
 
     [SerializeField] ObjectInteraction triggerScript;
-    [SerializeField] public float delayTime = 30f; // Tempo di attesa per avviare il video
+    [SerializeField] public float delayTime = 2f; // Tempo di attesa per avviare il video
 
     private bool videoDelayStarted = false; // Variabile per evitare di avviare la coroutine più volte
 
@@ -71,8 +71,9 @@ public class StanzaFinalePassatoManager : MonoBehaviour
 
     private void Update()
     {
-        if (triggerScript != null && triggerScript.hasActivated && !videoDelayStarted)
+        if (triggerScript != null && triggerScript.startVideo && !videoDelayStarted)
         {
+            Debug.Log("Video delay avviato.");
             videoDelayStarted = true;
             StartVideoAfterDelay();
         }
