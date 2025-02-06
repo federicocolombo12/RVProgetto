@@ -5,11 +5,12 @@ using TMPro;  // Solo se usi TextMeshPro
 
 public class CountdownTimer : MonoBehaviour
 {
-    public TextMeshProUGUI countdownText;  // Cambia in 'public Text countdownText;' se non usi TextMeshPro
+    [SerializeField] TextMeshProUGUI countdownText;  // Cambia in 'public Text countdownText;' se non usi TextMeshPro
     public float countdownTime = 60;  // Durata del timer in secondi
 
     private void Start()
     {
+        countdownText = GetComponent<TextMeshProUGUI>();  // Cambia in 'GetComponent<Text>();' se non usi TextMeshPro
         StartCoroutine(CountdownRoutine());
     }
 

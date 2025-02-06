@@ -9048,7 +9048,6 @@ GameObject:
   - component: {fileID: 1308487275}
   - component: {fileID: 1308487274}
   - component: {fileID: 1308487273}
-  - component: {fileID: 1308487276}
   m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
@@ -9139,20 +9138,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1308487276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1308487271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa601ca9fd26ae840818b864f5dbcd72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countdownText: {fileID: 1948067981}
-  countdownTime: 60
 --- !u!4 &1308544203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5986664435722268547, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
@@ -11904,6 +11889,7 @@ GameObject:
   - component: {fileID: 1948067979}
   - component: {fileID: 1948067982}
   - component: {fileID: 1948067981}
+  - component: {fileID: 1948067983}
   m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12027,6 +12013,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948067978}
   m_CullTransparentMesh: 1
+--- !u!114 &1948067983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948067978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa601ca9fd26ae840818b864f5dbcd72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownText: {fileID: 1948067981}
+  countdownTime: 60
 --- !u!4 &1956374580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 565703446992856329, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
