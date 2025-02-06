@@ -104,10 +104,11 @@ public class KnifePickUpandPlace : MonoBehaviour
         {
             pickedObject = hit.transform.gameObject;
 
-            MeshCollider meshCollider = pickedObject.GetComponent<MeshCollider>();
-            if (meshCollider != null)
+            
+            Collider collider = pickedObject.GetComponent<Collider>();
+            if (collider != null)
             {
-                meshCollider.enabled = false;
+                collider.enabled = false;
             }
 
             Rigidbody rb = pickedObject.GetComponent<Rigidbody>();

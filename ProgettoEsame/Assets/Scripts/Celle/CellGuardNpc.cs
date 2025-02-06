@@ -147,11 +147,6 @@ public class CellGuardNpc : MonoBehaviour
             thirdPosition = true;
             player.playerCanMove = false;
 
-            if (thirdPosition && aperturaPorta != null)
-            {
-                aperturaPorta.ApriPorta();
-            }
-
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
