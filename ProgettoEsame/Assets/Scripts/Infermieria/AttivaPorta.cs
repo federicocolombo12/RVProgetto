@@ -10,6 +10,7 @@ public class AttivaPorta : MonoBehaviour
     private float maxPickupDistance = 3.0f;
     private float maxDropDistance = 3.0f;
     [SerializeField] private FirstPersonController FirstPersonController;
+    [SerializeField] private MedicineAudio medicineAudio;
 
     // Cooldown variables
     public float interactionCooldown = 3f;
@@ -108,7 +109,14 @@ public class AttivaPorta : MonoBehaviour
 
         obj.transform.position = targetPosition;
         obj.transform.parent = holdPosition;
+
         InfermieriaManager.instance.pastigliaTrovata = true;
+
+        // Chiamata al metodo per riprodurre il suono
+        if (medicineAudio != null)
+        {
+            medicineAudio.PlayMedicineSound(); // Gestito tramite lo script MedicineAudio
+        }
 
         FirstPersonController.cameraCanMove = true;
         this.enabled = false; // Disattiva lo script dopo aver raccolto l'oggetto
