@@ -95,14 +95,14 @@ public class CorridoioManager : MonoBehaviour
     IEnumerator LoadFinaleCoroutine()
     {
         
-        TransitionScript.instance.FadeOut(1);
+        TransitionScript.instance.FadeOut(0);
         yield return new WaitForSeconds(1);
             
         Debug.Log("Door is now open!");
         MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
             () => {
                 startAnimationPorta = true;
-                TransitionScript.instance.FadeIn(1);
+                TransitionScript.instance.FadeIn(0);
                 
             });
         Destroy(gameObject);
