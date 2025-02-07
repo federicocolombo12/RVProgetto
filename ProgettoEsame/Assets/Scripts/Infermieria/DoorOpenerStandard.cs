@@ -7,6 +7,7 @@ public class DoorOpenerStandard : MonoBehaviour
     public PortaStandardAudio portaAudio; // Riferimento allo script audio
     private Transform player;
     public Camera mainCamera;
+    private bool doorActive = false;
 
     [SerializeField] private float interactionDistance = 2f;
     [SerializeField] private LayerMask interactableLayer;
@@ -27,6 +28,8 @@ public class DoorOpenerStandard : MonoBehaviour
     private IEnumerator WaitForAnimationStart()
     {
         doorAnimator.SetBool("DoorOpen", true);
+        doorActive=true;
+        doorAnimator.gameObject.GetComponentInChildren<BoxCollider>().gameObject.tag = "Untagged";
         portaAudio.PlayAperturaSound(); // Riproduce il suono
         yield return new WaitUntil(() => doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Apertura"));
 
@@ -40,6 +43,12 @@ public class DoorOpenerStandard : MonoBehaviour
     {
         Ray ray = new Ray(player.position, player.forward);
         RaycastHit hit;
+        
+        if (!doorActive)
+        {
+            DisattivaTag();
+        }
+        
 
         Debug.DrawRay(player.position, player.forward * interactionDistance, Color.red);
 
@@ -49,6 +58,13 @@ public class DoorOpenerStandard : MonoBehaviour
             {
                 StartCoroutine(WaitForAnimationStart());
             }
+        }
+    }
+    private void DisattivaTag()
+    {
+        if (doorAnimator.gameObject.GetComponentInChildren<BoxCollider>().gameObject.tag == "Untagged")
+        {
+            doorAnimator.gameObject.GetComponentInChildren<BoxCollider>().gameObject.tag = "OggettoInteragibile1";
         }
     }
 }

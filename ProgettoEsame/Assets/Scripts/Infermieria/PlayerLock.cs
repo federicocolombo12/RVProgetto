@@ -9,6 +9,7 @@ public class PlayerLock : MonoBehaviour
     [SerializeField] private bool locked;
     public bool reachedPoint;
     FirstPersonController player;
+    [SerializeField] private Transform targetPosition;
     
     [SerializeField] TriggerController triggerController;
 
@@ -25,6 +26,11 @@ public class PlayerLock : MonoBehaviour
         if (locked)
         {
             player.playerCanMove = false;
+            if (player.gameObject.transform.position != targetPosition.position)
+            {
+                player.gameObject.transform.position = targetPosition.position;
+            }
+            
         }
         else if (!locked && !reachedPoint)
         {
