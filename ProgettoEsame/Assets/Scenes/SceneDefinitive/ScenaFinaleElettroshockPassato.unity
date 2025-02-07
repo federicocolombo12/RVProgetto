@@ -3183,15 +3183,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.953
+      value: 7.822
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.263
+      value: 1.124
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.246
+      value: 1.21
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3221,14 +3221,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3193871012266833458, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00059330254
+      objectReference: {fileID: 0}
+    - target: {fileID: -3193871012266833458, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.10714033
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
       propertyPath: m_Name
       value: GiorgioCoda
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
     - target: {fileID: 5866666021909216657, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 84e101655cf52494bbc18953adfbedd8, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4245,6 +4265,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 9093810522960544110, guid: 3a231fb4a5c0fd24583fa7797efa5530, type: 3}
   m_PrefabInstance: {fileID: 794887169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1406882671 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 24b5fc01b4a537b4f947e32dfbbeae90, type: 3}
+  m_PrefabInstance: {fileID: 1140922826}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1409921066 stripped
 Animator:
@@ -5947,12 +5972,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081582502}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a142254cf4c1e9d499faa673975b781b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1409921066}
+  animator: {fileID: 1406882671}
   hasActivated: 0
   delayTime: 2
   startVideo: 0

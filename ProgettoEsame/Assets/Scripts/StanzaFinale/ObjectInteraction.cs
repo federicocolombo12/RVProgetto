@@ -15,6 +15,12 @@ public class ObjectInteraction : MonoBehaviour
     {
         // Trova lo script GiorgioCodaAudio sullo stesso oggetto
         audioScript = GetComponent<GiorgioCodaAudio>();
+
+        // Verifica che l'animator sia assegnato
+        if (animator == null)
+        {
+            Debug.LogError("Animator non assegnato su " + gameObject.name);
+        }
     }
 
     void Update()
@@ -44,6 +50,7 @@ public class ObjectInteraction : MonoBehaviour
 
     private IEnumerator TriggerDisapprova()
     {
+        Debug.Log("Attivazione trigger Disapprova");
         animator.SetTrigger("Disapprova");
         yield return new WaitForSeconds(1f);
         animator.SetTrigger("TornaIndietro");
@@ -52,6 +59,7 @@ public class ObjectInteraction : MonoBehaviour
 
     private IEnumerator TriggerActivateAction()
     {
+        Debug.Log("Attivazione trigger ActivateAction");
         animator.SetTrigger("ActivateAction");
         hasActivated = false;
         yield return new WaitForSeconds(47f);
