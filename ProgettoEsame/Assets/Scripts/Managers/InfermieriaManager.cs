@@ -28,7 +28,7 @@ public class InfermieriaManager : MonoBehaviour
 
     void Start()
     {
-        
+        TransitionScript.instance.FadeIn(1);
     }
 
     // Update is called once per frame
