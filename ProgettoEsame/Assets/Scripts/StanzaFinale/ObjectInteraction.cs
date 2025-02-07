@@ -6,7 +6,7 @@ public class ObjectInteraction : MonoBehaviour
     public Animator animator;
     public bool hasActivated = false;
     private bool isColliding = false;
-    public float delayTime = 2f;
+    public float delayTime = 47f;
     public bool startVideo = false;
 
     private GiorgioCodaAudio audioScript; // Riferimento allo script audio
@@ -62,7 +62,7 @@ public class ObjectInteraction : MonoBehaviour
         Debug.Log("Attivazione trigger ActivateAction");
         animator.SetTrigger("ActivateAction");
         hasActivated = false;
-        yield return new WaitForSeconds(47f);
+        yield return new WaitForSeconds(2f);
         startVideo = true;
     }
 
