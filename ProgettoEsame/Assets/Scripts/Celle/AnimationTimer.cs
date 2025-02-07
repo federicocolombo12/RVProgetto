@@ -6,6 +6,7 @@ public class AnimationTimer : MonoBehaviour
     [SerializeField] private Paziente3ScriptNPC paziente3;
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private BuzzerSound buzzerSound; // Aggiunto riferimento al suono del buzzer
+    [SerializeField] private GameObject triggerObject;
 
     private void OnEnable()
     {
@@ -20,8 +21,7 @@ public class AnimationTimer : MonoBehaviour
     private void HandleTimerEnd()
     {
         // Imposta i flag su true
-        paziente2.SetShouldMoveToPosition(true);
-        paziente3.SetShouldMoveToPosition(true);
+        triggerObject.SetActive(true);
 
         // Avvia l'animazione delle porte
         doorAnimator.SetTrigger("OpenDoor");
