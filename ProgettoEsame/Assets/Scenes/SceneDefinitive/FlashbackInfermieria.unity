@@ -20268,7 +20268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &837757504
 Transform:
   m_ObjectHideFlags: 0
@@ -29919,7 +29919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raccoltaScript: {fileID: 0}
-  canvasVisualizzazione: {fileID: 0}
+  canvasVisualizzazione: {fileID: 1732357243}
   stopView: 0
 --- !u!64 &1213659102
 MeshCollider:
@@ -34245,7 +34245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6581245343422655493, guid: 735814b54c660bb428a4c0e5f99d3dab, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -54952,14 +54952,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7635504380835043332, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+      insertIndex: 12
+      addedObject: {fileID: 2015589586}
+    - targetCorrespondingSourceObject: {fileID: 7635504380835043332, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2015589575}
     - targetCorrespondingSourceObject: {fileID: 7635504380835043332, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2015589574}
-    - targetCorrespondingSourceObject: {fileID: 7635504380835043332, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2015589586}
   m_SourcePrefab: {fileID: 100100000, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
 --- !u!23 &6135507964255934602
 MeshRenderer:
