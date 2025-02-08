@@ -4,15 +4,16 @@ using UnityEngine.AI;
 
 public class CellGuardNpc : MonoBehaviour
 {
-    public float idleTime = 2f; // Tempo in secondi prima che inizi a camminare
-    public float secondIdleTime = 5f; // Tempo in secondi per il secondo idle
-    public Transform firstDestination; // Prima destinazione
-    public Transform secondDestination; // Seconda destinazione
-    public Transform thirdDestination; // Terza destinazione
-    public Transform fourthDestination; // Terza destinazione
-    public float walkSpeed = 1f; // Velocità di camminata
-    public float stoppingDistance = 0.5f; // Distanza di arresto
-    public float rightTurnDuration = 1f; // Durata della rotazione a destra
+    public float idleTime = 2f; 
+    public float secondIdleTime = 5f; 
+    public Transform firstDestination; 
+    public Transform secondDestination; 
+    public Transform thirdDestination; 
+    public Transform fourthDestination; 
+    public Transform fifthDestination; 
+    public float walkSpeed = 1f; 
+    public float stoppingDistance = 0.5f; 
+    public float rightTurnDuration = 1f; 
     public float playerStoppingDistance = 1f;
     public float blockDistance = 3f;
     public static CellGuardNpc instance;
@@ -154,22 +155,43 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
 
-            // Camminata verso il giocatore
-            Debug.Log("Inizio Camminata verso il giocatore");
+            // Rotazione a destra
+            Debug.Log("Inizio Rotazione a Destra");
             animator.SetBool("SetIdle", false);
+            animator.SetBool("IsTurningRight", true);
+            yield return new WaitForSeconds(rightTurnDuration);
+            animator.SetBool("IsTurningRight", false);
+
+            // Camminata verso la quarta destinazione
+            Debug.Log("Inizio Camminata verso la quarta destinazione");
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(fourthDestination.position);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
-            // Torna allo stato di idle
+            // Stato di idle e rotazione a destra
             Debug.Log("Arrivato alla quarta destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
-            RotateTowardsPlayer();
-            audioManager.TalkingClip4();
+            animator.SetBool("IsTurningRight", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            animator.SetBool("IsTurningRight", false);
+
+            // Camminata verso la quinta destinazione
+            Debug.Log("Inizio Camminata verso la quinta destinazione");
+            animator.SetBool("IsWalking", true);
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(fifthDestination.position);
+            yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
+
+            // Stato di idle alla quinta destinazione
+            Debug.Log("Arrivato alla quinta destinazione");
+            animator.SetBool("IsWalking", false);
+            navMeshAgent.isStopped = true;
             animator.SetBool("SetIdle", true);
+            audioManager.TalkingClip4();
             yield return new WaitForSeconds(3f);
+
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
             break;
