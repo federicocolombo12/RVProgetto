@@ -8,6 +8,7 @@ public class NpcCelleInteractionManager : MonoBehaviour
     public Camera playerCamera;
     public float interactionDistance = 2f;
     public bool paziente0Interaction = false;
+    public bool paziente1Interaction = false;
     public bool paziente2Interaction = false;
     public bool paziente3Interaction = false;
     private Paziente0Script paziente0Script;
@@ -68,6 +69,11 @@ public class NpcCelleInteractionManager : MonoBehaviour
                     {
                         Debug.Log("Giocatore ha interagito con il Paziente 0");
                         paziente0Interaction = true;
+                    }
+                    else if (npc.CompareTag("Paziente1"))
+                    {
+                        Debug.Log("Giocatore ha interagito con il Paziente 4");
+                        paziente1Interaction = true;
                     }
                     else if (npc.CompareTag("Paziente2"))
                     {
