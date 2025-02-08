@@ -72,9 +72,11 @@ public class InfermieraScript : MonoBehaviour
         yield return new WaitForSeconds(10f);  // Attendi che l'animazione finisca
 
         animator.SetTrigger("NurseIdle");
-        childUi.tag = "OggettoInteragibile1";
+        
         PlayerLock playerLock = interactor.GetComponent<PlayerLock>();
         playerLock.reachedPoint = false;
         isTalking = false; // Reimposta lo stato a "non parlando"
+        yield return new WaitForSeconds(10f);
+        childUi.tag = "OggettoInteragibile1"; // Riaggiungi il tag "Interactable" all'infermiera
     }
 }
