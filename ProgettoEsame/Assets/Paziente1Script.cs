@@ -7,7 +7,7 @@ public class Paziente1ScriptNPC : MonoBehaviour
 {
     private Animator animator;
     private NpcHeadLookAtCelle npcHeadLookAtCelle;
-    private Paziente2AudioManager audioManager; // Riferimento al gestore audio
+    private Paziente3AudioManager audioManager;
     private NavMeshAgent navMeshAgent;
     public Transform PosizionePaziente1; // Assicurati di assegnare questa posizione nel tuo inspector
     [SerializeField] public bool shouldMoveToPosition = false; // Flag per controllare la routine di movimento
@@ -15,7 +15,7 @@ public class Paziente1ScriptNPC : MonoBehaviour
     void Awake()
     {
         npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
-        audioManager = GetComponent<Paziente2AudioManager>(); // Recupera il componente audio
+        audioManager = GetComponent<Paziente3AudioManager>(); // Recupera il componente audio
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -41,7 +41,6 @@ public class Paziente1ScriptNPC : MonoBehaviour
         {
             Interagisci();
             NpcCelleInteractionManager.instance.paziente1Interaction = false;
-            CellaManager.instance.attivaPazienteRoutine = true;
         }
         else
         {
@@ -83,7 +82,7 @@ public class Paziente1ScriptNPC : MonoBehaviour
     private IEnumerator InteragisciRoutine()
     {
         animator.SetBool("Interagisci", true);
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(4.5f);
         animator.SetBool("Interagisci", false);
         NpcCelleInteractionManager.instance.ReturnToInitialPosition(transform);
     }

@@ -11,6 +11,7 @@ public class NpcCelleInteractionManager : MonoBehaviour
     public bool paziente1Interaction = false;
     public bool paziente2Interaction = false;
     public bool paziente3Interaction = false;
+    public GameObject colliderBlockToActivate;
     private Paziente0Script paziente0Script;
     private List<Collider> npcs = new List<Collider>(); // Lista degli NPC vicini
     private List<Collider> interactingNpcs = new List<Collider>(); // Lista degli NPC con cui stai interagendo
@@ -47,7 +48,7 @@ public class NpcCelleInteractionManager : MonoBehaviour
         foreach (Collider item in objectList)
         {
             // Controlla se è un NPC con tag valido
-            if (item.CompareTag("Paziente0") || item.CompareTag("Paziente2") || item.CompareTag("Paziente3"))
+            if (item.CompareTag("Paziente0") || item.CompareTag("Paziente1") || item.CompareTag("Paziente2") || item.CompareTag("Paziente3"))
             {
                 npcs.Add(item); // Aggiungi l'NPC alla lista
             }
@@ -69,10 +70,11 @@ public class NpcCelleInteractionManager : MonoBehaviour
                     {
                         Debug.Log("Giocatore ha interagito con il Paziente 0");
                         paziente0Interaction = true;
+                        colliderBlockToActivate.SetActive(true);
                     }
                     else if (npc.CompareTag("Paziente1"))
                     {
-                        Debug.Log("Giocatore ha interagito con il Paziente 4");
+                        Debug.Log("Giocatore ha interagito con il Paziente 1");
                         paziente1Interaction = true;
                     }
                     else if (npc.CompareTag("Paziente2"))
