@@ -15,10 +15,12 @@ public class Paziente0Script : MonoBehaviour
     public GameObject knife;
     public Camera playerCamera;
     public float interactionDistance = 2f;
+   
 
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     private CellBackground cellBackground; // Riferimento allo script della musica
+    private PortaIngersso portaIngersso;
 
     // AudioManager
     public bool audiotalking = false;
@@ -31,6 +33,7 @@ public class Paziente0Script : MonoBehaviour
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         cellBackground = FindObjectOfType<CellBackground>(); // Trova lo script della musica
+        portaIngersso = FindObjectOfType<PortaIngersso>();
 
         if (animator == null)
             Debug.LogError("Animator non trovato sul personaggio!");
@@ -50,9 +53,11 @@ public class Paziente0Script : MonoBehaviour
     public IEnumerator PazienteRoutine()
     {
         yield return new WaitUntil(() => CellaManager.instance.attivaPazienteRoutine);
+        
 
         while (true)
         {
+            portaIngersso.OpenDoor();
             // Stato Idle
             animator.SetBool("IsWalking", false);
             animator.SetBool("SetIdle", true);
@@ -69,6 +74,7 @@ public class Paziente0Script : MonoBehaviour
 
             // Rotazione a destra
             animator.SetBool("IsRunning", false);
+            portaIngersso.CloseDoor();
             audioRunning = false;
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningRight", true);
