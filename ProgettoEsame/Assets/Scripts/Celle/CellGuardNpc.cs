@@ -23,6 +23,7 @@ public class CellGuardNpc : MonoBehaviour
     private AperturaPorta aperturaPorta;
     public bool OggettoNascosto = false;
     [SerializeField] public bool thirdPosition = false;
+    private PortaIngersso portaIngersso;
 
     // AudioManager: Stati audio
     [SerializeField] CellGuardAudioManager audioManager;
@@ -38,6 +39,7 @@ public class CellGuardNpc : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<FirstPersonController>();
         aperturaPorta = FindObjectOfType<AperturaPorta>();
+        portaIngersso = FindObjectOfType<PortaIngersso>();
 
         if (animator == null)
         {
@@ -77,6 +79,7 @@ public class CellGuardNpc : MonoBehaviour
             // Passa allo stato di camminata verso la prima destinazione
             Debug.Log("Inizio Camminata verso la prima destinazione");
             animator.SetBool("SetIdle", false);
+            portaIngersso.OpenDoor();
             animator.SetBool("IsWalking", true);
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(firstDestination.position);
@@ -86,6 +89,7 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Arrivato alla prima destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            portaIngersso.CloseDoor();
             animator.SetBool("IsTurningLeft", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool("IsTurningLeft", false);
