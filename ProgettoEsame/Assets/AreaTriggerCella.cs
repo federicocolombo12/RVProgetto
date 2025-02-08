@@ -22,7 +22,10 @@ public class TriggerAreaManager : MonoBehaviour
             Debug.Log("Il player è entrato nell'area del trigger.");
             // Imposta lo stato del trigger nel knifeScript
             if (knifeScript != null)
+            {
                 knifeScript.SetPlayerInTriggerArea(true);
+                knifeScript.ActivateKnifeTag(); // Assegna il tag "OggettoInteragibile2" al coltello
+            }
         }
     }
 
@@ -33,7 +36,9 @@ public class TriggerAreaManager : MonoBehaviour
             Debug.Log("Il player ha lasciato l'area del trigger.");
             // Reimposta lo stato del trigger nel knifeScript
             if (knifeScript != null)
+            {
                 knifeScript.SetPlayerInTriggerArea(false);
+            }
         }
     }
 }
