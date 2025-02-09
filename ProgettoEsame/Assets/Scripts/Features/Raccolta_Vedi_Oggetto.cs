@@ -100,7 +100,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         }
         else
         {
-            targetRotation *= Quaternion.Euler(0, 180, 0);
+            targetRotation *= Quaternion.Euler(0, 0, 0);
         }
 
         // Assicurati che l'oggetto sia visibile
