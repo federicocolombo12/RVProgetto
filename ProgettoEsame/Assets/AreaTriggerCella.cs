@@ -24,7 +24,7 @@ public class TriggerAreaManager : MonoBehaviour
             if (knifeScript != null)
             {
                 knifeScript.SetPlayerInTriggerArea(true);
-                knifeScript.ActivateKnifeTag(); // Assegna il tag "OggettoInteragibile2" al coltello
+                knifeScript.ActivateKnifeTagTrigger(); // Assegna il tag "OggettoInteragibile2" al coltello
             }
         }
     }
@@ -38,6 +38,7 @@ public class TriggerAreaManager : MonoBehaviour
             if (knifeScript != null)
             {
                 knifeScript.SetPlayerInTriggerArea(false);
+                knifeScript.DisactivateKnifeTag(); // Rimuovi il tag "OggettoInteragibile2" dal coltello
             }
         }
     }

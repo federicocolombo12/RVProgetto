@@ -14,43 +14,35 @@ public class KnifePickUpandPlace : MonoBehaviour
     public float interactionCooldown = 3f;
     private float currentCooldown;
 
-    // Variabili per i due AudioSource
-    public AudioSource audioSource1; // Primo AudioSource (Empty)
-    public AudioSource audioSource2; // Secondo AudioSource (Paziente Zero)
+    // Audio sources and clips
+    public AudioSource audioSource1;
+    public AudioSource audioSource2;
+    public AudioClip knifePickupClip;
+    public AudioClip secondAudioClip;
 
-    // AudioClip per i due AudioSource
-    public AudioClip knifePickupClip;    // Clip audio per il pickup del coltello (Empty)
-    public AudioClip secondAudioClip;    // Clip audio per il paziente zero
-
-    // Variabile per verificare se l'audio del coltello è in riproduzione
+    // Audio playback state
     public bool isKnifePickupAudioPlaying = false;
 
     private enum InteractionState { Idle, Interact, StopInteract }
     private InteractionState currentState = InteractionState.Idle;
 
-    // Ritardi
-    public float secondAudioDelay = 2f;  // Ritardo per il secondo audio (Paziente Zero)
-    public float guardAudioDelay = 5f;  // Ritardo aggiuntivo per il suono della guardia
+    // Delays
+    public float secondAudioDelay = 2f;
+    public float guardAudioDelay = 5f;
 
-    public void SetPlayerInTriggerArea(bool isInTriggerArea)
-    {
-        isPlayerInTriggerArea = isInTriggerArea;
-    }
-
-
-    // Variabile per tenere traccia se il player è nell'area del trigger
+    // Player trigger area state
     private bool isPlayerInTriggerArea = false;
 
     void Start()
     {
-        // Assicurati che gli AudioSource siano assegnati se non lo sono già
+        // Ensure audio sources are assigned
         if (audioSource1 == null)
         {
-            audioSource1 = GetComponents<AudioSource>()[0]; // Prendi il primo AudioSource
+            audioSource1 = GetComponents<AudioSource>()[0];
         }
         if (audioSource2 == null)
         {
-            audioSource2 = GetComponents<AudioSource>()[1]; // Prendi il secondo AudioSource
+            audioSource2 = GetComponents<AudioSource>()[1];
         }
     }
 
@@ -73,9 +65,7 @@ public class KnifePickUpandPlace : MonoBehaviour
                 break;
 
             case InteractionState.Interact:
-                // Update cooldown timer
                 currentCooldown -= Time.deltaTime;
-                // Only allow stopping interaction after cooldown
                 if (currentCooldown <= 0 && Input.GetKeyDown(KeyCode.F))
                 {
                     ChangeState(InteractionState.StopInteract);
@@ -99,30 +89,22 @@ public class KnifePickUpandPlace : MonoBehaviour
 
     void TryPickUpObject()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxPickupDistance, interactableLayer))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, maxPickupDistance, interactableLayer))
         {
             pickedObject = hit.transform.gameObject;
 
-            
-            Collider collider = pickedObject.GetComponent<Collider>();
-            if (collider != null)
+            if (pickedObject.TryGetComponent(out Collider collider))
             {
                 collider.enabled = false;
             }
 
-            Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (pickedObject.TryGetComponent(out Rigidbody rb))
             {
                 rb.isKinematic = true;
             }
 
-            // Attiva il primo audio immediatamente (senza ritardo)
             PlayKnifePickupAudio();
-
-            // Attiva il secondo audio con il ritardo di 2 secondi e ritardo aggiuntivo per la guardia
             StartCoroutine(PlaySecondAudioWithDelay(secondAudioDelay + guardAudioDelay));
-
             StartCoroutine(PickupObject(pickedObject, holdPosition.position));
             ChangeState(InteractionState.Interact);
         }
@@ -136,9 +118,8 @@ public class KnifePickUpandPlace : MonoBehaviour
             return;
         }
 
-        RaycastHit hit;
         Vector3 dropPosition = pickedObject.transform.position;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, maxDropDistance))
         {
             dropPosition = hit.point;
         }
@@ -154,10 +135,7 @@ public class KnifePickUpandPlace : MonoBehaviour
 
     private IEnumerator PlaySecondAudioWithDelay(float delay)
     {
-        // Aggiungi il ritardo totale (2 secondi + ritardo per la guardia)
         yield return new WaitForSeconds(delay);
-
-        // Riproduci il secondo audio (Paziente Zero)
         PlaySecondAudio();
     }
 
@@ -167,7 +145,7 @@ public class KnifePickUpandPlace : MonoBehaviour
         {
             audioSource1.clip = knifePickupClip;
             audioSource1.Play();
-            isKnifePickupAudioPlaying = true;  // Imposta lo stato come vero quando l'audio viene riprodotto
+            isKnifePickupAudioPlaying = true;
         }
     }
 
@@ -194,30 +172,24 @@ public class KnifePickUpandPlace : MonoBehaviour
         CellaManager.instance.coltelloPreso = true;
         CellaManager.instance.attivaGuardRoutine = true;
 
-        // Cambia il tag dell'oggetto corrente
         obj.tag = "Untagged";
-
-        // Cambia il tag di tutti i figli
         ChangeTagOfChildren(obj, "Untagged");
 
-        // Disattiva i suoni dopo un certo tempo (5 secondi)
         yield return new WaitForSeconds(5f);
         audioSource1.Stop();
         audioSource2.Stop();
-        isKnifePickupAudioPlaying = false;  // Reimposta lo stato quando l'audio finisce
+        isKnifePickupAudioPlaying = false;
     }
 
     private IEnumerator DropObject(GameObject obj, Vector3 targetPosition, RaycastHit hit)
     {
-        // Verifica che l'oggetto non sia null
         if (obj == null)
         {
             Debug.LogError("L'oggetto da rilasciare è null!");
-            yield break;  // Interrompi l'esecuzione se l'oggetto è null
+            yield break;
         }
 
-        MeshCollider meshCollider = obj.GetComponent<MeshCollider>();
-        if (meshCollider != null)
+        if (obj.TryGetComponent(out MeshCollider meshCollider))
         {
             meshCollider.enabled = true;
             meshCollider.convex = true;
@@ -227,11 +199,10 @@ public class KnifePickUpandPlace : MonoBehaviour
             Debug.LogWarning("MeshCollider non trovato su " + obj.name);
         }
 
-        Rigidbody rb = obj.GetComponent<Rigidbody>();
-        if (rb == null)
+        if (!obj.TryGetComponent(out Rigidbody rb))
         {
             Debug.LogWarning("Rigidbody non trovato su " + obj.name + ", aggiungo un nuovo Rigidbody.");
-            rb = obj.AddComponent<Rigidbody>();  // Aggiungi un nuovo Rigidbody se non esiste
+            rb = obj.AddComponent<Rigidbody>();
         }
         rb.isKinematic = true;
 
@@ -243,7 +214,6 @@ public class KnifePickUpandPlace : MonoBehaviour
 
         rb.isKinematic = false;
 
-        // Verifica che l'oggetto sia stato posizionato correttamente nel target
         if (hit.transform != null && hit.transform.CompareTag("Drawer"))
         {
             obj.transform.parent = hit.transform;
@@ -257,8 +227,13 @@ public class KnifePickUpandPlace : MonoBehaviour
         foreach (Transform child in parent.transform)
         {
             child.gameObject.tag = newTag;
-            ChangeTagOfChildren(child.gameObject, newTag); // Ricorsione per i figli dei figli
+            ChangeTagOfChildren(child.gameObject, newTag);
         }
+    }
+
+    public void SetPlayerInTriggerArea(bool isInTriggerArea)
+    {
+        isPlayerInTriggerArea = isInTriggerArea;
     }
 
     public void ActivateKnifeTag()
@@ -266,19 +241,15 @@ public class KnifePickUpandPlace : MonoBehaviour
         gameObject.tag = "OggettoInteragibile2";
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void ActivateKnifeTagTrigger()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInTriggerArea = true;
-        }
+        gameObject.tag = "PosaColtello";
     }
 
-    private void OnTriggerExit(Collider other)
+    public void DisactivateKnifeTag()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInTriggerArea = false;
-        }
+        gameObject.tag = "Untagged";
     }
+
+   
 }
