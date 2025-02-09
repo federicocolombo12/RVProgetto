@@ -37,7 +37,7 @@ public class CassettoOpen : MonoBehaviour
     void Update()
     {
         // Controlla se il tasto "E" viene premuto e il raycast colpisce il cassetto
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, raycastDistance, cassettoLayer))

@@ -38,7 +38,7 @@ public class AperturaPorta : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isMoving) // Premi 'E' per aprire/chiudere la porta solo se non è in movimento
+        if (Input.GetKeyDown(KeyCode.Q) && !isMoving) // Premi 'E' per aprire/chiudere la porta solo se non è in movimento
         {
             RaycastHit hit;
             Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));

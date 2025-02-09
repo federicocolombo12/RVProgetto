@@ -174,7 +174,7 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningRight", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(0.5f);
             animator.SetBool("IsTurningRight", false);
 
             // Camminata verso la quinta destinazione
