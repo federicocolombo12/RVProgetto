@@ -7,6 +7,8 @@ public class AnimationTimer : MonoBehaviour
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private BuzzerSound buzzerSound; // Riferimento al suono del buzzer
     [SerializeField] private GameObject triggerObject;
+    [SerializeField] private Collider doorCollider;
+
 
     private void OnEnable()
     {
@@ -22,6 +24,8 @@ public class AnimationTimer : MonoBehaviour
     {
         // Attiva il trigger dell'oggetto
         triggerObject.SetActive(true);
+
+        doorCollider.enabled = false;
 
         // Avvia l'animazione delle porte
         doorAnimator.SetTrigger("OpenDoor");
