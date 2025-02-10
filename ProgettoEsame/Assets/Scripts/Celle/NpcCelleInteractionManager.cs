@@ -16,6 +16,7 @@ public class NpcCelleInteractionManager : MonoBehaviour
     private List<Collider> npcs = new List<Collider>(); // Lista degli NPC vicini
     private List<Collider> interactingNpcs = new List<Collider>(); // Lista degli NPC con cui stai interagendo
     public bool isInteracting;
+    FirstPersonController player;
 
     void Awake()
     {
@@ -71,6 +72,8 @@ public class NpcCelleInteractionManager : MonoBehaviour
                         Debug.Log("Giocatore ha interagito con il Paziente 0");
                         paziente0Interaction = true;
                         colliderBlockToActivate.SetActive(true);
+                        player = FindObjectOfType<FirstPersonController>();
+                        player.playerCanMove = false;
                     }
                     else if (npc.CompareTag("Paziente1"))
                     {
