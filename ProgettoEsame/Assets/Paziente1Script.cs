@@ -7,7 +7,7 @@ public class Paziente1ScriptNPC : MonoBehaviour
 {
     private Animator animator;
     private NpcHeadLookAtCelle npcHeadLookAtCelle;
-    private Paziente3AudioManager audioManager;
+    private Paziente1AudioManager audioManager;
     private NavMeshAgent navMeshAgent;
     public Transform PosizionePaziente1; // Assicurati di assegnare questa posizione nel tuo inspector
     [SerializeField] public bool shouldMoveToPosition = false; // Flag per controllare la routine di movimento
@@ -15,7 +15,7 @@ public class Paziente1ScriptNPC : MonoBehaviour
     void Awake()
     {
         npcHeadLookAtCelle = GetComponent<NpcHeadLookAtCelle>();
-        audioManager = GetComponent<Paziente3AudioManager>(); // Recupera il componente audio
+        audioManager = GetComponent<Paziente1AudioManager>(); // Recupera il componente audio
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 

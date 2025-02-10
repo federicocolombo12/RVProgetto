@@ -10474,6 +10474,21 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+--- !u!114 &957515569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957515559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad2efcbc80485c4eaabef773a0e2c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoghi: []
+  audioSource: {fileID: 957515564}
+  intervalloTraDialoghi: 2
 --- !u!1001 &959338602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20968,9 +20983,6 @@ PrefabInstance:
       addedObject: {fileID: 957515565}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3e21ff1e0287741abce8ad235d1b1d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 957515564}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3e21ff1e0287741abce8ad235d1b1d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 957515563}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3e21ff1e0287741abce8ad235d1b1d, type: 3}
       insertIndex: -1
@@ -20981,6 +20993,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3e21ff1e0287741abce8ad235d1b1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 957515568}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3e21ff1e0287741abce8ad235d1b1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 957515564}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3e21ff1e0287741abce8ad235d1b1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 957515569}
   m_SourcePrefab: {fileID: 100100000, guid: 5c3e21ff1e0287741abce8ad235d1b1d, type: 3}
 --- !u!4 &1866640968 stripped
 Transform:
