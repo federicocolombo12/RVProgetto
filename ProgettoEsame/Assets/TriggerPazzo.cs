@@ -8,12 +8,17 @@ public class TriggerPazzo : MonoBehaviour
     [SerializeField] PazzoScript pazzoScript;
     private float lastActionTime = -5f; // Inizializza a -5 per permettere la prima esecuzione immediata
     private const float actionCooldown = 5f; // Intervallo di 5 secondi
-
+    private AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();   
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (Time.time - lastActionTime >= actionCooldown)
         {
             pazzoScript.Silence();
+            audioSource.Play();
             lastActionTime = Time.time;
         }
     }
