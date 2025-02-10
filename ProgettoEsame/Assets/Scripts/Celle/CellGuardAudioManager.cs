@@ -9,6 +9,7 @@ public class CellGuardAudioManager : MonoBehaviour
     [SerializeField] private AudioClip talkingClip2;
     [SerializeField] private AudioClip talkingClip3;
     [SerializeField] private AudioClip talkingClip4;
+    [SerializeField] private AudioClip talkingClip5;
     [SerializeField] private AudioClip idleClip;
     [SerializeField] private AudioClip walkingClip;
     [SerializeField] private AudioClip talkingClip;
@@ -61,6 +62,10 @@ public class CellGuardAudioManager : MonoBehaviour
     public void TalkingClip4()
     {
         PlayAudioClip(talkingClip4);
+    }
+    public void TalkingClip5()
+    {
+        PlayAudioClip(talkingClip0);
     }
     public void IdleClip() { 
         PlayAudioClip(idleClip);

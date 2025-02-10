@@ -2,27 +2,46 @@ using UnityEngine;
 
 public class BuzzerSound : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource; // Riferimento all'AudioSource
-    [SerializeField] private AudioClip buzzerClip; // Suono del buzzer
+    public AudioSource audioSource1; // Primo AudioSource
+    public AudioSource audioSource2; // Secondo AudioSource
+
+    public AudioClip buzzerClip1; // Primo suono
+    public AudioClip buzzerClip2; // Secondo suono
 
     private void Start()
     {
-        // Assicura che l'AudioSource sia presente
-        if (audioSource == null)
+        // Assicura che entrambi gli AudioSource siano presenti
+        if (audioSource1 == null)
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource1 = gameObject.AddComponent<AudioSource>();
+        }
+        if (audioSource2 == null)
+        {
+            audioSource2 = gameObject.AddComponent<AudioSource>();
         }
     }
 
-    public void PlayBuzzer()
+    public void PlayBuzzer1()
     {
-        if (buzzerClip != null && audioSource != null)
+        if (buzzerClip1 != null && audioSource1 != null)
         {
-            audioSource.PlayOneShot(buzzerClip);
+            audioSource1.PlayOneShot(buzzerClip1);
         }
         else
         {
-            Debug.LogWarning("BuzzerSound: AudioSource o AudioClip non assegnato!");
+            Debug.LogWarning("BuzzerSound: AudioSource1 o AudioClip1 non assegnato!");
+        }
+    }
+
+    public void PlayBuzzer2()
+    {
+        if (buzzerClip2 != null && audioSource2 != null)
+        {
+            audioSource2.PlayOneShot(buzzerClip2);
+        }
+        else
+        {
+            Debug.LogWarning("BuzzerSound: AudioSource2 o AudioClip2 non assegnato!");
         }
     }
 }

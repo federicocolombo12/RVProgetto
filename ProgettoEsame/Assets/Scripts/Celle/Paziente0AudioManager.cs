@@ -12,7 +12,10 @@ public class Paziente0AudioManager : MonoBehaviour
     [SerializeField] private AudioClip idleClip;
     [SerializeField] private AudioClip walkingClip;
     [SerializeField] private AudioClip talkingClip;
-    [SerializeField] private AudioClip knifePickupAudioClip; // Nuovo clip audio per il pick-up del coltello
+    [SerializeField] private AudioClip knifePickupAudioClip;
+
+    [SerializeField] private float normalVolume = 0.5f; // Volume normale per gli altri suoni
+    [SerializeField] private float runningVolume = 1.0f; // Volume più alto per la corsa
 
     void Start()
     {
@@ -41,19 +44,19 @@ public class Paziente0AudioManager : MonoBehaviour
     {
         if (animator.GetBool("IsRunning") && audioSource.clip != runningClip)
         {
-            PlayAudioClip(runningClip);
+            PlayAudioClip(runningClip, runningVolume);
         }
         else if (animator.GetBool("SetIdle") && audioSource.clip != idleClip)
         {
-            PlayAudioClip(idleClip);
+            PlayAudioClip(idleClip, normalVolume);
         }
         else if (animator.GetBool("IsWalking") && audioSource.clip != walkingClip)
         {
-            PlayAudioClip(walkingClip);
+            PlayAudioClip(walkingClip, normalVolume);
         }
         else if (animator.GetBool("IsYelling") && audioSource.clip != talkingClip)
         {
-            PlayAudioClip(talkingClip);
+            PlayAudioClip(talkingClip, normalVolume);
         }
         else if (!animator.GetBool("IsRunning") && !animator.GetBool("SetIdle") &&
                  !animator.GetBool("IsWalking") && !animator.GetBool("IsYelling"))
@@ -64,11 +67,11 @@ public class Paziente0AudioManager : MonoBehaviour
         // Se il coltello è stato preso, riproduci il nuovo suono
         if (CellaManager.instance.coltelloPreso && audioSource.clip != knifePickupAudioClip)
         {
-            PlayAudioClip(knifePickupAudioClip);
+            PlayAudioClip(knifePickupAudioClip, normalVolume);
         }
     }
 
-    private void PlayAudioClip(AudioClip clip)
+    private void PlayAudioClip(AudioClip clip, float volume)
     {
         if (audioSource.isPlaying)
         {
@@ -76,6 +79,7 @@ public class Paziente0AudioManager : MonoBehaviour
         }
 
         audioSource.clip = clip;
+        audioSource.volume = volume; // Imposta il volume dinamicamente
         audioSource.Play();
     }
 

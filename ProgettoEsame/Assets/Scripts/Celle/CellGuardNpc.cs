@@ -175,6 +175,7 @@ public class CellGuardNpc : MonoBehaviour
             animator.SetBool("IsTurningRight", true);
             yield return new WaitForSeconds(0.5f);
             animator.SetBool("IsTurningRight", false);
+            audioManager.TalkingClip4();
 
             // Camminata verso la quinta destinazione
             Debug.Log("Inizio Camminata verso la quinta destinazione");
@@ -189,7 +190,7 @@ public class CellGuardNpc : MonoBehaviour
             navMeshAgent.isStopped = true;
             yield return RotateTowardsPlayer(transform, playerTransform.position);
             animator.SetBool("SetIdle", true);
-            audioManager.TalkingClip4();
+            audioManager.TalkingClip5();
             yield return new WaitForSeconds(3f);
 
 
