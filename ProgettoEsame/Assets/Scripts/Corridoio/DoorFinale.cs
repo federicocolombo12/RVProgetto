@@ -34,4 +34,8 @@ public class DoorFinale : MonoBehaviour
 
        StanzaFinaleManager.instance.LoadStanzaPassato();
     }
+    public void ChiudiPorta()
+    {
+        doorAnimator.SetBool("DoubleDoorOpen", false);
+    }
 }
