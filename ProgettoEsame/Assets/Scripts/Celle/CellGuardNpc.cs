@@ -150,7 +150,6 @@ public class CellGuardNpc : MonoBehaviour
             audioManager.TalkingClip3();
 
             thirdPosition = true;
-            player.playerCanMove = false;
 
             animator.SetBool("SetIdle", true);
             yield return new WaitForSeconds(secondIdleTime);
@@ -194,6 +193,7 @@ public class CellGuardNpc : MonoBehaviour
 
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
+            yield return new WaitForSeconds(1f);
             break;
         }
     }

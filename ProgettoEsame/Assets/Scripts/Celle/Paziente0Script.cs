@@ -28,6 +28,24 @@ public class Paziente0Script : MonoBehaviour
     public bool audioidle = false;
     public bool audiowalking = false;
 
+    private void ActivateAllColliders(GameObject obj)
+    {
+        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = true;
+        }
+    }
+
+    private void DisactivateAllColliders(GameObject obj)
+    {
+        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false;
+        }
+    }
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -48,6 +66,8 @@ public class Paziente0Script : MonoBehaviour
         navMeshAgent.stoppingDistance = stoppingDistance;
 
         StartCoroutine(PazienteRoutine());
+
+
     }
 
     public IEnumerator PazienteRoutine()
@@ -93,6 +113,9 @@ public class Paziente0Script : MonoBehaviour
             navMeshAgent.SetDestination(thirdDestination1.position);
             yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance);
 
+            ActivateAllColliders(gameObject);
+
+
             // Stato Idle
             animator.SetBool("IsRunning", false);
             audioRunning = false;
@@ -129,6 +152,7 @@ public class Paziente0Script : MonoBehaviour
 
             // Camminata verso la destinazione zero
             animator.SetBool("SetIdle", false);
+            DisactivateAllColliders(gameObject);
             animator.SetBool("IsWalking", true);
             navMeshAgent.speed = walkSpeed;
             navMeshAgent.isStopped = false;
@@ -141,9 +165,12 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("IsTurningRight", true);
             yield return new WaitForSeconds(0.8f);
             animator.SetBool("SetIdle", true);
+            ActivateAllColliders(gameObject);
 
             break;
         }
+
     }
+
 }
 

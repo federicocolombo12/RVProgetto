@@ -45,6 +45,7 @@ public class KnifePickUpandPlace : MonoBehaviour
         {
             audioSource2 = GetComponents<AudioSource>()[1];
         }
+        player = FindObjectOfType<FirstPersonController>();
     }
 
     void Update()
@@ -181,7 +182,7 @@ public class KnifePickUpandPlace : MonoBehaviour
         audioSource2.Stop();
         isKnifePickupAudioPlaying = false;
 
-        player = FindObjectOfType<FirstPersonController>();
+       
         player.playerCanMove = true;
     }
 
@@ -224,6 +225,8 @@ public class KnifePickUpandPlace : MonoBehaviour
         }
 
         CellaManager.instance.coltelloNascosto = true;
+        player.playerCanMove = false;
+        DisactivateKnifeTag();
     }
 
     private void ChangeTagOfChildren(GameObject parent, string newTag)
