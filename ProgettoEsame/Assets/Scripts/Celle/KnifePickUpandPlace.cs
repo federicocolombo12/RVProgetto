@@ -32,6 +32,7 @@ public class KnifePickUpandPlace : MonoBehaviour
 
     // Player trigger area state
     private bool isPlayerInTriggerArea = false;
+    FirstPersonController player;
 
     void Start()
     {
@@ -179,6 +180,9 @@ public class KnifePickUpandPlace : MonoBehaviour
         audioSource1.Stop();
         audioSource2.Stop();
         isKnifePickupAudioPlaying = false;
+
+        player = FindObjectOfType<FirstPersonController>();
+        player.playerCanMove = true;
     }
 
     private IEnumerator DropObject(GameObject obj, Vector3 targetPosition, RaycastHit hit)
