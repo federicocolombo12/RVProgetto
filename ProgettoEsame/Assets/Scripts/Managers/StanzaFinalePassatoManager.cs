@@ -12,7 +12,7 @@ public class StanzaFinalePassatoManager : MonoBehaviour
     public bool ultimoOggetto = false; // Stato del quinto oggetto
 
     [Header("Oggetto Finale")]
-    public GameObject videoObject; // Oggetto che contiene il VideoPlayer
+    //public GameObject videoObject; // Oggetto che contiene il VideoPlayer
 
     public GameObject canvasObject; // Aggiungi il riferimento al Canvas
 
@@ -40,9 +40,9 @@ public class StanzaFinalePassatoManager : MonoBehaviour
 
     private void Start()
     {
-        if (videoObject != null && canvasObject != null)
+        if (canvasObject != null)
         {
-            videoObject.SetActive(false); // Disattiva il video all'inizio
+            //videoObject.SetActive(false); // Disattiva il video all'inizio
             canvasObject.SetActive(false); // Disattiva anche il Canvas all'inizio
         }
         else
@@ -82,24 +82,24 @@ public class StanzaFinalePassatoManager : MonoBehaviour
     // Metodo per avviare il video
     public void AvviaVideo()
     {
-        if (canvasObject != null && videoObject != null && !canvasObject.activeSelf)
+        if (canvasObject != null && !canvasObject.activeSelf)
         {
             canvasObject.SetActive(true); // Attiva il Canvas che contiene il video
-            videoObject.SetActive(true);  // Attiva il GameObject del VideoPlayer (lo rende visibile)
+            //videoObject.SetActive(true);  // Attiva il GameObject del VideoPlayer (lo rende visibile)
 
             Debug.Log("Video avviato.");
 
-            VideoPlayer videoPlayer = videoObject.GetComponent<VideoPlayer>();
+            /*VideoPlayer videoPlayer = videoObject.GetComponent<VideoPlayer>();
             if (videoPlayer != null)
             {
                 // Avvia il video
-                videoPlayer.Play();
+                //videoPlayer.Play();
                 Debug.Log("VideoPlayer avviato.");
             }
             else
             {
                 Debug.LogError("Nessun componente VideoPlayer trovato sull'oggetto video.");
-            }
+            }*/
         }
     }
 
