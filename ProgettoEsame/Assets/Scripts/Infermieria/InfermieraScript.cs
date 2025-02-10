@@ -48,6 +48,7 @@ public class InfermieraScript : MonoBehaviour
             {
                 infermieraSound.PlayNurseTalkSound(1);  // Riproduce il primo suono
             }
+            yield return new WaitForSeconds(10f);
         }
         else
         {
@@ -65,11 +66,12 @@ public class InfermieraScript : MonoBehaviour
             {
                 attivaPorta.enabled = true;
             }
+            yield return new WaitForSeconds(3f);
         }
 
         interactionCount++;
 
-        yield return new WaitForSeconds(10f);  // Attendi che l'animazione finisca
+          // Attendi che l'animazione finisca
 
         animator.SetTrigger("NurseIdle");
         
