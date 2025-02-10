@@ -187,9 +187,11 @@ public class CellGuardNpc : MonoBehaviour
             Debug.Log("Arrivato alla quinta destinazione");
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
+            yield return RotateTowardsPlayer(transform, playerTransform.position);
             animator.SetBool("SetIdle", true);
             audioManager.TalkingClip4();
             yield return new WaitForSeconds(3f);
+
 
             // Segnala la fine dell'animazione
             OnAnimationEnd?.Invoke();
@@ -198,13 +200,25 @@ public class CellGuardNpc : MonoBehaviour
         }
     }
 
-    private void RotateTowardsPlayer()
+    private IEnumerator RotateTowardsPlayer(Transform npcTransform, Vector3 targetPosition)
     {
-        Vector3 direction = (playerTransform.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        Quaternion initialRotation = npcTransform.rotation;
+        Vector3 direction = (targetPosition - npcTransform.position).normalized;
+        direction.y = 0; // Mantieni la rotazione solo sull'asse Y
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        float elapsedTime = 0f;
+        float duration = 1f; // Durata della rotazione in secondi
+
+        while (elapsedTime < duration)
+        {
+            npcTransform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        npcTransform.rotation = targetRotation;
     }
 
     // Metodo per aggiornare lo stato audio
-   
+
 }
