@@ -96,7 +96,7 @@ public class CorridoioManager : MonoBehaviour
     {
 
         TransitionScript.instance.FadeOut(0);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         Debug.Log("Door is now open!");
         MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshock", LoadSceneMode.Additive,
