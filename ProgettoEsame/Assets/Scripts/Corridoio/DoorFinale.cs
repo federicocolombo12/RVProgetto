@@ -6,10 +6,12 @@ using UnityEngine;
 public class DoorFinale : MonoBehaviour
 {
     public Animator doorAnimator;
-    
+    private DoorFinaleAudio doorFinaleAudio;
+
     private void Start()
     {
         doorAnimator = GetComponent<Animator>();
+        doorFinaleAudio = GetComponent<DoorFinaleAudio>();
         StartCoroutine(WaitForAnimationStart());
         
 
@@ -26,6 +28,7 @@ public class DoorFinale : MonoBehaviour
         // Execute the code after startAnimation becomes true
         // Place your code here
         doorAnimator.SetBool("DoubleDoorOpen", true);
+        doorFinaleAudio?.PlayDoorOpenSound();
     }
 
     
@@ -37,5 +40,6 @@ public class DoorFinale : MonoBehaviour
     public void ChiudiPorta()
     {
         doorAnimator.SetBool("DoubleDoorOpen", false);
+        doorFinaleAudio?.PlayDoorCloseSound();
     }
 }
