@@ -15,6 +15,7 @@ public class InfermieriaManager : MonoBehaviour
     public bool isInRow = false;
     public bool medicinaPresa = false;
     [SerializeField] TransitionScript transitionManager;
+   
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -58,7 +59,10 @@ public class InfermieriaManager : MonoBehaviour
             {
                 Debug.LogError("PlayerSpawnPos1 non trovato nella scena Corridoio1!");
             }
+            GameObject colliderTag1 = GameObject.Find("ColliderInfermieria");
+            colliderTag1.tag = "Untagged";
             Destroy(gameObject);
+           
         });
     }
 
