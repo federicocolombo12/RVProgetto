@@ -52,7 +52,7 @@ public class ObjectInteraction : MonoBehaviour
     {
         Debug.Log("Attivazione trigger Disapprova");
         animator.SetTrigger("Disapprova");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         animator.SetTrigger("TornaIndietro");
         hasActivated = true;
     }
@@ -62,7 +62,7 @@ public class ObjectInteraction : MonoBehaviour
         Debug.Log("Attivazione trigger ActivateAction");
         animator.SetTrigger("ActivateAction");
         hasActivated = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(35f);
         startVideo = true;
     }
 
