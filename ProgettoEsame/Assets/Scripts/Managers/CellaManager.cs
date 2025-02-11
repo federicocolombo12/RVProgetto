@@ -102,6 +102,8 @@ public class CellaManager : MonoBehaviour
             {
                 Debug.LogError("PlayerSpawnPos1 non trovato nella scena Corridoio1!");
             }
+            GameObject colliderTag1 = GameObject.Find("ColliderCella");
+            colliderTag1.tag = "Untagged";
             Destroy(gameObject);
         });
     }
