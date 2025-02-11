@@ -6,7 +6,7 @@ using TMPro;
 public class CountdownTimer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI countdownText;
-    private TimeSpan startTime = new TimeSpan(12, 29, 0);
+    private TimeSpan startTime = new TimeSpan(12, 28, 30);
     private TimeSpan endTime = new TimeSpan(12, 30, 0);
     public static event Action OnTimerEnd; // Evento per notificare la fine del timer
 
