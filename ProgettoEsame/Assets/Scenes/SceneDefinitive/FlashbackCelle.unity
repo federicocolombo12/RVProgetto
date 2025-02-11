@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 40230380}
   - component: {fileID: 40230382}
   - component: {fileID: 40230381}
+  - component: {fileID: 40230383}
   m_Layer: 0
   m_Name: Cupboard.001
   m_TagString: Untagged
@@ -607,6 +608,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40230379}
+  m_Mesh: {fileID: 3580619207427735485, guid: 94793406bf2f93e4f91d806739ccb8a2, type: 3}
+--- !u!64 &40230383
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40230379}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 3580619207427735485, guid: 94793406bf2f93e4f91d806739ccb8a2, type: 3}
 --- !u!1 &46381953
 GameObject:
@@ -28062,6 +28085,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -304.0575
       objectReference: {fileID: 0}
+    - target: {fileID: 8421248580222810997, guid: dc39b8279ffa4184fb74680468c7fb26, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4018286686147086024, guid: 1b6083f3d6337554d88d253903116430, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
