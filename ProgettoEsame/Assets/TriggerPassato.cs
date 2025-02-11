@@ -12,12 +12,17 @@ public class TriggerPassato : MonoBehaviour
 
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.F))
         {
-            TransitionScript.instance.FadeOut(1);
-            MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshockPassato", LoadSceneMode.Single, () =>
-            {
-                TransitionScript.instance.FadeIn(1);
-            });
-            Destroy(gameObject);
+            StartCoroutine(LoadScene());
         }
+    }
+    IEnumerator LoadScene()
+    {
+        TransitionScript.instance.FadeOut(1);
+        yield return new WaitForSeconds(1);
+        MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshockPassato", LoadSceneMode.Single, () =>
+        {
+            TransitionScript.instance.FadeIn(1);
+        });
+        Destroy(gameObject);
     }
 }
