@@ -83,11 +83,17 @@ public class CellaManager : MonoBehaviour
 
     private void LoadCorridoio1Scene()
     {
+        StartCoroutine(LoadScene());
+    }
+    IEnumerator LoadScene()
+    {
         TransitionScript.instance.FadeOut(1);
+        yield return new WaitForSeconds(1);
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
         {
             // Trova il punto di spawn nella nuova scena
             GameObject spawnPoint = GameObject.Find("PlayerSpawnPos1");
+            TransitionScript.instance.FadeIn(1);
             if (spawnPoint != null)
             {
                 Instantiate(firstPersonControllerCorridoio1, spawnPoint.transform.position, spawnPoint.transform.rotation);
