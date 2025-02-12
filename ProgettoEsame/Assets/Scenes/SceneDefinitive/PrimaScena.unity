@@ -1348,7 +1348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &424916213
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -2072,6 +2072,8 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
+  customRotation: 0
 --- !u!64 &631319920
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2106,7 +2108,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 10fa8f2a0bf7b5040bc7c8ce1a70a715, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.92
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3589,7 +3591,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 89c8a1bb64bf3734eaf72d482cdd9741, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.92
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3809,7 +3811,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 29e4bcc3dda40eb4482adf14691e36f6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.92
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4183,6 +4185,8 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
+  customRotation: 0
 --- !u!82 &1370540918
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4195,7 +4199,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: afd92c8732e56474eaea497891288637, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.92
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4305,7 +4309,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 045bef3843c28664ebde13d93e01c1ca, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.713
+  m_Volume: 0.92
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4481,6 +4485,8 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
+  customRotation: 0
 --- !u!82 &1567246746
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4493,7 +4499,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: da047539ac90b0a4f85b0ad868d5d4c4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.92
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4805,7 +4811,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6c282f268317a1e418c853af56b0ea8f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.835
+  m_Volume: 0.92
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4921,6 +4927,8 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
+  customRotation: 0
 --- !u!1 &1770467399
 GameObject:
   m_ObjectHideFlags: 0
@@ -4965,7 +4973,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.116
+  m_Volume: 0.125
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5791,15 +5799,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dec1ae76a89cc644a4c03117602a298, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.606382
+      value: -13.59
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dec1ae76a89cc644a4c03117602a298, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.385215
+      value: 8.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dec1ae76a89cc644a4c03117602a298, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -59.90681
+      value: -56.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7dec1ae76a89cc644a4c03117602a298, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7503,7 +7511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Intensity
-      value: 35.424503
+      value: 55.534744
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_ShapeWidth
@@ -7967,7 +7975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Intensity
-      value: 3.9648275
+      value: 6.215632
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_AreaSize.x
@@ -9424,7 +9432,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 610d49be98d00dc4188d657de15ab181, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.183
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -10090,7 +10098,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.83
+  m_Volume: 0.82
   m_Pitch: 0.7
   Loop: 0
   Mute: 0

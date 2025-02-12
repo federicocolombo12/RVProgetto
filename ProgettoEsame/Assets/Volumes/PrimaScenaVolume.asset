@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 2
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -33,16 +33,16 @@ MonoBehaviour:
     m_Value: 1
   m_MaxRaySteps:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 128
   m_DenoiseSS:
     m_OverrideState: 1
     m_Value: 1
   m_HalfResolutionDenoiserSS:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   m_DenoiserRadiusSS:
     m_OverrideState: 1
-    m_Value: 0.475
+    m_Value: 0.5
   m_SecondDenoiserPassSS:
     m_OverrideState: 1
     m_Value: 1
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f077503be6ae942a1e1245dbd53ea9, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   quality:
     m_OverrideState: 1
     m_Value: 1

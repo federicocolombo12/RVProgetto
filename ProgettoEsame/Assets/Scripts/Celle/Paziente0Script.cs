@@ -163,7 +163,9 @@ public class Paziente0Script : MonoBehaviour
             animator.SetBool("IsWalking", false);
             navMeshAgent.isStopped = true;
             animator.SetBool("IsTurningRight", true);
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(1.2f);
+            animator.SetBool("IsTurningRight", false);
+            yield return StartCoroutine(RotateToTarget(Quaternion.Euler(0, -90, 0), 1f));
             animator.SetBool("SetIdle", true);
             ActivateAllColliders(gameObject);
 
@@ -171,6 +173,19 @@ public class Paziente0Script : MonoBehaviour
         }
 
     }
+    private IEnumerator RotateToTarget(Quaternion targetRotation, float duration)
+    {
+        Quaternion startRotation = transform.rotation;
+        float time = 0f;
 
+        while (time < duration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.rotation = targetRotation;
+    }
 }
 
