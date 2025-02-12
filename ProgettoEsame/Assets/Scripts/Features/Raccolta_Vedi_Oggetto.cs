@@ -18,6 +18,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     public AttivaUi attivaUi;
     private bool isInteracting = false;
     public bool rotazione = false;
+    [SerializeField] private float vicinanza = 0.6f;
 
     void Start()
     {
@@ -88,7 +89,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         originalRotation = this.transform.rotation;
 
         // Calcola la posizione target
-        Vector3 targetPosition = player.position + player.forward * 0.6f; // Posiziona l'oggetto molto vicino alla camera
+        Vector3 targetPosition = player.position + player.forward * vicinanza; // Posiziona l'oggetto molto vicino alla camera
 
         // Calcola la rotazione target per far guardare l'oggetto verso la camera
         Quaternion targetRotation = Quaternion.LookRotation(player.position - this.transform.position);

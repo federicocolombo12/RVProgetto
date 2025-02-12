@@ -8055,6 +8055,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
 --- !u!64 &190349524
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18954,6 +18955,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
 --- !u!114 &586933259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20003,11 +20005,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43255e8cea509d74abf9333d46aacfc7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.947085
+      value: 1.71
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43255e8cea509d74abf9333d46aacfc7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.348
+      value: -24.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43255e8cea509d74abf9333d46aacfc7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21097,7 +21099,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21683,6 +21685,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ui 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8285018901373302606, guid: 5552f9d516133354e8a1b8d08e32d27d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039708596346328595, guid: 5552f9d516133354e8a1b8d08e32d27d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9111967429900209173, guid: 5552f9d516133354e8a1b8d08e32d27d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 572.5
@@ -21724,7 +21734,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9039708596346328595, guid: 5552f9d516133354e8a1b8d08e32d27d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5552f9d516133354e8a1b8d08e32d27d, type: 3}
@@ -36247,6 +36258,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
 --- !u!82 &1197565426
 AudioSource:
   m_ObjectHideFlags: 0
@@ -36649,6 +36661,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
 --- !u!114 &1213659095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37497,6 +37510,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256189083}
   m_Mesh: {fileID: -6144602804010439459, guid: c3de3d48030cd2144a8afe8e68a345d7, type: 3}
+--- !u!1 &1261220971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1261220972}
+  - component: {fileID: 1261220973}
+  m_Layer: 3
+  m_Name: Ui
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1261220972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261220971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1923186682}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1261220973
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261220971}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1262585283
 GameObject:
   m_ObjectHideFlags: 0
@@ -55208,6 +55274,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.4
 --- !u!114 &1923186675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55221,7 +55288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raccoltaScript: {fileID: 0}
-  canvasVisualizzazione: {fileID: 0}
+  canvasVisualizzazione: {fileID: 1290263486}
   stopView: 0
 --- !u!64 &1923186676
 MeshCollider:
@@ -55355,6 +55422,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raccolta_Vedi_Oggetto_script: {fileID: 0}
   audioSource: {fileID: 1923186680}
+--- !u!4 &1923186682 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4581033386119276581, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+  m_PrefabInstance: {fileID: 1376170213209607428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1923712199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58371,6 +58443,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
 --- !u!114 &2063667662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59035,6 +59108,7 @@ MonoBehaviour:
   playAudio: 0
   attivaUi: {fileID: 0}
   rotazione: 0
+  vicinanza: 0.6
 --- !u!114 &2100587919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63076,6 +63150,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3808014742218896031, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_TagString
+      value: OggettoInteragibile1
+      objectReference: {fileID: 0}
     - target: {fileID: 3830359081006084488, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -64179,6 +64257,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5198235219422209247, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 403714267}
+    - targetCorrespondingSourceObject: {fileID: 4581033386119276581, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1261220972}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8404575675302245184, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       insertIndex: -1
