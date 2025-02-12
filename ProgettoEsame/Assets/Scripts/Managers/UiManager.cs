@@ -151,7 +151,6 @@ public class UiManager : MonoBehaviour
                     {
                         if (interactSet.Contains(collider))
                         {
-                            Debug.Log("Vicino: " + collider);
 
                             // Attiva "Interagisci" e disattiva "Indicatore_Vicinanza"
                             Transform interagisci = uiElement.transform.Find("Interagisci");
@@ -163,7 +162,6 @@ public class UiManager : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("Lontano: " + collider);
 
                             // Disattiva "Interagisci" e attiva "Indicatore_Vicinanza"
                             Transform background = uiElement.transform.Find("Background");
