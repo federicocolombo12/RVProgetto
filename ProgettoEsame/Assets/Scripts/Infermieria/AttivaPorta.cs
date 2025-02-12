@@ -11,7 +11,7 @@ public class AttivaPorta : MonoBehaviour
     private float maxDropDistance = 3.0f;
     [SerializeField] private FirstPersonController FirstPersonController;
     [SerializeField] private MedicineAudio medicineAudio;
-
+    private bool notLoaded = true;
     // Cooldown variables
     public float interactionCooldown = 3f;
     private float currentCooldown;
@@ -150,14 +150,11 @@ public class AttivaPorta : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Tavolo"))
+        if (notLoaded)
         {
-            Debug.Log("Oggetto Posato");
-            InfermieriaManager.instance.medicinaPresa = true;
+            notLoaded = false;
+            InfermieriaManager.instance.LoadCorridoio();
         }
-        else
-        {
-            Debug.Log("Oggetto non posato");
-        }
+        
     }
 }
