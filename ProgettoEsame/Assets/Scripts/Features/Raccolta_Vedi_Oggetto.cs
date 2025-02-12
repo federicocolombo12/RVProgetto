@@ -19,6 +19,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private bool isInteracting = false;
     public bool rotazione = false;
     [SerializeField] private float vicinanza = 0.6f;
+    [SerializeField] private float customRotation=0;
 
     void Start()
     {
@@ -97,11 +98,11 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
         if (isFlat)
         {
-            targetRotation *= Quaternion.Euler(90, 0, 0);
+            targetRotation *= Quaternion.Euler(90, customRotation, 0);
         }
         else
         {
-            targetRotation *= Quaternion.Euler(0, 0, 0);
+            targetRotation *= Quaternion.Euler(0, customRotation, 0);
         }
 
         // Assicurati che l'oggetto sia visibile
