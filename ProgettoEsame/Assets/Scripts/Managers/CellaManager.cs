@@ -81,7 +81,7 @@ public class CellaManager : MonoBehaviour
         LoadCorridoio1Scene();
     }
 
-    private void LoadCorridoio1Scene()
+    public void LoadCorridoio1Scene()
     {
         StartCoroutine(LoadScene());
     }

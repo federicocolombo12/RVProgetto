@@ -195,7 +195,7 @@ public class CellGuardNpc : MonoBehaviour
 
 
             // Segnala la fine dell'animazione
-            OnAnimationEnd?.Invoke();
+            CellaManager.instance.LoadCorridoio1Scene();
             yield return new WaitForSeconds(1f);
             break;
         }
