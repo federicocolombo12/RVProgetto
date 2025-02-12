@@ -33,23 +33,21 @@ public class InfermieriaManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    
+    public void LoadCorridoio()
     {
-        if (medicinaPresa)
-        {
-            StartCoroutine(LoadScene());
 
-        }
+       StartCoroutine(LoadScene());
     }
-
     IEnumerator LoadScene()
     {
         TransitionScript.instance.FadeOut(1);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         MySceneManager.instance.LoadNextScene("Corridoio1", LoadSceneMode.Single, () =>
         {
             // Trova il punto di spawn nella nuova scena
+            TransitionScript.instance.FadeIn(1);
             GameObject spawnPoint = GameObject.Find("PlayerSpawnPos");
             if (spawnPoint != null)
             {
@@ -60,6 +58,7 @@ public class InfermieriaManager : MonoBehaviour
                 Debug.LogError("PlayerSpawnPos1 non trovato nella scena Corridoio1!");
             }
             GameObject colliderTag1 = GameObject.Find("ColliderInfermieria");
+            
             colliderTag1.tag = "Untagged";
             Destroy(gameObject);
            
