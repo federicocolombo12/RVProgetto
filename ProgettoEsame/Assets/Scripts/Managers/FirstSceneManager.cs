@@ -11,6 +11,7 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] bool torchFound = false;
     public bool doorOpenable = false;
     public bool doorOpen = false;
+    public bool open = false;
     [SerializeField] Scene currentScene;
     [SerializeField] string currentSceneName;
     public bool startAnimation = false;
@@ -61,8 +62,12 @@ public class FirstSceneManager : MonoBehaviour
         }
         if (doorOpen)
         {
-
-            StartCoroutine(LoadScene());
+            if (!open)
+            {
+                open = true;
+                StartCoroutine(LoadScene());
+            }
+            
 
         }
     }
