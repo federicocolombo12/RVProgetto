@@ -3488,7 +3488,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992572048}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 90ea0f5c4e822d5469b884f0a5a59e99, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 2c6ee20d7c7c2cb4284fa369649eb6e7, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -5374,6 +5374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1310692952}
   - component: {fileID: 1310692953}
+  - component: {fileID: 1310692954}
   m_Layer: 3
   m_Name: UI
   m_TagString: OggettoInteragibile1
@@ -5417,6 +5418,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1310692954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310692951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127956878230a3642badb7cc3272e959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectInteraction: {fileID: 1690164308}
 --- !u!4 &1343828639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4156619824367734, guid: cc81e0db4097ad04092c19b084523b99, type: 3}
@@ -6443,6 +6457,7 @@ MonoBehaviour:
   delayTime: 30
   startVideo: 0
   blocca: 0
+  aspetta: 1
 --- !u!4 &1690164310
 Transform:
   m_ObjectHideFlags: 0
@@ -7528,6 +7543,7 @@ MonoBehaviour:
   delayTime: 2
   startVideo: 0
   blocca: 0
+  aspetta: 1
 --- !u!4 &2120081739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4837693977132404, guid: 4e12d279753093a40a6c88deea619dfe, type: 3}

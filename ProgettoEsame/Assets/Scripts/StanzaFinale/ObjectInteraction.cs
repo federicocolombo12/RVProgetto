@@ -9,6 +9,7 @@ public class ObjectInteraction : MonoBehaviour
     public float delayTime = 47f;
     public bool startVideo = false;
     public bool blocca = false;
+    public bool aspetta = true;
 
     private GiorgioCodaAudio audioScript; // Riferimento allo script audio
 
@@ -26,7 +27,7 @@ public class ObjectInteraction : MonoBehaviour
 
     void Update()
     {
-        if (isColliding && Input.GetKeyDown(KeyCode.E))
+        if (isColliding && Input.GetKeyDown(KeyCode.E) && aspetta)
         {
             if (!hasActivated)
             {
@@ -51,17 +52,21 @@ public class ObjectInteraction : MonoBehaviour
 
     private IEnumerator TriggerDisapprova()
     {
+        aspetta = false;
         Debug.Log("Attivazione trigger Disapprova");
         animator.SetTrigger("Disapprova");
         yield return new WaitForSeconds(5f);
         animator.SetTrigger("TornaIndietro");
         hasActivated = true;
+        yield return new WaitForSeconds(10f);
+        aspetta = true;
     }
 
     private IEnumerator TriggerActivateAction()
     {
         Debug.Log("Attivazione trigger ActivateAction");
         blocca=true;
+        aspetta = false;
         animator.SetTrigger("ActivateAction");
         hasActivated = false;
         yield return new WaitForSeconds(35f);
