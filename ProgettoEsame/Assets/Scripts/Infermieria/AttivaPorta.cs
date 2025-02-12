@@ -107,7 +107,7 @@ public class AttivaPorta : MonoBehaviour
             obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, holdPosition.rotation, animationSpeed * Time.deltaTime);
             yield return null;
         }
-
+        gameObject.tag = "Untagged";
         obj.transform.position = targetPosition;
         
         obj.transform.parent = holdPosition;
