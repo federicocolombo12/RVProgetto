@@ -18,7 +18,7 @@ public class TriggerPassato : MonoBehaviour
     IEnumerator LoadScene()
     {
         TransitionScript.instance.FadeOut(1);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         MySceneManager.instance.LoadNextScene("ScenaFinaleElettroshockPassato", LoadSceneMode.Single, () =>
         {
             TransitionScript.instance.FadeIn(1);
