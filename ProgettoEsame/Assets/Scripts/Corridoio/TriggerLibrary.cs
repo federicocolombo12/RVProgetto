@@ -20,6 +20,7 @@ public class FallingLibrary : MonoBehaviour
     public void setPosition()
     {
         transform.rotation = targetPosition.rotation;
+        transform.position = targetPosition.position;
     }
     
 }
