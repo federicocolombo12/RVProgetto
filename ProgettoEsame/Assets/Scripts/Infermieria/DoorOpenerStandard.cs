@@ -54,7 +54,7 @@ public class DoorOpenerStandard : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance, interactableLayer))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 StartCoroutine(WaitForAnimationStart());
             }
@@ -64,7 +64,7 @@ public class DoorOpenerStandard : MonoBehaviour
     {
         if (doorAnimator.gameObject.GetComponentInChildren<BoxCollider>().gameObject.tag == "Untagged")
         {
-            doorAnimator.gameObject.GetComponentInChildren<BoxCollider>().gameObject.tag = "OggettoInteragibile1";
+            doorAnimator.gameObject.GetComponentInChildren<BoxCollider>().gameObject.tag = "Door";
         }
     }
 }
