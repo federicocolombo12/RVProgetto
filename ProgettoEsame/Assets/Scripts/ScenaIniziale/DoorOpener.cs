@@ -33,7 +33,7 @@ public class DoorOpener : MonoBehaviour
                 return;
             }
             
-            doorPrefab.transform.GetChild(0).tag = "OggettoInteragibile1";
+            doorPrefab.transform.GetChild(0).tag = "Door";
             doorPrefab.GetComponent<PlayAudioInteract>().enabled = false;
             doorPrefab.GetComponent<AudioSource>().enabled = false;
             DoorActivate();
@@ -65,7 +65,7 @@ public class DoorOpener : MonoBehaviour
         {
             Debug.Log("Raycast ha colpito: " + hit.transform.name);
 
-            if (Input.GetKeyDown(KeyCode.E)) // Se preme il tasto "E"
+            if (Input.GetKeyDown(KeyCode.Q)) // Se preme il tasto "E"
             {
                 Debug.Log("Tasto E premuto.");
 

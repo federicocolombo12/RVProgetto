@@ -2682,7 +2682,7 @@ GameObject:
   - component: {fileID: 840448675}
   m_Layer: 6
   m_Name: Maniglia
-  m_TagString: OggettoInteragibile1
+  m_TagString: Divieto
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9629,6 +9629,12 @@ MonoBehaviour:
   - tag: OggettoInteragibile2
     uiPrefab: {fileID: 6581245343422655493, guid: d80bda072235ebd41978c446889461dc, type: 3}
     uiHeight: 0.2
+  - tag: Door
+    uiPrefab: {fileID: 3514490593784229002, guid: 96ec401b429e2e449a0288303dac21fc, type: 3}
+    uiHeight: 0.2
+  - tag: Divieto
+    uiPrefab: {fileID: 3998063568919483562, guid: 269a6096cabd22d45b5c5bd7bdcba0e7, type: 3}
+    uiHeight: 0.2
   poolSize: 10
   colliders:
   - {fileID: 0}
@@ -9779,7 +9785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3875178808963416676, guid: 5552f9d516133354e8a1b8d08e32d27d, type: 3}
       propertyPath: m_Alpha
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9111967429900209173, guid: 5552f9d516133354e8a1b8d08e32d27d, type: 3}
       propertyPath: m_LocalPosition.x
