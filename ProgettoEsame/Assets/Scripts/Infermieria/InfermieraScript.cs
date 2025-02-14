@@ -56,17 +56,15 @@ public class InfermieraScript : MonoBehaviour
             childUi.tag = "Untagged";
             Debug.Log("Puoi posare l'oggetto sul tavolo.");
             isTalking = true; // Imposta lo stato a "parlando"
-            animator.SetTrigger("NurseTalk");
+            animator.SetTrigger("NurseReact");
             if (infermieraSound != null && !infermieraSound.IsPlaying())
             {
                 infermieraSound.PlayNurseTalkSound(2);  // Riproduce il secondo suono
             }
 
-            if (attivaPorta != null)
-            {
-                attivaPorta.enabled = true;
-            }
+            
             yield return new WaitForSeconds(3f);
+            InfermieriaManager.instance.LoadCorridoio();
         }
 
         interactionCount++;
