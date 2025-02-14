@@ -169,7 +169,7 @@ MonoBehaviour:
   - {fileID: 303481084818867999}
   - {fileID: 3295833044440996530}
   - {fileID: 6433935618246756909}
-  - {fileID: 1548651408399867088}
+  - {fileID: 366092929853484923}
 --- !u!114 &303481084818867999
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -185,10 +185,32 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: 25.9
+    m_Value: 42
   tint:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 4.2
+--- !u!114 &366092929853484923
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5ab44aadfb1804db5fd470983ac1b8, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 0
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.9996781, z: 0.8632839, w: 0}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 0.9106376, y: 0.92524177, z: 1, w: 0}
 --- !u!114 &393167879654124352
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -305,28 +327,6 @@ MonoBehaviour:
   m_HighQualityFiltering:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &1548651408399867088
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5ab44aadfb1804db5fd470983ac1b8, type: 3}
-  m_Name: LiftGammaGain
-  m_EditorClassIdentifier: 
-  active: 1
-  lift:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9916667, z: 0.98, w: 0}
-  gamma:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
-  gain:
-    m_OverrideState: 1
-    m_Value: {x: 0.93, y: 0.94633335, z: 1, w: 0.15817225}
 --- !u!114 &3295833044440996530
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -342,7 +342,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.84
   contrast:
     m_OverrideState: 1
     m_Value: 12.4
