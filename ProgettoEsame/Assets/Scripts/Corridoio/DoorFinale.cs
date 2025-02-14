@@ -28,6 +28,7 @@ public class DoorFinale : MonoBehaviour
         // Execute the code after startAnimation becomes true
         // Place your code here
         doorAnimator.SetBool("DoubleDoorOpen", true);
+        gameObject.transform.GetChild(1).GetChild(0).tag = "Untagged";
         doorFinaleAudio?.PlayDoorOpenSound();
     }
 

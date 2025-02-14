@@ -13,7 +13,7 @@ public class TriggerFinale : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.F))
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Q))
         {
             eventTracker.corridoioEvents[eventIndex].Invoke();
             Destroy(gameObject);
