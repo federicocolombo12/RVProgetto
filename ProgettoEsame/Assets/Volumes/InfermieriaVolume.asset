@@ -134,13 +134,13 @@ MonoBehaviour:
   active: 1
   indirectDiffuseLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 1
   indirectDiffuseLightingLayers:
     m_OverrideState: 1
     m_Value: 255
   reflectionLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   reflectionLightingLayers:
     m_OverrideState: 1
     m_Value: 255
@@ -428,7 +428,7 @@ MonoBehaviour:
     m_Value: 1
   m_MaxRaySteps:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 128
   m_DenoiseSS:
     m_OverrideState: 1
     m_Value: 1
@@ -437,7 +437,7 @@ MonoBehaviour:
     m_Value: 1
   m_DenoiserRadiusSS:
     m_OverrideState: 1
-    m_Value: 0.475
+    m_Value: 0.5
   m_SecondDenoiserPassSS:
     m_OverrideState: 1
     m_Value: 1
@@ -451,10 +451,10 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 1039615
   textureLodBias:
     m_OverrideState: 1
-    m_Value: 7
+    m_Value: 0
   m_RayLength:
     m_OverrideState: 1
     m_Value: 50
@@ -481,7 +481,7 @@ MonoBehaviour:
     m_Value: 0
   m_DenoiserRadius:
     m_OverrideState: 1
-    m_Value: 0.6
+    m_Value: 1
   m_SecondDenoiserPass:
     m_OverrideState: 1
     m_Value: 1
