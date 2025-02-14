@@ -635,9 +635,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6111173220831754838}
-    - targetCorrespondingSourceObject: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6183263268111088498}
   m_SourcePrefab: {fileID: 100100000, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
 --- !u!4 &1836492980832622630 stripped
 Transform:
@@ -714,11 +711,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd57032c624ed4449b9c78fd848debbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 2
-  interactRadius: 1
-  uiPrefab: {fileID: 6581245343422655493, guid: d6d4e177fd98df446a40238af89b6d9e, type: 3}
+  detectionRadius: 4
+  interactRadius: 2
+  interactableTypes:
+  - tag: OggettoInteragibile2
+    uiPrefab: {fileID: 6581245343422655493, guid: d6ba1dc73f7c28e4f9a4f38aa6a50294, type: 3}
+    uiHeight: 0.5
   poolSize: 5
-  altezza: 0.1
   colliders:
   - {fileID: 0}
   - {fileID: 0}
@@ -726,34 +725,6 @@ MonoBehaviour:
   boxWidth: 0.2
   boxHeight: 0.2
   playerCamera: {fileID: 0}
-  sprite1: {fileID: 0}
-  sprite2: {fileID: 0}
---- !u!114 &6183263268111088498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8500117414385257011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4850911a56fe374e85922cbad9a2a66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRadius: 2
-  interactRadius: 1
-  uiPrefab: {fileID: 6581245343422655493, guid: d80bda072235ebd41978c446889461dc, type: 3}
-  poolSize: 4
-  altezza: 0.1
-  colliders:
-  - {fileID: 0}
-  - {fileID: 0}
-  boxLength: 2
-  boxWidth: 0.2
-  boxHeight: 0.2
-  playerCamera: {fileID: 0}
-  sprite1: {fileID: 0}
-  sprite2: {fileID: 0}
 --- !u!4 &8500117414385257023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608466737390796411, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
