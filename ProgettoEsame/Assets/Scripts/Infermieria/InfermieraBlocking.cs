@@ -14,6 +14,8 @@ public class InfermieraBlocking : MonoBehaviour
     [SerializeField] InteractWithNurse1 interactWithNurse1;
     [SerializeField] NpcHeadLookAt npcHeadLookAt;
     [SerializeField] private InfermieraBlockingAudio infermieraAudio; // Riferimento allo script audio
+    [SerializeField] private Transform playerTransform; // Riferimento al transform del player
+    [SerializeField] private float lookRange = 5f; // Distanza massima per attivare il look
 
     bool coroutineStarted = false;
     void Start()
@@ -31,15 +33,13 @@ public class InfermieraBlocking : MonoBehaviour
         {
             StartCoroutine(ReachDestination());
             coroutineStarted = true;
-
         }
         else
         {
-            NurseLook();
+            HandleNurseLook();
         }
-
-
     }
+
     public void NurseTalk()
     {
         animator.SetTrigger("Blocked");
@@ -49,7 +49,6 @@ public class InfermieraBlocking : MonoBehaviour
         {
             infermieraAudio.PlayNurseTalk();
         }
-
     }
 
     public void EndInteraction()
@@ -87,6 +86,7 @@ public class InfermieraBlocking : MonoBehaviour
         yield return new WaitUntil(() => !navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f);
 
         animator.SetTrigger("Stop");
+        navMeshAgent.isStopped = true;
 
         // Ferma il suono della camminata
         if (infermieraAudio != null)
@@ -94,6 +94,16 @@ public class InfermieraBlocking : MonoBehaviour
             infermieraAudio.StopNurseWalking();
         }
     }
+
+    void HandleNurseLook()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        if (distanceToPlayer <= lookRange)
+        {
+            NurseLook();
+        }
+    }
+
     void NurseLook()
     {
         npcHeadLookAt.LookAtPosition(Camera.main.transform.position);

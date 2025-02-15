@@ -2076,6 +2076,8 @@ MonoBehaviour:
   interactWithNurse1: {fileID: 2015589559}
   npcHeadLookAt: {fileID: 0}
   infermieraAudio: {fileID: 4298606}
+  playerTransform: {fileID: 1820768201}
+  lookRange: 3
 --- !u!136 &4298598
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -50740,8 +50742,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.6761742, y: 0.5068121, z: 1.1425425}
+  m_Center: {x: -0.009613394, y: 0.20340607, z: 0.2608618}
 --- !u!1 &1735180474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6625962169102252290, guid: c3de3d48030cd2144a8afe8e68a345d7, type: 3}
@@ -52813,6 +52815,11 @@ Transform:
 --- !u!20 &1820768200 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7635504381691802256, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
+  m_PrefabInstance: {fileID: 6122731296308333319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1820768201 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7635504381691802263, guid: 9a53b72e063587f40b48fd57f015a448, type: 3}
   m_PrefabInstance: {fileID: 6122731296308333319}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1820958719 stripped
@@ -65069,7 +65076,7 @@ Transform:
   m_GameObject: {fileID: 7803482789757135915}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 27.059, y: 0.75, z: 1.008}
+  m_LocalPosition: {x: 27.059, y: 0.7303, z: 1.008}
   m_LocalScale: {x: 76, y: 75.999985, z: 75.999985}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -69053,8 +69060,8 @@ MonoBehaviour:
   medicineAudio: {fileID: 8132377813948751977}
   interactionCooldown: 3
   boxLength: 2
-  boxWidth: 0.1
-  boxHeight: 0.1
+  boxWidth: 0.2
+  boxHeight: 0.2
 --- !u!1 &8180047125990783778
 GameObject:
   m_ObjectHideFlags: 0
