@@ -34,6 +34,11 @@ public class KnifePickUpandPlace : MonoBehaviour
     private bool isPlayerInTriggerArea = false;
     FirstPersonController player;
 
+    // Box dimensions
+    public float boxLength = 2f; // La lunghezza della box nella direzione della camera
+    public float boxWidth = 0.1f; // La larghezza della box (asse X)
+    public float boxHeight = 0.1f; // L'altezza della box (asse Y)
+
     void Start()
     {
         // Ensure audio sources are assigned
@@ -91,26 +96,39 @@ public class KnifePickUpandPlace : MonoBehaviour
 
     void TryPickUpObject()
     {
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, maxPickupDistance, interactableLayer))
+        Vector3 boxCenter = Camera.main.transform.position + Camera.main.transform.forward * (maxPickupDistance / 2);
+        Vector3 boxHalfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+        Quaternion boxOrientation = Camera.main.transform.rotation;
+        Collider[] hitColliders = new Collider[10]; // Array di colliders per memorizzare i risultati
+
+        int numHits = Physics.OverlapBoxNonAlloc(boxCenter, boxHalfExtents, hitColliders, boxOrientation, interactableLayer);
+
+        for (int i = 0; i < numHits; i++)
         {
-            pickedObject = hit.transform.gameObject;
-
-            if (pickedObject.TryGetComponent(out Collider collider))
+            Collider hitCollider = hitColliders[i];
+            if (hitCollider != null)
             {
-                collider.enabled = false;
-            }
+                pickedObject = hitCollider.gameObject;
 
-            if (pickedObject.TryGetComponent(out Rigidbody rb))
-            {
-                rb.isKinematic = true;
-            }
+                if (pickedObject.TryGetComponent(out Collider collider))
+                {
+                    collider.enabled = false;
+                }
 
-            PlayKnifePickupAudio();
-            StartCoroutine(PlaySecondAudioWithDelay(secondAudioDelay + guardAudioDelay));
-            StartCoroutine(PickupObject(pickedObject, holdPosition.position));
-            ChangeState(InteractionState.Interact);
+                if (pickedObject.TryGetComponent(out Rigidbody rb))
+                {
+                    rb.isKinematic = true;
+                }
+
+                PlayKnifePickupAudio();
+                StartCoroutine(PlaySecondAudioWithDelay(secondAudioDelay + guardAudioDelay));
+                StartCoroutine(PickupObject(pickedObject, holdPosition.position));
+                ChangeState(InteractionState.Interact);
+                break; // Esci dal ciclo una volta trovato l'oggetto
+            }
         }
     }
+
 
     void TryDropObject()
     {
