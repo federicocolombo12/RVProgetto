@@ -11,12 +11,16 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        // Imposta il valore dello slider al volume salvato (o 1 se non esiste)
-        volumeSlider.value = PlayerPrefs.GetFloat("GameVolume", 1f);
-        AudioListener.volume = volumeSlider.value;
+        if (volumeSlider != null)
+        {
+            volumeSlider.value = PlayerPrefs.GetFloat("GameVolume", 1f);
+            AudioListener.volume = volumeSlider.value;
 
-        // Aggiunge l'evento per rilevare cambiamenti nello slider
-        volumeSlider.onValueChanged.AddListener(SetVolume);
+            // Aggiunge l'evento per rilevare cambiamenti nello slider
+            volumeSlider.onValueChanged.AddListener(SetVolume);
+        }
+        // Imposta il valore dello slider al volume salvato (o 1 se non esiste)
+        
     }
 
     public void SetVolume(float volume)
