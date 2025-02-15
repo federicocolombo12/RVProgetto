@@ -163,4 +163,5 @@ public class AttivaPorta : MonoBehaviour
 
         rb.isKinematic = false;
     }
+    
 }
