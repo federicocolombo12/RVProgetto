@@ -119,14 +119,6 @@ public class PauseMenuManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        // Carica la scena del menu principale
-        Time.timeScale = 1f; // Assicurati che il tempo riprenda
-        SceneManager.LoadScene("TitleScreen");
-
-        // Ferma entrambi i suoni quando si esce dal menu
-        if (pauseSoundManager != null)
-        {
-            pauseSoundManager.FermaSuoniQuandoEsci(); // Ferma entrambi i suoni
-        }
+        MySceneManager.instance.ResetSystem();
     }
 }
