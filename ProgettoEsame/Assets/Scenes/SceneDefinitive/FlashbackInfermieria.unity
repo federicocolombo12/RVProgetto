@@ -5562,7 +5562,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 80814940}
-  - component: {fileID: 80814941}
   m_Layer: 0
   m_Name: Blocco
   m_TagString: Untagged
@@ -5585,27 +5584,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 750351194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &80814941
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 80814939}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.5849537, z: 1}
-  m_Center: {x: 0, y: 0.29247683, z: 0}
 --- !u!4 &81048242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7290947647670657272, guid: 915606d2664f1024086f8f17a3c59112, type: 3}
@@ -16828,7 +16806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_ConstrainedObject: {fileID: 0}
+    m_ConstrainedObject: {fileID: 620154006}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -19514,6 +19492,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619534211}
   m_Mesh: {fileID: -8970182166468518216, guid: c3de3d48030cd2144a8afe8e68a345d7, type: 3}
+--- !u!4 &620154006 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7960280721370981414, guid: 0f8418e84a977f24fa1ac34a494d0ccb, type: 3}
+  m_PrefabInstance: {fileID: 716971326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &624823674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35374,7 +35357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &1188871507
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -40867,7 +40850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHeight: 0.3
-  otherNpc: {fileID: 0}
+  otherNpc: {fileID: 620154006}
   playerInteraction: {fileID: 2015589562}
   target: {fileID: 400445783}
   transitionDuration: 1
@@ -69069,6 +69052,9 @@ MonoBehaviour:
   FirstPersonController: {fileID: 2015589553}
   medicineAudio: {fileID: 8132377813948751977}
   interactionCooldown: 3
+  boxLength: 2
+  boxWidth: 0.1
+  boxHeight: 0.1
 --- !u!1 &8180047125990783778
 GameObject:
   m_ObjectHideFlags: 0

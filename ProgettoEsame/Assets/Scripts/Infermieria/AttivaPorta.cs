@@ -19,6 +19,11 @@ public class AttivaPorta : MonoBehaviour
     private enum InteractionState { Idle, Interact }
     private InteractionState currentState = InteractionState.Idle;
 
+    // Box dimensions
+    public float boxLength = 2f; // La lunghezza della box nella direzione della camera
+    public float boxWidth = 0.1f; // La larghezza della box (asse X)
+    public float boxHeight = 0.1f; // L'altezza della box (asse Y)
+
     void Update()
     {
         switch (currentState)
@@ -28,7 +33,7 @@ public class AttivaPorta : MonoBehaviour
                 {
                     if (pickedObject == null)
                     {
-                        TryPickupObject();
+                        TryPickUpObject();
                     }
                     else
                     {
@@ -57,34 +62,45 @@ public class AttivaPorta : MonoBehaviour
         currentState = newState;
     }
 
-    void TryPickupObject()
+    void TryPickUpObject()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxPickupDistance, interactableLayer))
+        Vector3 boxCenter = Camera.main.transform.position + Camera.main.transform.forward * (maxPickupDistance / 2);
+        Vector3 boxHalfExtents = new Vector3(boxWidth / 2, boxHeight / 2, boxLength / 2);
+        Quaternion boxOrientation = Camera.main.transform.rotation;
+        Collider[] hitColliders = new Collider[10]; // Array di colliders per memorizzare i risultati
+
+        int numHits = Physics.OverlapBoxNonAlloc(boxCenter, boxHalfExtents, hitColliders, boxOrientation, interactableLayer);
+
+        for (int i = 0; i < numHits; i++)
         {
-            pickedObject = hit.transform.gameObject;
-            Collider collider = pickedObject.GetComponent<Collider>();
-            if (collider != null)
+            Collider hitCollider = hitColliders[i];
+            if (hitCollider != null)
             {
-                collider.enabled = false;
-            }
+                pickedObject = hitCollider.gameObject;
 
-            Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = true;
-            }
+                if (pickedObject.TryGetComponent(out Collider collider))
+                {
+                    collider.enabled = false;
+                }
 
-            StartCoroutine(PickupObject(pickedObject, holdPosition.position));
-            ChangeState(InteractionState.Interact);
+                if (pickedObject.TryGetComponent(out Rigidbody rb))
+                {
+                    rb.isKinematic = true;
+                }
+
+                StartCoroutine(PickupObject(pickedObject, holdPosition.position));
+                ChangeState(InteractionState.Interact);
+                break; // Esci dal ciclo una volta trovato l'oggetto
+            }
         }
     }
 
     void TryDropObject()
     {
-        RaycastHit hit;
+        if (pickedObject == null) return;
+
         Vector3 dropPosition = pickedObject.transform.position;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDropDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, maxDropDistance))
         {
             dropPosition = hit.point;
         }
@@ -109,7 +125,7 @@ public class AttivaPorta : MonoBehaviour
         }
         gameObject.tag = "Untagged";
         obj.transform.position = targetPosition;
-        
+
         obj.transform.parent = holdPosition;
 
         InfermieriaManager.instance.pastigliaTrovata = true;
@@ -146,15 +162,5 @@ public class AttivaPorta : MonoBehaviour
         }
 
         rb.isKinematic = false;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (notLoaded)
-        {
-            notLoaded = false;
-            InfermieriaManager.instance.LoadCorridoio();
-        }
-        
     }
 }
