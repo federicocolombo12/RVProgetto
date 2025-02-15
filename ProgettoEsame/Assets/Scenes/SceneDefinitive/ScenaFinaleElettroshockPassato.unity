@@ -1388,7 +1388,6 @@ GameObject:
   m_Component:
   - component: {fileID: 356207494}
   - component: {fileID: 356207495}
-  - component: {fileID: 356207496}
   m_Layer: 0
   m_Name: StanzaFinalePassatoManager
   m_TagString: Untagged
@@ -1431,32 +1430,6 @@ MonoBehaviour:
   lucePuntiforme: {fileID: 996050987}
   triggerScript: {fileID: 0}
   delayTime: 5
---- !u!114 &356207496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356207492}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e46e94d04a38994418249c69ae6d5542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oggetto1: {fileID: 1182143387}
-  oggetto2: {fileID: 1182143389}
-  oggetto3: {fileID: 1182143388}
-  oggetto4: {fileID: 1182143390}
-  quintoOggetto: {fileID: 1649590900}
-  Oggetto1: 0
-  Oggetto2: 0
-  Oggetto3: 0
-  Oggetto4: 0
-  ultimoOggetto: 0
-  triggerWalk: TriggerWalk
-  triggerIdle: TriggerIdle
-  triggerBackward: TriggerBackward
-  animator: {fileID: 0}
 --- !u!1001 &358550242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3407,7 +3380,7 @@ GameObject:
   - component: {fileID: 992572049}
   - component: {fileID: 992572056}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: VideoFinale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3463,7 +3436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4576,16 +4549,6 @@ PrefabInstance:
 --- !u!1 &1182143387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8523077118944184887, guid: a7e3c7f10eb72430e8bc938ef6d88744, type: 3}
-  m_PrefabInstance: {fileID: 1182143386}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1182143388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1776964982851178954, guid: a7e3c7f10eb72430e8bc938ef6d88744, type: 3}
-  m_PrefabInstance: {fileID: 1182143386}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1182143389 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 787435022061910122, guid: a7e3c7f10eb72430e8bc938ef6d88744, type: 3}
   m_PrefabInstance: {fileID: 1182143386}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1182143390 stripped

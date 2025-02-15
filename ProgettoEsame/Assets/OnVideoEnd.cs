@@ -10,7 +10,6 @@ public class OnVideoEnd : MonoBehaviour
 
     void Start()
     {
-        ;
         if (videoPlayer != null)
         {
             videoPlayer.loopPointReached += OnVideoFinished; // Subscribe to the event
@@ -24,13 +23,8 @@ public class OnVideoEnd : MonoBehaviour
     void OnVideoFinished(VideoPlayer vp)
     {
         Debug.Log("Video has ended!");
-        // Add the action you want to perform here
-        ReturnHome();
+        MySceneManager.instance.ResetSystem();
     }
 
-    void ReturnHome()
-    {
-        Application.Quit();
-        
-    }
+    
 }
