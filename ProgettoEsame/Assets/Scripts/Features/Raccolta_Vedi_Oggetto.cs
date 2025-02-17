@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Raccolta_Vedi_Oggetto : MonoBehaviour
 {
     public float transitionDuration = 1f; // Durata della transizione
-    public bool isFlat = false; // Variabile per indicare se l'oggetto è coricato
+    public bool isFlat = false; // Indica se l'oggetto è piatto
     [SerializeField] private bool isViewing = false;
     private Transform player;
     private Vector3 originalPosition;
@@ -19,7 +19,12 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     private bool isInteracting = false;
     public bool rotazione = false;
     [SerializeField] private float vicinanza = 0.6f;
-    [SerializeField] private float customRotation=0;
+    [SerializeField] private float customRotation = 0;
+
+    // Variabili per limitare la rotazione indipendentemente dal tipo di oggetto
+    public bool limitRotation = false;
+    public float minRotationLimit = -45f; // Limite inferiore (in gradi)
+    public float maxRotationLimit = 45f;  // Limite superiore (in gradi)
 
     void Start()
     {
@@ -89,13 +94,13 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
         originalPosition = this.transform.position;
         originalRotation = this.transform.rotation;
 
-        // Calcola la posizione target
-        Vector3 targetPosition = player.position + player.forward * vicinanza; // Posiziona l'oggetto molto vicino alla camera
+        // Calcola la posizione target: posiziona l'oggetto vicino alla camera
+        Vector3 targetPosition = player.position + player.forward * vicinanza;
 
         // Calcola la rotazione target per far guardare l'oggetto verso la camera
         Quaternion targetRotation = Quaternion.LookRotation(player.position - this.transform.position);
 
-        // Aggiungi un offset di rotazione in base all'orientamento dell'oggetto
+        // Applica un offset in base all'orientamento dell'oggetto
         if (isFlat)
         {
             targetRotation *= Quaternion.Euler(90, customRotation, 0);
@@ -175,13 +180,48 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     {
         float rotationSpeed = 100f;
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-        if (isFlat)
+
+        if (limitRotation)
         {
-            this.transform.Rotate(Vector3.forward, mouseX, Space.Self);
+            if (isFlat)
+            {
+                // Per gli oggetti piatti, limitiamo la rotazione attorno all'asse Z.
+                float currentZ = transform.localEulerAngles.z;
+                if (currentZ > 180)
+                    currentZ -= 360; // Porta l'angolo nel range [-180, 180]
+                float newZ = currentZ + mouseX;
+                newZ = Mathf.Clamp(newZ, minRotationLimit, maxRotationLimit);
+
+                float clampedMouseX = newZ - currentZ;
+                transform.Rotate(Vector3.forward, clampedMouseX, Space.Self);
+            }
+            else
+            {
+                // Per gli altri oggetti, limitiamo la rotazione attorno all'asse Y.
+                float currentY = transform.localEulerAngles.y;
+                if (currentY > 180)
+                    currentY -= 360; // Porta l'angolo nel range [-180, 180]
+                float newY = currentY + mouseX;
+                newY = Mathf.Clamp(newY, minRotationLimit, maxRotationLimit);
+
+                float clampedMouseX = newY - currentY;
+                transform.Rotate(Vector3.up, clampedMouseX, Space.Self);
+            }
         }
         else
         {
-            this.transform.Rotate(Vector3.up, mouseX, Space.Self);
+            // Rotazione libera: usa l'asse in base al valore di isFlat.
+            if (isFlat)
+            {
+                transform.Rotate(Vector3.forward, mouseX, Space.Self);
+            }
+            else
+            {
+                transform.Rotate(Vector3.up, mouseX, Space.Self);
+            }
         }
     }
+
+
+
 }

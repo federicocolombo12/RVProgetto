@@ -7858,6 +7858,9 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.3
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
 --- !u!64 &190349524
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -35359,7 +35362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &1188871507
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -35558,6 +35561,9 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.4
   customRotation: 0
+  limitRotation: 1
+  minRotationLimit: -45
+  maxRotationLimit: 45
 --- !u!82 &1197565426
 AudioSource:
   m_ObjectHideFlags: 0
@@ -35947,6 +35953,9 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.4
   customRotation: 90
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
 --- !u!114 &1213659095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38899,6 +38908,9 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.4
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
 --- !u!114 &1354722637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55034,6 +55046,9 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.4
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
 --- !u!114 &1923186675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58225,6 +58240,9 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.6
   customRotation: 90
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
 --- !u!114 &2063667662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58891,6 +58909,9 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.3
   customRotation: 90
+  limitRotation: 1
+  minRotationLimit: -45
+  maxRotationLimit: 45
 --- !u!114 &2100587919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62457,6 +62478,30 @@ PrefabInstance:
     - target: {fileID: 909889258767048627, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_UseBoundingSphereOverride
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 915591356732001329, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.26209685
+      objectReference: {fileID: 0}
+    - target: {fileID: 915591356732001329, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.64082634
+      objectReference: {fileID: 0}
+    - target: {fileID: 915591356732001329, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6776547
+      objectReference: {fileID: 0}
+    - target: {fileID: 915591356732001329, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.24785273
+      objectReference: {fileID: 0}
+    - target: {fileID: 915591356732001329, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 137.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 915591356732001329, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 273.2
       objectReference: {fileID: 0}
     - target: {fileID: 1078421235240385553, guid: df9a6f761fa7a433cbcfab483b64ff49, type: 3}
       propertyPath: m_LocalPosition.x
