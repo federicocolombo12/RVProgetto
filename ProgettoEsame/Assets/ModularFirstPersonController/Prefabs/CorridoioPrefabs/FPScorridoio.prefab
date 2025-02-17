@@ -607,6 +607,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8600853251334597032, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
+      propertyPath: torciaAudio
+      value: 
+      objectReference: {fileID: 7346262702838708397}
+    - target: {fileID: 8600853251334597032, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       propertyPath: flashlightTransform
       value: 
       objectReference: {fileID: 1836492980832622630}
@@ -635,6 +639,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6111173220831754838}
+    - targetCorrespondingSourceObject: {fileID: 6608466737390796407, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7346262702838708397}
   m_SourcePrefab: {fileID: 100100000, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
 --- !u!4 &1836492980832622630 stripped
 Transform:
@@ -728,6 +735,22 @@ MonoBehaviour:
   boxWidth: 0.2
   boxHeight: 0.2
   playerCamera: {fileID: 0}
+--- !u!114 &7346262702838708397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500117414385257011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4aebb8375d68f498aa6ccf3c68fcb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accensioneClip: {fileID: 8300000, guid: 251a5ffa96857ca45a2ffcb489de7679, type: 3}
+  spegnimentoClip: {fileID: 8300000, guid: a987b5075e8012a468028d1817b6d91b, type: 3}
+  pitchMin: 0.8
+  pitchMax: 0.9
 --- !u!4 &8500117414385257023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608466737390796411, guid: 8b9f4b13ef3ab468a85d59fabcdf795f, type: 3}
