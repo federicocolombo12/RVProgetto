@@ -29,16 +29,7 @@ public class AudioManagerTS: MonoBehaviour
         PlayerPrefs.SetFloat("GameVolume", volume); // Salva il volume tra le sessioni
         PlayerPrefs.Save();
     }
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+    
     public void PlayAudioEffect(AudioSource audioSource)
     {
 

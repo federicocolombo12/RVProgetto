@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class TitleScreenManager : MonoBehaviour
 {
-   
-    
+
 
     // Update is called once per frame
     void Update()
@@ -21,8 +22,8 @@ public class TitleScreenManager : MonoBehaviour
             MySceneManager.instance.LoadNextScene("PrimaScena", LoadSceneMode.Single, () =>
             {
                 Debug.Log("PrimaScena caricata con successo!");
-            });
-        
+            });    
+
     }
     public void QuitGame()
     {
