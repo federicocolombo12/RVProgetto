@@ -83,6 +83,9 @@ public class PauseMenuManager : MonoBehaviour
             firstPersonController.enabled = false;
         }
 
+        // Metti in pausa tutti gli audio
+        AudioListener.pause = true;
+
         if (pauseSoundManager != null && abilitaSuonoMenu)
         {
             pauseSoundManager.RiproduciSuoni(); // Riproduce entrambi i suoni contemporaneamente
@@ -104,6 +107,9 @@ public class PauseMenuManager : MonoBehaviour
         {
             firstPersonController.enabled = true;
         }
+
+        // Riprendi tutti gli audio
+        AudioListener.pause = false;
 
         // Ferma entrambi i suoni quando il gioco riprende
         if (pauseSoundManager != null)
