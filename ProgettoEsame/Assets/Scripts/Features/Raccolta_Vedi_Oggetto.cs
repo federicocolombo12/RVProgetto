@@ -25,6 +25,7 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
     public bool limitRotation = false;
     public float minRotationLimit = -45f; // Limite inferiore (in gradi)
     public float maxRotationLimit = 45f;  // Limite superiore (in gradi)
+    [SerializeField] private bool locked = false;
 
     void Start()
     {
@@ -178,48 +179,52 @@ public class Raccolta_Vedi_Oggetto : MonoBehaviour
 
     public void RotateObject()
     {
-        float rotationSpeed = 100f;
-        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-
-        if (limitRotation)
+        if (!locked)
         {
-            if (isFlat)
-            {
-                // Per gli oggetti piatti, limitiamo la rotazione attorno all'asse Z.
-                float currentZ = transform.localEulerAngles.z;
-                if (currentZ > 180)
-                    currentZ -= 360; // Porta l'angolo nel range [-180, 180]
-                float newZ = currentZ + mouseX;
-                newZ = Mathf.Clamp(newZ, minRotationLimit, maxRotationLimit);
+            float rotationSpeed = 100f;
+            float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
 
-                float clampedMouseX = newZ - currentZ;
-                transform.Rotate(Vector3.forward, clampedMouseX, Space.Self);
+            if (limitRotation)
+            {
+                if (isFlat)
+                {
+                    // Per gli oggetti piatti, limitiamo la rotazione attorno all'asse Z.
+                    float currentZ = transform.localEulerAngles.z;
+                    if (currentZ > 180)
+                        currentZ -= 360; // Porta l'angolo nel range [-180, 180]
+                    float newZ = currentZ + mouseX;
+                    newZ = Mathf.Clamp(newZ, minRotationLimit, maxRotationLimit);
+
+                    float clampedMouseX = newZ - currentZ;
+                    transform.Rotate(Vector3.forward, clampedMouseX, Space.Self);
+                }
+                else
+                {
+                    // Per gli altri oggetti, limitiamo la rotazione attorno all'asse Y.
+                    float currentY = transform.localEulerAngles.y;
+                    if (currentY > 180)
+                        currentY -= 360; // Porta l'angolo nel range [-180, 180]
+                    float newY = currentY + mouseX;
+                    newY = Mathf.Clamp(newY, minRotationLimit, maxRotationLimit);
+
+                    float clampedMouseX = newY - currentY;
+                    transform.Rotate(Vector3.up, clampedMouseX, Space.Self);
+                }
             }
             else
             {
-                // Per gli altri oggetti, limitiamo la rotazione attorno all'asse Y.
-                float currentY = transform.localEulerAngles.y;
-                if (currentY > 180)
-                    currentY -= 360; // Porta l'angolo nel range [-180, 180]
-                float newY = currentY + mouseX;
-                newY = Mathf.Clamp(newY, minRotationLimit, maxRotationLimit);
-
-                float clampedMouseX = newY - currentY;
-                transform.Rotate(Vector3.up, clampedMouseX, Space.Self);
+                // Rotazione libera: usa l'asse in base al valore di isFlat.
+                if (isFlat)
+                {
+                    transform.Rotate(Vector3.forward, mouseX, Space.Self);
+                }
+                else
+                {
+                    transform.Rotate(Vector3.up, mouseX, Space.Self);
+                }
             }
         }
-        else
-        {
-            // Rotazione libera: usa l'asse in base al valore di isFlat.
-            if (isFlat)
-            {
-                transform.Rotate(Vector3.forward, mouseX, Space.Self);
-            }
-            else
-            {
-                transform.Rotate(Vector3.up, mouseX, Space.Self);
-            }
-        }
+        
     }
 
 
