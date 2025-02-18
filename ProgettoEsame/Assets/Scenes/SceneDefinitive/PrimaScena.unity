@@ -1191,8 +1191,8 @@ MonoBehaviour:
   m_MaxDepthBias: 0.001
   m_ShadowResolution:
     m_Override: 512
-    m_UseOverride: 1
-    m_Level: 0
+    m_UseOverride: 0
+    m_Level: 2
   m_ShadowDimmer: 1
   m_VolumetricShadowDimmer: 1
   m_ShadowFadeDistance: 10000
@@ -1258,7 +1258,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2444,6 +2444,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.6
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!64 &631319920
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2725,8 +2729,8 @@ MonoBehaviour:
   m_MaxDepthBias: 0.001
   m_ShadowResolution:
     m_Override: 512
-    m_UseOverride: 1
-    m_Level: 0
+    m_UseOverride: 0
+    m_Level: 2
   m_ShadowDimmer: 1
   m_VolumetricShadowDimmer: 1
   m_ShadowFadeDistance: 10000
@@ -2792,7 +2796,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -4872,6 +4876,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.6
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!82 &1370540918
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5172,6 +5180,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.6
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!82 &1567246746
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5614,6 +5626,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.6
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!1 &1770467399
 GameObject:
   m_ObjectHideFlags: 0
@@ -8517,7 +8533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Intensity
-      value: 94.98964
+      value: 66.742676
       objectReference: {fileID: 0}
     - target: {fileID: 2258828481990623625, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_ShapeWidth
@@ -8993,7 +9009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_Intensity
-      value: 10.631555
+      value: 7.470061
       objectReference: {fileID: 0}
     - target: {fileID: 6200151139731084185, guid: 1a488498076417a4f8b5a9d6e11b7ba9, type: 3}
       propertyPath: m_AreaSize.x
