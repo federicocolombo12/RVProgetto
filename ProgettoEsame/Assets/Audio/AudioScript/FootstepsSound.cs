@@ -5,7 +5,7 @@ public class FootstepSoundRigidbody : MonoBehaviour
     public AudioSource footstepAudioSource;  // L'audio source per riprodurre il suono dei passi
     public AudioClip footstepClip;           // Clip audio dei passi
     public float stepInterval = 0.5f;       // Intervallo tra i suoni dei passi (in secondi)
-    public float movementThreshold = 0.1f;  // Velocità minima per considerare il movimento
+    public float movementThreshold = 0.1f;  // Velocitï¿½ minima per considerare il movimento
 
     private Rigidbody playerRigidbody;
     private float nextStepTime = 0f;
@@ -15,7 +15,7 @@ public class FootstepSoundRigidbody : MonoBehaviour
         // Ottieni il componente Rigidbody
         playerRigidbody = GetComponent<Rigidbody>();
 
-        // Aggiungi l'AudioSource se non è stato assegnato
+        // Aggiungi l'AudioSource se non ï¿½ stato assegnato
         if (footstepAudioSource == null)
         {
             footstepAudioSource = gameObject.AddComponent<AudioSource>();
@@ -34,13 +34,13 @@ public class FootstepSoundRigidbody : MonoBehaviour
 
     void CheckMovement()
     {
-        // Ottieni la velocità attuale del Rigidbody
-        Vector3 velocity = playerRigidbody.velocity;
+        // Ottieni la velocitï¿½ attuale del Rigidbody
+        Vector3 velocity = playerRigidbody.linearVelocity;
 
-        // Se il giocatore si sta muovendo e la velocità è superiore alla soglia
+        // Se il giocatore si sta muovendo e la velocitï¿½ ï¿½ superiore alla soglia
         if (velocity.magnitude > movementThreshold)
         {
-            // Se il suono non è già in riproduzione, lo riproduciamo
+            // Se il suono non ï¿½ giï¿½ in riproduzione, lo riproduciamo
             if (!footstepAudioSource.isPlaying && Time.time >= nextStepTime)
             {
                 PlayFootstepSound();
@@ -49,7 +49,7 @@ public class FootstepSoundRigidbody : MonoBehaviour
         }
         else
         {
-            // Se il giocatore è fermo, fermiamo il suono
+            // Se il giocatore ï¿½ fermo, fermiamo il suono
             if (footstepAudioSource.isPlaying)
             {
                 footstepAudioSource.Stop();
@@ -59,7 +59,7 @@ public class FootstepSoundRigidbody : MonoBehaviour
 
     void PlayFootstepSound()
     {
-        // Riproduce il suono dei passi solo se il suono non è già in riproduzione
+        // Riproduce il suono dei passi solo se il suono non ï¿½ giï¿½ in riproduzione
         footstepAudioSource.clip = footstepClip;
         footstepAudioSource.Play();
     }
