@@ -3430,7 +3430,7 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
+  m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
 --- !u!108 &284692976
@@ -3445,8 +3445,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1613.3624
-  m_Range: 2.4561691
+  m_Intensity: 100.26034
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -3491,7 +3491,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 2.4561691}
-  m_UseBoundingSphereOverride: 1
+  m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3866,6 +3866,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.4
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!4 &323590382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4132a76e88decce45a0ffca1573f34c9, type: 3}
@@ -5033,6 +5037,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.6
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!114 &404332351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6005,7 +6013,7 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
+  m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
 --- !u!108 &465995983
@@ -6020,8 +6028,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 319.39374
-  m_Range: 5
+  m_Intensity: 47.746483
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -6032,7 +6040,7 @@ Light:
     m_Strength: 1
     m_Bias: 0
     m_NormalBias: 0.18
-    m_NearPlane: 0.049999997
+    m_NearPlane: 0.08
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -6066,7 +6074,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 5}
-  m_UseBoundingSphereOverride: 1
+  m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -9655,7 +9663,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907255588}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -10126,7 +10134,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936627979}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -12293,7 +12301,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061766835}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -13353,7 +13361,7 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
+  m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
 --- !u!108 &1179322237
@@ -13368,8 +13376,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 319.39374
-  m_Range: 5
+  m_Intensity: 47.746483
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -13380,7 +13388,7 @@ Light:
     m_Strength: 1
     m_Bias: 0
     m_NormalBias: 0.18
-    m_NearPlane: 0.049999997
+    m_NearPlane: 0.08
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -13414,7 +13422,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 5}
-  m_UseBoundingSphereOverride: 1
+  m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -15763,7 +15771,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231704156}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -16802,7 +16810,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320872048}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -18206,6 +18214,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.3
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!114 &1532652725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18587,6 +18599,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.3
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!64 &1599220519
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20157,7 +20173,7 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
+  m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
 --- !u!108 &1744096612
@@ -20172,7 +20188,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1613.3624
+  m_Intensity: 100.26034
   m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -20218,7 +20234,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 8}
-  m_UseBoundingSphereOverride: 1
+  m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -21158,7 +21174,7 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
+  m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
 --- !u!108 &1850190390
@@ -21173,7 +21189,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1613.3624
+  m_Intensity: 100.26034
   m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -21219,7 +21235,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 8}
-  m_UseBoundingSphereOverride: 1
+  m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -21963,6 +21979,10 @@ MonoBehaviour:
   rotazione: 0
   vicinanza: 0.3
   customRotation: 0
+  limitRotation: 0
+  minRotationLimit: -45
+  maxRotationLimit: 45
+  locked: 0
 --- !u!64 &1907255544
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23548,7 +23568,7 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
+  m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
 --- !u!108 &2065999427
@@ -23563,8 +23583,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 394.2725
-  m_Range: 5
+  m_Intensity: 58.94018
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -23575,7 +23595,7 @@ Light:
     m_Strength: 1
     m_Bias: 0
     m_NormalBias: 0.18
-    m_NearPlane: 0.049999997
+    m_NearPlane: 0.08
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -23609,7 +23629,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 5}
-  m_UseBoundingSphereOverride: 1
+  m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -27901,6 +27921,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 17.979
       objectReference: {fileID: 0}
+    - target: {fileID: 1372565735366411421, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1393160937736739841, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -28005,6 +28029,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 2186728877292904375, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471317534941973096, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2497462826520570507, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.012
@@ -28068,6 +28100,10 @@ PrefabInstance:
     - target: {fileID: 2846046859332786399, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalPosition.z
       value: -6.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905655441255995277, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3464860472252539934, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28143,11 +28179,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 89bfc491b9f78fb4686c416d5ebd03d0, type: 2}
     - target: {fileID: 4354113344620975155, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Range
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4354113344620975155, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Intensity
-      value: 462.2786
+      value: 47.746483
       objectReference: {fileID: 0}
     - target: {fileID: 4354113344620975155, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_AreaSize.x
@@ -28163,7 +28199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4354113344620975155, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Shadows.m_NearPlane
-      value: 0.07
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4354113344620975155, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_BoundingSphereOverride.w
@@ -28179,7 +28215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4354113344620975155, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4372989269546533211, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28307,7 +28343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5994770268183426280, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Intensity
-      value: 1613.3624
+      value: 100.26034
       objectReference: {fileID: 0}
     - target: {fileID: 5994770268183426280, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_AreaSize.x
@@ -28335,7 +28371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5994770268183426280, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6101781466013162723, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -28370,8 +28406,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6401506143801935551, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_Range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401506143801935551, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Intensity
-      value: 394.89404
+      value: 47.746483
       objectReference: {fileID: 0}
     - target: {fileID: 6401506143801935551, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_AreaSize.x
@@ -28386,12 +28426,16 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6401506143801935551, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401506143801935551, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_BoundingSphereOverride.w
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6401506143801935551, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6555236090143654129, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28594,8 +28638,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8293395041693649840, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_Range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293395041693649840, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Intensity
-      value: 531.87103
+      value: 47.746483
       objectReference: {fileID: 0}
     - target: {fileID: 8293395041693649840, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_AreaSize.x
@@ -28608,6 +28656,10 @@ PrefabInstance:
     - target: {fileID: 8293395041693649840, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Lightmapping
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293395041693649840, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8293395041693649840, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_BoundingSphereOverride.w
@@ -28623,7 +28675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8293395041693649840, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8420243616056895408, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -28643,7 +28695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9121382364629562996, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_Intensity
-      value: 319.39374
+      value: 47.746483
       objectReference: {fileID: 0}
     - target: {fileID: 9121382364629562996, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_AreaSize.x
@@ -28675,7 +28727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9121382364629562996, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9211936287926972979, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalPosition.x
