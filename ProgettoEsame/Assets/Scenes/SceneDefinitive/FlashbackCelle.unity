@@ -9642,7 +9642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &907255589
 Transform:
   m_ObjectHideFlags: 0
@@ -9652,7 +9652,7 @@ Transform:
   m_GameObject: {fileID: 907255588}
   serializedVersion: 2
   m_LocalRotation: {x: -8.881784e-15, y: 0.7071062, z: 0.00000005338504, w: 0.7071075}
-  m_LocalPosition: {x: 22.832, y: -0.33, z: -16.46}
+  m_LocalPosition: {x: 22.832, y: -0.33, z: -13.66}
   m_LocalScale: {x: 1.2184825, y: 1.2184821, z: 1.2184826}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21075,7 +21075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 1259.9086
+  m_Intensity: 2996.1833
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -21091,7 +21091,7 @@ MonoBehaviour:
   m_ShapeWidth: 1.0994997
   m_ShapeHeight: 0.22607997
   m_AspectRatio: 1
-  m_ShapeRadius: 0.025
+  m_ShapeRadius: 4.67
   m_SoftnessScale: 1
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 30
@@ -21197,7 +21197,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100.26034
+  m_Intensity: 238.4287
   m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -21245,7 +21245,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 8}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
+  m_ShadowRadius: 4.67
   m_ShadowAngle: 0
 --- !u!1 &1859377435
 GameObject:
@@ -23485,7 +23485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 207.12898
+  m_Intensity: 179.50941
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -23512,7 +23512,7 @@ MonoBehaviour:
   m_IESPoint: {fileID: 0}
   m_IESSpot: {fileID: 0}
   m_IncludeForRayTracing: 1
-  m_AreaLightShadowCone: 118.8
+  m_AreaLightShadowCone: 89.1
   m_UseScreenSpaceShadows: 0
   m_InteractsWithSky: 1
   m_AngularDiameter: 0.5
@@ -23522,7 +23522,7 @@ MonoBehaviour:
   m_SurfaceTexture: {fileID: 0}
   m_SurfaceTint: {r: 1, g: 1, b: 1, a: 1}
   m_Distance: 1.5e+11
-  m_UseRayTracedShadows: 1
+  m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
   m_FilterTracedShadow: 1
   m_FilterSizeTraced: 16
@@ -23607,7 +23607,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 110.2595
+  m_Intensity: 95.55697
   m_Range: 65.86
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -28748,6 +28748,14 @@ PrefabInstance:
     - target: {fileID: 7915502579931316177, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_LocalPosition.z
       value: -56.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064055110981154032, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.224
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064055110981154032, guid: 1f7412537a800454295987053027e1df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.049
       objectReference: {fileID: 0}
     - target: {fileID: 8204480770097091324, guid: 1f7412537a800454295987053027e1df, type: 3}
       propertyPath: m_CastShadows
