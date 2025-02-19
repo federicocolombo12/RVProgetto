@@ -89,5 +89,31 @@ public class MySceneManager : MonoBehaviour
         // Ricarica la scena iniziale
         SceneManager.LoadScene(0); // Assumendo che la scena iniziale sia la 0 nell'ordine di build
     }
+    public void SetResolution(int value)
+    {
+        int width = 1920; // Full HD resolution
+        int height = 1080;
+
+        switch (value)
+        {
+            case 0: // Full HD
+                width = 1920;
+                height = 1080;
+                break;
+            case 1: // Quad HD
+                width = 2560;
+                height = 1440;
+                break;
+            case 2: // 4K
+                width = 3840;
+                height = 2160;
+                break;
+            default:
+                Debug.LogWarning("Invalid resolution value. Setting to Full HD by default.");
+                break;
+        }
+
+        Screen.SetResolution(width, height, Screen.fullScreen);
+    }
 
 }
