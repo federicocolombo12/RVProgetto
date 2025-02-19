@@ -8,7 +8,7 @@ public class Torcia : MonoBehaviour
 
     [SerializeField] public bool on;
     [SerializeField] public bool off;
-    [SerializeField] private float flickerTime = 2.5f;
+    [SerializeField] private float flickerTime = 3f;
     [SerializeField] private float elapsedTime;
 
     private Camera mainCamera;
@@ -92,7 +92,7 @@ public class Torcia : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < flickerTime)
         {
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
             flashlight.SetActive(!flashlight.activeSelf);
             elapsedTime += Time.deltaTime * 10;
         }
