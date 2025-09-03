@@ -1,5 +1,5 @@
 # RVProgetto
-Progetto di gruppo Cinema Immersivo
+Progetto di gruppo Realtà Virtuale
 ### **Creazione dei Feature Branches**
 
 - **Naming Conventions**: Usa nomi descrittivi per ogni branch, prefissi come `feature/`, `bugfix/`, o `hotfix/` aiutano a distinguere il tipo di lavoro svolto. Ad esempio:
