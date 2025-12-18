@@ -1,81 +1,53 @@
-# RVProgetto
-Progetto di gruppo Realtà Virtuale
-### **Creazione dei Feature Branches**
+# Forgotten History: Piedmont Psychiatric Institutions VR
 
-- **Naming Conventions**: Usa nomi descrittivi per ogni branch, prefissi come `feature/`, `bugfix/`, o `hotfix/` aiutano a distinguere il tipo di lavoro svolto. Ad esempio:
-    - `feature/flashback-system`: per il sistema di flashback.
-    - `feature/ui-system`: per la creazione o modifica del sistema UI.
-    - `bugfix/lighting`: per correggere bug legati al sistema di illuminazione.
-- **Creazione del Branch**:
-Quando inizi a lavorare su una nuova funzionalità, crea un nuovo branch a partire da `main`:
-    
-    ```bash
-    bash
-    Copia codice
-    git checkout main
-    git pull origin main  # Assicurati che sia aggiornato
-    git checkout -b feature/flashback-system
-    
-    ```
-    
+> Step into a haunting VR experience that explores the forgotten history of psychiatric institutions in Piedmont, Italy. Through an immersive first-person journey, uncover the dark past of mental health treatment while navigating through a meticulously crafted historical environment that brings to light a crucial chapter in Italian healthcare history.
 
-### 2. **Vantaggi dei Feature Branches**
+## 🎬 Video Trailer
 
-- **Isolamento delle Modifiche**: Le modifiche apportate a una funzionalità specifica sono isolate nel proprio branch, quindi errori o sperimentazioni non influenzano il progetto stabile.
-- **Parallelismo**: Ogni membro del team può lavorare su una feature diversa in modo indipendente, consentendo di procedere in parallelo e di mantenere il flusso di lavoro efficiente.
-- **Tracciabilità e Revisione**: Usando un branch per ogni feature, puoi visualizzare chiaramente tutte le modifiche correlate e preparare una pull request specifica per la revisione del codice.
+*[Insert Link to Video or Youtube Thumbnail here]*
 
-### 3. **Workflow di Sviluppo con i Feature Branches**
+---
 
-- **Sviluppo e Commit**: Durante il lavoro su una feature, fai commit frequenti e descrittivi nel branch:
-    
-    ```bash
-    bash
-    Copia codice
-    git commit -m "Implementazione della logica di transizione per il sistema di flashback"
-    
-    ```
-    
-- **Testing Locale**: Completa il testing nel tuo branch prima di aprire una pull request. Ad esempio, controlla se la transizione del flashback è fluida o se il sistema UI si comporta come previsto.
-- **Pull Request (PR)**: Quando la feature è completa e testata, apri una pull request dal tuo branch verso `main`. Nella PR:
-    - **Descrivi** le modifiche apportate e come testarle.
-    - **Assegna** la PR a un altro membro del team per una code review.
-    - Se ci sono conflitti (es. modifiche contemporanee ad asset o scene), risolvili nella PR.
-- **Code Review**: Il reviewer verifica la qualità e la compatibilità del codice. Eventuali feedback possono essere implementati nel branch feature prima di eseguire il merge su `main`.
+## 📖 About
 
-### 4. **Best Practice per i Feature Branches**
+This psychological narrative experience takes place in an abandoned asylum, where players piece together fragments of memory through environmental storytelling.
 
-- **Mantieni il Branch Aggiornato**: Periodicamente, sincronizza il branch con `main` per evitare grandi conflitti in seguito:
-    
-    ```bash
-    bash
-    Copia codice
-    git checkout feature/flashback-system
-    git fetch origin
-    git merge main
-    
-    ```
-    
-- **Piccole Feature e Issue Specifici**: Evita di caricare troppo un feature branch. Se la feature richiede molto tempo, spezzala in sotto-branch (es. `feature/flashback-transition` e `feature/flashback-animations`).
-- **Chiusura del Branch**: Dopo il merge della PR e la chiusura, elimina il branch per tenere ordinata la repository:
-    
-    ```bash
-    bash
-    Copia codice
-    git branch -d feature/flashback-system
-    git push origin --delete feature/flashback-system
-    
-    ```
-    
+Beginning in a desolate room, you'll explore dimly lit corridors and interact with historically accurate objects that trigger vivid flashbacks to the institution's active period. Each discovered item reveals a new layer of the asylum's history and your own mysterious connection to it.
 
-### 5. **Esempio Pratico**
+## 🗝️ Key Scenes
 
-Supponiamo che stiate lavorando in cinque persone e ognuno abbia un compito specifico:
+* **Dark Room Discovery:** Explore your initial surroundings with ambient sounds and interactive objects.
+* **Corridor Exploration:** Experience atmospheric encounters with echoes of the past.
+* **Infirmary Sequence:** Participate in the daily medication routine.
+* **Cell Block Drama:** Navigate tense moments of inspection and discovery.
+* **Electroshock Therapy Room:** Witness powerful historical revelations.
 
-- **Sviluppatore A**: Lavora su `feature/flashback-system`.
-- **Sviluppatore B**: Si occupa del `feature/ui-system`.
-- **Sviluppatore C**: Lavora su `bugfix/lighting`.
-- **Sviluppatore D**: Implementa gli effetti audio in `feature/audio-ambient`.
-- **Sviluppatore E**: Crea il sistema di gestione degli NPC in `feature/npc-interactions`.
+## 🎮 Controls
 
-Ciascuno lavora separatamente nel proprio branch, poi apre una pull request e passa per una code review, garantendo che ogni componente funzioni senza errori.
+| Action | Key |
+| :--- | :---: |
+| Movement | `W` `A` `S` `D` |
+| Interact with environment | `F` |
+| Pick up items | `E` |
+| Open Door | `Q` |
+| Pause Menu | `ESC` |
+
+## 👥 Development Team
+
+Created by students at **Politecnico di Torino**:
+
+* Federico Colombo
+* Alberto Fulcheri
+* Alice Carlotta La Greca
+* Marta Colonna
+* Edoardo Ursi
+
+## 📚 Historical Context
+
+This experience is based on extensive research into Piedmont's psychiatric institutions and the **Basaglia Law of 1978**, which revolutionized mental health care in Italy. The project aims to raise awareness about this important period in medical history and promote understanding of mental health treatment evolution.
+
+---
+
+> ⚠️ **Content Warning**
+>
+> This experience contains historical representations of psychiatric treatment and may be intense for some users. Not recommended for children.
