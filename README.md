@@ -4,7 +4,7 @@
 
 ## 🎬 Video Trailer
 
-*[Insert Link to Video or Youtube Thumbnail here]*
+*https://youtu.be/3qoI-SCNGOg*
 
 ---
 
